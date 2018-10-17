@@ -43,3 +43,6 @@ nbproject/*
 #########################
 #
 /config/app.default.php
+/webroot/freestore/avatars/*
+/webroot/freestore/binaries/*
+/webroot/freestore/covers/*

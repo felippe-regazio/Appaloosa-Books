@@ -1,0 +1,93 @@
+$join-content-width: 980px;
+.join{
+	&-hero{
+		padding-top: $navbar-height;
+		padding-bottom: $gutter*4;
+		&__content{
+			text-align: center;
+			position: relative;
+			.ap-logo-img, .ap-logo-img.logo-black{
+				position: relative;
+				margin: 0 auto;
+				padding-bottom: $gutter;
+			}
+			.side{
+				padding: $gutter*2;
+				overflow: hidden;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				font-size: 4vw;
+				h1{
+					text-transform: uppercase;
+				}
+				&.a{
+					z-index: 1;
+					background: $black;
+					color: $black;			
+					transition: $anim8-speed/4 ease-in-out;
+					clip-path: polygon(30% 0, 100% 0, 100% 100%, 30% 100%)
+				}
+				&.b{
+					z-index: -1;
+					top: 0;
+					left: 0;
+					color: $white;
+					background: $black;
+					position: absolute;
+					width: calc(100% - #{$gutter*4});
+				}
+			}
+		}
+	}
+	.join-form{
+		width: 92vw;
+		max-width: 600px;
+		position: relative;
+		margin: 0 auto;
+		padding-bottom: 45px;
+		form{
+			width: 100%;
+			input:not([type=checkbox]), textarea{
+				width: 100%;
+			}
+			.submit{
+				padding-top: $gutter*2;
+				text-align: center;
+				width: 100%;
+			}
+			[type=checkbox]{
+				margin-right: $gutter;
+			}
+		}
+		form{
+			&.loading{
+				.ap-btn{
+					// loading
+					border: none;
+					pointer-events: none;
+					transition: none;
+					&:hover{
+						background: transparent;
+					}
+					span.text{
+						display: none;
+					}
+					div.spinner{
+						transition: $anim8-speed;
+						opacity: 1;
+						border-radius: 100%;
+						border: dashed 3px $black;
+						height: 26px;
+						width: 26px;
+						animation: spin 4s linear infinite;
+						animation-delay: 200ms;
+					}
+					p.response{
+						font-weight: 700;
+					}
+				}
+			}					
+		}
+	}
+}

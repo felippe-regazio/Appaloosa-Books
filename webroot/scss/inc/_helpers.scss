@@ -1,0 +1,72 @@
+/* font */
+.fw-{
+	&500{
+		font-weight: 500;
+	}
+	&600{
+		font-weight: 500;
+	}
+	&700{
+		font-weight: 500;
+	}
+}
+/* borders, bgs and colors */
+.all-white{
+	border-color: $white;
+	background-color: $white;
+	color: $white;
+}
+.all-black{
+	border-color: $black;
+	background-color: $black;
+	color: $black;
+}
+.no-bg{
+	background: transparent;
+	background-color: transparent;
+	&:hover{
+		background: transparent;
+		background-color: transparent;
+	}
+}
+/* loading classes */
+.ap-loading-circle{
+	display: none;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
+	&:before{
+		content: "";
+		display: block;
+		width: 24px;
+		height: 24px;
+		border-radius: 50%;
+		border: dashed 3px $white;
+		animation: spin 3s infinite linear;
+	}
+	&.error{
+		&:before{
+			content: "error";
+			display: block;
+			width: unset;
+			height: unset;
+			border-radius: unset;
+			border: unset;
+			animation: unset;
+		}
+	}
+}
+.loading{
+	z-index: 100;
+	overflow: hidden;
+	transition: $anim8-speed ease-out;
+	* .ap-loading-circle,
+	.ap-loading-circle{
+		display: flex;
+	}
+}
+/* overflow hidden for body via class */
+body.overflow-hidden{
+	overflow: hidden !important;
+}

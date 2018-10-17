@@ -1,0 +1,94 @@
+// ABOUT THE AUTHOR
+.ap-mail-to{
+	z-index: 99999999 !important;
+	transform: translateX(100%) !important;
+	transition: $anim8-speed;
+	overflow: auto;
+	position: fixed;
+	background: $ap-a;
+	color: $white;
+	padding: 0;
+	height: 100%;
+	top: 0;
+	right: 0;
+	z-index: 10;
+	width: calc(50% + 12px);
+	@media screen and(max-width: 800px){
+		width: 100%;
+	}
+	&.ap-mail-to-open{
+		transform: translateX(0) !important;
+		transition: $anim8-speed;
+	}
+	a, i{
+		color: $white;
+		&:hover{
+			color: $black;
+		}
+	}		
+	&__close{
+		position: absolute;
+		right: $gutter;
+		top: $gutter;
+		cursor: pointer;
+		z-index: 17;
+	}
+	&__body{
+		form#mail-to-author{
+			padding: $gutter*2;
+			margin: 0 auto;
+			position: relative;
+			label, input, textarea{
+				width: 95%;
+				color: $white;
+				border-color: $white;
+				&::placeholder{
+					color: $white;
+				}
+			}
+			textarea{
+				margin-top: $gutter;
+				margin-bottom: $gutter/2;
+				height: 200px;
+			}
+			.submit{
+				margin: $gutter 0;
+				text-align: center;
+				margin-top: $gutter*3;
+				button{
+					background: transparent;
+					border-color: $white;
+					color: $white;
+					&:hover{
+						color: $black;
+						border-color: $black;
+					}
+				}
+			}
+			&.loading{
+				.ap-btn{
+					// loading
+					border: none;
+					pointer-events: none;
+					transition: none;
+					&:hover{
+						background: transparent;
+					}
+					span.text{
+						display: none;
+					}
+					div.spinner{
+						transition: $anim8-speed;
+						opacity: 1;
+						border-radius: 100%;
+						border: dashed 3px $white;
+						height: 26px;
+						width: 26px;
+						animation: spin 4s linear infinite;
+						animation-delay: 200ms;
+					}
+				}
+			}			
+		}
+	}
+}

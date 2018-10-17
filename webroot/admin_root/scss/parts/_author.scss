@@ -1,0 +1,18 @@
+.author-image-preview{
+	padding: $gutter;
+	height: 200px;
+	span.img-holder{
+	    position: relative;
+	    margin: 0 auto;
+	    padding: $gutter/2;
+	    display: block;
+	    height: 100%;
+	    max-width: 200px;
+	    border: dashed 3px $black;
+	    .img{
+	    	width: 100%;
+	    	height: 100%;
+	    	background-size: cover;
+	    }
+	}
+}

@@ -1,0 +1,244 @@
+// 
+.ui-kit{
+	padding: $gutter*2;
+	&-wrapper{
+		padding-bottom: $gutter;
+	}
+}
+.ap-hover{
+	color: $ap-a;
+	&:hover{
+		color: $ap-b;
+	}
+}
+// LISTS
+body:not(.ap-admin) ul{
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+	padding-bottom: $gutter*2;
+}
+// TEXT 
+[class^="typo"]{
+	margin-bottom: $gutter;	
+}
+.typo{
+	&-featured{
+		background: black;
+	    color: $white;
+	    width: fit-content;
+	}
+	&-title-big{
+	    font-size: $typo-title-big;
+	}
+	&-title{
+		font-size: $typo-title;
+	}
+	&-feature{
+		font-size: $typo-feature;	
+	}
+	&-subtitle{
+		font-size: $typo-subtitle;	
+	}
+	&-paragraph{
+		font-size: $typo-paragraph;	
+	}
+	&-current{
+		font-size: $typo-current;	
+	}
+	&-small{
+		font-size: $typo-small;	
+	}	
+	&-minimal{
+		font-size: $typo-minimal;	
+	}		
+	&-infos{
+		font-size: $typo-infos;	
+	}	
+}
+// LINKS
+a, .link{
+	color: $black;
+	cursor: pointer;
+	text-decoration: none;
+	transition: $anim8-speed;
+	transition: $anim8-speed/2 ease-in-out;
+	&:hover{
+		color: lighten( $ap-b, 5%);
+	}
+	&.invert{
+		color: lighten($ap-b, 5%);
+		&:hover{
+			color: $black;
+		}
+	}
+}
+// COLLORS
+.color-pallete{
+	display: flex;
+	justify-content: left;
+	align-items: center;
+	flex-wrap: wrap;
+	max-width: 500px;
+	div{
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 100px;
+		height: 100px;
+		margin: $gutter;
+		padding: $gutter;
+		color: $white;
+	}
+	.color-{
+		&a{
+			background: $ap-a;
+		}
+		&b{
+			background: $ap-b;
+			
+		}
+		&c{
+			background: $ap-c;
+			
+		}
+		&d{
+			background: $ap-d;
+			
+		}
+		&black{
+			background: $black;
+			color: $white;	
+		}
+		&white{
+			background: $white;
+			color: $black;	
+		}				
+	}
+}
+// BUTTON DEFAULT
+[class^="ap-btn"]{
+	border: solid 3px $black;
+	background: transparent;
+	color: $black;
+	padding: $gutter;
+	font-weight: 700;
+	cursor: pointer;
+	margin-bottom: $gutter;
+	transition: $anim8-speed ease-in-out;	
+	&:hover{
+		background: $black;
+		color: $white;
+	}
+	&:focus {
+		outline:0;
+	}
+}
+// BUTTON TYPES
+.ap-btn{
+	&--lg{
+		height: 56px;
+	}
+	&--sm{
+		height: 39px;
+		padding: $gutter/2 $gutter;
+	}
+	&--control{
+		padding: 6px;
+	    height: 34px;
+	    width: 34px;
+	}
+	&--primary{
+		background: $white;
+		// alias to ap-btn only
+	}
+	&--secondary{
+		background: $black;
+		color: $white;
+		&:hover{
+			background: $white;
+			color: $black;
+		}
+	}
+	&--primary-dark{
+		border-color: $white;
+		background: $black;
+		color: $white;
+		&:hover{
+			background: $white;
+			color: $black;
+		}
+	}
+	&--secondary-dark{
+		border-color: $white;
+		background: $white;
+		color: $black;
+		&:hover{
+			background: $black;
+			color: $white;
+		}
+	}
+}
+// FORMS
+body:not(.ap-admin):not(.ap-login){
+	section.form{
+		margin: $gutter 0;
+	}
+	.ap-form,
+	*{
+		label{
+			display: block;
+			padding-bottom: 4px;
+			color: $ap-d
+		}
+		input,
+		select,
+		textarea
+		{
+			-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+		    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+		    box-sizing: border-box;         /* Opera/IE 8+ */
+			border: none;
+			border-bottom: solid 2px $black;
+			padding: $gutter/2;
+			outline: none;
+			background: transparent;
+			transition: $anim8-speed;
+			margin-bottom: $gutter*2;
+			&::placeholder{
+				color: #aaa;
+				transition: $anim8-speed ease-in-out;
+			}
+			&:focus{
+				background: rgba(100,100,100, .1);
+				&::placeholder{
+					transform: translateX(-40px);
+					opacity: 0;
+				}
+			}
+		}
+		textarea{
+			border: solid 2px $black;
+		}
+	}
+	.group-field-and-btn{
+		form{
+			display: flex;
+			height: 46px;
+			justify-content: center;
+			margin-bottom: $gutter*2;
+			input{
+			    border: solid 3px black;
+			    margin: 0;
+			    width: 400px;
+			    @media screen and(max-width: 600px){
+			    	width: 200px;
+			    }
+			}
+			button{
+				border-left: none;
+				margin: 0;
+			}
+		}
+	}
+}

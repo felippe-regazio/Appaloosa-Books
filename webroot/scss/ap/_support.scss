@@ -1,0 +1,72 @@
+// ABOUT THE AUTHOR
+.ap-support{
+	z-index: 99999999 !important;
+	transform: translateX(100%) !important;
+	transition: $anim8-speed;
+	overflow: auto;
+	position: fixed;
+	background: $ap-b;
+	color: $white;
+	padding: 0;
+	height: 100%;
+	top: 0;
+	right: 0;
+	z-index: 10;
+	width: calc(50% + 12px);
+	@media screen and(max-width: 800px){
+		width: 100%;
+	}
+	&.ap-support-open{
+		transform: translateX(0) !important;
+		transition: $anim8-speed;
+	}
+	&__close{
+		position: absolute;
+		right: $gutter;
+		top: $gutter;
+		cursor: pointer;
+		z-index: 17;
+		&:hover{
+			color: $black;
+		}		
+	}
+	&__head{
+		padding: $gutter*2;
+		padding-bottom: 0;
+		margin-bottom: 0;
+		h1{
+			margin-bottom: 0;
+		}
+	}
+	&__body{
+		padding: $gutter*2;
+		padding-bottom: $gutter*3;
+		.content{
+			&__actions{
+				text-align: center;
+				.ap-donation-link{
+					button{
+						font-weight: 700;
+						&:hover{
+							border-color: $black;
+							color: $black;
+						}
+					}
+					&.error{
+						pointer-events: none;
+						button{
+							color: #ccc;
+							border-color: #ccc;
+							span{
+								display: none;
+							}
+							&:before{
+								content: "indisponível";
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

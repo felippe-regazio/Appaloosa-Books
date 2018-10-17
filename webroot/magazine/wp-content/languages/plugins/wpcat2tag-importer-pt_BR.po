@@ -1,0 +1,149 @@
+# Translation of Development (trunk) in Portuguese (Brazil)
+# This file is distributed under the same license as the Development (trunk) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2010-06-12 17:43:34+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: GlotPress/0.1\n"
+"Project-Id-Version: Development (trunk)\n"
+
+msgid "http://wordpress.org/"
+msgstr "http://br.wordpress.org/"
+
+#: wpcat2tag-importer.php:43
+msgid "Cheatin&#8217; uh?"
+msgstr "Trapaceando, é?"
+
+#: wpcat2tag-importer.php:46
+msgid "Categories to Tags"
+msgstr "Categorias em tags"
+
+#: wpcat2tag-importer.php:47
+msgid "Tags to Categories"
+msgstr "Tags em categorias"
+
+#: wpcat2tag-importer.php:83
+msgid "Convert Category to Tag."
+msgid_plural "Convert Categories (%d) to Tags."
+msgstr[0] "Converter categoria em tag"
+msgstr[1] "Converter categorias (%d) em tags"
+
+#: wpcat2tag-importer.php:85
+msgid "Hey there. Here you can selectively convert existing categories to tags. To get started, check the categories you wish to be converted, then click the Convert button."
+msgstr "Olá. Aqui você pode converter seletivamente categorias existentes em tags. Para começar, marque as categorias que você quer converter, então clique no botão Converter."
+
+#: wpcat2tag-importer.php:86
+msgid "Keep in mind that if you convert a category with child categories, the children become top-level orphans."
+msgstr "Tenha em mente que se você converter uma categoria com subcategorias, essas subcategorias se tornarão orfãs."
+
+#: wpcat2tag-importer.php:90
+msgid "You have no categories to convert!"
+msgstr "Você não tem categorias para converter!"
+
+#: wpcat2tag-importer.php:107 wpcat2tag-importer.php:183
+msgid "Uncheck All"
+msgstr "Desmarcar todas"
+
+#: wpcat2tag-importer.php:114 wpcat2tag-importer.php:121
+#: wpcat2tag-importer.php:190 wpcat2tag-importer.php:197
+msgid "Check All"
+msgstr "Marcar todas"
+
+#: wpcat2tag-importer.php:144
+msgid "* This category is also a tag. Converting it will add that tag to all posts that are currently in the category."
+msgstr "* Essa categoria também é uma tag. Ao convertê-la será adicionada a tag a todos os posts que estão atualmente nessa categoria."
+
+#: wpcat2tag-importer.php:146
+msgid "Convert Categories to Tags"
+msgstr "Converter categorias em tags"
+
+#: wpcat2tag-importer.php:159
+msgid "Convert Tag to Category."
+msgid_plural "Convert Tags (%d) to Categories."
+msgstr[0] "Converter tag em categoria"
+msgstr[1] "Converter tags (%d) em categorias."
+
+#: wpcat2tag-importer.php:161
+msgid "Here you can selectively convert existing tags to categories. To get started, check the tags you wish to be converted, then click the Convert button."
+msgstr "Aqui você pode converter seletivamente tags existentes em categorias. Para começar, marque as tags que você quer converter, então clique no botão Converter."
+
+#: wpcat2tag-importer.php:162
+msgid "The newly created categories will still be associated with the same posts."
+msgstr "As categorias criadas recentemente ainda serão associadas aos mesmos posts."
+
+#: wpcat2tag-importer.php:166
+msgid "You have no tags to convert!"
+msgstr "Você não tem tags para converter!"
+
+#: wpcat2tag-importer.php:208
+msgid "* This tag is also a category. When converted, all posts associated with the tag will also be in the category."
+msgstr "* Essa tag também é uma categoria. Quando for convertida, todos os posts associados a essa tag também estarão na categoria."
+
+#: wpcat2tag-importer.php:210
+msgid "Convert Tags to Categories"
+msgstr "Converter tags em categorias"
+
+#: wpcat2tag-importer.php:248 wpcat2tag-importer.php:368
+msgid "Uh, oh. Something didn&#8217;t work. Please <a href=\"%s\">try again</a>."
+msgstr "Ô, ô. Alguma coisa não funcionou. Por favor <a href=\"%s\">tente outra vez</a>."
+
+#: wpcat2tag-importer.php:267
+msgid "Category %s doesn&#8217;t exist!"
+msgstr "A categoria %s não existe!"
+
+#: wpcat2tag-importer.php:270
+msgid "Converting category <strong>%s</strong> ... "
+msgstr "Convertendo a categoria #%s..."
+
+#: wpcat2tag-importer.php:298 wpcat2tag-importer.php:341
+#: wpcat2tag-importer.php:427
+msgid "Converted successfully."
+msgstr "Convertidas com sucesso."
+
+#: wpcat2tag-importer.php:317
+msgid "Tag added to all posts in this category."
+msgstr "Tag adicionada a todos os posts nessa categoria."
+
+#: wpcat2tag-importer.php:359
+msgid "* This category is also a tag. The converter has added that tag to all posts currently in the category. If you want to remove it, please confirm that all tags were added successfully, then delete it from the <a href=\"%s\">Manage Categories</a> page."
+msgstr "* Essa categoria também é uma tag. O conversor adicionou aquela tag a todos os posts atualmente na categoria. Se você quiser removê-la, confirme se todas as tags foram adicionadas com sucesso, então apague-a através da página <a href=\"%s\">Gerenciar Categorias</a>."
+
+#: wpcat2tag-importer.php:360 wpcat2tag-importer.php:449
+msgid "We&#8217;re all done here, but you can always <a href=\"%s\">convert more</a>."
+msgstr "Tudo pronto aqui, mas você sempre poderá <a href=\"%s\">converter mais</a>."
+
+#: wpcat2tag-importer.php:385
+msgid "Converting tag <strong>%s</strong> ... "
+msgstr "Inseridas <strong>%s</strong>"
+
+#: wpcat2tag-importer.php:409
+msgid "All posts were added to the category with the same name."
+msgstr "Todos os posts foram adicionados à categoria com o mesmo nome."
+
+#: wpcat2tag-importer.php:430
+msgid "Tag #%s doesn&#8217;t exist!"
+msgstr "A tag #%s não existe!"
+
+#: wpcat2tag-importer.php:448
+msgid "* This tag is also a category. The converter has added all posts from it to the category. If you want to remove it, please confirm that all posts were added successfully, then delete it from the <a href=\"%s\">Manage Tags</a> page."
+msgstr "* Essa tag também é uma categoria. O conversor adicionou todos os posts dessa tag para a categoria. Se você quiser removê-la, confirme se todos os posts forsm adicionados com sucesso, então apague-a através da página <a href=\"%s\">Gerenciar Tags</a>."
+
+#: wpcat2tag-importer.php:491
+msgid "Categories and Tags Converter"
+msgstr "Conversor de categorias e tags"
+
+#: wpcat2tag-importer.php:491
+msgid "Convert existing categories to tags or tags to categories, selectively."
+msgstr "Converter categorias existentes em tags, ou tags em categorias, seletivamente."
+
+msgid "Categories to Tags Converter Importer"
+msgstr "Importador do conversor de categorias em tags"
+
+msgid "http://wordpress.org/extend/plugins/wpcat2tag-importer/"
+msgstr "http://wordpress.org/extend/plugins/wpcat2tag-importer/"
+
+msgid "wordpressdotorg"
+msgstr ""

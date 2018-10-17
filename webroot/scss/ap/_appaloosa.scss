@@ -1,0 +1,258 @@
+/* GLOBAL FONT DEFINE */
+*{
+	font-family: 'Bitstream-Charter';
+	line-height: 1.3;
+}
+/* AP- IS THE ROOT PREFIX CLASS AND MEANS GLOBAL CLASS */
+.ap-{
+	/* opening section */
+	&opening{
+		min-height: 100vh;
+		color: $white;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background-attachment: fixed !important;
+		&__feature{
+			max-width: 650px;
+			width: 90%;
+			text-align: center;
+			transition: $anim8-speed;
+			&-title{
+				font-size: 3.5em;
+				font-weight: 600;
+				opacity: .95;
+				display: block;
+				padding-bottom: $gutter/2;
+				@media screen and(max-width: 550px){
+					font-size: 2em;
+				}
+			} 
+		}
+		&__ghost-menu{
+		    position: absolute;
+		    min-height: 100%;
+		    width: 150px;
+		    right: 0;
+		    display: flex;
+		    flex-wrap: wrap;
+		    align-items: center;
+		    justify-content: center;
+		    @media screen and(min-width: 800px){
+		    	/* shows the ghost menu on hover */
+				&:hover{
+					.options{
+						transform: translateX(20px) rotate(-90deg);
+					    opacity: 1;
+					}
+					i.fa{
+						transform: translateX(-10px);
+						opacity: 0;
+					}
+				}
+		    }
+			//
+			.options{
+				transition: $anim8-speed*2 ease-in-out;
+				transform: translateX(30px) rotate(-90deg);
+				opacity: 0;
+				display: flex;
+				span{
+					margin: $gutter;
+					padding: 0 5px;
+					cursor: pointer;
+					&:hover{
+						background: $white;
+						color: $black;
+					}
+				}
+			}
+			i.fa{
+				position: absolute;
+				opacity: .5;
+				transition: $anim8-speed ease-in-out;
+				@media screen and(max-width: 800px){
+					display: none;	
+				}
+			}
+		}
+	}
+	/* about section */
+	&about{
+		font-size: 2em;
+		line-height: 1.2;
+		color: $ap-d;
+		padding: $gutter*4 $gutter;
+		position: relative;
+		overflow: hidden;
+		&__controls{
+			span{
+			    font-size: 20px;
+	    		padding: 2px 6px;
+	    		cursor: pointer;
+	    		transition: $anim8-speed/2 ease-in-out;
+	    		&:hover{
+	    			background:$black;
+	    			color: $white; 
+	    		}
+			}
+		}		
+		&__wrapper{
+			color: $black;
+			max-width: 650px;
+			position: relative;
+			margin: 0 auto;
+			word-wrap: break-word;
+			.title{
+				font-weight: 700;
+				padding-bottom: $gutter;
+			}
+		}
+		.ap-line{
+			position: absolute;
+			width: 100%;
+			bottom: $gutter;
+			left: 0;
+		}
+		@media screen and(max-width: 1000px){
+			flex-wrap: wrap;
+			&__wrapper{
+				padding: 0;
+				width: 100%;
+				display: block;
+				padding-bottom: $gutter*2;
+			}
+		}
+		@media screen and(max-width: 500px ){
+			&__wrapper .title{
+				font-size: $typo-paragraph;
+			}
+
+		}
+	}
+	// ending
+	&ending{
+		margin-bottom: $gutter*3;
+		margin-top: $gutter*2;
+		padding: $gutter;
+		@media screen and(max-width: 768px){
+			paddig: $gutter/2;
+		}
+		div{
+			max-width: 650px;
+			width: 100%;
+			position: relative;
+			margin: 0 auto;
+			overflow: hidden;
+		}
+		&__quoting{
+			font-size: 60px;
+			font-weight: 700;
+			padding-bottom: $gutter*2;
+		}
+		.field input{
+			min-width: unset;
+			width: 100%;
+		}
+		.newsletter{
+			position: relative;
+			width: 100%;
+			.group-field-and-btn form{
+				&.loading{
+					*{
+						pointer-events: none;
+					}
+					.newsletter-search-button{
+						i{
+							display: none;
+						}
+						div.spinner{
+							opacity: 1;
+							border-radius: 100%;
+							border: dashed 3px $white;
+							height: 12px;
+							width: 12px;
+							animation: spin 4s linear infinite;
+						}
+						&:hover{
+							background: $black;
+						}
+					}
+				}
+			}
+		}
+	}
+	//
+	&search-field{
+		width: fit-content;
+		display: inline-block;
+		text-align: right;
+		.field{
+			input{
+				opacity: 0;
+				min-width: unset;
+				height: 30px;
+				transition: $anim8-speed*2 ease-in-out;
+				max-width: 400px;
+				width: 0;
+			}
+			a{
+				display: flex;
+				outline: none;
+				height: 60px;
+			}
+		}
+		&.active{
+			.field{
+				input{
+					opacity: 1;
+					width: 65vw;
+				}
+			}
+		}
+	}
+	/* the ap wrapper */
+	&wrapper{
+		padding-top: $navbar-height;
+	}
+	/*
+	THE LOGO
+
+	Just include a div class .ap-logo anywhere to show a logo,
+	The logo types are:
+
+	ap-logo: 	       typographic default logo
+	ap-logo-img:       image logo
+	*/
+	&logo{
+		color: $white;
+		line-height: 1.1;
+		text-align: center;
+		&:before{
+			content: "appaloosa";
+			text-transform: uppercase;
+			font-size: 20px;
+			font-weight: 700;		
+		}
+		&:after{
+			content: "Online Indie Publishing";
+			font-size: 12px;
+			display: block;
+		}
+	}
+	&logo-img{
+		background: url("../../img/logo-txt-white.png");
+		background-size: cover;
+		background-position: center;
+		width: 116px;
+		height: 170px;
+		&.logo-black{
+			background: url("../../img/logo-txt-black.png");
+			background-size: cover;
+			background-position: center;
+		}
+	}
+}
+.justify-onmax{
+	overflow: visible !important; 
+}

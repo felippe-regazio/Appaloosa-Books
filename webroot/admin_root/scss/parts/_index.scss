@@ -1,0 +1,11 @@
+.appaloosa-status{
+	font-family: Serif;
+	font-weight: 700;
+	p{
+		font-size: 5vw;
+		line-height: 0.7;
+		&.number{
+			font-size: 16vw;
+		}
+	}
+}

@@ -1,0 +1,467 @@
+/*
+Theme Name: HitMag
+
+Adding support for languages written in a Right To Left (RTL) direction is easy -
+it's just a matter of overwriting all the horizontal positioning attributes
+of your CSS stylesheet in a separate stylesheet file named rtl.css.
+
+https://codex.wordpress.org/Right-to-Left_Language_Support
+
+*/
+
+
+body {
+  direction: rtl;
+  unicode-bidi: embed;
+}
+
+blockquote, q {
+  border-right: 3px solid #e74c3c;
+}
+
+ul, ol {
+  margin: 0 1.5em 1.5em 0;
+  padding-right: 2em;
+  padding-left: 0;
+}
+
+li > ul,
+li > ol {
+  margin-right: 1.5em;
+  margin-left: 0;
+}
+
+.page-template-template-magazine #primary.content-area {
+  float: right;
+}
+
+.page-template-template-magazine #secondary.widget-area {
+  float: left;
+}
+
+.main-navigation {
+  float: right;
+}
+
+.main-navigation ul {
+  padding-right: 0;
+}
+
+.main-navigation ul ul {
+  float: right;
+  right: -999em;
+  left: auto;
+}
+
+.main-navigation ul ul ul {
+  right: -999em;
+  left: auto;
+}
+
+.main-navigation ul ul li:hover > ul, .main-navigation ul ul li.focus > ul {
+  right: 100%;
+  left: auto;
+}
+
+.main-navigation ul li:hover > ul,
+.main-navigation ul li.focus > ul {
+  right: auto;
+}
+
+.main-navigation li {
+  float: right;
+}
+
+.main-navigation .menu-item-has-children > a:after,
+.main-navigation .page_item_has_children > a:after {
+  float: left;
+  margin: 0 10px 0 0;
+  line-height: 20px;
+}
+
+.main-navigation .menu-item-has-children .menu-item-has-children > a:after,
+.main-navigation .page_item_has_children .menu-item-has-children > a:after {
+  content: "\f0d9";
+  float: left;
+  margin: 0 10px 0 0;
+}
+
+.comment-navigation .nav-previous,
+.posts-navigation .nav-previous,
+.post-navigation .nav-previous {
+  float: right;
+}
+
+.comment-navigation .nav-next,
+.posts-navigation .nav-next,
+.post-navigation .nav-next {
+  float: left;
+  text-align: left;
+}
+
+.top-navigation {
+  margin-right: 10px;
+  margin-left: 0;
+}
+
+.top-navigation ul {
+  padding-right: 0;
+}
+.top-navigation ul ul {
+  float: right;
+  right: -999em;
+  left: auto;
+}
+.top-navigation ul ul ul {
+  right: -999em;
+  left: auto;
+}
+.top-navigation ul ul li:hover > ul, .top-navigation ul ul li.focus > ul {
+  right: 100%;
+  left: auto;
+}
+.top-navigation ul li:hover > ul,
+.top-navigation ul li.focus > ul {
+  right: auto;
+}
+.top-navigation li {
+  float: right;
+}
+.top-navigation .menu-item-has-children > a:after,
+.top-navigation .page_item_has_children > a:after {
+  float: left;
+  line-height: 20px;
+  margin: 0 10px 0 0;
+}
+.top-navigation .menu-item-has-children .menu-item-has-children > a:after,
+.top-navigation .page_item_has_children .menu-item-has-children > a:after {
+  float: left;
+  margin: 0 10px 0 0;
+  content: "\f0d9";
+}
+#main-nav-button {
+  text-align: right;
+  margin-left: 0;
+  margin-right: 30px;
+}
+#main-nav-button:before {
+  margin: 0 0 0 10px;
+}
+#top-nav-button {
+  text-align: right;
+}
+@media (min-width: 768px) {
+  .hitmag-full-width #top-nav-button {
+    margin-left: 0;
+    margin-right: 20px;
+  }
+}
+.responsive-mainnav,
+.responsive-topnav {
+  padding-left: 30px;
+  padding-right: 0;
+}
+.responsive-mainnav ul,
+.responsive-topnav ul {
+  padding: 5px 30px 5px 0;
+}
+.hm-social-menu {
+  float: left;
+  margin: 7.5px 15px 7.5px -5px;
+}
+.screen-reader-text {
+  right: -9999em;
+  left: auto;
+}
+.hm-search-button-icon {
+  float: left;
+  left: 30px;
+  right: auto;
+}
+@media (max-width: 480px) {
+  .hm-search-box-container {
+    width: 100%;
+    left: 0;
+    right: auto;
+  }
+}
+@media (min-width: 481px) {
+  .hm-search-box-container {
+    left: 25px;
+    right: auto;
+  }
+}
+@media (min-width: 768px) {
+  .hm-search-box-container {
+    left: 30px;
+    right: auto;
+  }
+}
+@media (min-width: 992px) {
+  .hm-search-box-container {
+    left: 40px;
+    right: auto;
+  }
+}
+#hm-search-form .search-form .search-field {
+  float: right;
+}
+.screen-reader-text:focus {
+  right: 5px;
+  left: auto;
+}
+.alignleft {
+  float: right;
+  margin-left: 1.5em;
+  margin-right: 0;
+}
+.alignright {
+  float: left;
+  margin-right: 1.5em;
+}
+.aligncenter {
+  margin-right: auto;
+  margin-left: auto;
+}
+a.hm-viewall {
+  float: left;
+}
+.hm-viewall:after {
+  margin-right: 0.3em;
+  margin-left: 0;
+  content: none;
+}
+.hm-viewall:before {
+    content: '\f100';
+    cursor: pointer;
+    display: inline;
+    margin-right: 0.3em;
+    font-weight: normal;
+    font-family: 'FontAwesome';
+}
+.hm-header-sidebar {
+  float: left;
+}
+@media (min-width: 768px) {
+  .site-info-owner {
+    float: right;
+    padding: 20px 0 20px 20px;
+  }
+}
+@media (min-width: 768px) {
+  .site-info-designer {
+    float: right;
+    text-align: left;
+    padding: 20px 20px 20px 0;
+  }
+}
+@media (min-width: 768px) {
+  .footer-sidebar {
+    float: right;
+  }
+}
+.search-form .search-field {
+  padding: 10px 10px 10px 85px;
+}
+.search-form .search-submit {
+  left: 0;
+}
+.hmb-post,
+.hms-posts {
+  margin-right: 0;
+  float: right;
+}
+@media (max-width: 768px) {
+  .hmb-post,
+  .hms-posts {
+    margin-right: 0;
+    margin-left: 0;
+  }
+}
+.hmb-post {
+  margin-left: 5.306122448979592%;
+  margin-right: 0;
+}
+.hms-posts {
+  margin-left: 0;
+  margin-right: 0;
+}
+.hms-thumb {
+  float: right;
+  margin-left: 15px;
+  margin-right: 0;
+}
+.hm-dualc-left {
+  margin-right: 0;
+  margin-left: 5.306122448979592%;
+  float: right;
+}
+@media (max-width: 768px) {
+  .hm-dualc-left {
+    margin-left: 0;
+    float: none;
+  }
+}
+li.hm-tab {
+  float: right;
+}
+.hmw_avatar {
+  float: right;
+  margin: 0 0 0 1em;
+}
+#hitmag-tags a,
+.widget_tag_cloud .tagcloud a {
+  float: right;
+  margin: 0 0 1px 1px;
+}
+/*#primary.content-area {
+  float: right;
+}
+#secondary.widget-area {
+  float: left;
+}
+.th-left-sidebar #primary.content-area {
+  float: left;
+}
+.th-left-sidebar #secondary.widget-area {
+  float: right;
+}*/
+.th-grid-2 .hitmag-post {
+  margin-left: 5.306122448979592%;
+  margin-right: 0;
+  float: right;
+}
+@media (max-width: 768px) {
+  .th-grid-2 .hitmag-post {
+    margin-right: 0;
+    margin-left: 0;
+    float: none;
+  }
+}
+.th-grid-2 .hitmag-post:nth-child(2n) {
+  margin-left: 0;
+}
+
+.th-no-sidebar .th-grid-2 .hitmag-post {
+  margin-left: 3.571428%;
+  margin-right: 0;
+}
+@media (max-width: 768px) {
+  .th-no-sidebar .th-grid-2 .hitmag-post {
+    margin-right: 0;
+    margin-left: 0;
+  }
+}
+.th-no-sidebar .th-grid-2 .hitmag-post:nth-child(2n) {
+  margin-left: 0;
+}
+.th-grid-3 .hitmag-post {
+  float: right;
+}
+@media (max-width: 768px) {
+  .th-grid-3 .hitmag-post {
+    margin-right: 0;
+    margin-left: 0;
+  }
+}
+.th-list-posts .archive-thumb {
+  float: right;
+  margin: 0 0 0 30px;
+}
+.hm-logo {
+  float: right;
+}
+
+.hm-site-title {
+  margin-right: 15px;
+}
+.hm-date {
+  margin: 7.5px 0 7.5px 15px;
+  float: right;
+}
+.site-branding {
+  float: right;
+}
+.hm-header-image img {
+  float: right;
+}
+.hm-author-img {
+  float: right;
+  margin: 0 0 0 25px;
+}
+.hm-tags-links a {
+  margin-left: 1px;
+  margin-right: 0;
+}
+.hm-tagged {
+  margin-left: 1px;
+  margin-right: 0;
+}
+.hm-edit-link a.post-edit-link:before {
+  margin: 1px 0 0 .5em;
+}
+.hm-slider-details {
+  right: 0;
+}
+.hm-rel-post {
+  margin-left: 3.5%;
+  margin-right: 0;
+  float: right;
+}
+@media (max-width: 768px) {
+  .hm-rel-post {
+    margin-left: 0;
+  }
+}
+.hm-rel-post:nth-child(3n) {
+  margin-left: 0;
+}
+.hm-share {
+  margin-left: 10px;
+  margin-right: 0;
+  text-align: right;
+}
+.hm-share-facebook:before,
+.hm-share-twitter:before,
+.hm-share-googleplus:before {
+  border-left: 1px solid rgba(255, 255, 255, 0.3);
+  border-right: none;
+  margin-left: 0.6em;
+  margin-right: 0;
+  padding-left: 0.6em;
+  padding-right: 0;
+}
+.comment-list article,
+.comment-list .pingback,
+.comment-list .trackback {
+  padding: 30px 75px 30px 30px;
+}
+.comment-list .children > li {
+  padding-right: 0.875em;
+}
+.comment-author .avatar {
+  right: 0;
+}
+.comment-metadata {
+  margin-right: 5px;
+}
+.comment-content ul,
+.comment-content ol {
+  margin: 0 1.25em 1.5em 0;
+}
+.comment-reply-title small a {
+  float: left;
+}
+.flexslider {
+  direction: ltr;
+}
+.hm-slider-details {
+  right: 0;
+  text-align: right;
+}
+.post-navigation .nav-previous {
+  padding-left: 5px;
+}
+.post-navigation .nav-next {
+  padding-right: 5px;
+}

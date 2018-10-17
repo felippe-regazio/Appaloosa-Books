@@ -1,0 +1,69 @@
+/* Scss to Header & Nav Element */
+.ap-navbar{
+	z-index: 2;
+	position: fixed;
+	top: 0;
+	background: $ap-a;
+	height: $navbar-height;
+	width: 100%;
+	transition: $anim8-speed*2 ease-in-out;
+	box-shadow: $box-shadow;
+	&.hidden{
+		transform: translateY(-100%);
+		box-shadow: none;
+	}
+	.ap-navbar__wrapper{
+		position: relative;
+		width: 100%;
+		/* logo specs - absolute center */
+		.ap-logo{
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			transform: translate(-50%, 50%);
+		}
+	}
+}
+/* Fixed Menu Toggle Button */
+.ap-navbar-hamburger{
+	z-index: 1000;
+	position: fixed;
+	background: $ap-a;
+	height: 30px;
+    width: 30px;
+    left: $gutter*2;
+    padding: $gutter/2;
+    top: 14px;
+    cursor: pointer;
+	transition: $anim8-speed*2 ease-in-out;
+	span{
+		display: block;
+		opacity: 1;
+		transition: $anim8-speed*3 ease-in-out;
+		border-bottom: solid 5px $white;
+		width: 29px;
+		height: 4px;
+	}
+	/* Hover and Close Mode Span Anim8 */
+	&:hover{
+		span:first-child{			
+			transform: translateY(20px);
+		}
+		span:last-child{			
+			transform: translateY(-20px);
+		}
+	}
+	&.close-shape{
+		span{
+			transform: rotate(46deg) translateY(-1px) translateX(1px);
+		}
+		span:first-child{
+			transform: rotate(-45deg) translateY(6px) translateX(-7px);
+		}		
+		span:last-child{
+			transition: $anim8-speed*4 ease-in-out;
+			transform: translateY(-40px);
+			opacity:0;
+		}				
+	}
+}

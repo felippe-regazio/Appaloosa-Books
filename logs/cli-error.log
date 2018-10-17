@@ -1,0 +1,28 @@
+2018-08-04 02:09:20 Error: [RuntimeException] Unknown command `cake serve`. Run `cake --help` to get the list of valid commands. in /Applications/AMPPS/www/Appaloosa-Books-Cake/vendor/cakephp/cakephp/src/Console/CommandRunner.php on line 318
+Stack Trace:
+#0 /Applications/AMPPS/www/Appaloosa-Books-Cake/vendor/cakephp/cakephp/src/Console/CommandRunner.php(156): Cake\Console\CommandRunner->resolveName(Object(Cake\Console\CommandCollection), Object(Cake\Console\ConsoleIo), 'serve')
+#1 /Applications/AMPPS/www/Appaloosa-Books-Cake/bin/cake.php(12): Cake\Console\CommandRunner->run(Array)
+#2 {main}
+
+
+2018-08-04 02:09:28 Error: [RuntimeException] Unknown command `cake ser`. Run `cake --help` to get the list of valid commands. in /Applications/AMPPS/www/Appaloosa-Books-Cake/vendor/cakephp/cakephp/src/Console/CommandRunner.php on line 318
+Stack Trace:
+#0 /Applications/AMPPS/www/Appaloosa-Books-Cake/vendor/cakephp/cakephp/src/Console/CommandRunner.php(156): Cake\Console\CommandRunner->resolveName(Object(Cake\Console\CommandCollection), Object(Cake\Console\ConsoleIo), 'ser')
+#1 /Applications/AMPPS/www/Appaloosa-Books-Cake/bin/cake.php(12): Cake\Console\CommandRunner->run(Array)
+#2 {main}
+
+
+2018-08-23 00:26:09 Error: [RuntimeException] Unknown command `cake servr`. Run `cake --help` to get the list of valid commands. in /Applications/AMPPS/www/Appaloosa-Books-Cake/vendor/cakephp/cakephp/src/Console/CommandRunner.php on line 318
+Stack Trace:
+#0 /Applications/AMPPS/www/Appaloosa-Books-Cake/vendor/cakephp/cakephp/src/Console/CommandRunner.php(156): Cake\Console\CommandRunner->resolveName(Object(Cake\Console\CommandCollection), Object(Cake\Console\ConsoleIo), 'servr')
+#1 /Applications/AMPPS/www/Appaloosa-Books-Cake/bin/cake.php(12): Cake\Console\CommandRunner->run(Array)
+#2 {main}
+
+
+2018-10-13 22:14:55 Error: [RuntimeException] Unknown command `cake sever`. Run `cake --help` to get the list of valid commands. in /Applications/AMPPS/www/Appaloosa-Books/vendor/cakephp/cakephp/src/Console/CommandRunner.php on line 318
+Stack Trace:
+#0 /Applications/AMPPS/www/Appaloosa-Books/vendor/cakephp/cakephp/src/Console/CommandRunner.php(156): Cake\Console\CommandRunner->resolveName(Object(Cake\Console\CommandCollection), Object(Cake\Console\ConsoleIo), 'sever')
+#1 /Applications/AMPPS/www/Appaloosa-Books/bin/cake.php(12): Cake\Console\CommandRunner->run(Array)
+#2 {main}
+
+

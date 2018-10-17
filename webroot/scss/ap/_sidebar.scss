@@ -1,0 +1,117 @@
+$sidebar-max-width: 400px;
+/**/
+body.sidebar-open{
+	overflow: hidden !important;
+}
+.ap-sidebar {
+	z-index: 100;
+	position: fixed;
+	overflow: auto;
+	top: 0;
+	left: 0;
+	width: 95%;
+	height: 100%;
+	color: $white;
+	font-size: 1.3em;
+	line-height: 28px;
+	background-color: rgba(0,0,0,.96);
+	transition: $anim8-speed*3;
+	transform: translate(-100vw);
+	max-width: $sidebar-max-width;
+	&.active{
+		transform: translate(0) ;
+	}
+	&.put-behind{
+		z-index: 3;
+	}
+	/* sidebar columns conf */
+	&__content{
+		padding: $gutter*2;
+		padding-top: 55px;
+	    display: grid;
+		transition: $anim8-speed*3 ease-in-out;
+	}
+	&__col{
+		transition: $anim8-speed ease-in-out;
+	    .ap-logo-img{
+	    	position: relative;
+	    	margin: 0 auto;
+	    	margin-bottom: $gutter*3;
+	    }
+	}
+	/* sidebar elements */
+	hr, p, img, a,.ap-logo-img{
+		color: $white;
+		opacity: 0.7;
+	}
+	a:not([class]){
+		transition: $anim8-speed ease-in-out;
+		text-decoration: none;
+		&:hover{
+			opacity: 1;
+			color: lighten(#fff, 5%);
+		}
+	}
+	a.link.invert{
+		transition: $anim8-speed ease-in-out;
+		&:hover{
+			transition: $anim8-speed ease-in-out;
+			color: $white;
+			opacity: 1;
+		}
+	}
+	/* ULS */
+	ul.menu{
+		font-size: 1.5em;
+	}
+	ul.genders{
+		font-size: 3em;
+		line-height: 1;
+	}
+	.tile{
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		top: 0;
+		left: 0;
+		background: rgba(0,0,0,.96);
+		transform: translateX(-100%);
+		transition: $anim8-speed;
+		overflow: auto;
+		&.active{
+			transform: translateX(0);
+			transition: $anim8-speed ease-in;
+		}
+		&__content{
+			padding: $gutter*2;
+			.controls{
+			    height: 16px;
+			    text-align: right;
+			    display: flex;
+			    align-items: center;
+			    justify-content: flex-end;
+			    padding: $gutter/2;
+			    margin-bottom: 32px;
+				span i{
+					display: block;
+					cursor: pointer;
+				}
+			}
+			.bests-list{
+				a{
+					transition: $anim8-speed ease-in-out;
+					text-decoration: none;
+					display: block;
+					padding-bottom: $gutter*2;
+					span{
+						color: $ap-b;
+					}
+					&:hover{
+						opacity: 1;
+						color: lighten(#fff, 5%);
+					}
+				}
+			}
+		}
+	}
+}

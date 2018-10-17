@@ -1,0 +1,11 @@
+.ap-terms{
+	&__content{
+		max-width: 800px; 
+		margin: 0 auto; 
+		padding: 120px 20px;
+		.holder{
+			padding: $gutter;
+			box-shadow: $box-shadow;
+		}
+	}
+}

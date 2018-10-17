@@ -1,0 +1,108 @@
+// ABOUT THE AUTHOR
+.ap-author-details{
+	z-index: 99999999 !important;
+	transform: translateX(100%) !important;
+	transition: $anim8-speed;
+	overflow: auto;
+	position: fixed;
+	background: $black;
+	color: $white;
+	padding: 0;
+	height: 100%;
+	top: 0;
+	right: 0;
+	z-index: 10;
+	width: calc(50% + 12px);
+	@media screen and(max-width: 800px){
+		width: 100%;
+	}
+	&.about-author-open{
+		transform: translateX(0) !important;
+		transition: $anim8-speed;
+	}
+	a, i{
+		color: $white;
+		&:hover{
+			color: lighten($ap-b, 5%);
+		}
+	}			    	
+	&__close{
+		position: absolute;
+		right: $gutter;
+		top: $gutter;
+		cursor: pointer;
+		z-index: 15;
+	}
+	.about-author{
+		position: relative;
+		padding: $gutter*2;
+		&__avatar{
+			padding-top: $gutter*2;
+			margin-bottom: $gutter;
+			.wrapper{
+				margin: 0 auto;
+				padding: $gutter/2;
+				background: none;
+				border: dashed 2px $white;
+				width: 200px;
+    			height: 200px !important;
+    			.author-image{
+    				min-with: 150px;
+    				min-height: 150px;
+    				width: 100%;
+	    			height: 100%;
+	    			background-repeat: no-repeat;
+	    			background-size: cover;
+	    			background-position: center;
+	    			position: relative;
+    			}
+			}
+		}
+		&__name{
+			text-align: center;
+			p{
+				font-weight: 700;
+				letter-spacing: 1px;
+				font-size: $typo-feature;
+				margin-bottom: 7px;
+			}
+		}
+		&__socials{
+		    font-size: 22px;
+			letter-spacing: 5px;
+			text-align: center;
+			padding-bottom: $gutter*2;
+		}
+		&__bio{
+			min-height: 145px;
+			line-height: 1.3;
+			padding: $gutter;
+			padding-bottom: $gutter*3;
+			@media screen and(max-width: 500px){
+				padding: 0;
+				padding-bottom: $gutter*3;
+			}
+		}
+		&__support{
+			text-align: center;
+			margin-bottom: $gutter*2;
+			button{
+				border-color: $white;
+				color: $white;
+				i{
+					transition: $anim8-speed*2;
+					color: $white;
+				}
+				&:hover{
+					background: $black;
+    				border-color: $ap-b;
+    				color: $ap-b;
+    				i{	
+    					transition: $anim8-speed*2;
+    					color: $ap-b;
+    				}	
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,1316 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: hitmag.1.1.1\n"
+"POT-Creation-Date: 2017-11-21 08:57+0530\n"
+"PO-Revision-Date: 2017-11-21 08:57+0530\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.7\n"
+"X-Poedit-KeywordsList: __;_e;esc_html__;esc_html_e;esc_attr__;esc_attr_e;_n;"
+"_x;_nx\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: 404.php:17
+msgid "Oops! That page can&rsquo;t be found."
+msgstr ""
+
+#: 404.php:21
+msgid "It looks like nothing was found at this location. Maybe try a search?"
+msgstr ""
+
+#: comments.php:33
+#, php-format
+msgid "One Comment on &ldquo;%s&rdquo;"
+msgstr ""
+
+#: comments.php:39
+#, php-format
+msgid "%1$s Comment on &ldquo;%2$s&rdquo;"
+msgstr ""
+
+#: comments.php:56 comments.php:78
+msgid "Comment navigation"
+msgstr ""
+
+#: comments.php:59 comments.php:81
+msgid "Older Comments"
+msgstr ""
+
+#: comments.php:60 comments.php:82
+msgid "Newer Comments"
+msgstr ""
+
+#: comments.php:95
+msgid "Comments are closed."
+msgstr ""
+
+#: footer.php:49
+#, php-format
+msgid "Copyright &#169; %1$s %2$s."
+msgstr ""
+
+#: footer.php:55
+#, php-format
+msgid "Powered by %1$s and %2$s."
+msgstr ""
+
+#: functions.php:52 functions.php:133 header.php:113
+msgid "Main Menu"
+msgstr ""
+
+#: functions.php:53 functions.php:142 header.php:33
+msgid "Top Menu"
+msgstr ""
+
+#: functions.php:54
+msgid "Social Media Menu"
+msgstr ""
+
+#: functions.php:151
+msgid "Social Links Menu"
+msgstr ""
+
+#: functions.php:188
+msgid "Main Sidebar"
+msgstr ""
+
+#: functions.php:190
+msgid "Add widgets here."
+msgstr ""
+
+#: functions.php:197 inc/dashboard/theme-info.php:59
+msgid "Magazine Homepage"
+msgstr ""
+
+#: functions.php:199
+msgid ""
+"Appearas on Magazine Homepage template only. Add magazine posts widgets to "
+"this widget area."
+msgstr ""
+
+#: functions.php:206
+msgid "Header Advertisement Area"
+msgstr ""
+
+#: functions.php:208
+msgid "You can add advertisement widget to this widget area."
+msgstr ""
+
+#: functions.php:215
+msgid "Footer Left Sidebar"
+msgstr ""
+
+#: functions.php:224
+msgid "Footer Mid Sidebar"
+msgstr ""
+
+#: functions.php:233
+msgid "Footer Right Sidebar"
+msgstr ""
+
+#: functions.php:254 functions.php:260 functions.php:266
+msgid "on"
+msgstr ""
+
+#: header.php:25
+msgid "Skip to content"
+msgstr ""
+
+#: search.php:19
+#, php-format
+msgid "Search Results for: %s"
+msgstr ""
+
+#: single.php:26
+msgid "Next Article"
+msgstr ""
+
+#: single.php:28
+msgid "Previous Article"
+msgstr ""
+
+#: template-magazine.php:26
+msgid ""
+"Please go to Appearance &#8594; Widgets and add posts widgets to the "
+"\"Magazine Homepage\" widget area. You can use the Magazine Posts widgets to "
+"set up the theme like the demo website."
+msgstr ""
+
+#: inc/class-meta-boxes.php:38
+msgid "Select Layout"
+msgstr ""
+
+#: inc/class-meta-boxes.php:118
+msgid "Default Layout"
+msgstr ""
+
+#: inc/class-meta-boxes.php:121
+msgid "Right Sidebar"
+msgstr ""
+
+#: inc/class-meta-boxes.php:124
+msgid "Left Sidebar"
+msgstr ""
+
+#: inc/class-meta-boxes.php:127
+msgid "Full Width"
+msgstr ""
+
+#: inc/class-meta-boxes.php:130
+msgid "Full Width Content Centered."
+msgstr ""
+
+#: inc/template-tags.php:79
+msgid "Leave a Comment"
+msgstr ""
+
+#: inc/template-tags.php:82
+#, php-format
+msgid "%d Comments."
+msgstr ""
+
+#: inc/template-tags.php:84
+msgid "1 Comment"
+msgstr ""
+
+#: inc/template-tags.php:114
+msgid "Tagged"
+msgstr ""
+
+#: inc/template-tags.php:125 template-parts/content-page.php:36
+#, php-format
+msgid "Edit %s"
+msgstr ""
+
+#: inc/template-tags.php:153
+msgid " / "
+msgstr ""
+
+#: inc/customizer/customizer.php:28
+msgid "Header options"
+msgstr ""
+
+#: inc/customizer/customizer.php:37
+msgid "General Settings"
+msgstr ""
+
+#: inc/customizer/customizer.php:43
+msgid "Top Bar"
+msgstr ""
+
+#: inc/customizer/customizer.php:49
+msgid "Header Settings"
+msgstr ""
+
+#: inc/customizer/customizer.php:55
+msgid "Header Image Options"
+msgstr ""
+
+#: inc/customizer/customizer.php:62
+msgid "Slider Settings"
+msgstr ""
+
+#: inc/customizer/customizer.php:68
+msgid "Blog options"
+msgstr ""
+
+#: inc/customizer/customizer.php:69
+msgid ""
+"These options affect to blog posts listing page and archives like category "
+"and tags."
+msgstr ""
+
+#: inc/customizer/customizer.php:75
+msgid "Post options"
+msgstr ""
+
+#: inc/customizer/customizer.php:76
+msgid "These options affect only to single post articles."
+msgstr ""
+
+#: inc/customizer/customizer.php:81
+msgid "Page options"
+msgstr ""
+
+#: inc/customizer/customizer.php:82
+msgid "These opitons affect only to pages."
+msgstr ""
+
+#: inc/customizer/customizer.php:87 inc/dashboard/theme-info.php:91
+msgid "Theme Info"
+msgstr ""
+
+#: inc/customizer/customizer.php:110
+msgid "Theme Primary Color"
+msgstr ""
+
+#: inc/customizer/customizer.php:127
+msgid "Boxed Layout"
+msgstr ""
+
+#: inc/customizer/customizer.php:132 inc/customizer/customizer.php:242
+msgid "On"
+msgstr ""
+
+#: inc/customizer/customizer.php:133 inc/customizer/customizer.php:243
+msgid "Off"
+msgstr ""
+
+#: inc/customizer/customizer.php:140
+msgid "Footer Copyright Text."
+msgstr ""
+
+#: inc/customizer/customizer.php:149
+msgid "Top Bar Show/Hide"
+msgstr ""
+
+#: inc/customizer/customizer.php:154 inc/customizer/customizer.php:332
+#: inc/customizer/customizer.php:365 inc/customizer/customizer.php:425
+#: inc/customizer/customizer.php:475 inc/customizer/customizer.php:488
+#: inc/customizer/customizer.php:501 inc/customizer/customizer.php:514
+msgid "Show"
+msgstr ""
+
+#: inc/customizer/customizer.php:155 inc/customizer/customizer.php:333
+#: inc/customizer/customizer.php:366 inc/customizer/customizer.php:426
+#: inc/customizer/customizer.php:476 inc/customizer/customizer.php:489
+#: inc/customizer/customizer.php:502 inc/customizer/customizer.php:515
+msgid "Hide"
+msgstr ""
+
+#: inc/customizer/customizer.php:162
+msgid "Show search icon on Main Navigation."
+msgstr ""
+
+#: inc/customizer/customizer.php:171
+msgid "Show date on topbar."
+msgstr ""
+
+#: inc/customizer/customizer.php:187
+msgid "Header Image Position"
+msgstr ""
+
+#: inc/customizer/customizer.php:193
+msgid "After site title and logo"
+msgstr ""
+
+#: inc/customizer/customizer.php:196
+msgid "Before site title and logo"
+msgstr ""
+
+#: inc/customizer/customizer.php:199
+msgid "After Main Navigation"
+msgstr ""
+
+#: inc/customizer/customizer.php:207
+msgid "Link header image to homepage."
+msgstr ""
+
+#: inc/customizer/customizer.php:217
+msgid "Notice"
+msgstr ""
+
+#: inc/customizer/customizer.php:219
+msgid "Slider displays on magazine homepage only."
+msgstr ""
+
+#: inc/customizer/customizer.php:227
+msgid "Create a magazine homepage."
+msgstr ""
+
+#: inc/customizer/customizer.php:229
+msgid "Learn How to create a magazine homepage"
+msgstr ""
+
+#: inc/customizer/customizer.php:237
+msgid "Featured Slider"
+msgstr ""
+
+#: inc/customizer/customizer.php:250
+msgid "Select the category for slider posts"
+msgstr ""
+
+#: inc/customizer/customizer.php:268 inc/customizer/customizer.php:389
+#: inc/customizer/customizer.php:522
+msgid "Content and Sidebar Alignment"
+msgstr ""
+
+#: inc/customizer/customizer.php:284
+msgid "Posts Listing Layout"
+msgstr ""
+
+#: inc/customizer/customizer.php:291
+msgid "2 Columns Grid"
+msgstr ""
+
+#: inc/customizer/customizer.php:292
+msgid "2 posts in a row."
+msgstr ""
+
+#: inc/customizer/customizer.php:295
+msgid "3 Columns Grid"
+msgstr ""
+
+#: inc/customizer/customizer.php:296
+msgid "3 posts in a row."
+msgstr ""
+
+#: inc/customizer/customizer.php:299
+msgid "List Posts"
+msgstr ""
+
+#: inc/customizer/customizer.php:300
+msgid "Posts with featured images on the left side."
+msgstr ""
+
+#: inc/customizer/customizer.php:303
+msgid "Large Posts"
+msgstr ""
+
+#: inc/customizer/customizer.php:304
+msgid "Large posts with featured images on the top."
+msgstr ""
+
+#: inc/customizer/customizer.php:312
+msgid "What post meta to display?"
+msgstr ""
+
+#: inc/customizer/customizer.php:317
+msgid "Category List"
+msgstr ""
+
+#: inc/customizer/customizer.php:318 inc/customizer/customizer.php:411
+msgid "Date"
+msgstr ""
+
+#: inc/customizer/customizer.php:319 inc/customizer/customizer.php:412
+msgid "Author"
+msgstr ""
+
+#: inc/customizer/customizer.php:320 inc/customizer/customizer.php:413
+msgid "Comments Link"
+msgstr ""
+
+#: inc/customizer/customizer.php:327
+msgid "Excerpt Show/Hide"
+msgstr ""
+
+#: inc/customizer/customizer.php:340
+msgid "Excerpt Length"
+msgstr ""
+
+#: inc/customizer/customizer.php:360
+msgid "Show read more button."
+msgstr ""
+
+#: inc/customizer/customizer.php:373
+msgid "Read more button text."
+msgstr ""
+
+#: inc/customizer/customizer.php:375
+msgid "Read More"
+msgstr ""
+
+#: inc/customizer/customizer.php:405
+msgid "What post meta to display in single post?"
+msgstr ""
+
+#: inc/customizer/customizer.php:410
+msgid "Categories List"
+msgstr ""
+
+#: inc/customizer/customizer.php:420
+msgid "Featured image inside the single post."
+msgstr ""
+
+#: inc/customizer/customizer.php:433
+msgid "Link featured image to full size image."
+msgstr ""
+
+#: inc/customizer/customizer.php:449
+msgid "Use lightbox feature."
+msgstr ""
+
+#: inc/customizer/customizer.php:470
+msgid "Posts navigation after the post."
+msgstr ""
+
+#: inc/customizer/customizer.php:483
+msgid "Author details box after the post."
+msgstr ""
+
+#: inc/customizer/customizer.php:496
+msgid "Related posts after the post."
+msgstr ""
+
+#: inc/customizer/customizer.php:509
+msgid "Tags list after the post."
+msgstr ""
+
+#: inc/customizer/customizer.php:538
+msgid "Theme Setup Guide"
+msgstr ""
+
+#: inc/customizer/customizer.php:540
+msgid "Read the documentation"
+msgstr ""
+
+#: inc/customizer/customizer.php:546 inc/customizer/customizer.php:548
+msgid "Theme Details"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:5
+#: inc/kirki/includes/class-kirki-l10n.php:104
+msgid "Background Color"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:6
+#: inc/kirki/includes/class-kirki-l10n.php:105
+msgid "Background Image"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:7
+#: inc/kirki/includes/class-kirki-l10n.php:106
+msgid "No Repeat"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:8
+#: inc/kirki/includes/class-kirki-l10n.php:107
+msgid "Repeat All"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:9
+#: inc/kirki/includes/class-kirki-l10n.php:108
+msgid "Repeat Horizontally"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:10
+#: inc/kirki/includes/class-kirki-l10n.php:109
+msgid "Repeat Vertically"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:11
+#: inc/kirki/includes/class-kirki-l10n.php:110
+msgid "Inherit"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:12
+#: inc/kirki/includes/class-kirki-l10n.php:111
+msgid "Background Repeat"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:13
+#: inc/kirki/includes/class-kirki-l10n.php:112
+msgid "Cover"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:14
+#: inc/kirki/includes/class-kirki-l10n.php:113
+msgid "Contain"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:15
+#: inc/kirki/includes/class-kirki-l10n.php:114
+msgid "Background Size"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:16
+#: inc/kirki/includes/class-kirki-l10n.php:115
+msgid "Fixed"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:17
+#: inc/kirki/includes/class-kirki-l10n.php:116
+msgid "Scroll"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:18
+#: inc/kirki/includes/class-kirki-l10n.php:117
+msgid "Background Attachment"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:19
+#: inc/kirki/includes/class-kirki-l10n.php:118
+msgid "Left Top"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:20
+#: inc/kirki/includes/class-kirki-l10n.php:119
+msgid "Left Center"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:21
+#: inc/kirki/includes/class-kirki-l10n.php:120
+msgid "Left Bottom"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:22
+#: inc/kirki/includes/class-kirki-l10n.php:121
+msgid "Right Top"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:23
+#: inc/kirki/includes/class-kirki-l10n.php:122
+msgid "Right Center"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:24
+#: inc/kirki/includes/class-kirki-l10n.php:123
+msgid "Right Bottom"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:25
+#: inc/kirki/includes/class-kirki-l10n.php:124
+msgid "Center Top"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:26
+#: inc/kirki/includes/class-kirki-l10n.php:125
+msgid "Center Center"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:27
+#: inc/kirki/includes/class-kirki-l10n.php:126
+msgid "Center Bottom"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:28
+#: inc/kirki/includes/class-kirki-l10n.php:127
+msgid "Background Position"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:29
+#: inc/kirki/includes/class-kirki-l10n.php:128
+msgid "Background Opacity"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:30
+#: inc/kirki/includes/class-kirki-l10n.php:129
+msgid "ON"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:31
+#: inc/kirki/includes/class-kirki-l10n.php:130
+msgid "OFF"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:32
+#: inc/kirki/includes/class-kirki-l10n.php:131
+msgid "All"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:33
+#: inc/kirki/includes/class-kirki-l10n.php:132
+msgid "Cyrillic"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:34
+#: inc/kirki/includes/class-kirki-l10n.php:133
+msgid "Cyrillic Extended"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:35
+#: inc/kirki/includes/class-kirki-l10n.php:134
+msgid "Devanagari"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:36
+#: inc/kirki/includes/class-kirki-l10n.php:135
+msgid "Greek"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:37
+#: inc/kirki/includes/class-kirki-l10n.php:136
+msgid "Greek Extended"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:38
+#: inc/kirki/includes/class-kirki-l10n.php:137
+msgid "Khmer"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:39
+#: inc/kirki/includes/class-kirki-l10n.php:138
+msgid "Latin"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:40
+#: inc/kirki/includes/class-kirki-l10n.php:139
+msgid "Latin Extended"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:41
+#: inc/kirki/includes/class-kirki-l10n.php:140
+msgid "Vietnamese"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:42
+#: inc/kirki/includes/class-kirki-l10n.php:141
+msgid "Hebrew"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:43
+#: inc/kirki/includes/class-kirki-l10n.php:142
+msgid "Arabic"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:44
+#: inc/kirki/includes/class-kirki-l10n.php:143
+msgid "Bengali"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:45
+#: inc/kirki/includes/class-kirki-l10n.php:144
+msgid "Gujarati"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:46
+#: inc/kirki/includes/class-kirki-l10n.php:145
+msgid "Tamil"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:47
+#: inc/kirki/includes/class-kirki-l10n.php:146
+msgid "Telugu"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:48
+#: inc/kirki/includes/class-kirki-l10n.php:147
+msgid "Thai"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:49
+#: inc/kirki/includes/class-kirki-l10n.php:148
+msgid "Serif"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:50
+#: inc/kirki/includes/class-kirki-l10n.php:149
+msgid "Sans Serif"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:51
+#: inc/kirki/includes/class-kirki-l10n.php:150
+msgid "Monospace"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:52
+#: inc/kirki/includes/class-kirki-l10n.php:151
+msgid "Font Family"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:53
+#: inc/kirki/includes/class-kirki-l10n.php:152
+msgid "Font Size"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:54
+#: inc/kirki/includes/class-kirki-l10n.php:153
+msgid "Font Weight"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:55
+#: inc/kirki/includes/class-kirki-l10n.php:154
+msgid "Line Height"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:56
+#: inc/kirki/includes/class-kirki-l10n.php:155
+msgid "Font Style"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:57
+#: inc/kirki/includes/class-kirki-l10n.php:156
+msgid "Letter Spacing"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:58
+#: inc/kirki/includes/class-kirki-l10n.php:157
+msgid "Top"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:59
+#: inc/kirki/includes/class-kirki-l10n.php:158
+msgid "Bottom"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:60
+#: inc/kirki/includes/class-kirki-l10n.php:159
+msgid "Left"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:61
+#: inc/kirki/includes/class-kirki-l10n.php:160
+msgid "Right"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:62
+#: inc/kirki/includes/class-kirki-l10n.php:161
+msgid "Center"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:63
+#: inc/kirki/includes/class-kirki-l10n.php:162
+msgid "Justify"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:64
+#: inc/kirki/includes/class-kirki-l10n.php:163
+msgid "Color"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:65
+#: inc/kirki/includes/class-kirki-l10n.php:164
+msgid "Add Image"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:66
+#: inc/kirki/includes/class-kirki-l10n.php:165
+msgid "Change Image"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:67
+#: inc/kirki/includes/class-kirki-l10n.php:166
+msgid "No Image Selected"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:68
+#: inc/kirki/includes/class-kirki-l10n.php:167
+msgid "Add File"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:69
+#: inc/kirki/includes/class-kirki-l10n.php:168
+msgid "Change File"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:70
+#: inc/kirki/includes/class-kirki-l10n.php:169
+msgid "No File Selected"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:71
+#: inc/kirki/includes/class-kirki-l10n.php:170
+msgid "Remove"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:72
+#: inc/kirki/includes/class-kirki-l10n.php:171
+msgid "Select a font-family"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:73
+#: inc/kirki/includes/class-kirki-l10n.php:172
+msgid "Variant"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:74
+#: inc/kirki/includes/class-kirki-l10n.php:173
+msgid "Subset"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:75
+#: inc/kirki/includes/class-kirki-l10n.php:174
+msgid "Size"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:76
+#: inc/kirki/includes/class-kirki-l10n.php:175
+msgid "Height"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:77
+#: inc/kirki/includes/class-kirki-l10n.php:176
+msgid "Spacing"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:78
+#: inc/kirki/includes/class-kirki-l10n.php:177
+msgid "Ultra-Light 100"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:79
+#: inc/kirki/includes/class-kirki-l10n.php:178
+msgid "Ultra-Light 100 Italic"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:80
+#: inc/kirki/includes/class-kirki-l10n.php:179
+msgid "Light 200"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:81
+#: inc/kirki/includes/class-kirki-l10n.php:180
+msgid "Light 200 Italic"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:82
+#: inc/kirki/includes/class-kirki-l10n.php:181
+msgid "Book 300"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:83
+#: inc/kirki/includes/class-kirki-l10n.php:182
+msgid "Book 300 Italic"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:84
+#: inc/kirki/includes/class-kirki-l10n.php:183
+msgid "Normal 400"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:85
+#: inc/kirki/includes/class-kirki-l10n.php:184
+msgid "Normal 400 Italic"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:86
+#: inc/kirki/includes/class-kirki-l10n.php:185
+msgid "Medium 500"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:87
+#: inc/kirki/includes/class-kirki-l10n.php:186
+msgid "Medium 500 Italic"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:88
+#: inc/kirki/includes/class-kirki-l10n.php:187
+msgid "Semi-Bold 600"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:89
+#: inc/kirki/includes/class-kirki-l10n.php:188
+msgid "Semi-Bold 600 Italic"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:90
+#: inc/kirki/includes/class-kirki-l10n.php:189
+msgid "Bold 700"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:91
+#: inc/kirki/includes/class-kirki-l10n.php:190
+msgid "Bold 700 Italic"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:92
+#: inc/kirki/includes/class-kirki-l10n.php:191
+msgid "Extra-Bold 800"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:93
+#: inc/kirki/includes/class-kirki-l10n.php:192
+msgid "Extra-Bold 800 Italic"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:94
+#: inc/kirki/includes/class-kirki-l10n.php:193
+msgid "Ultra-Bold 900"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:95
+#: inc/kirki/includes/class-kirki-l10n.php:194
+msgid "Ultra-Bold 900 Italic"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:96
+#: inc/kirki/includes/class-kirki-l10n.php:195
+msgid "Invalid Value"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:97
+#: inc/kirki/includes/class-kirki-l10n.php:196
+msgid "Add new"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:98
+#: inc/kirki/includes/class-kirki-l10n.php:197
+msgid "row"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:99
+#: inc/kirki/includes/class-kirki-l10n.php:198
+#, php-format
+msgid "Limit: %s rows"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:100
+#: inc/kirki/includes/class-kirki-l10n.php:199
+#: inc/kirki/includes/sections/class-kirki-sections-hover-section.php:40
+msgid "Press return or enter to open this section"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:101
+#: inc/kirki/includes/class-kirki-l10n.php:200
+#: inc/kirki/includes/sections/class-kirki-sections-hover-section.php:46
+msgid "Back"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:102
+#: inc/kirki/includes/class-kirki-l10n.php:201
+#, php-format
+msgid "%s Reset"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:103
+#: inc/kirki/includes/class-kirki-l10n.php:202
+msgid "Text Align"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:104
+#: inc/kirki/includes/class-kirki-l10n.php:203
+msgid "Text Transform"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:105
+#: inc/kirki/includes/class-kirki-l10n.php:204
+msgid "None"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:106
+#: inc/kirki/includes/class-kirki-l10n.php:205
+msgid "Capitalize"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:107
+#: inc/kirki/includes/class-kirki-l10n.php:206
+msgid "Uppercase"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:108
+#: inc/kirki/includes/class-kirki-l10n.php:207
+msgid "Lowercase"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:109
+#: inc/kirki/includes/class-kirki-l10n.php:208
+msgid "Initial"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:110
+#: inc/kirki/includes/class-kirki-l10n.php:209
+msgid "Select a Page"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:111
+#: inc/kirki/includes/class-kirki-l10n.php:210
+msgid "Open Editor"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:112
+#: inc/kirki/includes/class-kirki-l10n.php:211
+msgid "Close Editor"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:113
+#: inc/kirki/includes/class-kirki-l10n.php:212
+msgid "Switch Editor"
+msgstr ""
+
+#: inc/customizer/kirki-config.php:114
+#: inc/kirki/includes/class-kirki-l10n.php:213
+msgid "Hex Value"
+msgstr ""
+
+#: inc/customizer/custom-controls/class-upsell-customize.php:76
+msgid "Ready for more?"
+msgstr ""
+
+#: inc/customizer/custom-controls/class-upsell-customize.php:77
+msgid "Get HitMag Pro"
+msgstr ""
+
+#: inc/customizer/custom-controls/control-category-dropdown.php:16
+msgid "&mdash; Show All Posts &mdash;"
+msgstr ""
+
+#: inc/dashboard/theme-info.php:18
+msgid ""
+"Welcome to HitMag! To get started with HitMag please visit the theme Welcome "
+"page."
+msgstr ""
+
+#: inc/dashboard/theme-info.php:19
+msgid "Get Started with HitMag"
+msgstr ""
+
+#: inc/dashboard/theme-info.php:37 inc/dashboard/theme-info.php:39
+msgid "HitMag Theme"
+msgstr ""
+
+#: inc/dashboard/theme-info.php:50
+msgid "Welcome to HitMag"
+msgstr ""
+
+#: inc/dashboard/theme-info.php:56
+msgid "HitMag"
+msgstr ""
+
+#: inc/dashboard/theme-info.php:83
+msgid "Theme Customizer"
+msgstr ""
+
+#: inc/dashboard/theme-info.php:84
+msgid ""
+"All the HitMag theme settings are located at the customizer. Start "
+"customizing your website with customizer."
+msgstr ""
+
+#: inc/dashboard/theme-info.php:85
+msgid "Go to customizer"
+msgstr ""
+
+#: inc/dashboard/theme-info.php:87
+msgid "Theme Documentation"
+msgstr ""
+
+#: inc/dashboard/theme-info.php:88
+msgid "Need to learn all about HitMag? Read the theme documentation carefully."
+msgstr ""
+
+#: inc/dashboard/theme-info.php:89
+msgid "Read the documentation."
+msgstr ""
+
+#: inc/dashboard/theme-info.php:92
+msgid "Know all the details about HitMag theme."
+msgstr ""
+
+#: inc/dashboard/theme-info.php:93
+msgid "Theme Details."
+msgstr ""
+
+#: inc/dashboard/theme-info.php:95
+msgid "Theme Demo"
+msgstr ""
+
+#: inc/dashboard/theme-info.php:96
+msgid "See the theme preview of free version."
+msgstr ""
+
+#: inc/dashboard/theme-info.php:97
+msgid "Theme Preview"
+msgstr ""
+
+#: inc/dashboard/theme-info.php:124
+msgid ""
+"Congratulations...! You have activated a magazine front page successfully. "
+"Now start adding posts widgets to \"Magazine Homepage\" widget area."
+msgstr ""
+
+#: inc/dashboard/theme-info.php:127
+msgid "Go to Widgets Area"
+msgstr ""
+
+#: inc/dashboard/theme-info.php:138
+msgid "Select \"A Static page\" option for the setting \"Front Page Displays\""
+msgstr ""
+
+#: inc/dashboard/theme-info.php:141
+msgid ""
+"Select the page that has \"Magazine Homepage\" template as the front page ."
+msgstr ""
+
+#: inc/dashboard/theme-info.php:144
+msgid "Select front page."
+msgstr ""
+
+#: inc/dashboard/theme-info.php:155
+msgid "Select the \"Magazine Homepage\" page template for the front page."
+msgstr ""
+
+#: inc/dashboard/theme-info.php:157
+msgid ""
+"Go to the edit screen of the front page. Then select the Template - "
+"\"Magazine Homepage\" from \"Page Attributes\" dialog box."
+msgstr ""
+
+#: inc/dashboard/theme-info.php:161
+msgid "Change front page template"
+msgstr ""
+
+#: inc/dashboard/theme-info.php:163
+msgid "Create a page that has \"Magazine Homepage\" page template."
+msgstr ""
+
+#: inc/dashboard/theme-info.php:166
+msgid ""
+"First create a page to display on front page. Give any title for that page. "
+"( eg: Home )"
+msgstr ""
+
+#: inc/dashboard/theme-info.php:167
+msgid ""
+"Then from the \"Page Attributes\" dialog box select the Template-\"Magazine "
+"Homepage\""
+msgstr ""
+
+#: inc/dashboard/theme-info.php:170
+msgid "Create a page."
+msgstr ""
+
+#: inc/widgets/block-posts-dual.php:13
+msgid "HitMag: Magazine Posts (Style 2)"
+msgstr ""
+
+#: inc/widgets/block-posts-dual.php:14
+msgid "Displays posts in a two column layout."
+msgstr ""
+
+#: inc/widgets/block-posts-dual.php:30 inc/widgets/block-posts-dual.php:35
+#: inc/widgets/block-posts-grid.php:30 inc/widgets/block-posts-single.php:29
+#: inc/widgets/sidebar-posts.php:30
+msgid "Latest Posts"
+msgstr ""
+
+#: inc/widgets/block-posts-dual.php:34 inc/widgets/block-posts-dual.php:39
+#: inc/widgets/block-posts-grid.php:34 inc/widgets/block-posts-single.php:31
+msgid "View All"
+msgstr ""
+
+#: inc/widgets/block-posts-dual.php:45
+msgid "First Set of Posts"
+msgstr ""
+
+#: inc/widgets/block-posts-dual.php:47 inc/widgets/block-posts-dual.php:70
+#: inc/widgets/block-posts-grid.php:41 inc/widgets/block-posts-single.php:37
+#: inc/widgets/sidebar-posts.php:40
+msgid "Title:"
+msgstr ""
+
+#: inc/widgets/block-posts-dual.php:51 inc/widgets/block-posts-dual.php:74
+#: inc/widgets/block-posts-single.php:41 inc/widgets/sidebar-posts.php:44
+msgid "Select a post category"
+msgstr ""
+
+#: inc/widgets/block-posts-dual.php:55 inc/widgets/block-posts-dual.php:78
+#: inc/widgets/block-posts-grid.php:49 inc/widgets/sidebar-posts.php:48
+msgid "Number of posts:"
+msgstr ""
+
+#: inc/widgets/block-posts-dual.php:60 inc/widgets/block-posts-dual.php:83
+#: inc/widgets/block-posts-grid.php:54 inc/widgets/sidebar-posts.php:53
+msgid "Hide sticky posts."
+msgstr ""
+
+#: inc/widgets/block-posts-dual.php:63 inc/widgets/block-posts-dual.php:86
+#: inc/widgets/block-posts-grid.php:57 inc/widgets/block-posts-single.php:45
+msgid "View All Text:"
+msgstr ""
+
+#: inc/widgets/block-posts-dual.php:68
+msgid "Second Set of Posts"
+msgstr ""
+
+#: inc/widgets/block-posts-grid.php:13
+msgid "HitMag: Magazine Posts ( Style 3 )"
+msgstr ""
+
+#: inc/widgets/block-posts-grid.php:14 inc/widgets/block-posts-single.php:15
+msgid "Displays latest posts or posts from a choosen category."
+msgstr ""
+
+#: inc/widgets/block-posts-grid.php:45
+msgid "Select a post category:"
+msgstr ""
+
+#: inc/widgets/block-posts-single.php:14
+msgid "HitMag: Magazine Posts (Style 1)"
+msgstr ""
+
+#: inc/widgets/popular-tags-comments.php:15
+msgid "HitMag: Popular Posts, Tags, Comments"
+msgstr ""
+
+#: inc/widgets/popular-tags-comments.php:16
+msgid "Displays popular posts, comments, tags in a tabbed pane."
+msgstr ""
+
+#: inc/widgets/popular-tags-comments.php:33
+msgid "Number of popular posts:"
+msgstr ""
+
+#: inc/widgets/popular-tags-comments.php:37
+msgid "Number of comments:"
+msgstr ""
+
+#: inc/widgets/popular-tags-comments.php:83
+msgid "Popular"
+msgstr ""
+
+#: inc/widgets/popular-tags-comments.php:84
+msgid "Comments"
+msgstr ""
+
+#: inc/widgets/popular-tags-comments.php:85
+msgid "Tags"
+msgstr ""
+
+#: inc/widgets/popular-tags-comments.php:141
+msgid "No comments found."
+msgstr ""
+
+#: inc/widgets/popular-tags-comments.php:155
+msgid "No tags created."
+msgstr ""
+
+#: inc/widgets/sidebar-posts.php:14
+msgid "HitMag: Sidebar Posts"
+msgstr ""
+
+#: inc/widgets/sidebar-posts.php:15
+msgid ""
+"Displays latest posts or posts from a choosen category.Use this widget in "
+"the main sidebars."
+msgstr ""
+
+#: template-parts/authorbox.php:8
+#, php-format
+msgid "About %s"
+msgstr ""
+
+#: template-parts/authorbox.php:11
+#, php-format
+msgid "View all posts by %s &rarr;"
+msgstr ""
+
+#: template-parts/content-none.php:14
+msgid "Nothing Found"
+msgstr ""
+
+#: template-parts/content-none.php:21
+#, php-format
+msgid ""
+"Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
+msgstr ""
+
+#: template-parts/content-none.php:25
+msgid ""
+"Sorry, but nothing matched your search terms. Please try again with some "
+"different keywords."
+msgstr ""
+
+#: template-parts/content-none.php:31
+msgid ""
+"It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps "
+"searching can help."
+msgstr ""
+
+#: template-parts/content-page.php:24 template-parts/content-single.php:39
+msgid "Pages:"
+msgstr ""
+
+#: template-parts/content-single.php:34
+#, php-format
+msgid "Continue reading %s <span class=\"meta-nav\">&rarr;</span>"
+msgstr ""
+
+#: template-parts/related-posts.php:10
+msgid "Related Posts"
+msgstr ""

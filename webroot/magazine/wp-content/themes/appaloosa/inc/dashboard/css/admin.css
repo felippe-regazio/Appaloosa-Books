@@ -1,0 +1,10 @@
+.th-required-box {
+    padding: 20px;
+    background: #fff;
+    border-left: 4px solid #d54e21;
+    margin: 50px 0;
+}
+
+h3.th-reqbox-heading {
+    margin-top: 0;
+}

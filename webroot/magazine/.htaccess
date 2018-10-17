@@ -1,0 +1,11 @@
+# este htaccess soh tera efeito se o dominio wordpress
+# estiver perfeitamente configurado na tabela wp_options
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /magazine/
+  RewriteRule ^index\.php$ - [L]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule . /magazine/index.php [L]
+</IfModule>

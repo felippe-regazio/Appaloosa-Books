@@ -223,7 +223,7 @@
 				</div>
 				<div class="box-footer">
 					<button class="submit btn btn-success">Salvar</button>
-					<button class="btn btn-primary toggle-author-details no-cache" data-author="<?= $admin_data['author']['author_id'] ?>">Visualizar</button>
+					<button class="btn btn-primary toggle-author-details no-cache" data-author="<?= $author_data['author_id'] ?>">Visualizar</button>
 				</div>
 			</div>
 			<?= $this->Form->end() ?>

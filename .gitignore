@@ -4,7 +4,6 @@
 /config/.env
 /logs/*
 /tmp/*
-/vendor/*
 
 # OS generated files #
 ######################
@@ -42,7 +41,4 @@ nbproject/*
 # Appaloosa sensitive info
 #########################
 #
-/config/app.default.php
-/webroot/freestore/avatars/*
-/webroot/freestore/binaries/*
-/webroot/freestore/covers/*
+/package-lock.json

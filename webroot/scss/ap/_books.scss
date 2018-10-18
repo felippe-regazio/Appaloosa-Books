@@ -19,22 +19,34 @@
 	&__wrapper{
 		position: relative;
 		.menu{
-			display: flex;
-			align-items: center;
-			justify-content: flex-end;
 		    font-weight: 700;
 		    overflow: hidden;
 		    ul.ap-books-controls{
-		    	a{
-		    		text-decoration: none;
-		    	}
-		    	a.gender{
-		    		&.active{
-		    			color: $ap-b;
-		    			// &:hover{
-		    			// 	text-decoration: line-through;
-		    			// }
-		    		}
+		    	padding: 10px;
+				display: flex;
+				flex-wrap: wrap;
+				align-items: center;
+				justify-content: center;
+				height: 100%;
+				padding-top: 2px;
+		    	li{
+			    	display: block;
+			    	width: 100%;
+			    	a{
+			    		transition: $anim8-speed ease-in-out;
+			    		text-decoration: none;
+			    		display: block;
+			    		width: 100%;
+			    		&.color-a svg text{
+			    			fill: $ap-a;
+			    		}
+			    		&:hover, &.active{
+			    			svg text{
+			    				transition: $anim8-speed ease-in-out;
+			    				fill: $ap-b;
+			    			}
+			    		}
+			    	}
 		    	}
 	    		&.disabled{
 	    			*{
@@ -105,6 +117,8 @@
 					width: 100%;
 					height: 100%;
 					backface-visibility: hidden;
+					-moz-backface-visibility: hidden;
+					-webkit-backface-visibility: hidden;
 					.wrapper{
 						position: relative;
 						width: 100%;

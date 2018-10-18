@@ -45,7 +45,7 @@ class BooksTable extends Table
 	public function listAllAvailableWith( $params = [] ){
 
 		$terms = $params["search"];
-		$gender = ( ! empty($params["gender"]) ?  ["Genders.name" => $params["gender"]] : "" );
+		$gender = ( ! empty($params["gender"]) ?  ["genders.name" => $params["gender"]] : "" );
 
 		/* 
 			this is the search method, it mounts a string

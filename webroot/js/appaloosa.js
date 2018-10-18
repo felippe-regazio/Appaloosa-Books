@@ -45,7 +45,7 @@
 		The spotlight function receives x and y param, which are the mouse coord x
 		and mouse coord y in % - if not passed, the light 
 	*/
-	function spotlight( $element ){
+	function spotlight( $element, mouseMoveEvent ){
 		$element.each(function(){
 			// config vars
 			var   light_color 	   = 'rgba(55,55,55,.3)',
@@ -58,9 +58,9 @@
 			windowHeight = $(window).height(),
 			x = 50;
 			y = 50;
-			if(event){
-				x = Math.round(event.pageX / windowWidth * 100),
-				y = Math.round(event.pageY / windowHeight * 100); 
+			if(mouseMoveEvent){
+				x = Math.round(mouseMoveEvent.pageX / windowWidth * 100),
+				y = Math.round(mouseMoveEvent.pageY / windowHeight * 100); 
 			}
 			// the magic
 			$(this).css({
@@ -73,15 +73,16 @@
 			});
 		});
 	};
+	// on mouse move, show spotlight on home
+	isSafari = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/)
 	if($('.spotlight').length>0){
 		$('.spotlight').each(function(){
-			spotlight( $(this) );	
+			spotlight( $(this), false );	
 		});	
-		$('.spotlight').each(function(){
-			$(this).mousemove(function(){
-				spotlight( $(this) );	
+		if( ! isSafari )
+			$('.spotlight').mousemove(function(e){
+				spotlight( $(this), e );	
 			});
-		});
 	};
 	/* 
 		BINDS THE OPACITY OF A GIVEN ELEMENT TO THE SCROLL
@@ -107,120 +108,6 @@
 			} else if ( calc < '0' ) {
 				$elem.css({ 'opacity': 0 });
 			}
-		});
-	});
-	/* 
-		JUSTIFY SPECIAL TO UL MENUS 
-		@structure:
-		<div class="your-wrapper" style="must have height and width">
-			<div class="justify-special">
-				<ul>
-					<li><a href="/"><div>A</div></a></li>
-					<li><a href="/"><div>B</div></a></li>
-					<li><a href="/"><div>C</div></a></li>
-					<li><a href="/"><div>D</div></a></li>
-					<li><a href="/"><div>E</div></a></li>
-					<li><a href="/"><div>F</div></a></li>
-				</ul>
-			</div>
-		</div>
-	*/
-	function justifyProportional(){
-		var $wrapper = $('.justify-proportional');
-		// initial style
-		$wrapper.find("ul li").css({
-			"width": "fit-content",
-			"line-height": "1",
-			"font-size": "1px"
-		});
-		// the magic
-		$wrapper.find('ul li a div').each(function(){
-			var c = 0;
-			while( $(this).innerWidth() < ($wrapper.innerWidth() - 45) ){
-				c++;
-				$(this).css({
-					"font-size": c+'px'
-				});
-				// secure break if had some fail on calc the sizes
-				if(c > $wrapper.innerWidth()) break;
-			}
-		});
-	}
-	if( $('.justify-proportional').length>0 ){
-		$(window).on( "resize", function(){
-			setTimeout(justifyProportional(),500);
-		});
-		justifyProportional();
-	}	
-	/* 
-		JUSTIFY ONMAX
-		keep increasing font size ultil contant and container have same width
-		@structure
-		<div class="justify-onmax">
-			<div class="justify-onmax__list">
-				<ul>
-					<li><a href="/"><div>A</div></a></li>
-					<li><a href="/"><div>B</div></a></li>
-					<li><a href="/"><div>C</div></a></li>
-					<li><a href="/"><div>D</div></a></li>
-					<li><a href="/"><div>E</div></a></li>
-					<li><a href="/"><div>F</div></a></li>
-				</ul>
-			</div>
-		</div>
-	*/
-	(function(){
-		var $wrapper = $('.justify-onmax');
-		// initial style
-		$wrapper.find(".justify-onmax__list ul").removeAttr("style").css({
-			"width": "fit-content",
-			"padding": "10%",
-			"padding-top": "6px",
-			"font-size": "1px",
-			"margin-left": "-4px"
-		});
-		// the magic
-		$wrapper.find('.justify-onmax__list').each(function(){
-			var c = 0;
-			while( $(this).innerWidth() < ($wrapper.innerWidth()) ){
-				c++ * 4;
-				$(this).find("*").css({
-					"font-size": c+'px'
-				});
-				// secure break if had some fail on calc the sizes
-				if(c > $wrapper.innerWidth()) break;
-			}
-		});
-	})();
-	/* 
-		SEARCH TOGGLE BTN 
-		Toggle search input to ap-search-field classes
-	*/
-	$('.ap-search-field-toggle').each(function(){
-		var $searchField = $(this);
-		$searchField.find('.search-toggle').on('click', function(e){
-			e.preventDefault();	
-			$searchField.toggleClass('active');	
-			$searchField.find('.search-input').focus();	
-			/* SEARCH INPUT FOCUS OUT HANDLER */
-			$searchField.find('.search-input').on('focusout', function(e){	
-				/* 
-					see which elem stoled the focus; if was stolen by the 
-					.search-toggle, which is the search button <a>,
-					the focusout will take no action, otherwise, the
-					focusout will perform an input hide. this keep the
-					input event handler separed from .search-toggle event
-					handler. the .event-toggle must be a <a> element, which
-					will always be returned in the relatedTarget to keep
-					security, other elements could return null. if not here
-					the focuslost is triggered before any button events
-					trapping the search input state */
-				var a = e.relatedTarget;
-				var b = $searchField.find('.search-toggle')[0];
-				if( a != b ){
-					$searchField.removeClass('active');	
-				}
-			});
 		});
 	});
 	/* 

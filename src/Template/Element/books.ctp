@@ -34,35 +34,58 @@
 		<!--  -->
 	</div>
 	<div class="ap-books__wrapper">
-		<div class="book menu justify-onmax">
-			<div class="justify-onmax__list">
-				<ul class="ap-books-controls">
-					<li data-aos="fade-right" 
-						data-aos-duration="400" 
-						data-aos-offset="50" 
-						data-aos-once="true"><a href="/" class="gender"><div>Poesia</div></a></li>
-					<li data-aos="fade-right" 
-						data-aos-duration="600" 
-						data-aos-offset="-10" 
-						data-aos-once="true"><a href="/" class="gender"><div>Conto</div></a></li>
-					<li data-aos="fade-right" 
-						data-aos-duration="800" 
-						data-aos-offset="-10" 
-						data-aos-once="true"><a href="/" class="gender"><div>Crônica</div></a></li>
-					<li data-aos="fade-right" 
-						data-aos-duration="1000" 
-						data-aos-offset="-10" 
-						data-aos-once="true"><a href="/" class="gender"><div>Romance</div></a></li>
-					<li data-aos="fade-right" 
-						data-aos-duration="1400" 
-						data-aos-offset="-10" 
-						data-aos-once="true"><a href="/" class="gender"><div>Antologias</div></a></li>
-					<li data-aos="fade-right" 
-						data-aos-duration="1200" 
-						data-aos-offset="-10" 
-						data-aos-once="true"><a class="ap-hover toggle-authors-list" href="/"><div>Autores\as</div></a></li>
-				</ul>
-			</div>
+		<div class="book menu">	
+			<ul class="ap-books-controls">
+				<!-- The link texts is in SVG format to generate a FitText Effect -->
+				<li data-aos="fade-right" 
+					data-aos-duration="400" 
+					data-aos-offset="50" 
+					data-aos-once="true">
+					<a href="/" class="gender fitText" data-search="Poesia">
+						<svg viewBox="0 0 85 18"><text x="0" y="15">Poesia</text></svg>
+					</a>
+				</li>
+				<li data-aos="fade-right" 
+					data-aos-duration="600" 
+					data-aos-offset="-10" 
+					data-aos-once="true">
+					<a href="/" class="gender" data-search="Conto">
+						<svg viewBox="0 0 85 18"><text x="0" y="12">Conto</text></svg>
+					</a>
+				</li>
+				<li data-aos="fade-right" 
+					data-aos-duration="800" 
+					data-aos-offset="-10" 
+					data-aos-once="true">
+					<a href="/" class="gender" data-search="Crônica">
+						<svg viewBox="0 0 85 18"><text x="0" y="12">Crônica</text></svg>
+					</a>
+				</li>
+				<li data-aos="fade-right" 
+					data-aos-duration="1000" 
+					data-aos-offset="-10" 
+					data-aos-once="true">
+					<a href="/" class="gender" data-search="Romance">
+						<svg viewBox="0 0 85 18"><text x="0" y="12">Romance</text></svg>
+					</a>
+				</li>
+				<li data-aos="fade-right" 
+					data-aos-duration="1400" 
+					data-aos-offset="-10" 
+					data-aos-once="true">
+					<a href="/" class="gender" data-search="Antologias">
+						<svg viewBox="0 0 85 18"><text x="0" y="12">Antologias</text></svg>
+					</a>
+				</li>
+				<li data-aos="fade-right" 
+					data-aos-duration="1200" 
+					data-aos-offset="-10" 
+					data-aos-once="true">
+					<a class="ap-hover toggle-authors-list color-a" href="/">
+						<svg viewBox="0 0 85 18"><text x="0" y="12">Autores/as</text></svg>
+					</a>
+				</li>
+			</ul>
 		</div>
 		<!-- 
 			EMPTY WARNING

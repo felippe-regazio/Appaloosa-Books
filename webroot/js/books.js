@@ -41,7 +41,7 @@
 			// add the active class on clicked elem
 			$(this).addClass("active");
 			// define the data-gender
-			var gender = $(this).find("div").html();
+			var gender = $(this).data("search");
 			$(".ap-books").attr("data-gender", gender);
 		}
 		// reload the books results

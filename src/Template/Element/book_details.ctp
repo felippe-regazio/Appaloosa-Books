@@ -35,7 +35,7 @@
 				{{description}}
 			</div>
 			<div class="info-side__review-foot">
-				<span class="info-side__review-more link">
+				<span class="info-side__review-more">
 					<i class="fa fa-arrow-down"></i>
 				</span>
 				<span class="info-side__click-review">
@@ -78,7 +78,7 @@
 					<td><i class="fa fa-user-circle"></i> Autor</td>
 					<td>
 						<a class="author-name toggle-author-details" href="/" data-author="{{author.author_id}}">
-							<i class="fa fa-caret-left"></i>{{author.author_first_name}} {{author.author_last_name}}
+							{{author.author_first_name}} {{author.author_last_name}}
 						</a>
 					</td>
 					<td></td>
@@ -87,9 +87,9 @@
 				<tr>
 					<td><i class="fa fa-eye"></i> Views</td>
 					<td class="td-fire">
-						<i class="fa fa-fire">
-						<i class="fa fa-fire">
-						<i class="fa fa-fire">
+						<i class="fa fa-fire"></i>
+						<i class="fa fa-fire"></i>
+						<i class="fa fa-fire"></i>
 					</td>
 					<td></td>
 					<td>{{views}}</td>

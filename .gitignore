@@ -38,7 +38,8 @@ nbproject/*
 # Sass preprocessor
 .sass-cache/
 
-# Appaloosa sensitive info
+# Appaloosa
 #########################
 #
+/node_modules
 /package-lock.json

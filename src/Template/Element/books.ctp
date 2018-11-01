@@ -112,7 +112,7 @@
 				 	<!-- front -->
 				 	<div class="front"
 				 	style="background-image:url(<?= $this->Url->image('/freestore/covers/'); ?>{{cover}})">
-				 		<div class="wrapper cover-flip">
+				 		<div class="wrapper ap-book-see ap-book-see-scoped">
 				 			<div class="wrapper__controls">
 								<button class="ap-btn--secondary ap-book-see">
 				 					<i class="fa fa-eye"></i>

@@ -31,6 +31,8 @@
 	*/
 	$("body").on("click", ".ap-book-see", function(e){
 		e.preventDefault();
+		/* PREVENT EVENT DELEGATION IF BOOK SEE HAVES PROPER CLASS */
+		if( $(this).hasClass("ap-book-see-scoped") && !e.target.classList.contains("ap-book-see") ) return 0;
 		/* GET THE DATA JSON FROM ATTR DATA */
 		data = $(this).parents(".book").data("book");
 		if( data.author.author_options.allow_public_emails != "1" ) delete data.author["author_email"];

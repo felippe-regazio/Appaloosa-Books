@@ -6,7 +6,7 @@
 			<ul class="menu">
 				<li><a href="<?= Router::url(['controller'=>'appaloosa', 'action' => 'index']); ?>"><?=__('Home');?></a></li>
 				<li><a href="<?= Router::url(['controller'=>'appaloosa', 'action' => 'info']); ?>"><?=__('Originais');?></a></li>
-				<li><a class="link invert" data-tile="#best-sellers" href=""><?=__('Best Sellers');?></a></li>
+				<li><a class="link invert" data-tile="#best-sellers" href=""><?=__('Best Seven');?></a></li>
 				<li><a href="<?= Router::url(['controller'=>'appaloosa', 'action' => 'info']); ?>"><?=__('Informações Úteis');?></a></li>
 			</ul>
 			<hr>

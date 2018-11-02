@@ -104,7 +104,7 @@
 		<div id="books-results-container"></div>
 		<template id="book-template">
 			<!-- The Book -->
-			<div class="book"		
+			<div class="book"	
 				 data-book="{{stringfyed}}"
 				 ontouchstart="this.classList.toggle('hover');">
 				 <!-- // -->

@@ -1,5 +1,5 @@
 .ap-books{
-	overflow: hidden;
+	display: grid;
 	&__head{
 		text-align: right;
 		padding: $gutter*2;
@@ -80,11 +80,13 @@
 				width: 100%;
 				height: calc(25vw * 5.3);
 			};
-			&:hover{
-				transition: $anim8-speed;
-				transform: scale(1.02);
+			&:not(.menu):hover{
 				z-index: 1;
-			  box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+				.book__content .front,
+				.book__content .back{
+					transition: $anim8-speed ease-in-out;
+					box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+				}
 			}
 			&__content{
 				width: 100%;
@@ -100,8 +102,10 @@
 					background-size: cover;
 					transform: rotateY(0deg);
 					cursor: pointer;
+					transition: $anim8-speed ease-in-out;
 				}
 				.back{
+					transition: $anim8-speed ease-in-out;
 					height: 100%;
 					width: 100%;
 					background: $black;

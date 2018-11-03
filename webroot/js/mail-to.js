@@ -5,7 +5,10 @@
 	$("body").on("click", ".toggle-mail-to", function(e){
 		e.preventDefault();
 		var authorId = $(this).attr("data-author-id");
+		var bookName = $(this).attr("data-book-name");
 		$(".ap-mail-to").find("#author-id").val( authorId );
+		$(".ap-mail-to").find("#book-name").val( bookName );
+		clearAuthorMailForm();
 		$(".ap-mail-to").toggleClass("ap-mail-to-open");
 	});
 	/* 
@@ -21,10 +24,16 @@
 			data = JSON.parse(data);
 			$form.removeClass("loading");
 			$form.find("p.response").fadeIn("slow").html(data.message);
-			$form[0].reset();
+			clearAuthorMailForm();
 			setTimeout(function(){
 				$form.find("p.response").fadeOut("slow").html("");
 			}, 3000 );
 		});
 	});
+	/*
+		Clear author mail form
+	*/
+	function clearAuthorMailForm(){
+		$("#mail-to-author input:not([type=hidden]), #mail-to-author textarea:not([type=hidden])").val("");
+	}
 })();

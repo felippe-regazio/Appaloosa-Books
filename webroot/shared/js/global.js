@@ -19,5 +19,10 @@ $(document).keyup(function(e){
 			$("body").removeClass("overflow-hidden");
 			return;
 		}
+		// close authors list
+		if( $(".ap-authors-list.ap-authors-list-open").removeClass("ap-authors-list-open").length ){
+			window.history.replaceState({}, document.title, "/");
+			$("body").removeClass('overflow-hidden');
+		}
 	}
 });

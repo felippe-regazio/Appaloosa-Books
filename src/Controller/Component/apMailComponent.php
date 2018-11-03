@@ -86,7 +86,7 @@ class apMailComponent extends Component{
         $sender = isset( $data["email"] ) && $data["email"] != null ? $data["email"] : "Anônimo"; 
 
         $credits = "<br/><br/>Mensagem enviada por solicitação de: <br/>Nome: " . $name . " - Email: " . $sender;
-        $message = "Mensagem enviada por um leitor/a: <br/><br/> \"" . $data["message"] . "\"" . $credits;
+        $message = "Mensagem enviada por um leitor/a sobre o livro: " . $data["book_name"] . ". <br/><br/> \"" . $data["message"] . "\"" . $credits;
 
         // envia uma copia do email para a Appaloosa e para o autor escolhido
         $author_data = TableRegistry::get("authors")->getAuthorEmailById( $data["author_id"] )[0];

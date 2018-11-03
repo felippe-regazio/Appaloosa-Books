@@ -15,6 +15,10 @@
 			<?= $this->Form->hidden( "author_id", [
 				'id' => 'author-id',
 				'required' => true,
+			]) ?>
+			<?= $this->Form->hidden( "book_name", [
+				'id' => 'book-name',
+				'required' => true,
 			]) ?>			
 			<?= $this->Form->control( "name", [
 				'label' => false,

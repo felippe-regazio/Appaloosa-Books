@@ -60,7 +60,7 @@
 				</a>
 			{{/files.pdf}}
 			{{#author.author_email}}
-				<button class="ap-btn--secondary toggle-mail-to" data-author-id="{{author.author_id}}">
+				<button class="ap-btn--secondary toggle-mail-to" data-author-id="{{author.author_id}}" data-book-name="{{title}}">
 						<i class="fa fa-envelope"></i> E-MAIL
 				</button>
 			{{/author.author_email}}

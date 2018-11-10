@@ -26,5 +26,14 @@ if( $uri[1] != $base_uri ){
 	die();
 }
 
+/**
+	slash on admin addresses
+**/
+if( $uri[1] != "admin" ){
+	$address  = "http://" . $_SERVER['HTTP_HOST'] . "/admin/";
+	header('Location: ' . $address, false);
+	die();
+}
+
 /** Loads the WordPress Environment and Template */
 require( dirname( __FILE__ ) . '/wp-blog-header.php' );

@@ -18,7 +18,6 @@
 			data.files = JSON.parse( data.files );
 			data.author.author_options = JSON.parse( data.author.author_options );
 			if( data ){
-				console.log(data);
 				if( data.author.author_options.allow_public_emails != "1" ) delete data.author["author_email"];
 				renderBookDetails( data );			
 			} else {
@@ -36,7 +35,6 @@
 		/* GET THE DATA JSON FROM ATTR DATA */
 		data = $(this).parents(".book").data("book");
 		if( data.author.author_options.allow_public_emails != "1" ) delete data.author["author_email"];
-		console.log(data);
 		renderBookDetails( data );
 	});
 	/*

@@ -41,5 +41,6 @@ nbproject/*
 # Appaloosa
 #########################
 #
+/config/dumps/*
 /node_modules
 /package-lock.json

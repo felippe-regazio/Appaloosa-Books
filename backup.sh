@@ -29,13 +29,27 @@ MGDBHOST="appaloosa.mysql.uhserver.com"
 # my sql ap magazine database name
 MGDBDATA="appaloosa_mag"
 
+# mysql ap matomo user
+MTDBUSER="apmatomo"
+# mysql ap matomo pass
+MTDBPASS="Trufasazuis87@"
+# mysql ap matomo host
+MTDBHOST="ap-matomo.mysql.uhserver.com"
+# my sql ap matomo database name
+MTDBDATA="ap_matomo"
+
 # --------------------------------------------------
 # CREATE BOOKS & MAGAZINE DB DUMPS
 # --------------------------------------------------
 
+# ap db // core
 /Applications/AMPPS/mysql/bin/mysqldump -u$APDBUSER -p$APDBPASS -h$APDBHOST $APDBDATA > ./config/dumps/ap_bks_dump.sql
 
+# ap mag // magazine
 /Applications/AMPPS/mysql/bin/mysqldump -u$MGDBUSER -p$MGDBPASS -h$MGDBHOST $MGDBDATA > ./config/dumps/ap_mag_dump.sql
+
+# ap matomo // analytics
+/Applications/AMPPS/mysql/bin/mysqldump -u$MTDBUSER -p$MTDBPASS -h$MTDBHOST $MTDBDATA > ./config/dumps/ap_mtm_dump.sql
 
 # --------------------------------------------------
 # SYNC APPALOOSA BOOKS UPLOAD FOLDERS

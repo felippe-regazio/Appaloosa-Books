@@ -6,6 +6,14 @@
  * @subpackage Administration
  */
 
+/** Force trailing slash */
+$PROTOCOL = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://";
+$CURRENT_URI = $PROTOCOL . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+if (substr( $CURRENT_URI, -1 ) !== '/') {
+    header('Location: '.$CURRENT_URI."/", true, 301);
+    exit;
+}
+
 /** Load WordPress Bootstrap */
 require_once( dirname( __FILE__ ) . '/admin.php' );
 

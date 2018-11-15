@@ -38,9 +38,9 @@ nbproject/*
 # Sass preprocessor
 .sass-cache/
 
-# Appaloosa
-#########################
-#
+# Appaloosa specific files #
+############################
 /config/dumps/*
 /node_modules
 /package-lock.json
+/backup.sh

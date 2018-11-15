@@ -48,7 +48,7 @@
 		 	 data-aos-delay="200" 
 		 	 data-aos-once="true">
 			<h3># HUBS</h3>
-			<a href="http://appaloosabooks.com/magazine">
+			<a href="magazine/">
 				<svg viewBox="0 0 72 20"><text x="0" y="15">Magazine</text></svg>
 			</li>
 			<a href="http://github.com/felippe-regazio" target="_blank">

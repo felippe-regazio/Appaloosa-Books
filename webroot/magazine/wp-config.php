@@ -59,6 +59,21 @@ define('SECURE_AUTH_SALT', 'I`vUClm^NUIwf_BZee^||v0|%&l@YmM<wJTia81y%?4=z^kn16om
 define('LOGGED_IN_SALT',   '<LgQ6o!#j 9d}NWjV3kv1]Kwwcws5V]WcDdG13D0V?e;Te 6_1j%!;5Mr?C:yRH1');
 define('NONCE_SALT',       'XzMNBe,*QR)O@G*G$pH+I%}~-xSA],wYK@eOalgL[!p8Dhr?_s@nFj|5r?G,O+oy');
 
+
+/**#@+
+ * Unbind database domain config
+ *
+ * This will be set the current uri always as the wp_address
+ * so, we are no more dependent of database domain configurations
+*/
+
+$WP_FOLDER = "/magazine/";
+$PROTOCOL = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://";
+$AP_CURRENT_URI = $PROTOCOL . $_SERVER['HTTP_HOST'] . $WP_FOLDER;
+
+define('WP_HOME', $AP_CURRENT_URI );
+define('WP_SITEURL', $AP_CURRENT_URI );
+
 /**#@-*/
 
 /**
@@ -81,6 +96,7 @@ $table_prefix  = 'apmag_';
  *
  * @link https://codex.wordpress.org/Debugging_in_WordPress
  */
+
 define('WP_DEBUG', false);
 define('FS_METHOD', 'direct');
 

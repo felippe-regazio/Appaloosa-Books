@@ -89,8 +89,4 @@ class AppaloosaController extends AppController
     public function terms(){
         
     }
-
-    public function magazine(){
-        $this->redirect("http://appaloosabooks.com/magazine/");
-    }
 }

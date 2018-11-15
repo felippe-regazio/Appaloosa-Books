@@ -12,7 +12,7 @@
 			<hr>
 			<ul>
 				<li>
-					<a href="<?= Router::url(['controller'=>'appaloosa', 'action' => 'magazine']); ?>" target="_blank">
+					<a href="magazine/" target="_blank">
 						<?=__('Appaloosa Magazine<br/>Revista de literatura, etc');?>
 					</a>
 				</li>

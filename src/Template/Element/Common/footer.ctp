@@ -38,7 +38,7 @@
 				<svg viewBox="0 0 68 20"><text x="0" y="15">Originais</text></svg>
 			</a>
 			<a href="<?= Router::url(['controller'=>'appaloosa', 'action' => 'index']); ?>">
-				<svg viewBox="0 0 84 18"><text x="0" y="15">Homepage</text></svg>
+				<svg viewBox="0 0 84 21"><text x="0" y="15">Homepage</text></svg>
 			</a>
 		</div>
 		<div class="c"

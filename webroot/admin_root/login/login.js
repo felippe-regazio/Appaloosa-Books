@@ -1,5 +1,5 @@
 (function(){
-	$(".ap-login").find("form").on("submit", function(e){
+	$(".ap-login").find("form.login-form").on("submit", function(e){
 		e.preventDefault();
 		var $form = $(this);
 		var email = $("#email").val();

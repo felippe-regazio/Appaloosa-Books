@@ -137,7 +137,7 @@
 					<div class="form-group col-sm-6 col-xs-12">
 						<?= $this->Form->control( "views", [
 							'label' => 'Views',
-							'value' => $book_data["views"],
+							'value' => $book_data["views"] ? $book_data["views"] : 1,
 							'placeholder' => 'Views',
 							'class' => 'form-control',
 						]) ?>

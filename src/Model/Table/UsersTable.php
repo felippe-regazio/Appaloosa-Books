@@ -5,6 +5,7 @@ use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
+use Cake\Utility\Security;
 use Cake\I18n\Time;
 
 /**
@@ -157,6 +158,17 @@ class UsersTable extends Table
         $this->query()->update()
         ->set( $data )
         ->where(['id'=>$id])
+        ->execute();
+    }
+
+    /*
+        Update user pass by email
+    */
+    public function setNewPass( $email, $rawpass ){
+        $newpass = Security::hash( $rawpass, 'sha1', true );
+        $this->query()->update()
+        ->set(['pass' => $newpass])
+        ->where(['email' => $email])
         ->execute();
     }
 

@@ -118,6 +118,7 @@
 							'label' => 'Views',
 							'placeholder' => 'Views',
 							'class' => 'form-control',
+							'value' => 1,
 						]) ?>
 					</div>
 				</div>	

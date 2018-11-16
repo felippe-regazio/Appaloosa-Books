@@ -42,7 +42,10 @@ class AdminController extends Controller
     public function initialize()
     {
         parent::initialize();
+        
         $this->loadComponent("Flash");
+        $this->loadComponent("password");
+
         $this->viewBuilder()->setLayout("admin");
     }
     
@@ -91,6 +94,23 @@ class AdminController extends Controller
         $this->getRequest()->getSession()->delete('Admin.data');
         $this->redirect(array('controller'=>'appaloosa', 'action'=>'index'));
     }
+
+    public function passwordrecover(){
+        $this->render(false);
+        if ($this->request->is('post')) {
+            $email = $this->request->getData('emailtopassrecover');
+            $users = $this->loadModel('users');
+            if( !empty($email) && $users->exists(['email' => $email]) ){
+                $pass = $this->password->generateRandomPass( 8 );
+                $users->setNewPass($email, $pass);
+                $this->loadComponent("apMail")->inform( [$email], "Nova senha: " . $pass);
+                $this->Flash->success("Sua nova senha foi enviada. Por favor, verifique o seu e-mail");
+            } else {
+                $this->Flash->error("E-mail inválido");
+            }     
+        }
+        $this->redirect(array('controller'=>'Admin', 'action'=>'index'));
+    }    
 
     // =================================================================================
     // Pages

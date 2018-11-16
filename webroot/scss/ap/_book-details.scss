@@ -149,8 +149,9 @@ $book-details-breakpoint: 800px;
 			    				a.author-name{
 			    					text-decoration: underline;
 			    				}
-			    				&.td-fire{
+			    				&.td-fire i{
 			    					color: red;
+			    					margin: 0;
 			    				}
 			    				@media screen and(max-width: 510px){
 			    					font-size: 16px;

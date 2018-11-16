@@ -1,4 +1,18 @@
 /*
+	Page general loading 
+*/
+var waitToShowLoading = 1500;
+setTimeout(function(){
+	$("body.loading").addClass("wait");
+}, waitToShowLoading);
+$(window).on("load", function(e){
+	$.when($("body").removeClass("loading wait")).then(function(){
+		setTimeout(function(){
+			$("body").removeClass("fadeIn");
+		}, 500);
+	});
+});
+/*
 	Escape Key closes menus and tiles
 */
 $(document).keyup(function(e){

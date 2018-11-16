@@ -14,6 +14,7 @@
  */
 namespace App\Controller;
 
+use Cake\Routing\Router;
 use Cake\Core\Configure;
 use Cake\Network\Exception\ForbiddenException;
 use Cake\Network\Exception\NotFoundException;
@@ -53,40 +54,21 @@ class AppaloosaController extends AppController
     }
 
     public function info(){
-        
-        $partners = [
-            
-            0 => [
-                "name" => "Bruno Ribeiro",
-                "image" => "brunoribeiro.jpg",
-                "task" => "Escritor, editor e reviewer",
-                "about" => "Bruno Ribeiro, nasceu em julho de 1989, é mineiro radicado na Paraíba, com tiques argentinos. Graduado em publicidade & propaganda e mestre em Escrita Criativa pela Universidad Nacional de Tres de Febrero, de Buenos Aires, Bruno escreve, traduz, roteiriza, bagunça e experimenta. Publicou em jornais, revistas, blogues, livros e antologias mundo afora.",
-                "link" => "",
-            ],
-            1 => [
-                "name" => "Ítalo Lima",
-                "image" => "italolima.jpg",
-                "task" => "Escritor e conteudista",
-                "about" => "Ítalo Lima nasceu em Teresina/PI. Formado em Publicidade e Propaganda e cheio de inquietações na pele. Poeta em estado constante de aflição. Em 2014 criou o projeto no Instagram (@italolimapoesias) onde vende poesia em moldura e até hoje vem curando a solidão através de quadros poéticos. Da solidão ao erotismo, Itálo escreveu 'Quando a gente se mata numa poesia', lançado em 2017, na Bienal do livro, no Rio de Janeiro.",
-                "link" => "",
-            ],
-
-        ];
-
-        $this->set( "partners", $partners );
+        $this->set("title", "Appaloosa Books - Informações úteis");
     }
 
     public function unsubscribe(){
+        $this->set("title", "Appaloosa Books - Unsubscribe");
         $email = $this->request->getQuery("email");
         if( empty($email) ) $this->redirect(["controller"=>"appaloosa", "action"=>"index"]);
         $this->loadModel("subscribers")->unsubscribe($email);
     }
 
     public function join(){
-        
+        $this->set("title", "Appaloosa Books - Quero fazer parte");
     }
 
     public function terms(){
-        
+        $this->set("title", "Appaloosa Books - Termos e condições");
     }
 }

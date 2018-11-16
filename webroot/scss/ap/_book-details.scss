@@ -201,9 +201,9 @@ $book-details-breakpoint: 800px;
  		top: $gutter;		
  	}
 	&.active{	
-		pointer-events: auto;
-		z-index: 3;
 		opacity: 1;
+		z-index: 120;
+		pointer-events: auto;
 		.side{
 			transition: $anim8-speed*2 ease-in-out;
 			transform: translate(0);

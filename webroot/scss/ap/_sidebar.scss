@@ -70,14 +70,17 @@ body.sidebar-open{
 	}
 	.tile{
 		width: 100%;
-		height: 100%;
+		height: auto;
 		position: absolute;
 		top: 0;
 		left: 0;
 		background: rgba(0,0,0,.96);
 		transform: translateX(-100%);
 		transition: $anim8-speed;
-		overflow: auto;
+		overflow: hidden;
+		&.loading{
+			height: 100%;
+		}
 		&.active{
 			transform: translateX(0);
 			transition: $anim8-speed ease-in;

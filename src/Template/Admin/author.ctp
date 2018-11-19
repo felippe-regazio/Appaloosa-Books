@@ -62,7 +62,7 @@
 							'accept' => 'image/jpeg, image/jpg, image/png'
 						]) ?>
 					</div>							
-					<div class="form-group col-sm-12">
+					<div class="form-group col-sm-12 col-xs-12">
 						<?= $this->Form->control( "author_about", [
 							'type' => 'textarea',
 							'required' => true,

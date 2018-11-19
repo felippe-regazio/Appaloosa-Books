@@ -47,6 +47,7 @@ use Cake\Routing\Route\DashedRoute;
 Router::defaultRouteClass(DashedRoute::class);
 
 Router::scope('/', function (RouteBuilder $routes) {
+
     /*
         Appaloosa
     */
@@ -57,12 +58,7 @@ Router::scope('/', function (RouteBuilder $routes) {
     */
     $routes->connect('/admin', ['controller' => 'Admin', 'action'=>'login']);
     $routes->connect('/admin/:action', ['controller' => 'Admin']);
-    /*
-        Magazine  
-    */
-    $routes->connect('/magazine/:action', ['controller' => 'Appaloosa', 'action'=>'magazine']);
     
-    //
     $routes->fallbacks(DashedRoute::class);
 });
 

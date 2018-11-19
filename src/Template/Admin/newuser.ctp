@@ -117,7 +117,7 @@
 					</div>							
 					<div class="form-group col-sm-12">
 						<?= $this->Form->control( "author_about", [
-							'type' => 'textarea',
+							'type' => 'textarea col-xs-12',
 							'label' => 'Sobre - Máx. 800 char',
 							'maxlength' => 800,
 							'class' => 'form-control',

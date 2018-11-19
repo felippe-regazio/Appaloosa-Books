@@ -67,9 +67,15 @@ define('NONCE_SALT',       'XzMNBe,*QR)O@G*G$pH+I%}~-xSA],wYK@eOalgL[!p8Dhr?_s@n
  * so, we are no more dependent of database domain configurations
 */
 
-$WP_FOLDER = "/magazine/";
-$PROTOCOL = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://";
-$AP_CURRENT_URI = $PROTOCOL . $_SERVER['HTTP_HOST'] . $WP_FOLDER;
+/**#@+ Dont need to configure domains at database */
+$SUBFOLDER	 	= "/magazine/";
+$PROTOCOL    	= (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://";
+$AP_CURRENT_URI = $PROTOCOL . $_SERVER['HTTP_HOST'] . $SUBFOLDER;
+
+if( $_SERVER['HTTP_HOST'] == 'localhost' ){
+	$AP_CURRENT_URI = $PROTOCOL . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+	$AP_CURRENT_URI = implode("/", array_slice(explode("/", $AP_CURRENT_URI), 0, 4)) . $SUBFOLDER;
+}
 
 define('WP_HOME', $AP_CURRENT_URI );
 define('WP_SITEURL', $AP_CURRENT_URI );

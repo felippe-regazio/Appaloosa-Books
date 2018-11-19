@@ -98,7 +98,7 @@
 					<h2> <i class="fa fa-info-circle"></i> Review</h2>
 				</div>						
 				<div class="box-body">																			
-					<div class="form-group col-sm-12">
+					<div class="form-group col-sm-12 col-xs-12">
 						<?= $this->Form->control( "description", [
 							'type' => 'textarea',
 							'label' => 'Sobre',

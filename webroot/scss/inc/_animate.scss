@@ -11,7 +11,7 @@
         letter-spacing: 10px;
         max-width: fit-content;
         animation: 
-            typing 3.5s steps(30, end),
+            // typing 3.5s steps(30, end),
             blink-caret 1s step-end infinite;
         @media screen and(max-width: 550px){
             font-size: .90em;

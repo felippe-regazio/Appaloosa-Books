@@ -82,7 +82,11 @@
 						</a>
 					</td>
 					<td></td>
-					<td><span class="link"><i class="fab fa-facebook"></i></span></td>
+					<td>
+						{{#author.author_links.facebook}}
+							<a href="{{author.author_links.facebook}}" target="_blank"><i class="fab fa-facebook"></i></a>
+						{{/author.author_links.facebook}}
+					</td>
 				</tr>
 				<tr>
 					<td><i class="fa fa-eye"></i> Views</td>
@@ -98,7 +102,7 @@
 					<td><i class="fa fa-bookmark"></i> Gênero</td>
 					<td></td>
 					<td></td>
-					<td>{{Genders.name}}</td>
+					<td>{{gender.name}}</td>
 				</tr>
 				<tr>
 					<td><i class="fa fa-calendar"></i> Desde</td>

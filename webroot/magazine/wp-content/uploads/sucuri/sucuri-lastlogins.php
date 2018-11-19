@@ -119,3 +119,4 @@
 {"user_id":9,"user_login":"Renan Chiaparini","user_remoteaddr":"187.23.35.207","user_hostname":"bb1723cf.virtua.com.br","user_lastlogin":"2018-08-30 13:51:43"}
 {"user_id":4,"user_login":"italolimapoesias","user_remoteaddr":"201.30.158.210","user_hostname":"201.30.158.210","user_lastlogin":"2018-09-11 14:07:02"}
 {"user_id":4,"user_login":"italolimapoesias","user_remoteaddr":"201.30.158.210","user_hostname":"201.30.158.210","user_lastlogin":"2018-10-03 14:17:50"}
+{"user_id":1,"user_login":"ApMag","user_remoteaddr":"127.0.0.1","user_hostname":"localhost","user_lastlogin":"2018-11-15 21:28:51"}

@@ -13,6 +13,18 @@
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
 
+
+use Cake\Routing\Router;
+
+// SEO & Page Metas Pre Definitions
+
+$default_title = "Appaloosa Books - Livros Independentes Online e Gratuitos";
+
+$default_image = Router::url("/", true) . "img/ap-feature.png";
+
+$default_description = "A Appaloosa é uma casa de publicações digitais com foco na literatura contemporânea e independente. Publicamos desde textos até livros completos nos formatos epub e pdf com edição profissional e alta qualidade gráfica. Basicamente disponibilizamos pequenos e incríveis universos em um formato colaborativo e gratuito";
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -21,10 +33,22 @@
     <?= $this->Html->charset() ?>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- SEO -->
-    <meta name="description" content="A Appaloosa é uma casa de publicações digitais com foco na literatura contemporânea e independente. Publicamos desde textos até livros completos nos formatos epub e pdf com edição profissional e alta qualidade gráfica. Basicamente disponibilizamos pequenos e incríveis universos em um formato colaborativo e gratuito" />    
-    <!--  -->
-    <title><?= !empty($title) ? $title : "Appaloosa Books - Livros Independentes Online e Gratuitos" ?></title>    
+    
+    <!-- Title -->
+    <title><?= isset($title) && !empty($title) ? $title : $default_title ?></title>
+
+    <!-- SEO Tags -->
+    <meta name="description" content="<?= isset($description) && !empty($description) ? $description : $default_description ?>" />
+    <!--  Essential META Tags -->
+    <meta property="og:title" content="<?= isset($title) && !empty($title) ? $title : $default_title ?>">
+    <meta property="og:description" content="<?= isset($description) && !empty($description) ? $description : $default_description ?>">
+    <meta property="og:image" content="<?= isset($image) && !empty($image) ? $image : $default_image ?>">
+    <meta property="og:url" content="<?= Router::url( null, true ) ?>">
+    <!--  Non-Essential, But Recommended -->
+    <meta name="twitter:card" content="<?= isset($image) && !empty($image) ? $image : $default_image ?>">
+    <meta name="twitter:image:alt" content="<?= $default_title ?>">
+    <meta property="og:site_name" content="Appaloosa Books - Online Indie Publishing">
+    
     <!-- Meta -->
     <?= $this->Html->meta('icon') ?>
     <?= $this->fetch('meta') ?>
@@ -40,8 +64,50 @@
     <!-- -->
 
 </head>
-<body>
-    
+<!-- MATOMO -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//"+window.location.host+"/matomo/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', '1']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<!-- LOADING : Loading style is inline cause css is part of loading process -->
+<style>
+    body.loading *{
+        opacity: 0;
+    }
+    body.loading.wait:before{
+        content: "carregando ";
+        position: fixed;
+        top: 45%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: #aaaaaa;
+        font-size: 18px;
+        letter-spacing: 10px;
+        border-right: solid 2px;
+        animation: blink-caret 1s step-end infinite;
+    }
+    body.fadeIn *{
+        transition: 400ms;
+        will-change: opacity;
+    }
+    /* The typing effect */
+    @keyframes blink-caret {
+        from, to { border-color: transparent }
+        50% { border-color: #008b8b }
+    }
+</style>
+<body class="fadeIn loading">
+    <!-- the loading class on body is removed by a loader in shared/js/global.js -->
+
     <!-- Header -->
     <?= $this->element('Common/navbar') ?>
     <!-- Sidebar -->

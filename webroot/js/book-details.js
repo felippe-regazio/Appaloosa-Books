@@ -7,26 +7,36 @@
 		}, 600);
 	};
 	/*
+		RENDER BOOK FROM HASH (ajax or session store)
 		If there is a hash on the url, see if its a book
-	*/
+	*/	
 	var bookHash = window.location.hash.replace("#", "");
 	if( bookHash && bookHash != "authorsList" ){
-		$.get("ajax/getBookByAsbn/"+bookHash, function(data){
-			data = JSON.parse(data);
-			/* PARSE OBJCTS FROM DB */
-			data = data[0];
-			data.files = JSON.parse( data.files );
-			data.author.author_options = JSON.parse( data.author.author_options );
+		var data;
+		// get the book data from session store or ajax
+		if( sessionStorage.getItem('book_'+bookHash) ){
+			data = JSON.parse( sessionStorage.getItem('book_'+bookHash) );
+			moutBookFromHash(data);
+		} else {	
+			$.get("ajax/getBookByAsbn/"+bookHash, function(bookdata){
+				sessionStorage.setItem('book_'+bookHash, bookdata);
+				data = JSON.parse(bookdata);
+				moutBookFromHash(data);
+			});
+		}
+		// mount the book data from hash to screen
+		function moutBookFromHash(data){
 			if( data ){
-				console.log(data);
+				data = data[0];
 				if( data.author.author_options.allow_public_emails != "1" ) delete data.author["author_email"];
 				renderBookDetails( data );			
 			} else {
 				window.history.replaceState({}, document.title, "/");
 			}
-		});
-	}	
+		}
+	}
 	/*
+		RENDER BOOK FROM HTML DATA-BOOK (static)
 		Show Book Detail Button (.ap-book-view)
 	*/
 	$("body").on("click", ".ap-book-see", function(e){
@@ -35,14 +45,17 @@
 		if( $(this).hasClass("ap-book-see-scoped") && !e.target.classList.contains("ap-book-see") ) return 0;
 		/* GET THE DATA JSON FROM ATTR DATA */
 		data = $(this).parents(".book").data("book");
-		if( data.author.author_options.allow_public_emails != "1" ) delete data.author["author_email"];
-		console.log(data);
 		renderBookDetails( data );
 	});
 	/*
+		FUNCTION THAT RENDERS A BOOK BASED ON A GIVEN DATA
 		Opens a book-details with a given data rendered
 	*/
 	function renderBookDetails( data ){
+		if( typeof data.files == 'string') data.files = JSON.parse(data.files);
+		if( typeof data.author.author_links == 'string') data.author.author_links = JSON.parse(data.author.author_links);
+		if( typeof data.author.author_options == 'string') data.author.author_options = JSON.parse(data.author.author_options);
+		if( data.author.author_options.allow_public_emails != "1" ) delete data.author["author_email"];
 		var template = $('#ap-book-details-template').html();
 		Mustache.parse(template);
 		var rendered = Mustache.render(template, data);

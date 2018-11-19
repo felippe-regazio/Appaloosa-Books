@@ -21,13 +21,15 @@
     <!-- -->
 </head>
 <body class="ap-login hold-transition skin-blue sidebar-mini">
-
+    <div class="messages" style="padding-top: 25px; max-width: 500px; margin: 0 auto; position: relative">
+        <?= $this->Flash->render() ?>
+    </div>
     <div class="login-box box box-info">
         <div class="box-header text-center">
             <h3><b>Appaloosa</b>Books</h3>
         </div>
         <div class="login-box-body">
-            <form action="<?= Router::url(['controller'=>'Ajax', 'action'=>'login']) ?>" method="post">
+            <form class="login-form" action="<?= Router::url(['controller'=>'Ajax', 'action'=>'login']) ?>" method="post">
                 <div class="form-group has-feedback">
                     <input id="email" type="email" name="email" class="form-control" placeholder="Email" required>
                     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
@@ -44,8 +46,22 @@
                     </div>
                 </div>
                 <!-- forgot pass -->
-                <a class="link invert pull-right" href="/">Esqueci a senha</a>
+                <span class="link invert pull-right" onclick="document.getElementsByClassName('passwordrecover')[0].classList.toggle('hidden')">Esqueci a senha</span>
             </form>
+            <form class="passwordrecover hidden" method="post" action="<?= Router::url(['controller'=>'Admin', 'action'=>'passwordrecover']) ?>">
+                <br/>
+                <div class="form-group has-feedback">
+                    <input id="emailtopassrecover" type="email" name="emailtopassrecover" class="form-control" placeholder="E-mail relacionado a conta" required>
+                    <span class="glyphicon glyphicon-asterisk form-control-feedback"></span>
+                </div>
+                <div class="row">
+                    <div class="col-xs-4">
+                        <button type="submit" class="btn btn-primary btn-block btn-flat">
+                            Recuperar
+                        </button>
+                    </div>
+                </div>
+            </form>            
         </div>
     </div>
     <!-- Scripts -->

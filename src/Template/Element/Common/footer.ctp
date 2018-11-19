@@ -38,7 +38,7 @@
 				<svg viewBox="0 0 68 20"><text x="0" y="15">Originais</text></svg>
 			</a>
 			<a href="<?= Router::url(['controller'=>'appaloosa', 'action' => 'index']); ?>">
-				<svg viewBox="0 0 84 18"><text x="0" y="15">Homepage</text></svg>
+				<svg viewBox="0 0 84 21"><text x="0" y="15">Homepage</text></svg>
 			</a>
 		</div>
 		<div class="c"
@@ -48,7 +48,7 @@
 		 	 data-aos-delay="200" 
 		 	 data-aos-once="true">
 			<h3># HUBS</h3>
-			<a href="http://appaloosabooks.com/magazine">
+			<a href="magazine/">
 				<svg viewBox="0 0 72 20"><text x="0" y="15">Magazine</text></svg>
 			</li>
 			<a href="http://github.com/felippe-regazio" target="_blank">

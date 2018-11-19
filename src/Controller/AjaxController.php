@@ -248,6 +248,14 @@ class AjaxController extends Controller
 
     public function contactEmail(){
         $data = $this->request->getData();
+        // THERE IS A HONEYPOT IN THIS METHOD, THE REAL EMAIL FIELD
+        // HAVES THE NAME "qwewrerttyyuui" AND THE FIELD EMAIL IS A
+        // FAKE HIDDEN ONE. IF EMAIL CAMES, IT MEANS THAT WAS A BOT.
+        // IF EMAIL DIDNT CAME, WE FILL IT WITH "qwewrerttyyuui" AND
+        // GO AHEAD WITH THE AUTHOR MAIL SEND FUNCTION.
+        !empty($data["email"]) ? exit : $data["email"] = $data["mnhiguygyiiug"];
+        !empty($data["phone"]) ? exit : '';
+        // THE SCRIPT ITSELF        
         $error = "";
         // sends an appaloosa data email
         $this->loadComponent("apMail");
@@ -267,6 +275,14 @@ class AjaxController extends Controller
 
     public function authorEmail(){
         $data = $this->request->getData();
+        // THERE IS A HONEYPOT IN THIS METHOD, THE REAL EMAIL FIELD
+        // HAVES THE NAME "qwewrerttyyuui" AND THE FIELD EMAIL IS A
+        // FAKE HIDDEN ONE. IF EMAIL CAMES, IT MEANS THAT WAS A BOT.
+        // IF EMAIL DIDNT CAME, WE FILL IT WITH "qwewrerttyyuui" AND
+        // GO AHEAD WITH THE AUTHOR MAIL SEND FUNCTION.
+        !empty($data["email"]) ? exit : $data["email"] = $data["qwewrerttyyuui"];
+        !empty($data["phone"]) ? exit : '';
+        // THE SCRIPT ITSELF
         $error = "";
         //
         try{

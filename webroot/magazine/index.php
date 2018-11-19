@@ -13,17 +13,12 @@
  */
 define('WP_USE_THEMES', true);
 
-/** 
-	O cake identifica os enderecos sem / no fim como metodos, entao
-	geralmente o endereco dominio.com/magazine soh abre quando usado como dominio.com/magazine/.
-	Este hook verifica se a raiz esta sem / e redirecionad para magazine/ com barra no fim
-**/
-$base_uri = "magazine";
-$uri = explode("/", $_SERVER['REQUEST_URI']);
-if( $uri[1] != $base_uri ){
-	$address  = "http://" . $_SERVER['HTTP_HOST'] . "/magazine/";
-	header('Location: ' . $address, false);
-	die();
+/** Force trailing slash and assure right link */
+$PROTOCOL = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://";
+$CURRENT_URI = $PROTOCOL . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+if (substr( $CURRENT_URI, -1 ) !== '/') {
+    header('Location: '.$CURRENT_URI."/", true, 301);
+    exit;
 }
 
 /** Loads the WordPress Environment and Template */

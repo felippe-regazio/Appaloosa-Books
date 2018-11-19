@@ -25,7 +25,7 @@
 				'placeholder' => 'Seu nome (opcional)',
 				'required' => false
 			]) ?>
-			<?= $this->Form->control( "email", [
+			<?= $this->Form->control( "qwewrerttyyuui", [
 				'label' => false,
 				'type' => 'email',
 				'placeholder' => 'Seu e-mail (opcional)',
@@ -37,6 +37,21 @@
 				'placeholder' => 'Mensagem',
 				'required' => true
 			]) ?>
+			<!-- h o n e y p o t s -->
+			<?= $this->Form->control( "email", [
+				'label' => '',
+				'type' => 'text',
+				'autocomplete' => false,
+				'required' => false,
+				'style' => 'opacity: 0; height: 0; width: 0; position: absolute; z-index: -1',
+			]) ?>
+			<?= $this->Form->control( "phone", [
+				'label' => '',
+				'type' => 'text',
+				'autocomplete' => false,
+				'required' => false,
+				'style' => 'opacity: 0; height: 0; width: 0; position: absolute; z-index: -1',
+			]) ?>			
 			<p>
 			Aqui você pode enviar uma mensagem para o autor ou autora. Você pode omitir o seu Nome e E-mail, assim sua mensagem será enviada de forma anônima. O conteúdo das mensagens trocadas é de total responsabilidade de seus remetentes.
 			</p>

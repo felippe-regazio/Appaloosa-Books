@@ -98,13 +98,18 @@
 			<li class="treeview">
 				<a href="#">
 					<i class="fa fa-circle-o text-yellow"></i>
-					<span>Appaloosa Config</span>
+					<span>Appaloosa Tools</span>
 					<span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
 				</a>
 				<ul class="treeview-menu">
 					<li>
 						<a href="<?= Router::url(["controller"=>"admin", "action"=>"subscribers"]) ?>">
 							<i class="fa fa-envelope"></i> Subscribers
+						</a>
+					</li>
+					<li>
+						<a href="<?= Router::url(["controller"=>"admin", "action"=>"analytics"]) ?>">
+							<i class="fa fa-pie-chart"></i> Analytics
 						</a>
 					</li>
 				</ul>

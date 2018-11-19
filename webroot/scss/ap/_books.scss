@@ -1,8 +1,5 @@
 .ap-books{
-<<<<<<< HEAD
-=======
 	display: grid;
->>>>>>> 2d5ce06f48dc6de3a074f6af8689b1783ff0c323
 	overflow: hidden;
 	&__head{
 		text-align: right;
@@ -84,12 +81,9 @@
 				width: 100%;
 				height: calc(25vw * 5.3);
 			};
-<<<<<<< HEAD
-=======
 			&:not(.menu):hover{
 				z-index: 1;
 			}
->>>>>>> 2d5ce06f48dc6de3a074f6af8689b1783ff0c323
 			&__content{
 				width: 100%;
 				height: 100%;
@@ -229,7 +223,7 @@
 						}
 					}
 				}
-    		}
+    	}
 		}
 	}
 }

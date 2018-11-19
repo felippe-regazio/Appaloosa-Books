@@ -74,7 +74,7 @@ $AP_CURRENT_URI = $PROTOCOL . $_SERVER['HTTP_HOST'] . $SUBFOLDER;
 
 if( $_SERVER['HTTP_HOST'] == 'localhost' ){
 	$AP_CURRENT_URI = $PROTOCOL . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-	$AP_CURRENT_URI = implode("/", array_slice(explode("/", $AP_CURRENT_URI), 0, 4)) . $SUBFOLDER;
+  $AP_CURRENT_URI = implode("/", array_slice(explode("/", $AP_CURRENT_URI), 0, 4)) . $SUBFOLDER;
 }
 
 define('WP_HOME', $AP_CURRENT_URI );

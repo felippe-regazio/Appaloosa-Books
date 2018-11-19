@@ -67,7 +67,7 @@ define('NONCE_SALT',       'XzMNBe,*QR)O@G*G$pH+I%}~-xSA],wYK@eOalgL[!p8Dhr?_s@n
  * so, we are no more dependent of database domain configurations
 */
 
-/**#@+ Dont need to configure domains at database */
+/**#@+ Snippet to dont need configure domains strings at database */
 $SUBFOLDER	 	= "/magazine/";
 $PROTOCOL    	= (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://";
 $AP_CURRENT_URI = $PROTOCOL . $_SERVER['HTTP_HOST'] . $SUBFOLDER;

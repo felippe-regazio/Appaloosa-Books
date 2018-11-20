@@ -1,13 +1,13 @@
 (function(){
 	var $bookDetails = $(".ap-book-details");
-	/* Common Call Back Events When Closes*/
+	/* Common Call Back Events When Closes a Book Details*/
 	function BookDetailsCloseEvents(){
 		setTimeout(function(){		
 			$(".info-side__review").removeClass('expanded');
 		}, 600);
 	};
 	/*
-		RENDER BOOK FROM HASH (ajax or session store)
+		RENDER BOOK FROM HASH ON LOAD PAGE (ajax or session store)
 		If there is a hash on the url, see if its a book
 	*/	
 	var bookHash = window.location.hash.replace("#", "");
@@ -36,7 +36,7 @@
 		}
 	}
 	/*
-		RENDER BOOK FROM HTML DATA-BOOK (static)
+		RENDER BOOK FROM HTML DATA-BOOK ON BOOK CLICK (static)
 		Show Book Detail Button (.ap-book-view)
 	*/
 	$("body").on("click", ".ap-book-see", function(e){
@@ -46,6 +46,8 @@
 		/* GET THE DATA JSON FROM ATTR DATA */
 		data = $(this).parents(".book").data("book");
 		renderBookDetails( data );
+		/* UPDATES THE URL STATE */
+		history.pushState( data, "Appaloosa Books : "+data.title, window.location.href );
 	});
 	/*
 		FUNCTION THAT RENDERS A BOOK BASED ON A GIVEN DATA
@@ -76,12 +78,17 @@
 			    	}, 1000);
 				}, 425);
 			}
-			/* UPDATE URL WITH THE HASH */
+			/* 
+				update url with the book hash id
+			*/
 			window.location.hash = data.asbn;
 			/* INCREASE THE BOOK VIEWS */
 			$.post( "ajax/increaseBookView/"+data.asbn );
 		});
 	}
+	//
+	// behavior =======================================
+	//
 	/* 
 		Closes BookDetails (.ap-book-close)
 	*/

@@ -1,5 +1,5 @@
 /*
-	Page general loading 
+	Page general loading function
 */
 var waitToShowLoading = 1500;
 setTimeout(function(){
@@ -13,10 +13,10 @@ $(window).on("load", function(e){
 	});
 });
 /*
-	Escape Key closes menus and tiles
+	Close cascade hierarchy function. This events close
+	An oppened page tile following a simple hierarchy
 */
-$(document).keyup(function(e){
-	if( e.key == "Escape" ){
+function closeCurrentTile(){
 		// close sidebar bestSellers Tile
 		if( $(".tile.active").removeClass("active").length && $(".ap-sidebar.put-behind").removeClass("put-behind").length ) return;
 		// common screen wich can be closed no matter the order
@@ -38,5 +38,19 @@ $(document).keyup(function(e){
 			window.history.replaceState({}, document.title, "/");
 			$("body").removeClass('overflow-hidden');
 		}
+}
+/*
+	Escape Key closes menus and tiles
+*/
+$(document).keyup(function(e){
+	if( e.key == "Escape" ){
+		closeCurrentTile();
 	}
 });
+/*
+	Events to trigger when url changes back from a hashState
+*/
+window.onhashchange = function() {
+	if( !window.location.hash )
+	closeCurrentTile();
+};

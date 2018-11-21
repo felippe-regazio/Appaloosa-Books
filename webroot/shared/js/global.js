@@ -17,27 +17,28 @@ $(window).on("load", function(e){
 	An oppened page tile following a simple hierarchy
 */
 function closeCurrentTile(){
-		// close sidebar bestSellers Tile
-		if( $(".tile.active").removeClass("active").length && $(".ap-sidebar.put-behind").removeClass("put-behind").length ) return;
-		// common screen wich can be closed no matter the order
-		var commonClose =
-			$(".ap-support.ap-support-open").removeClass("ap-support-open").length ||
-			$(".ap-mail-to.ap-mail-to-open").removeClass("ap-mail-to-open").length ||
-			$(".ap-author-details.about-author-open").removeClass("about-author-open").length ||
-			$(".ap-book-details.cover-expand").removeClass("cover-expand").length ||
-			$(".ap-contact.ap-contact-open").removeClass("ap-contact-open").length;
-		if( commonClose ) return;
-		// close book details
-		if($(".ap-book-details.active").removeClass("active").length){
-			window.history.replaceState({}, document.title, "/");
-			$("body").removeClass("overflow-hidden");
-			return;
-		}
-		// close authors list
-		if( $(".ap-authors-list.ap-authors-list-open").removeClass("ap-authors-list-open").length ){
-			window.history.replaceState({}, document.title, "/");
-			$("body").removeClass('overflow-hidden');
-		}
+	// close sidebar bestSellers Tile
+	if( $(".tile.active").removeClass("active").length && $(".ap-sidebar.put-behind").removeClass("put-behind").length ) return;
+	// common screen wich can be closed no matter the order
+	var commonClose =
+		$(".ap-support.ap-support-open").removeClass("ap-support-open").length ||
+		$(".ap-mail-to.ap-mail-to-open").removeClass("ap-mail-to-open").length ||
+		$(".ap-author-details.about-author-open").removeClass("about-author-open").length ||
+		$(".ap-book-details.cover-expand").removeClass("cover-expand").length ||
+		$(".ap-contact.ap-contact-open").removeClass("ap-contact-open").length;
+	if( commonClose ) return;
+	// close book details
+	if($(".ap-book-details.active").removeClass("active").length){
+		$("body").removeClass("overflow-hidden");
+		window.history.pushState(null, document.title, "/");
+		return;
+	}
+	// close authors list
+	if( $(".ap-authors-list.ap-authors-list-open").removeClass("ap-authors-list-open").length ){
+		$("body").removeClass('overflow-hidden');
+		window.history.replaceState(null, document.title, "/");
+		return;
+	}
 }
 /*
 	Escape Key closes menus and tiles
@@ -47,10 +48,3 @@ $(document).keyup(function(e){
 		closeCurrentTile();
 	}
 });
-/*
-	Events to trigger when url changes back from a hashState
-*/
-window.onhashchange = function() {
-	if( !window.location.hash )
-	closeCurrentTile();
-};

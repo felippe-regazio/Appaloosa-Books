@@ -1,7 +1,7 @@
 <?php
 // datastore=auditqueue;
 // created_on=1523928894;
-// updated_on=1539141804;
+// updated_on=1542769130;
 exit(0);
 ?>
 1523928894_5689:"Warning: ApMag, 127.0.0.1; Plugin activated: Sucuri Security - Auditing, Malware Scanner and Hardening (v1.8.14; sucuri-scanner\/sucuri.php)"
@@ -1306,3 +1306,6 @@ exit(0);
 1542321234_4152:"Warning: ApMag, 127.0.0.1; Post moved to trash; ID: 357; name: Ask - Nova Quest\u00e3o ou Debate; status: publish"
 1542321234_9219:"Notice: ApMag, 127.0.0.1; Page status has been changed; details: ID: 357,Old status: publish,New status: trash,Title: Ask - Nova Quest\u00e3o ou Debate"
 1542321266_4794:"Warning: ApMag, 127.0.0.1; Post deleted: (multiple entries): Post id: 363,Post author: 1,Post type: nav_menu_item,Post status: publish,Post inserted: 2018-05-04 10:47:41,Post modified: 2018-05-04 10:47:41,Post guid: http:\/\/www.appaloosabooks.com\/magazine\/?p=363,Post title: Debates"
+1542590745_4926:"Notice: 127.0.0.1; User authentication succeeded: ApMag"
+1542590775_5994:"Notice: 127.0.0.1; User authentication succeeded: ApMag"
+1542769132_0003:"Warning: 127.0.0.1; Post deleted: (multiple entries): Post id: 666,Post author: 3,Post type: post,Post status: auto-draft,Post inserted: 2018-11-12 17:43:12,Post modified: 2018-11-12 17:43:12,Post guid: http:\/\/www.appaloosabooks.com\/magazine\/?p=666,Post title: Rascunho autom\u00e1tico"

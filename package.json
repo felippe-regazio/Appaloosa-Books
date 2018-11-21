@@ -12,7 +12,6 @@
   "author": "Felippe Regazio",
   "license": "MIT",
   "devDependencies": {
-    "google-closure-compiler": "^20181028.0.1",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^5.0.0",
     "gulp-clean-css": "^3.10.0",

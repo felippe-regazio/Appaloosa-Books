@@ -11,6 +11,12 @@
 		openAuthorsList();
 	});
 	/*
+		On hash change
+	*/
+	history.onhashchange = function(){
+		console.log(window.location.hash);
+	}
+	/*
 		Useful Functions
 	*/
 	function openAuthorsList(){
@@ -25,7 +31,7 @@
 			window.location.hash = "AuthorsList";
 		} else {
 			// If Closing
-			window.history.replaceState({}, document.title, "/");
+			window.history.pushState({}, document.title, "/");
 		}
 		// ------------------------------------------------------------
 		$(".ap-authors-list").toggleClass("ap-authors-list-open");
@@ -60,5 +66,6 @@
 			$("#authors-list-content").append(rendered);
 		});
 		$(".ap-authors-list").removeClass("loading");
+		window.history.pushState(author, "Appaloosa Books : Autores", window.location.hash);
 	}
 })();

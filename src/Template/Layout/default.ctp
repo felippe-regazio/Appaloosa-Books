@@ -19,12 +19,8 @@ use Cake\Routing\Router;
 // SEO & Page Metas Pre Definitions
 
 $default_title = "Appaloosa Books - Livros Independentes Online e Gratuitos";
-
 $default_image = Router::url("/", true) . "img/ap-feature.png";
-
 $default_description = "A Appaloosa é uma casa de publicações digitais com foco na literatura contemporânea e independente. Publicamos desde textos até livros completos nos formatos epub e pdf com edição profissional e alta qualidade gráfica. Basicamente disponibilizamos pequenos e incríveis universos em um formato colaborativo e gratuito";
-
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -62,7 +58,6 @@ $default_description = "A Appaloosa é uma casa de publicações digitais com fo
         ]) ?>
     <?= $this->fetch('css') ?>
     <!-- -->
-
 </head>
 <!-- MATOMO -->
 <script type="text/javascript">
@@ -123,6 +118,7 @@ $default_description = "A Appaloosa é uma casa de publicações digitais com fo
     
     <!-- Scripts -->
     <?= $this->Html->script([
+        '/bower_components/jquery-touchswipe/jquery.touchSwipe.min.js',
         '/bower_components/mustache.js/mustache.min.js',
         '/bower_components/jquery/dist/jquery.min.js',
         '/bower_components/aos/dist/aos.js',
@@ -130,7 +126,7 @@ $default_description = "A Appaloosa é uma casa de publicações digitais com fo
         '/shared/dist/js/main.min.js',
         '/dist/js/main.min.js'
     ]) ?>
+
     <?= $this->fetch('script') ?>
-    
 </body>
 </html>

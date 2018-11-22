@@ -26,6 +26,7 @@
     <!-- Css -->
     <?= $this->Html->css([
             // Ap Styles are loaded dynamically from webroot/admin/scss/main
+            '/bower_components/jquery-touchswipe/jquery.touchSwipe.min.js',
             '/bower_components/font-awesome/web-fonts-with-css/css/fontawesome-all.min.css',
             '/admin_root/AdminLTE/bower_components/bootstrap/dist/css/bootstrap.min.css',
             '/admin_root/AdminLTE/bower_components/font-awesome/css/font-awesome.min.css',

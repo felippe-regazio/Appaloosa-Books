@@ -1,4 +1,5 @@
 /*
+  LOADING
 	Page general loading function
 */
 var waitToShowLoading = 1500;
@@ -13,6 +14,7 @@ $(window).on("load", function(e){
 	});
 });
 /*
+  COMMON CLOSE FUNCTION QUEUE
 	Close cascade hierarchy function. This events close
 	An oppened page tile following a simple hierarchy
 */
@@ -40,6 +42,7 @@ function closeCurrentTile(){
 	}
 }
 /*
+  ESCAPE (ESC)
 	Close menus and tiles on Escape (ESC) Key
 */
 $(document).keyup(function(e){
@@ -48,16 +51,26 @@ $(document).keyup(function(e){
 	}
 });
 /*
+  SWIPING HANDLES
 	Close menus and tiles on Swipe right or left
 */
-// closeOnSwipe.on('swiperight', function(){
-// 	closeCurrentTile();
-// });
-// closeOnSwipe.on('swipeleft', function(){
-// 	var commonClose =
-// 		$(".ap-book-details.cover-expand").removeClass("cover-expand").length;
-// 	if( commonClose ) return;
-// 	// sidebar
-// 	if($('.ap-sidebar').hasClass('active'))
-// 	$('.ap-navbar-hamburger').trigger('click');
-// });
+$(document).swipe( {
+  preventDefaultEvents: false,
+  // On Swipe Right
+  swipeRight:function() {
+    if( window.getSelection().toString() == "" ){
+			closeCurrentTile();
+    };
+  },
+  // On Swipe Left
+  swipeLeft:function() {
+    if( window.getSelection().toString() == "" ){
+			var commonClose =
+				$(".ap-book-details.cover-expand").removeClass("cover-expand").length;
+			if( commonClose ) return;
+			// sidebar
+			if($('.ap-sidebar').hasClass('active'))
+			$('.ap-navbar-hamburger').trigger('click');
+    };
+  }
+});

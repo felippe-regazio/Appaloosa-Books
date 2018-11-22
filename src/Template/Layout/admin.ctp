@@ -61,7 +61,6 @@
     <!-- Scripts -->
     <?= $this->Html->script([
         // Admin
-        '/bower_components/mustache.js/mustache.min.js',
         '/admin_root/AdminLTE/bower_components/jquery/dist/jquery.min.js',
         '/admin_root/AdminLTE/bower_components/bootstrap/dist/js/bootstrap.min.js',
         '/admin_root/AdminLTE/plugins/input-mask/jquery.inputmask.js',
@@ -75,6 +74,7 @@
         '/shared/dist/js/main.min.js',
         '/admin_root/dist/js/main.min.js',
         // Ap dist to reuse appaloosa features on admin
+        '/bower_components/mustache.js/mustache.min.js',
         '/dist/js/main.min.js',
     ]) ?>
     <?= $this->fetch('script') ?>

@@ -118,9 +118,9 @@ $default_description = "A Appaloosa é uma casa de publicações digitais com fo
     
     <!-- Scripts -->
     <?= $this->Html->script([
-        '/bower_components/jquery-touchswipe/jquery.touchSwipe.min.js',
         '/bower_components/mustache.js/mustache.min.js',
         '/bower_components/jquery/dist/jquery.min.js',
+        '/bower_components/jquery-touchswipe/jquery.touchSwipe.min.js',
         '/bower_components/aos/dist/aos.js',
         '/bower_components/swiper/dist/js/swiper.min.js',
         '/shared/dist/js/main.min.js',

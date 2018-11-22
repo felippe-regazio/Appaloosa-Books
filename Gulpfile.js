@@ -3,7 +3,7 @@ APPALOOSA BOOKS GULPFILE
 Used this file to compile the project js and css the proper way
 */
 var gulp 		 = require('gulp'),
-	sass 		 = require('gulp-sass'),
+	sass 		 	 = require('gulp-sass'),
 	concat 		 = require('gulp-concat'),
 	minify 		 = require('gulp-clean-css'), // for css
 	uglify		 = require('gulp-uglify'); 	  // for js
@@ -12,10 +12,7 @@ var gulp 		 = require('gulp'),
 var options_sass = {
 	outputStyle: 'compressed'
 };
-
 /* APPALOOSA */
-
-/* Compiles the main.scss maped files to webroot/dist/css/main.min.css */
 gulp.task('ap-css', function(){
 	return gulp.src( './webroot/scss/*.scss' )
 	.pipe(sass( options_sass ).on('error', sass.logError))
@@ -35,9 +32,7 @@ gulp.task('ap-watch', function(){
 	// js watchings
 	gulp.watch('./webroot/js/**/*.js', ['ap-js']);
 });
-
-/* admin_root */
-
+/* ADMIN_ROOT */
 gulp.task('admin_root-css', function(){
 	return gulp.src( './webroot/admin_root/scss/*.scss' )
 	.pipe(sass( options_sass ).on('error', sass.logError))
@@ -56,9 +51,7 @@ gulp.task('admin_root-watch', function(){
 	// js watchings
 	gulp.watch('./webroot/admin_root/js/**/*.js', ['admin_root-js']);
 });
-
 /* SHARED */
-
 gulp.task('shared-css', function(){
 	return gulp.src( './webroot/shared/scss/*.scss' )
 	.pipe(sass( options_sass ).on('error', sass.logError))
@@ -77,9 +70,7 @@ gulp.task('shared-watch', function(){
 	// js watchings
 	gulp.watch('./webroot/shared/js/**/*.js', ['shared-js']);
 });
-
-
-/* Initializer */
+/* DEFAULTS */
 gulp.task('default', [ 
 	'ap-css', 
 	'admin_root-css',

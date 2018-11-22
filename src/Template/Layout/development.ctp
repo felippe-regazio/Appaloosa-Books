@@ -50,6 +50,7 @@
     <?= $this->Html->script([
         '/bower_components/jquery/dist/jquery.min.js',
         '/bower_components/aos/dist/aos.js',
+        '/bower_components/hammerjs/hammer.min.js',
         '/bower_components/swiper/dist/js/swiper.min.js',
         '/dist/js/main.min.js'
     ]) ?>

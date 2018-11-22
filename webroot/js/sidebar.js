@@ -6,7 +6,7 @@
 		$sidebar.toggleClass('active').focus();
 		$("body").toggleClass('sidebar-open');
 	});
-	/* Closes on click */
+	/* Closes on leave */
 	$sidebar.on('mouseleave', function(){
 		/* if not ap-sidebar, ap-sidebar-toggle element on hover, closes the sbar*/
 		if ($('.ap-sidebar:hover, .ap-sidebar-toggle:hover').length != 1 

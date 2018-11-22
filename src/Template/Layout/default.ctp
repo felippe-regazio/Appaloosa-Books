@@ -127,6 +127,7 @@ $default_description = "A Appaloosa é uma casa de publicações digitais com fo
         '/bower_components/jquery/dist/jquery.min.js',
         '/bower_components/aos/dist/aos.js',
         '/bower_components/swiper/dist/js/swiper.min.js',
+        '/bower_components/hammerjs/hammer.min.js',
         '/shared/dist/js/main.min.js',
         '/dist/js/main.min.js'
     ]) ?>

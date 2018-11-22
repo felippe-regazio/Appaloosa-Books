@@ -50,15 +50,14 @@ $(document).keyup(function(e){
 /*
 	Close menus and tiles on Swipe right or left
 */
-closeOnSwipe = new Hammer(document);
-closeOnSwipe.on('swiperight', function(){
-	closeCurrentTile();
-});
-closeOnSwipe.on('swipeleft', function(){
-	var commonClose =
-		$(".ap-book-details.cover-expand").removeClass("cover-expand").length;
-	if( commonClose ) return;
-	// sidebar
-	if($('.ap-sidebar').hasClass('active'))
-	$('.ap-navbar-hamburger').trigger('click');
-});
+// closeOnSwipe.on('swiperight', function(){
+// 	closeCurrentTile();
+// });
+// closeOnSwipe.on('swipeleft', function(){
+// 	var commonClose =
+// 		$(".ap-book-details.cover-expand").removeClass("cover-expand").length;
+// 	if( commonClose ) return;
+// 	// sidebar
+// 	if($('.ap-sidebar').hasClass('active'))
+// 	$('.ap-navbar-hamburger').trigger('click');
+// });

@@ -60,7 +60,6 @@
     <!-- Scripts -->
     <?= $this->Html->script([
         // Admin
-        '/bower_components/hammerjs/hammer.min.js',
         '/bower_components/mustache.js/mustache.min.js',
         '/admin_root/AdminLTE/bower_components/jquery/dist/jquery.min.js',
         '/admin_root/AdminLTE/bower_components/bootstrap/dist/js/bootstrap.min.js',

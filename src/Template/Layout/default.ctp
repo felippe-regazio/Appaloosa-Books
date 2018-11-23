@@ -77,6 +77,11 @@ $default_description = "A Appaloosa é uma casa de publicações digitais com fo
 <style>
     body.loading *{
         opacity: 0;
+        overflow: hidden !important;
+    }
+    body.loading *:before,
+    body.loading *:after{
+        display: none;
     }
     body.loading.wait:before{
         content: "carregando ";

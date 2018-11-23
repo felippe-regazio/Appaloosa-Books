@@ -6,7 +6,7 @@
 	*/
 	function renderBookFromUrlHash(){
 		var bookHash = window.location.hash.replace("#", "");
-		if( bookHash && bookHash != "authorsList" ){
+		if( bookHash && bookHash != "AuthorsList" ){
 			var data;
 			// get the book data from session store or ajax
 			if( sessionStorage.getItem('book_'+bookHash) ){
@@ -92,6 +92,10 @@
 		OR RENDER A BOOK WHEN A URL STATE CHANGES TO A BOOK HASH
 	*/
 	renderBookFromUrlHash();
+	/*
+		RE RENDER A BOOK WHEN HASH CHANGES TO A BOOK ID
+		This is to able the book-details to reopen on history state back
+	*/	
 	window.onhashchange = function() {
 		if( window.location.hash ){
 			renderBookFromUrlHash();

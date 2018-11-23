@@ -1,5 +1,7 @@
 (function(){
-	// Update Hash
+	/*
+		On page load or Hash Change
+	*/
 	if( window.location.hash == "#AuthorsList" ){
 		openAuthorsList();
 	}
@@ -10,12 +12,6 @@
 		e.preventDefault();
 		openAuthorsList();
 	});
-	/*
-		On hash change
-	*/
-	history.onhashchange = function(){
-		console.log(window.location.hash);
-	}
 	/*
 		Useful Functions
 	*/
@@ -28,10 +24,9 @@
 			$("#authors-list-content").css({
 				"column-count" : columns
 			});
-			window.location.hash = "AuthorsList";
 		} else {
 			// If Closing
-			window.history.replaceState({}, document.title, "/");
+			window.history.pushState({}, document.title, "/");
 		}
 		// ------------------------------------------------------------
 		$(".ap-authors-list").toggleClass("ap-authors-list-open");

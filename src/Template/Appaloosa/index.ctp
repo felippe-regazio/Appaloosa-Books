@@ -98,6 +98,15 @@
 	 data-aos-offset="150" 
 	 data-aos-once="true">	 	
 </div>
+<!-- USEFUL INFORMATION -->
+<section class="useful-info">
+	<section class="useful-info__content">
+		<!-- O que significa Appaloosa -->
+		<!-- Como faço para obter um livro -->
+		<!-- Formas de Apoiar a Appaloosa -->
+		<!-- Formas de Apoiar um Autor ou Autora -->
+	</section>
+</section>
 <!-- PAGE ENDING - NEWSLETTER -->
 <section class="ap-newsletter">
 	<div class="ap-newsletter__quoting"

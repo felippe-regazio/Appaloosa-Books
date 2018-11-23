@@ -130,11 +130,10 @@
 
 		}
 	}
-	// ending
-	&ending{
-		margin-bottom: $gutter*3;
-		margin-top: $gutter*2;
+	// newsletter section
+	&newsletter{
 		padding: $gutter;
+		background-color: #eeeeee;
 		@media screen and(max-width: 768px){
 			paddig: $gutter/2;
 		}
@@ -149,10 +148,6 @@
 			font-size: 60px;
 			font-weight: 700;
 			padding-bottom: $gutter*2;
-		}
-		.field input{
-			min-width: unset;
-			width: 100%;
 		}
 		.newsletter{
 			position: relative;
@@ -179,6 +174,9 @@
 						}
 					}
 				}
+			}
+			.group-field-and-btn form input{
+				background: $white;
 			}
 		}
 	}

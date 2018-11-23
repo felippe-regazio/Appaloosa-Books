@@ -98,10 +98,9 @@
 	 data-aos-offset="150" 
 	 data-aos-once="true">	 	
 </div>
-<!-- PAGE ENDING - NEWSLETTER AND MORE -->
-<section class="ap-ending">
-	<!--  -->
-	<div class="ap-ending__quoting"
+<!-- PAGE ENDING - NEWSLETTER -->
+<section class="ap-newsletter">
+	<div class="ap-newsletter__quoting"
 		 data-aos="fade-up" 
 		 data-aos-duration="1000" 
 		 data-aos-offset="140" 

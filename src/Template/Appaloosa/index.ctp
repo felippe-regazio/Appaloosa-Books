@@ -55,7 +55,7 @@
 					<!-- text body -->
 					<div class="message">			
 						Se você deseja publicar conosco, envie seu original para 
-						<span><b><?= AP_ORIGINALS_EMAIL ?></b></span>. Para assuntos gerais, por favor, utilize o e-mail: <span><b><?= AP_CONTACT_EMAIL ?></b></span>. Pode ser que você também curta a nossa revista online, <a href=""><b>clique aqui</b></a> para conhecê-la.
+						<span><b><?= AP_ORIGINALS_EMAIL ?></b></span>. Para assuntos gerais, por favor, utilize o e-mail: <span><b><?= AP_CONTACT_EMAIL ?></b></span>. Pode ser que você também curta a nossa revista online, <a class="link invert" href="magazine/" target="_blank"><b>clique aqui</b></a> para conhecê-la.
 					</div>
 				</div>
 			</div>
@@ -65,7 +65,7 @@
 					<div class="title typo-subtitle">3. Apoio e Doação</div>
 					<!-- text body -->
 					<div class="message">			
-						A Appaloosa é uma "Single Developer Application", uma aplicação inteiramente desenvolvida por uma única pessoa, e que hoje já conta com alguns colaboradores. Estamos abertos para novos partners, conteudistas, desenvolvedores ou Doadores. Se você deseja apoiar, colaborar ou doar - ou simplesmente saber mais sobre - <a class="link invert" href="<?= Router::url(['controller'=>'appaloosa', 'action' => 'info']); ?>">
+						A Appaloosa é uma "Single Developer Application", uma aplicação inteiramente desenvolvida por uma única pessoa, e que hoje já conta com alguns colaboradores. Se você deseja apoiar, colaborar ou doar - ou simplesmente saber mais sobre - <a class="link invert" href="<?= Router::url(['controller'=>'appaloosa', 'action' => 'info']); ?>">
 							<b>clique aqui</b>
 						</a>
  					</div>
@@ -73,20 +73,20 @@
 			</div>
 		</div>
 		<!-- controls -->
-		<div class="ap-about__controls"
+		<div class="ap-about__wrapper ap-about__controls"
 			 data-aos="fade-up" 
 			 data-aos-delay="600"
 			 data-aos-offset="50" 
 			 data-aos-once="true">
-			<span class="ap-about__controls-prev"><i class="fa fa-chevron-left"></i></span>
-			<span class="ap-about__controls-next"><i class="fa fa-chevron-right"></i></span>
+			<span class="ap-about__controls-prev"><i class="ap-long-arrow arrow-left gray"></i></span>
+			<span class="ap-about__controls-next"><i class="ap-long-arrow right"></i></span>
 		</div>
 	</div>
 	<!-- Black Line -->
 	<div class="ap-line"
-		 data-aos="line-reveal" 
-		 data-aos-offset="150" 
-		 data-aos-once="true">	 	
+		 no-data-aos="line-reveal" 
+		 no-data-aos-offset="150" 
+		 no-data-aos-once="true">	 	
 	</div>
 </section>
 <!-- ========================================== BOOKS AND AUTHORS  -->
@@ -94,19 +94,11 @@
 <?= $this->element('authors_list') ?>
 <!-- =========================================== -->
 <div class="ap-line"
-	 data-aos="line-reveal" 
-	 data-aos-offset="150" 
-	 data-aos-once="true">	 	
+	 no-data-aos="line-reveal" 
+	 no-data-aos-once="true">	 	
 </div>
 <!-- USEFUL INFORMATION -->
-<section class="useful-info">
-	<section class="useful-info__content">
-		<!-- O que significa Appaloosa -->
-		<!-- Como faço para obter um livro -->
-		<!-- Formas de Apoiar a Appaloosa -->
-		<!-- Formas de Apoiar um Autor ou Autora -->
-	</section>
-</section>
+<?= $this->element('magcards'); ?>
 <!-- PAGE ENDING - NEWSLETTER -->
 <section class="ap-newsletter">
 	<div class="ap-newsletter__quoting"

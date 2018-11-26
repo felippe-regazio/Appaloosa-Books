@@ -83,17 +83,40 @@
 		line-height: 1.2;
 		color: $ap-d;
 		padding: $gutter*4 $gutter;
+		padding-bottom: 60px;
 		position: relative;
 		overflow: hidden;
 		&__controls{
+			padding-top: $gutter*2;
+			text-align: center;
 			span{
+			    margin-right: 12px;
+			    position: relative;
+			    height: 20px;
+			    width: 50px;
+			    display: inline-grid;
+			    align-items: center;
+			    padding: 0;
 			    font-size: 20px;
-	    		padding: 2px 6px;
-	    		cursor: pointer;
-	    		transition: $anim8-speed/2 ease-in-out;
+			    cursor: pointer;
+	    		&:first-child{
+				    margin-right: 12px;
+				    position: relative;
+				    height: 20px;
+				    width: 40px;
+				    display: inline-grid;
+				    align-items: center;
+	    		}
 	    		&:hover{
-	    			background:$black;
-	    			color: $white; 
+	    			.ap-long-arrow{
+						border-color: $ap-b;
+						&:before{
+							border-color: $ap-b;
+						}
+	    			}
+	    		}
+	    		&.ap-about__controls-prev.swiper-button-disabled{
+					display: none;
 	    		}
 			}
 		}		
@@ -132,7 +155,8 @@
 	}
 	// newsletter section
 	&newsletter{
-		padding: $gutter;
+		padding: $gutter*3 $gutter;
+		padding-bottom: 42px;
 		background-color: #eeeeee;
 		@media screen and(max-width: 768px){
 			paddig: $gutter/2;

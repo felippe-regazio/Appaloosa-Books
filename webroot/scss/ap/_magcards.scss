@@ -1,0 +1,62 @@
+.magcards{
+	overflow: hidden;
+	&__title{
+		padding-bottom: $gutter*2;
+		p{
+			font-size: 44px;
+			font-weight: 700;
+			margin: 0;
+			padding: 0;
+			padding-left: 2px;
+			text-transform: uppercase;
+			span{
+				display: block;
+				text-align: left;
+				font-size: 18px;
+			}
+		}
+	}
+	&__content{
+		padding: $gutter*6 $gutter;
+		.mg-card{
+			padding: 1px;
+			.mg-card__content{
+				max-width: 280px;
+				height: 350px;
+				padding: $gutter/2;
+				background-color: $black;
+				color: $white;
+				overflow: hidden;
+				font-size: 20px;
+			}
+		}
+	}
+	/* 
+		when slider is loading 
+		or nothing returned
+	*/
+	.swiper-wrapper{
+		&.loading,
+		&.empty{
+			width: 100%;
+			padding: 40px 0;
+			margin: 0;
+			.ap-loading-circle:before{
+				border-color: $black;
+			}
+			p{
+				font-size: 32px;
+				font-weight: 700;
+				color: #aaa;
+			}
+		}
+		&.loading{
+			p{
+				display: none;
+			}
+		}
+	}
+	.swiper-slide{
+		max-width: 320px;
+	}
+}

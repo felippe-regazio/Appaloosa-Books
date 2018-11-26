@@ -63,9 +63,9 @@
     to {transform:rotate(360deg);}
 }
 /* AOS NEW ANIMATIONS */
-[data-aos='line-reveal'] { 
+[data-aos='line-reveal'] {
+    &:not(.noanimation){}
     opacity: 0;
-    border-top: solid 2px $black;
     &.aos-animate {  
         opacity: 1;
         animation: width-reveal 1s ease-in;

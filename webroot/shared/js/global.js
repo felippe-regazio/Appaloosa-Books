@@ -99,3 +99,21 @@ if (hasTouch()) { // remove all :hover stylesheets
         }
     } catch (ex) {}
 }
+/*
+	GLOBAL SWIPER INDEPENDENT INSTANCES
+*/
+function newSwiper( elem ){
+	if( typeof Swiper !== 'undefined'){
+		$( elem ).each(function(index, element){
+		    $(this).addClass('apsw-'+index);
+		    new Swiper('.apsw-'+index, {
+		    	slidesPerView: 'auto',
+				grabCursor: true,
+				navigation: {
+					nextEl: '.ap-about__controls-next',
+					prevEl: '.ap-about__controls-prev',
+				},
+		    });
+		});
+	}
+}

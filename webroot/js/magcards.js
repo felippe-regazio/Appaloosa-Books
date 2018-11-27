@@ -7,13 +7,20 @@
 	});
 	/* Get posts From WP Magazine */
 	function loadMagPosts(){
-		$.get("magazine?rest_route=/wp/v2/posts/", function(data){
-			if(data){
-				renderMagPosts(data);
-			} else {
-				$postswrapper.removeClass("loading").addClass("empty");
-			}
-		});
+		// first check the session-store
+		// if theres nothing, do a get request to mag
+		if( !sessionStore.getItem("magcards-posts") ){
+			$.get("magazine?rest_route=/wp/v2/posts/", function(data){
+				if(data){
+					sessionStore.setItem("magcards-posts", data);
+					renderMagPosts(data);
+				} else {
+					$postswrapper.removeClass("loading").addClass("empty");
+				}
+			});
+		} else {
+			renderMagPosts( sessionStore.getItem("magcards-posts") );
+		}
 	}
 	/* Show the posts on screen */
 	function renderMagPosts(data){

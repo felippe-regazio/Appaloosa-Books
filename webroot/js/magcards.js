@@ -5,15 +5,22 @@
 	$(window).ready(function(){
 		loadMagPosts();
 	});
-	/* Get posts From WP Magazine */
+	/* Get posts From WP Magazine and store in a local Cache */
 	function loadMagPosts(){
-		$.get("magazine?rest_route=/wp/v2/posts/", function(data){
-			if(data){
-				renderMagPosts(data);
-			} else {
-				$postswrapper.removeClass("loading").addClass("empty");
-			}
-		});
+		var data;
+		if( sessionStorage.getItem("magposts-items") ){
+			data = JSON.parse(sessionStorage.getItem("magposts-items"));
+			renderMagPosts(data);
+		} else {
+			$.get("magazine?rest_route=/wp/v2/posts/&_embed&filter[status]=publish", function(data){
+				if(data){
+					sessionStorage.setItem("magposts-items", JSON.stringify(data));
+					renderMagPosts(data);
+				} else {
+					$postswrapper.removeClass("loading").addClass("empty");
+				}
+			});
+		}
 	}
 	/* Show the posts on screen */
 	function renderMagPosts(data){
@@ -22,6 +29,12 @@
 		var template = $magcards.find("template").html();
 		Mustache.parse(template);
 		$.each( data, function(index, value){
+			// insert a virtual key with the featured image
+			if(data[index]._embedded['wp:featuredmedia']['0'].media_details.sizes["medium-large"] != undefined){
+				data[index].featured_image = data[index]._embedded['wp:featuredmedia']['0'].media_details.sizes["medium-large"].source_url;
+			} else {
+				data[index].featured_image = data[index]._embedded['wp:featuredmedia']['0'].source_url;
+			};
 			if(value != undefined && index != undefined){
 				rendered += Mustache.render(template, data[index]);
 			}

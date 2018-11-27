@@ -25,10 +25,12 @@
 		</div>	
 	</div>
 	<template id="magCardTemplate">
-		<div class="swiper-slide mg-card mag-post ">
-			<div class="mg-card__content">
-				{{title.rendered}}
+		<a href="{{link}}" target="_blank" class="swiper-slide mg-card mag-post ">
+			<div class="mg-card__content" style="background-image:url({{featured_image}})">
+				<div class="mg-card__content-info">
+					{{{title.rendered}}}
+				</div>
 			</div>
-		</div>
+		</a>
 	</template>
 </section>

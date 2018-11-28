@@ -44,6 +44,7 @@ $info-content-width: 980px;
 		&__content{
 			padding: $gutter*2;
 			padding-top: 0;
+			padding-bottom: $gutter*3;
 			max-width: $info-content-width;
 			position: relative;
 			margin: 0 auto;
@@ -54,7 +55,7 @@ $info-content-width: 980px;
 				}
 			}
 			&-body{
-
+				padding-left: $gutter;
 			}
 			&-footer{
 				padding: $gutter*2 0;
@@ -63,6 +64,7 @@ $info-content-width: 980px;
 					padding-top: $gutter;
 					color: $ap-b;
 					font-weight: 700;
+					word-break: break-all;
 				}
 			}
 		}	

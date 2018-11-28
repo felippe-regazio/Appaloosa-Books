@@ -68,5 +68,5 @@ function moreLess(initiallyVisibleCharacters) {
 		$(this).parent().hide().prev().show().prev().show();
 	});
 };
-moreLess(600);
+moreLess(750);
 })();

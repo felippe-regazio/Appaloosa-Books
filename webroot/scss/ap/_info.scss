@@ -69,7 +69,7 @@ $info-content-width: 980px;
 			}
 		}	
 	}
-	.founder, .partner{
+	.founder{
 		&__content{
 			padding: $gutter*3 $gutter*2;
 			min-height: 300px;
@@ -82,6 +82,9 @@ $info-content-width: 980px;
 					padding-bottom: $gutter*3;
 				}	
 			}
+			&.padding-bottom-xl{
+				padding-bottom: $gutter*4;
+			}
 			&-img{
 				float: left;
 				padding: $gutter/2;
@@ -92,7 +95,6 @@ $info-content-width: 980px;
 				img{
 					display: block;
 					width: 100%;
-					filter: grayscale(90%);
 				}
 				@media screen and(max-width: 768px){	
 					float: none;

@@ -150,14 +150,14 @@
 		RE RENDER A BOOK WHEN HASH CHANGES TO A BOOK ID
 		This is to able the book-details to reopen on history state back
 	*/	
-	window.onhashchange = function() {
-		if( window.location.hash ){
+	window.addEventListener("hashchange", function(){
+		if( window.location.hash && window.location.hash != "#AuthorsList" ){
 			renderBookFromUrlHash();
 			window.history.replaceState(data, data.title, window.location.hash);
 		} else {
 			closeBookDetails();	
 		}
-	};
+	});
 	/*
 		RENDER BOOK FROM HTML DATA-BOOK ON BOOK CLICK (static)
 		Show Book Detail Button (.ap-book-view)

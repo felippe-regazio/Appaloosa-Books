@@ -22,7 +22,7 @@
             </div>
             <div class="about__content-body read-more">
                 <p>
-                    Para submissão de originais, utilize o e-mail <?= AP_ORIGINALS_EMAIL ?>. Temos predileção pelos gêneros Poesia, Conto, Crônica e Romance. Havendo interesse, ou não, entraremos em contato. A Appaloosa não emite parecer tecnico à respeito dos textos submetidos para análise, nos reservamos apenas a selecionar o material de interesse para possível publicação. Somos pouquíssimas pessoas tocando esse imenso barco, então esse processo pode demorar um pouquinho (1 mês no máx), mas sempre retornamos o contato.
+                    Para submissão de originais, utilize o e-mail <?= AP_ORIGINALS_EMAIL ?>. Temos predileção pelos gêneros Poesia, Conto, Crônica e Romance. Havendo interesse, ou não, entraremos em contato. A Appaloosa não emite parecer tecnico à respeito dos textos submetidos para análise, nos reservamos apenas a selecionar o material de interesse para possível publicação. Somos pouquíssimas pessoas tocando esse imenso barco, então esse processo pode demorar um pouquinho (1 mês no m), mas sempre retornamos o contato.
                 </p>
             </div>
         </div>
@@ -38,7 +38,7 @@
             </div>
             <div class="about__content-body read-more">
                 <p>
-                    Há diversas formas de <b>Apoiar</b> um autor ou autora. Lendo seu livro, falando de suas obras, compartilhando, etc. De qualuqer forma, a Appaloosa permite que você apoie financeiramente o autor que mais gostar. Para tanto, basta ir até o perfil do mesmo e clicar no botão "Apoiar". Como somos um projeto não comercial, você não é obrigado a contribuir com a editora ou com algum autor para ter acesso as nossas publicações. As contribuições feitas para autores são depositadas diretamente na conta virtual dos mesmos e não sofrem nenhum tipo de dedução.
+                    Há diversas formas de Apoiar um autor ou autora. Lendo seu livro, falando de suas obras, compartilhando, etc. De qualuqer forma, a Appaloosa permite que você apoie financeiramente o autor que mais gostar. Para tanto, basta ir até o perfil do mesmo e clicar no botão "Apoiar". Como somos um projeto não comercial, você não é obrigado a contribuir com a editora ou com algum autor para ter acesso as nossas publicações. As contribuições feitas para autores são depositadas diretamente na conta virtual dos mesmos e não sofrem nenhum tipo de dedução.
                 </p>
             </div>
         </div>
@@ -134,10 +134,10 @@
     </div>
 <!-- FOUNDER -->
     <div class="founder">
-        <div class="founder__content">
+        <div class="founder__content padding-bottom-xl">
             <div class="founder__content-title">
                 <span class="about-toggle">
-                    <h1><i class="fa fa-coffee"></i> O Criadore e a criatura</h1>
+                    <h1><i class="fa fa-coffee"></i> Quem criou a Appaloosa Books?</h1>
                 </span>            
             </div>
             <div class="founder__content-img">
@@ -153,53 +153,4 @@
             </div>
         </div>
     </div>
-    <!-- PARCEIROS -->
-    <?php 
-
-        $partners = [        
-            0 => [
-                "name" => "Bruno Ribeiro",
-                "image" => "brunoribeiro.jpg",
-                "task" => "Escritor, editor e reviewer",
-                "about" => "Bruno Ribeiro, nasceu em julho de 1989, é mineiro radicado na Paraíba, com tiques argentinos. Graduado em publicidade & propaganda e mestre em Escrita Criativa pela Universidad Nacional de Tres de Febrero, de Buenos Aires, Bruno escreve, traduz, roteiriza, bagunça e experimenta. Publicou em jornais, revistas, blogues, livros e antologias mundo afora.",
-                "link" => "",
-            ],
-            1 => [
-                "name" => "Ítalo Lima",
-                "image" => "italolima.jpg",
-                "task" => "Escritor e conteudista",
-                "about" => "Ítalo Lima nasceu em Teresina/PI. Formado em Publicidade e Propaganda e cheio de inquietações na pele. Poeta em estado constante de aflição. Em 2014 criou o projeto no Instagram (@italolimapoesias) onde vende poesia em moldura e até hoje vem curando a solidão através de quadros poéticos. Da solidão ao erotismo, Itálo escreveu 'Quando a gente se mata numa poesia', lançado em 2017, na Bienal do livro, no Rio de Janeiro.",
-                "link" => "",
-            ],
-
-        ];
-    ?>    
-        
-    <?php foreach($partners as $key => $partner): ?>    
-        <div class="founder">
-            <div class="founder__content">
-                <?php 
-                    // printa o titulo apenas na primeira iteracao
-                    reset($partners);
-                    if ( $key === key($partners) ):
-                ?>
-                    <div class="founder__content-title">
-                        <span class="about-toggle">
-                            <h1><i class="fa fa-handshake"></i> Parceiros e colaboradores</h1>
-                        </span>            
-                    </div>
-                <?php endif; ?>
-                <div class="founder__content-img">
-                    <?= $this->Html->Image("colab/" . $partner["image"], ["alt"=>"Imagem do Colaborador da Appaloosa, " . $partner["name"]] ); ?>
-                </div>
-                <div class="founder__content-about">
-                    <h2><?= $partner["name"] ?></h2>
-                    <span><?= $partner["task"] ?></span>
-                    <p>
-                        <?= $partner["about"] ?>
-                    </p>
-                </div>
-            </div>
-        </div>    
-    <?php endforeach; ?>
 </section>

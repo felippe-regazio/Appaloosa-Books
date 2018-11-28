@@ -1,33 +1,27 @@
 (function(){
 	/*
-		On page load or Hash Change
+		On page load or On Hash Change
 	*/
 	if( window.location.hash == "#AuthorsList" ){
-		openAuthorsList();
+		toggleAuthorsList();
 	}
+	window.addEventListener("hashchange", function(){
+		if( window.location.hash == "#AuthorsList" ){
+			toggleAuthorsList();
+		}
+	});
 	/* 
-		All Authors Show
+		All Authors Show on Click
 	*/
 	$("body").on("click", ".toggle-authors-list", function(e){
 		e.preventDefault();
-		openAuthorsList();
+		toggleAuthorsList(true);
 	});
 	/*
 		Useful Functions
 	*/
-	function openAuthorsList(){
-		// ------------------------------------------------------------
-		if( ! $(".ap-authors-list").hasClass("ap-authors-list-open") ){
-			// If Opening
-			var columns = Math.floor(window.innerWidth / 300);
-			$(".ap-authors-list").addClass("loading");
-			$("#authors-list-content").css({
-				"column-count" : columns
-			});
-		} else {
-			// If Closing
-			window.history.pushState({}, document.title, "/");
-		}
+	function toggleAuthorsList( toggleHash ){
+		var data = {};
 		// ------------------------------------------------------------
 		$(".ap-authors-list").toggleClass("ap-authors-list-open");
 		$("body").toggleClass('overflow-hidden');
@@ -40,7 +34,7 @@
 					buildAuthorList( data );
 			} else {
 				$.get("ajax/getAuthorsNameList", function(data){
-					var data = JSON.parse(data);
+					data = JSON.parse(data);
 					// if is first access, saves this data on local storage
 					if ( data && typeof(Storage) !== "undefined" ){
 						sessionStorage.setItem( 'authors_list', JSON.stringify(data) );
@@ -50,6 +44,23 @@
 			}
 		} else {
 			$(".ap-authors-list").removeClass("loading");
+		}
+		// ------------------------------------------------------------
+		if( ! $(".ap-authors-list").hasClass("ap-authors-list-open") ){
+			// If Opening
+			var columns = Math.floor(window.innerWidth / 300);
+			$(".ap-authors-list").addClass("loading");
+			$("#authors-list-content").css({
+				"column-count" : columns
+			});
+		}
+		// toggle the window hash if flagged to
+		if( toggleHash ){
+			if( window.location.hash == "#AuthorsList" ){
+				window.history.pushState({}, document.title, "/");
+			} else {
+				window.history.pushState(data, "Appaloosa Books - Autores", "#AuthorsList");
+			}
 		}
 	}
 	function buildAuthorList( data ){

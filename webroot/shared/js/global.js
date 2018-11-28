@@ -46,6 +46,7 @@ function closeCurrentTile(){
 	// close authors list
 	if( $(".ap-authors-list.ap-authors-list-open").removeClass("ap-authors-list-open").length ){
 		$("body").removeClass('overflow-hidden');
+    window.history.pushState(null, document.title, "/");
 		return;
 	}
 }

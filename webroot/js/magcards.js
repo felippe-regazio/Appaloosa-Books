@@ -24,7 +24,6 @@
 	}
 	/* Show the posts on screen */
 	function renderMagPosts(data){
-		console.log(data);
 		var rendered = "";
 		var template = $magcards.find("template").html();
 		Mustache.parse(template);
@@ -35,6 +34,11 @@
 			} else {
 				data[index].featured_image = data[index]._embedded['wp:featuredmedia']['0'].source_url;
 			};
+			// truncate the title
+			if( data[index].title.rendered.length > 80 ){
+				data[index].title.rendered = data[index].title.rendered.substring(0, 80) + "...";	
+			}
+			// renders the card
 			if(value != undefined && index != undefined){
 				rendered += Mustache.render(template, data[index]);
 			}

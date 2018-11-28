@@ -27,7 +27,7 @@
 						<span><i class="fa fa-arrow-left"></i></span>
 					</a>
 				</div>
-				<h2>Appaloosa BestSellers</h2>
+				<h2>Appaloosa BestSeven</h2>
 				<div class="bests-list"></div>
 				<template>
 					<div class="book" data-book="{{stringfyed}}">

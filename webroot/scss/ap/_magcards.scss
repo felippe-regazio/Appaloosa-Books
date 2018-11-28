@@ -19,7 +19,7 @@
 	&__content{
 		padding: $gutter*6 $gutter;
 		.mg-card{
-			padding: 2px;
+			padding: 1px;
 			.mg-card__content{
 				background-size: cover;
 				background-position: center;
@@ -30,18 +30,67 @@
 				position: relative;
 				&-info{
 					font-size: 20px;
+					padding: 12px;
+					background: rgba(10,10,10,.7);
+					height: 90px;
 					font-weight: 700;
+					position: relative;
+					transform: translateY(236px);
+				}
+				&:before {
+					content: '';
 					position: absolute;
+					top: 0;
+					right: 0;
 					bottom: 0;
 					left: 0;
-					width: 100%;
-					padding: $gutter;
-					background: rgba(0,0,0,0.5);
-					height: 90px;
+					background-image: linear-gradient(to bottom right, $ap-a, $ap-b );
+					opacity: 0;
+					transition: $anim8-speed;
+				}
+				&:hover{
+					&:before{
+						opacity: .3;
+						transition: $anim8-speed;
+					}
 				}
 			}
 		}
 	}
+	.magcards__controls{
+		padding-top: $gutter*2;
+		text-align: center;
+		span{
+		    margin-right: 12px;
+		    position: relative;
+		    height: 20px;
+		    width: 50px;
+		    display: inline-grid;
+		    align-items: center;
+		    padding: 0;
+		    font-size: 20px;
+		    cursor: pointer;
+    		&:first-child{
+			    margin-right: 12px;
+			    position: relative;
+			    height: 20px;
+			    width: 40px;
+			    display: inline-grid;
+			    align-items: center;
+    		}
+    		&:hover{
+    			.ap-long-arrow{
+					border-color: $ap-b;
+					&:before{
+						border-color: $ap-b;
+					}
+    			}
+    		}
+    		&.magcards__controls-prev.swiper-button-disabled{
+				display: none;
+    		}
+		}
+	}		
 	/* 
 		when slider is loading 
 		or nothing returned

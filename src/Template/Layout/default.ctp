@@ -33,7 +33,8 @@ $default_description = "A Appaloosa é uma casa de publicações digitais com fo
     <!-- Title -->
     <title><?= isset($title) && !empty($title) ? $title : $default_title ?></title>
 
-    <!-- SEO Tags -->
+    <!-- SEO Tags -- Keep the name=image and nam=description cause is used by books.js -->
+    <meta name="image" content="<?= isset($image) && !empty($image) ? $image : $default_image ?>">
     <meta name="description" content="<?= isset($description) && !empty($description) ? $description : $default_description ?>" />
     <!--  Essential META Tags -->
     <meta property="og:title" content="<?= isset($title) && !empty($title) ? $title : $default_title ?>">

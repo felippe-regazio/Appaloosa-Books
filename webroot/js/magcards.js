@@ -1,4 +1,10 @@
 (function(){
+
+	/*
+		Not run if has no magcards
+	*/
+	if(!$(".magcards").length) return 0;
+
 	var $magcards = $(".magcards");
 	var $postswrapper = $magcards.find(".swiper-wrapper");
 	/* Put things to work */

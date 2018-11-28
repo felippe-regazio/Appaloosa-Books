@@ -118,10 +118,6 @@ $default_description = "A Appaloosa é uma casa de publicações digitais com fo
     <!-- Footer -->
     <?= $this->element('Common/footer') ?>
     
-    <!-- ========================================== BOOK DETAILS LIGHTBOX  -->
-    <?= $this->element('book_details') ?>
-    <!-- =========================================== -->
-    
     <!-- Scripts -->
     <?= $this->Html->script([
         '/bower_components/mustache.js/mustache.min.js',

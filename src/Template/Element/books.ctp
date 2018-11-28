@@ -181,3 +181,7 @@
 		<?= $this->Form->end(); ?>
 	</div>
 </section>
+<!-- ========================================== BOOK DETAILS LIGHTBOX -->
+<?= $this->element('book_details') ?>
+<!-- ========================================== AUTHORS LIST -->
+<?= $this->element('authors_list') ?>

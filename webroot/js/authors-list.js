@@ -1,4 +1,10 @@
 (function(){
+
+	/*
+		Not run if has no authors-list
+	*/
+	if(!$(".ap-authors-list").length) return 0;
+
 	/*
 		On page load or On Hash Change
 	*/

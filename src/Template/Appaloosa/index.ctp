@@ -91,7 +91,6 @@
 </section>
 <!-- ========================================== BOOKS AND AUTHORS  -->
 <?= $this->element('books') ?>
-<?= $this->element('authors_list') ?>
 <!-- =========================================== -->
 <div class="ap-line"
 	 no-data-aos="line-reveal" 

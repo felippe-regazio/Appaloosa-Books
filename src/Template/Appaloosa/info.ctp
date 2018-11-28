@@ -28,7 +28,7 @@
         </div>
     </div>
 <!-- APOIE O AUTOR INDEPENDENTE  -->
-    <div class="about">
+    <div class="indieauthors" class="about">
         <div class="about__content">
             <div class="about__content-header">
                 <span class="about-toggle">

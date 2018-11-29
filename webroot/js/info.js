@@ -5,13 +5,11 @@ if(!$(".info").length) return 0;
 /* 
 	SCROLL TO URL HASH
 */
-$(window).on("load", function(){
-  if( $(window.location.hash).length ){
-    $("html,body").animate({
-        scrollTop: $(window.location.hash).offset().top - 50
-    }, 1000);
-  }
-});
+if( window.location.hash && $(window.location.hash).length ){
+  $("html,body").animate({
+      scrollTop: $(window.location.hash).offset().top - 120
+  }, 1000);
+}
 /* 
 	DARK BACKGROUND WHICH FOLLOWS CURSOR
 	this is the funcion to make the background follows the

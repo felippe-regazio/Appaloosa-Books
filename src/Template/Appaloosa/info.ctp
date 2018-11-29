@@ -1,5 +1,5 @@
 <section class="info">
-    <div id="publish" class="info-hero">
+    <div class="info-hero">
         <div class="info-hero__content">
             <div class="side a clipfollow" data-bg="dorothea-lange.jpg">
                 <!-- a side -->
@@ -11,8 +11,8 @@
             </div>
         </div>
     </div>
-<!-- QUEM SOMOS  -->
-    <div class="about">
+<!-- PUBLIQUE  -->
+    <div id="publish" class="about">
         <div class="about__content">
             <div class="about__content-header">
                 <span class="about-toggle">
@@ -22,13 +22,13 @@
             </div>
             <div class="about__content-body read-more">
                 <p>
-                    Para submissão de originais, utilize o e-mail <?= AP_ORIGINALS_EMAIL ?>. Temos predileção pelos gêneros Poesia, Conto, Crônica e Romance. Havendo interesse, ou não, entraremos em contato. A Appaloosa não emite parecer tecnico à respeito dos textos submetidos para análise, nos reservamos apenas a selecionar o material de interesse para possível publicação. Somos pouquíssimas pessoas tocando esse imenso barco, então esse processo pode demorar um pouquinho (1 mês no m), mas sempre retornamos o contato.
+                    Para submissão de originais, utilize o e-mail <?= AP_ORIGINALS_EMAIL ?>. Temos predileção pelos gêneros Poesia, Conto, Crônica e Romance. Havendo interesse, ou não, entraremos em contato. A Appaloosa não emite parecer tecnico à respeito dos textos submetidos para análise, nos reservamos apenas a selecionar o material de interesse para possível publicação. Somos pouquíssimas pessoas tocando esse imenso barco, então esse processo pode demorar um pouquinho (1 mês no máx), mas sempre retornamos o contato.
                 </p>
             </div>
         </div>
     </div>
 <!-- APOIE O AUTOR INDEPENDENTE  -->
-    <div class="indieauthors" class="about">
+    <div id="support" class="indieauthors" class="about">
         <div class="about__content">
             <div class="about__content-header">
                 <span class="about-toggle">
@@ -44,7 +44,7 @@
         </div>
     </div>
 <!-- NAO SOMOS UMA EDITORA COMERCIAL  -->
-    <div class="about">
+    <div id="noncomercial" class="about">
         <div class="about__content">
             <div class="about__content-header">
                 <span class="about-toggle">
@@ -60,7 +60,7 @@
         </div>
     </div>
 <!-- AD FREE  -->
-    <div class="about">
+    <div id="adfree" class="about">
         <div class="about__content">
             <div class="about__content-header">
                 <span class="about-toggle">
@@ -76,7 +76,7 @@
         </div>
     </div>
 <!-- 100% ONLINE -->
-    <div class="about">
+    <div id="allonline" class="about">
         <div class="about__content">
             <div class="about__content-header">
                 <span class="about-toggle">
@@ -92,7 +92,7 @@
         </div>
     </div>                
 <!-- O QUE SAO LIVROS DIGITAIS  -->
-    <div id="digital" class="about">
+    <div id="yepub" class="about">
         <div class="about__content">
             <div class="about__content-header">
                 <span class="about-toggle">

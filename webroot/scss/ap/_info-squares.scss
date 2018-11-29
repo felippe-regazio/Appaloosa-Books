@@ -26,7 +26,7 @@
       text-align: center;
       text-decoration: none;
       &:hover{
-        color: $ap-b;
+        color: lighten($ap-b, 5%);
       }
       &__content{
         display: grid;
@@ -46,6 +46,9 @@
           }
           p, i{
             margin: 0;
+          }
+          i{
+            font-size: 56px;
           }
         }
       }

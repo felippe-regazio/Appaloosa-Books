@@ -1,0 +1,54 @@
+.info-squares{
+  $sqrt-container: 980px;
+  $sqrt: 300px;
+  &__container{
+    padding: 60px 0;
+    width: 100%;
+    max-width: $sqrt-container;
+    position: relative;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    @media screen and(min-width: $sqrt-container){
+      &:hover{
+        .square{
+          margin: 8px;
+        }
+      }
+    }
+    .square{
+      padding: 3px;
+      width: $sqrt;
+      height: $sqrt;
+      transition: 400ms;
+      color: $white;
+      text-align: center;
+      text-decoration: none;
+      &:hover{
+        color: $ap-b;
+      }
+      &__content{
+        display: grid;
+        height: 100%;
+        width: 100%;
+        grid-template-rows: 50% 50%;
+        font-size: 26px;
+        position: relative;
+        background-color: $black;
+        &-block{
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: $gutter;
+          &:not(:last-child){
+            border-bottom: dashed 2px $white;
+          }
+          p, i{
+            margin: 0;
+          }
+        }
+      }
+    }
+  }
+}

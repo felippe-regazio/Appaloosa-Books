@@ -34,7 +34,7 @@
 					<div class="title typo-subtitle"
 							data-aos="fade-up" 
 							data-aos-duration="600" 
-							data-aos-offset="150" 
+							data-aos-offset="100" 
 							data-aos-once="true">
 					1. Sobre Nós
 					</div>
@@ -82,7 +82,9 @@
 			<span class="ap-about__controls-next"><i class="ap-long-arrow right"></i></span>
 		</div>
 	</div>
-	<!-- Black Line -->
+	<!-- ========================================== BOOKS AND AUTHORS  -->
+	<?= $this->element('info-squares') ?>
+	<!-- =========================================== -->	
 	<div class="ap-line"
 		 no-data-aos="line-reveal" 
 		 no-data-aos-offset="150" 

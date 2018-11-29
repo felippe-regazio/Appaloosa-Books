@@ -1,11 +1,16 @@
 (function(){
+
+if(!$(".info").length) return 0;
+
 /* 
-	INITIALS
+	SCROLL TO URL HASH
 */
-$("body").ready(function(){
-	setTimeout(function(){
-		scrollToHash( window.location.hash );
-	}, 500);
+$(window).on("load", function(){
+  if( $(window.location.hash).length ){
+    $("html,body").animate({
+        scrollTop: $(window.location.hash).offset().top - 50
+    }, 1000);
+  }
 });
 /* 
 	DARK BACKGROUND WHICH FOLLOWS CURSOR
@@ -32,17 +37,6 @@ if( window.innerWidth >= 768){
 	    });
 	});
 }
-/*
-	READS THE # IN THE URL
-	The # represents a elem id to scroll to
-*/
-function scrollToHash(hash){
-	if($(hash).length > 0 ){
-		$("html, body").animate({
-        	scrollTop: $(hash).offset().top - 120
-    	}, 1000);
-	}
-};
 /*
 	READ MORE ON ARTICLES
 */

@@ -19,7 +19,12 @@
             "icon" => "fa-hand-holding-usd",
             "link" => "info/#noncomercial",
             "text" => "Não Somos Uma Editora Comercial"
-          ]          
+          ],
+          3 => [
+            "icon" => "fa-hand-holding-usd",
+            "link" => "info/#noncomercial",
+            "text" => "Não Somos Uma Editora Comercial"
+          ],          
         );
 
         foreach( $squares as $square ):

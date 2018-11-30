@@ -22,6 +22,9 @@ $default_title = "Appaloosa Books - Livros Independentes Online e Gratuitos";
 $default_image = Router::url("/", true) . "img/ap-feature.png";
 $default_description = "A Appaloosa é uma casa de publicações digitais com foco na literatura contemporânea e independente. Publicamos desde textos até livros completos nos formatos epub e pdf com edição profissional e alta qualidade gráfica. Basicamente disponibilizamos pequenos e incríveis universos em um formato colaborativo e gratuito";
 ?>
+
+<?php if (substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip')) {ob_start('ob_gzhandler');} ?>
+
 <!DOCTYPE html>
 <html>
 <head>

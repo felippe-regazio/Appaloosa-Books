@@ -14,6 +14,9 @@
 	window.addEventListener("hashchange", function(){
 		if( window.location.hash == "#AuthorsList" ){
 			toggleAuthorsList();
+		} else {
+			$(".ap-authors-list").toggleClass("ap-authors-list-open");
+			$("body").toggleClass('overflow-hidden');
 		}
 	});
 	/* 
@@ -51,15 +54,6 @@
 		} else {
 			$(".ap-authors-list").removeClass("loading");
 		}
-		// ------------------------------------------------------------
-		if( ! $(".ap-authors-list").hasClass("ap-authors-list-open") ){
-			// If Opening
-			var columns = Math.floor(window.innerWidth / 300);
-			$(".ap-authors-list").addClass("loading");
-			$("#authors-list-content").css({
-				"column-count" : columns
-			});
-		}
 		// toggle the window hash if flagged to
 		if( toggleHash ){
 			if( window.location.hash == "#AuthorsList" ){
@@ -77,6 +71,10 @@
 			Mustache.parse(template);
 			$("#authors-list-content").append(rendered);
 		});
+		var columns = Math.floor(window.innerWidth / 300);
+			$("#authors-list-content").css({
+				"column-count" : columns
+		});		
 		$(".ap-authors-list").removeClass("loading");
 	}
 })();

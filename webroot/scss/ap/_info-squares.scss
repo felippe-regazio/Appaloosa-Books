@@ -2,6 +2,7 @@
   $sqrt-container: 980px;
   $sqrt: 300px;
   &__container{
+    min-height: 650px;
     padding: 60px 0;
     width: 100%;
     max-width: $sqrt-container;

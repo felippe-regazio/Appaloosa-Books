@@ -46,7 +46,7 @@ function closeCurrentTile(){
 	// close authors list
 	if( $(".ap-authors-list.ap-authors-list-open").removeClass("ap-authors-list-open").length ){
 		$("body").removeClass('overflow-hidden');
-    window.history.pushState(null, document.title, "/");
+    	window.history.pushState(null, document.title, "/");
 		return;
 	}
 }
@@ -57,6 +57,7 @@ function closeCurrentTile(){
 $(document).keyup(function(e){
 	if( e.key == "Escape" ){
 		closeCurrentTile();
+		console.log("uai");
 	}
 });
 /*

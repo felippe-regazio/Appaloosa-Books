@@ -28,8 +28,8 @@
 	}		
 	&__close{
 		position: absolute;
-		right: $gutter;
-		top: $gutter;
+		right: $gutter*2;
+		top: $gutter*2;
 		cursor: pointer;
 		z-index: 17;
 	}

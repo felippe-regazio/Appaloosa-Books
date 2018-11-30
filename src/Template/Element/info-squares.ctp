@@ -16,14 +16,24 @@
             "text" => "Apoie Autores Independentes"
           ],
           2 => [
-            "icon" => "fa-hand-holding-usd",
-            "link" => "info/#noncomercial",
-            "text" => "Não Somos Uma Editora Comercial"
-          ],
+            "icon" => "fa-hand-spock",
+            "link" => "info/#itsfree",
+            "text" => "Escolha o livro, baixe e leia. É grátis"
+          ],          
           3 => [
             "icon" => "fa-hand-holding-usd",
             "link" => "info/#noncomercial",
-            "text" => "Não Somos Uma Editora Comercial"
+            "text" => "A AP Books é uma Editora Não Comercial"
+          ],
+          4 => [
+            "icon" => "fa-smile",
+            "link" => "info/#adfree",
+            "text" => "Sem propagandas e banners no site"
+          ],
+          5 => [
+            "icon" => "fa-cloud",
+            "link" => "info/#allonline",
+            "text" => "Uma Editora 100% Online"
           ],          
         );
 

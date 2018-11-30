@@ -43,6 +43,22 @@
             </div>
         </div>
     </div>
+<!-- ITS FREE  -->
+    <div id="itsfree" class="indieauthors" class="about">
+        <div class="about__content">
+            <div class="about__content-header">
+                <span class="about-toggle">
+                    <h1><i class="fa fa-hand-spock"></i> Escolha o livro, baixe e leia. É gratis</h1>
+                    <br/>
+                </span>
+            </div>
+            <div class="about__content-body read-more">
+                <p>
+                    Somos uma editora Open Bar. Clique no título que deseja ler e veja as opções. Você pode baixar um PDF, ou um EPUB, e ler no dispositivo que preferir. Você deve então se perguntar como pode contribuir, certo? Você pode apoiar financeiramente um autor, ou a Appaloosa, pode compartilhar nosso trabalho ou do autor que gostar, ou entrar para o nosso time. Leia mais sobre nos tópicos dessa página, e caso ainda tenha dúvidas, por favor envie-nos um e-mail.
+                </p>
+            </div>
+        </div>
+    </div>    
 <!-- NAO SOMOS UMA EDITORA COMERCIAL  -->
     <div id="noncomercial" class="about">
         <div class="about__content">

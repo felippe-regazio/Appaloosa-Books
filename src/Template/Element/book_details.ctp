@@ -28,9 +28,7 @@
 		</div>
 		<!-- REVIEW -->
 		<div class="info-side__review">
-			<a href="{{Reviewers.link}}" target="_blank">
-				<h3>Reviewer: {{Reviewers.name}}</h3>
-			</a>
+			<h3>Reviewer: <a href="{{Reviewers.link}}" target="_blank">{{reviewer.name}}</h3></a>
 			<div class="info-side__review-roll">
 				{{description}}
 			</div>
@@ -48,14 +46,14 @@
 			{{#files.epub}}
 				<a href="<?= $this->Url->image( '/freestore/binaries/' ); ?>{{files.epub}}">
 					<button class="ap-btn--secondary">
-						<i class="fa fa-file"></i> EPUB
+						<i class="fa fa-book-open"></i> EPUB
 					</button>
 				</a>
 			{{/files.epub}}
 			{{#files.pdf}}
 				<a href="<?= $this->Url->image( '/freestore/binaries/' ); ?>{{files.pdf}}" target="_blank">
 					<button class="ap-btn--secondary">
-						<i class="fa fa-file"></i> PDF
+						<i class="fa fa-book-open"></i> PDF
 					</button>
 				</a>
 			{{/files.pdf}}
@@ -65,7 +63,7 @@
 				</button>
 			{{/author.author_email}}
 			{{#author.author_options.email_PagSeguro}}
-			<button class="ap-btn--secondary toggle-support" data-author-pg="{{author.author_options.email_PagSeguro}}">
+			<button class="ap-btn--secondary ap-btn--ap-a toggle-support" data-author-pg="{{author.author_options.email_PagSeguro}}" data-author-name="{{author.author_first_name}} {{author.author_last_name}}">
 				<i class="fa fa-heart"></i> APOIAR
 			</button>
 			{{/author.author_options.email_PagSeguro}}

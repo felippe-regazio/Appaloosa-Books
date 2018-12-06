@@ -150,7 +150,7 @@ $book-details-breakpoint: 800px;
 			    					text-decoration: underline;
 			    				}
 			    				&.td-fire i{
-			    					color: red;
+			    					color: $ap-a;
 			    					margin: 0;
 			    				}
 			    				@media screen and(max-width: 510px){

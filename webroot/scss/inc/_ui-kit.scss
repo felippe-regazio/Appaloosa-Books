@@ -178,6 +178,10 @@ a, .link{
 			color: $white;
 		}
 	}
+	&--ap-a{
+		background-color: $ap-a;
+		border-color: $ap-a;
+	}
 }
 // FORMS
 body:not(.ap-admin):not(.ap-login){

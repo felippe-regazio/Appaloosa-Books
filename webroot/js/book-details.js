@@ -77,6 +77,7 @@
 				}, 425);
 			}
 			/* INCREASE THE BOOK VIEWS */
+			console.log(data);
 			$.post( "ajax/increaseBookView/"+data.asbn );
 		});
 	}

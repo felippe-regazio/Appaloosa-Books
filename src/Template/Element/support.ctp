@@ -5,7 +5,7 @@
 	<div class="ap-loading-circle"></div>
 	<!-- Body -->
 	<div class="ap-support__head">
-		<h1><span class="fa fa-heart"></span> Apoiar Author Name</h1>
+		<h1><span class="fa fa-heart"></span> Apoiar Autor/a</h1>
 	</div>
 	<div class="ap-support__body">
 		<div class="content">
@@ -18,7 +18,7 @@
 				<a class="ap-donation-link" href="" target="_blank">
 					<button class="ap-btn--primary no-bg all-white hover-black">
 						<span>
-							<i class="fa fa-coffee"></i> Apoiar!
+							<i class="fa fa-coffee"></i> Apoiar <span id="ap-support-author-name"></span>!
 						</span>
 					</button>
 				</a>

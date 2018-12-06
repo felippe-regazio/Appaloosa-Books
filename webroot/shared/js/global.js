@@ -1,10 +1,3 @@
-/* 
-	Store the page default meta image and description
-*/
-var defaultmetas = {};
-defaultmetas.title = document.title;
-defaultmetas.image = $("meta[name=image").attr("content");
-defaultmetas.description = $("meta[name=description").attr("content");
 /*
   LOADING
 	Page general loading function
@@ -40,7 +33,6 @@ function closeCurrentTile(){
 	if($(".ap-book-details.active").removeClass("active").length){
 		$("body").removeClass("overflow-hidden");
 		window.history.pushState(null, document.title, "/");
-		resetMetatags(defaultmetas);
 		return;
 	}
 	// close authors list
@@ -57,7 +49,6 @@ function closeCurrentTile(){
 $(document).keyup(function(e){
 	if( e.key == "Escape" ){
 		closeCurrentTile();
-		console.log("uai");
 	}
 });
 /*
@@ -108,35 +99,6 @@ if (hasTouch()) { // remove all :hover stylesheets
             }
         }
     } catch (ex) {}
-}
-/*
-	Sets all metatags based on a given object as defaultmetas
-	The relevant here is title, image and description
-*/
-function setMetatags( metatags ){
-	if(!metatags.title) metatags.title = defaultmetas.title;
-	if(!metatags.image) metatags.image = defaultmetas.image;
-	if(!metatags.description) metatags.description = defaultmetas.description;
-	// title
-	document.title = metatags.title;
-	$("title").attr("title", metatags.title);
-	$('[property="og\\:title"]').attr("content", metatags.title);
-	$('[property="twitter\\:image:alt"]').attr("content", metatags.title);
-	// description
-	$('[name="description"]').attr("content", metatags.description);
-	$('[property="og\\:description"]').attr("content", metatags.description);
-	// image
-	$('[name="image"]').attr("content", metatags.image);
-	$('[property="og\\:image"]').attr("content", metatags.image);
-	$('[property="twitter\\:card"]').attr("content", metatags.image);
-	// url
-	$('[property="og\\:url"]').attr("content", window.location.href);
-}
-/*
-	Reset all metatags to the defaultmetas
-*/
-function resetMetatags(){
-	return setMetatags(defaultmetas);
 }
 /*
 	GLOBAL SWIPER INDEPENDENT INSTANCES

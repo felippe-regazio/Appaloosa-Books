@@ -10,47 +10,12 @@
 	//=========================================================================
 	
 	var $bookDetails = $(".ap-book-details");
-	/* 
-		Store the page default meta image and description
-	*/
-	var defaultmetas = {};
-	defaultmetas.title = document.title;
-	defaultmetas.image = $("meta[name=image").attr("content");
-	defaultmetas.description = $("meta[name=description").attr("content");
+
 
 	// =========================================================================
 	// FUNCTIONS
 	// =========================================================================
 
-	/*
-		Sets all metatags based on a given object as defaultmetas
-		The relevant here is title, image and description
-	*/
-	function setMetatags( metatags ){
-		if(!metatags.title) metatags.title = defaultmetas.title;
-		if(!metatags.image) metatags.image = defaultmetas.image;
-		if(!metatags.description) metatags.description = defaultmetas.description;
-		// title
-		document.title = metatags.title;
-		$("title").attr("title", metatags.title);
-		$('[property="og\\:title"]').attr("content", metatags.title);
-		$('[property="twitter\\:image:alt"]').attr("content", metatags.title);
-		// description
-		$('[name="description"]').attr("content", metatags.description);
-		$('[property="og\\:description"]').attr("content", metatags.description);
-		// image
-		$('[name="image"]').attr("content", metatags.image);
-		$('[property="og\\:image"]').attr("content", metatags.image);
-		$('[property="twitter\\:card"]').attr("content", metatags.image);
-		// url
-		$('[property="og\\:url"]').attr("content", window.location.href);
-	}
-	/*
-		Reset all metatags to the defaultmetas
-	*/
-	function resetMetatags(){
-		return setMetatags(defaultmetas);
-	}
 	/* 
 		FUNCTION THAT RENDERS A BOOK BASED ON A URL HASH CHANGE
 		Opens a book-details from a hash (ajax or store data)
@@ -111,8 +76,6 @@
 			    	}, 1000);
 				}, 425);
 			}
-			/* UPDATE METATAGS */
-			setMetatags({ title:data.title, description:data.description.substring(150)+"...", image:"freestore/covers/"+data.cover });
 			/* INCREASE THE BOOK VIEWS */
 			$.post( "ajax/increaseBookView/"+data.asbn );
 		});
@@ -131,7 +94,6 @@
 		$(".ap-author-details.about-author-open").removeClass("about-author-open").length ||
 		$(".ap-book-details.cover-expand").removeClass("cover-expand").length ||
 		$(".ap-contact.ap-contact-open").removeClass("ap-contact-open").length;
-		resetMetatags();
 	}
 	/*
 		Removes the click here circle on deatil hover

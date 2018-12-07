@@ -17,26 +17,26 @@
 	// =========================================================================
 
 	/* 
-		FUNCTION THAT RENDERS A BOOK BASED ON A URL HASH CHANGE
-		Opens a book-details from a hash (ajax or store data)
+		FUNCTION THAT RENDERS A BOOK BASED ON A URL QUERY B=ASBN
+		Opens a book-details from a query string (ajax or store data)
 	*/
-	function renderBookFromUrlHash(){
-		var bookHash = window.location.hash.replace("#", "");
-		if( bookHash && bookHash != "AuthorsList" ){
+	function renderBookFromUrlUrl(){
+		var bookQuery = getUrlParameterByName("b");
+		if( bookQuery ){
 			var data;
 			// get the book data from session store or ajax
-			if( sessionStorage.getItem('book_'+bookHash) ){
-				data = JSON.parse( sessionStorage.getItem('book_'+bookHash) );
-				mountBookFromHash(data);
+			if( sessionStorage.getItem('book_'+bookQuery) ){
+				data = JSON.parse( sessionStorage.getItem('book_'+bookQuery) );
+				mountBookFromUrl(data);
 			} else {	
-				$.get("ajax/getBookByAsbn/"+bookHash, function(bookdata){
-					sessionStorage.setItem('book_'+bookHash, bookdata);
+				$.get("ajax/getBookByAsbn/"+bookQuery, function(bookdata){
+					sessionStorage.setItem('book_'+bookQuery, bookdata);
 					data = JSON.parse(bookdata);
-					mountBookFromHash(data);
+					mountBookFromUrl(data);
 				});
 			}
-			// mount the book data from hash to screen
-			function mountBookFromHash(data){
+			// mount the book data from url to screen
+			function mountBookFromUrl(data){
 				if( data ){
 					data = data[0];
 					if( data.author.author_options.allow_public_emails != "1" ) delete data.author["author_email"];
@@ -77,7 +77,6 @@
 				}, 425);
 			}
 			/* INCREASE THE BOOK VIEWS */
-			console.log(data);
 			$.post( "ajax/increaseBookView/"+data.asbn );
 		});
 	}
@@ -110,17 +109,17 @@
 	// =========================================================================
 
 	/*
-		RENDER BOOK FROM HASH ON LOAD PAGE (ajax or session store)
-		OR RENDER A BOOK WHEN A URL STATE CHANGES TO A BOOK HASH
+		RENDER BOOK FROM URI QUERY ON LOAD PAGE (ajax or session store)
+		OR RENDER A BOOK WHEN A URL STATE CHANGES TO A BOOK URI QUERY
 	*/
-	renderBookFromUrlHash();
+	renderBookFromUrlUrl();	
 	/*
-		RE RENDER A BOOK WHEN HASH CHANGES TO A BOOK ID
-		This is to able the book-details to reopen on history state back
+		RE RENDER A BOOK WHEN URL QUERY CHANGES TO A BOOK ID ON POP STATE (Backbutton)
+		This is to able the book-details to reopen on history state gets back event
 	*/	
-	window.addEventListener("hashchange", function(){
-		if( window.location.hash && window.location.hash != "#AuthorsList" ){
-			renderBookFromUrlHash();
+	$(window).on("popstate", function(){
+		if( getUrlParameterByName("b") ){
+			renderBookFromUrlUrl();
 			window.history.replaceState(data, data.title, window.location.hash);
 		} else {
 			closeBookDetails();	
@@ -137,7 +136,7 @@
 		/* GET THE DATA JSON FROM ATTR DATA */
 		data = $(this).parents(".book").data("book");
 		renderBookDetails( data );
-		window.history.pushState(data, data.title, "#"+data.asbn);
+		window.history.pushState(data, data.title, "?b="+data.asbn);
 	});	
 	/* 
 		Closes BookDetails (.ap-book-close)

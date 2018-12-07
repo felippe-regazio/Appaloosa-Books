@@ -14,6 +14,18 @@ $(window).on("load", function(e){
 	});
 });
 /*
+	GET URL PARAM BY NAME
+*/
+function getUrlParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, '\\$&');
+    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}
+/*
   COMMON CLOSE FUNCTION QUEUE
 	Close cascade hierarchy function. This events close
 	An oppened page tile following a simple hierarchy

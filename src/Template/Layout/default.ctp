@@ -13,14 +13,8 @@
  * @license       https://opensource.org/licenses/mit-license.php MIT License
  */
 
+use Cake\Routing\Router; 
 
-use Cake\Routing\Router;
-
-// SEO & Page Metas Pre Definitions
-
-$default_title = "Appaloosa Books - Livros Independentes Online e Gratuitos";
-$default_image = Router::url("/", true) . "img/ap-feature.png";
-$default_description = "A Appaloosa é uma casa de publicações digitais com foco na literatura contemporânea e independente. Publicamos desde textos até livros completos nos formatos epub e pdf com edição profissional e alta qualidade gráfica. Basicamente disponibilizamos pequenos e incríveis universos em um formato colaborativo e gratuito";
 ?>
 
 <?php if (substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip')) {ob_start('ob_gzhandler');} ?>
@@ -32,23 +26,12 @@ $default_description = "A Appaloosa é uma casa de publicações digitais com fo
     <?= $this->Html->charset() ?>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
     <!-- Title -->
-    <title><?= isset($title) && !empty($title) ? $title : $default_title ?></title>
-
-    <!-- SEO Tags -- Keep the name=image and nam=description cause is used by books.js -->
-    <meta name="image" content="<?= isset($image) && !empty($image) ? $image : $default_image ?>">
-    <meta name="description" content="<?= isset($description) && !empty($description) ? $description : $default_description ?>" />
-    <!--  Essential META Tags -->
-    <meta property="og:title" content="<?= isset($title) && !empty($title) ? $title : $default_title ?>">
-    <meta property="og:description" content="<?= isset($description) && !empty($description) ? $description : $default_description ?>">
-    <meta property="og:image" content="<?= isset($image) && !empty($image) ? $image : $default_image ?>">
-    <meta property="og:url" content="<?= Router::url( null, true ) ?>">
-    <!--  Non-Essential, But Recommended -->
-    <meta name="twitter:card" content="<?= isset($image) && !empty($image) ? $image : $default_image ?>">
-    <meta name="twitter:image:alt" content="<?= $default_title ?>">
-    <meta property="og:site_name" content="Appaloosa Books - Online Indie Publishing">
-    
+    <title>
+        <?= isset($title) && !empty($title) ? $title : $metas["title"] ?>
+    </title>
+    <!-- Seo -->
+    <?= $this->element("metatags", $metas) ?>
     <!-- Meta -->
     <?= $this->Html->meta('icon') ?>
     <?= $this->fetch('meta') ?>
@@ -61,7 +44,7 @@ $default_description = "A Appaloosa é uma casa de publicações digitais com fo
             '/dist/css/main.min.css'
         ]) ?>
     <?= $this->fetch('css') ?>
-    <!-- -->
+
 </head>
 <!-- MATOMO -->
 <script type="text/javascript">

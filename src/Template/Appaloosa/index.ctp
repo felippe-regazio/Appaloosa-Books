@@ -12,16 +12,6 @@
 		<p class="ap-opening__feature-subtitle animate-typewriter">
 		<?=__('Exposing The New Writing'); ?></p>
 	</div>
-	<!-- tiny vertical sidebar -->
-	<!-- <div class="ap-opening__ghost-menu">
-		<i class="fa fa-chevron-left fa-xs"></i>
-		<div class="options">
-			<span data-anchor="#about-ap">Sobre</span>
-			<span data-anchor="about-#books-ap">Livros</span>
-			<span>|</span>
-			<span class="about-toggle">Originais</span>
-		</div>
-	</div> -->
 </section>
 <!-- ABOUT -->
 <section class="ap-about">

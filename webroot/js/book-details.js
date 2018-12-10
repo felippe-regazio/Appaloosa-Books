@@ -21,23 +21,27 @@
 		Opens a book-details from a query string (ajax or store data)
 	*/
 	function renderBookFromUrlUrl(){
-		var bookQuery = getUrlParameterByName("b");
-		if( bookQuery ){
+		var bookQuery = getUrlParameterByName("b") || window.location.hash.replace("#", "");
+		if( bookQuery && bookQuery != "AuthorsList" ){
 			var data;
+			// replace # for ?b= query to before show the book (if has a hash)
+			if(window.location.hash) window.history.replaceState(null, document.title, "/?b="+bookQuery);
 			// get the book data from session store or ajax
 			if( sessionStorage.getItem('book_'+bookQuery) ){
 				data = JSON.parse( sessionStorage.getItem('book_'+bookQuery) );
-				mountBookFromUrl(data);
+				if( data.length ) mountBookFromUrl(data);
 			} else {	
 				$.get("ajax/getBookByAsbn/"+bookQuery, function(bookdata){
-					sessionStorage.setItem('book_'+bookQuery, bookdata);
-					data = JSON.parse(bookdata);
-					mountBookFromUrl(data);
+					if(bookdata.length){
+						sessionStorage.setItem('book_'+bookQuery, bookdata);
+						data = JSON.parse(bookdata);
+						mountBookFromUrl(data);
+					}
 				});
 			}
 			// mount the book data from url to screen
 			function mountBookFromUrl(data){
-				if( data ){
+				if( data.length ){
 					data = data[0];
 					if( data.author.author_options.allow_public_emails != "1" ) delete data.author["author_email"];
 					renderBookDetails( data );
@@ -119,8 +123,8 @@
 	*/	
 	$(window).on("popstate", function(){
 		if( getUrlParameterByName("b") ){
+			var bookAsbn = getUrlParameterByName("b");
 			renderBookFromUrlUrl();
-			window.history.replaceState(data, data.title, window.location.hash);
 		} else {
 			closeBookDetails();	
 		}

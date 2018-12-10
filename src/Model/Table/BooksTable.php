@@ -145,7 +145,24 @@ class BooksTable extends Table
 			->select("views")
 			->sumOf("views");
 		return $result;
-	}	
+	}
+
+	public function getBookMetas($asbn){
+		$result = $this->find()
+			->contain(["authors", "reviewers", "genders"])
+			->where(["asbn" => $asbn])
+			->select([
+				"books.status",
+				"books.title",
+				"books.description",
+				"books.cover",
+				"authors.author_first_name",
+				"authors.author_last_name"
+			])
+			->first();
+        return $result;
+	}
+
 }
 
 ?>

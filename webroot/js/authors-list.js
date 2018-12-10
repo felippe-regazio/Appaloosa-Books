@@ -15,11 +15,11 @@
 		if( window.location.hash == "#AuthorsList" ){
 			toggleAuthorsList();
 		} else {
-			$(".ap-authors-list").toggleClass("ap-authors-list-open");
-			$("body").toggleClass('overflow-hidden');
+			$(".ap-authors-list").removeClass("ap-authors-list-open");
+			$("body").removeClass('overflow-hidden');
 		}
 	});
-	/* 
+	/*
 		All Authors Show on Click
 	*/
 	$("body").on("click", ".toggle-authors-list", function(e){

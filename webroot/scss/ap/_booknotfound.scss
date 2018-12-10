@@ -1,0 +1,22 @@
+.booknotfound{
+    position: fixed;
+    height: auto;
+    max-width: 600px;
+    width: 85%;
+    background-color: black;
+    z-index: 10000;
+    top: 12%;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    padding: $gutter;
+    &__content{
+    	padding: $gutter/2 $gutter*2;
+    	border: dashed 3px $white;
+    }
+    p.title{
+    	font-size: 30px;
+    	font-weight: 700;
+    	margin: $gutter 0;
+    }
+}

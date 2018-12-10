@@ -28,10 +28,11 @@ use Cake\Routing\Router;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Title -->
     <title>
-        <?= isset($title) && !empty($title) ? $title : $metas["title"] ?>
+        <?= isset($meta["title"]) && !empty($meta["title"]) ? $title = $meta["title"] : "" ?>
+        <?= isset($title) && !empty($title) ? $title : "Appaloosa Books - Livros Independentes Online" ?>
     </title>
     <!-- Seo -->
-    <?= $this->element("metatags", $metas) ?>
+    <?= $this->element("metatags") ?>
     <!-- Meta -->
     <?= $this->Html->meta('icon') ?>
     <?= $this->fetch('meta') ?>
@@ -103,7 +104,9 @@ use Cake\Routing\Router;
     <?= $this->fetch('content') ?>
     <!-- Footer -->
     <?= $this->element('Common/footer') ?>
-    
+    <!-- BookNotFound -->
+    <?= isset($booknotfound) ? $this->element('booknotfound') : "" ?>
+
     <!-- Scripts -->
     <?= $this->Html->script([
         '/bower_components/mustache.js/mustache.min.js',

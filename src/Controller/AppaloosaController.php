@@ -19,6 +19,7 @@ use Cake\Core\Configure;
 use Cake\Network\Exception\ForbiddenException;
 use Cake\Network\Exception\NotFoundException;
 use Cake\View\Exception\MissingTemplateException;
+use Cake\Utility\Text;
 use Cake\Event\Event;
 
 /**
@@ -44,27 +45,24 @@ class AppaloosaController extends AppController
         $this->viewBuilder()->setLayout('default');    
         $this->loadComponent('Security');
         $this->loadComponent('Csrf');
-        // default metas
-        $this->metas = [
-            "title" => __("Appaloosa Books - Livros Independentes Online e Gratuitos"),
-            "image" => Router::url("/", true) . "img/ap-feature.png",
-            "description" => __("A Appaloosa é uma casa de publicações digitais com foco na literatura contemporânea e independente. Publicamos desde textos até livros completos nos formatos epub e pdf com edição profissional e alta qualidade gráfica. Basicamente disponibilizamos pequenos e incríveis universos em um formato colaborativo e gratuito"),
-            "name" => "Appaloosa Books - Online Indie Publishing",
-            "url" => Router::url("/", true)
-        ];
-        $this->set("metas", $this->metas);
     }
 
     public function index(){ 
-        // If there is a Book, override the default metatags for it
-        $this->metas = [
-            "title" => __("Another"),
-            "image" => Router::url("/", true) . "img/ap-feature.png",
-            "description" => __("Another"),
-            "name" => "Another",
-            "url" => Router::url("/", true)
-        ];
-        $this->set("metas", $this->metas );
+        $this->set("title", "Appaloosa Books - Livros Independentes Online");
+        // Metatags for a loaded Book
+        if($this->request->getQuery("b")){
+            $book = $this->loadModel('books')->getBookMetas($this->request->getQuery("b"));
+            if( !empty($book) && $book['status'] == 1 ){
+                $this->set('meta', $meta = [
+                    "name" =>  "Appaloosa Books : " . $book["title"] . " - " . $book["author"]["author_first_name"]. " " . $book["author"]["author_last_name"],
+                    "title" => "Appaloosa Books : " . $book["title"] . " - " . $book["author"]["author_first_name"]. " " . $book["author"]["author_last_name"],
+                    "image" => Router::url("/", true) . "freestore/covers/" . $book["cover"],
+                    "description" => Text::truncate( $book['description'], 250, ["ellipsis"=>"..."] )
+                ]);
+            } else {
+                $this->set("booknotfound", true);
+            }
+        };
     }
 
     public function uiKit(){

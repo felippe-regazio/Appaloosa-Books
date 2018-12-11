@@ -333,6 +333,12 @@ jQuery(function () {
         forcePlaceholderSize: true,
         opacity: 0.6,
         tolerance: "pointer",
+//        helper: function(e) {
+//            //console.log(e.currentTarget.dataset.id);
+//            //debugger;
+//            var helper = jQuery(document.getElementById("sortable-helper")).clone();
+//            return helper;
+//        },
         update: function (event, ui) {
             //console.log(event);
             //console.log(ui.item.data("id"));

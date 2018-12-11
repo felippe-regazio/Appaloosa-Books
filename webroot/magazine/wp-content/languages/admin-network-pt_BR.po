@@ -1,5 +1,5 @@
-# Translation of WordPress - 4.9.x - Development - Administration - Network Admin in Portuguese (Brazil)
-# This file is distributed under the same license as the WordPress - 4.9.x - Development - Administration - Network Admin package.
+# Translation of WordPress - 5.0.x - Development - Administration - Network Admin in Portuguese (Brazil)
+# This file is distributed under the same license as the WordPress - 5.0.x - Development - Administration - Network Admin package.
 msgid ""
 msgstr ""
 "PO-Revision-Date: 2018-08-09 13:28:31+0000\n"
@@ -9,7 +9,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: GlotPress/2.4.0-alpha\n"
 "Language: pt_BR\n"
-"Project-Id-Version: WordPress - 4.9.x - Development - Administration - Network Admin\n"
+"Project-Id-Version: WordPress - 5.0.x - Development - Administration - Network Admin\n"
 
 #. translators: %s: DO_NOT_UPGRADE_GLOBAL_TABLES
 #: wp-admin/includes/network.php:107
@@ -81,8 +81,8 @@ msgstr "Sem permissão para apagar temas deste site."
 msgid "Sorry, you are not allowed to delete that site."
 msgstr "Sem permissão para apagar esse site."
 
-#: wp-admin/network/site-info.php:14 wp-admin/network/site-settings.php:14
-#: wp-admin/network/site-users.php:14
+#: wp-admin/network/site-info.php:14 wp-admin/network/site-users.php:14
+#: wp-admin/network/site-settings.php:14
 msgid "Sorry, you are not allowed to edit this site."
 msgstr "Sem permissão para editar este site."
 
@@ -94,10 +94,6 @@ msgstr "Sem permissão para adicionar sites nesta rede."
 msgid "Sorry, you are not allowed to manage themes for this site."
 msgstr "Sem permissão para gerenciar temas deste site."
 
-#. translators: This string should only be translated if wp-config-sample.php
-#. is localized. You can check the localized release package or
-#. https://i18n.svn.wordpress.org/<locale code>/branches/<wp
-#. version>/dist/wp-config-sample.php
 #: wp-admin/includes/network.php:436
 msgid "That&#8217;s all, stop editing! Happy blogging."
 msgstr "Isto é tudo, pare de editar! Divirta-se publicando no seu blog."
@@ -373,7 +369,7 @@ msgctxt "site"
 msgid "Not Spam"
 msgstr "Não é spam"
 
-#: wp-admin/network/site-users.php:346 wp-admin/network/user-new.php:117
+#: wp-admin/network/user-new.php:117 wp-admin/network/site-users.php:346
 msgid "A password reset link will be sent to the user via email."
 msgstr "O link para redefinir a senha será enviado para o usuário por e-mail."
 
@@ -467,8 +463,8 @@ msgstr "Você está prestes a desativar o site %s."
 msgid "You are about to activate the site %s."
 msgstr "Você está prestes a ativar o site %s."
 
-#: wp-admin/network/site-info.php:28 wp-admin/network/site-settings.php:26
-#: wp-admin/network/site-themes.php:49 wp-admin/network/site-users.php:42
+#: wp-admin/network/site-info.php:28 wp-admin/network/site-users.php:42
+#: wp-admin/network/site-themes.php:49 wp-admin/network/site-settings.php:26
 msgid "The requested site does not exist."
 msgstr "O site solicitado não existe"
 
@@ -509,7 +505,7 @@ msgstr "Atenção! Problema ao atualizar %1$s. O seu servidor pode estar impedid
 msgid "You are about to remove the following themes:"
 msgstr "Você está prestes a remover os seguintes temas:"
 
-#: wp-admin/network/site-themes.php:183 wp-admin/network/themes.php:279
+#: wp-admin/network/themes.php:279 wp-admin/network/site-themes.php:183
 msgid "%s theme disabled."
 msgid_plural "%s themes disabled."
 msgstr[0] "%s tema desativado."
@@ -523,7 +519,7 @@ msgstr "Tem certeza que deseja excluir esse tema?"
 msgid "These themes may be active on other sites in the network."
 msgstr "Estes temas podem estar ativos em outros sites da rede."
 
-#: wp-admin/network/site-themes.php:175 wp-admin/network/themes.php:271
+#: wp-admin/network/themes.php:271 wp-admin/network/site-themes.php:175
 msgid "%s theme enabled."
 msgid_plural "%s themes enabled."
 msgstr[0] "%s tema ativado."
@@ -636,8 +632,8 @@ msgstr "Apenas use esta tela após ter atualizado para a versão mais recente do
 msgid "WordPress has been updated! Before we send you on your way, we need to individually upgrade the sites in your network."
 msgstr "O WordPress foi atualizado! Antes de prosseguir, precisamos atualizar os sites de sua rede individualmente."
 
-#: wp-admin/network/menu.php:34 wp-admin/network/upgrade.php:15
-#: wp-admin/network/upgrade.php:40 wp-admin/network/upgrade.php:131
+#: wp-admin/network/upgrade.php:15 wp-admin/network/upgrade.php:40
+#: wp-admin/network/upgrade.php:131 wp-admin/network/menu.php:34
 msgid "Upgrade Network"
 msgstr "Atualizar rede"
 
@@ -671,11 +667,11 @@ msgstr "Você está prestes a remover o seguinte tema:"
 msgid "Yes, delete this theme"
 msgstr "Sim, exclua este tema"
 
-#: wp-admin/network/site-themes.php:181 wp-admin/network/themes.php:277
+#: wp-admin/network/themes.php:277 wp-admin/network/site-themes.php:181
 msgid "Theme disabled."
 msgstr "Tema desativado."
 
-#: wp-admin/network/site-themes.php:187 wp-admin/network/themes.php:291
+#: wp-admin/network/themes.php:291 wp-admin/network/site-themes.php:187
 msgid "No theme selected."
 msgstr "Nenhum tema selecionado."
 
@@ -715,7 +711,7 @@ msgstr "Tem certeza que você quer excluir estes temas?"
 msgid "This screen is for Super Admins to add new sites to the network. This is not affected by the registration settings."
 msgstr "Esta tela serve para super admins adicionarem novos sites à rede. Esta ação não é afetada pelas configurações de registro."
 
-#: wp-admin/network/site-themes.php:173 wp-admin/network/themes.php:269
+#: wp-admin/network/themes.php:269 wp-admin/network/site-themes.php:173
 msgid "Theme enabled."
 msgstr "Tema ativado."
 
@@ -740,8 +736,8 @@ msgid "Site info updated."
 msgstr "Informações do site atualizadas."
 
 #. translators: %s: site name
-#: wp-admin/network/site-info.php:117 wp-admin/network/site-settings.php:70
-#: wp-admin/network/site-themes.php:153 wp-admin/network/site-users.php:196
+#: wp-admin/network/site-info.php:117 wp-admin/network/site-users.php:196
+#: wp-admin/network/site-themes.php:153 wp-admin/network/site-settings.php:70
 msgid "Edit Site: %s"
 msgstr "Editar site: %s"
 
@@ -757,7 +753,7 @@ msgstr "Clicar nos títulos em negrito pode reordenar esta tabela."
 msgid "You cannot delete a theme while it is active on the main site."
 msgstr "Você não pode excluir um tema enquanto ele estiver ativo no site principal."
 
-#: wp-admin/network/menu.php:67 wp-admin/network/settings.php:19
+#: wp-admin/network/settings.php:19 wp-admin/network/menu.php:67
 msgid "Network Settings"
 msgstr "Configurações da rede"
 
@@ -790,7 +786,7 @@ msgstr "Adicionar novo site"
 msgid "An Edit link to a separate Edit Site screen."
 msgstr "Um link editar para uma tela de editar site separado."
 
-#: wp-admin/network/menu.php:53 wp-admin/network/themes.php:253
+#: wp-admin/network/themes.php:253 wp-admin/network/menu.php:53
 msgctxt "theme"
 msgid "Add New"
 msgstr "Adicionar novo"
@@ -811,7 +807,7 @@ msgstr "O Painel leva ao painel daquele site."
 msgid "Delete Theme"
 msgstr "Excluir tema"
 
-#: wp-admin/network/site-users.php:310 wp-admin/network/user-new.php:129
+#: wp-admin/network/user-new.php:129 wp-admin/network/site-users.php:310
 msgid "Add User"
 msgstr "Adicionar usuário"
 
@@ -831,8 +827,8 @@ msgstr "Sem permissão para excluir o site %s."
 msgid "Allow site administrators to add new users to their site via the \"Users &rarr; Add New\" page"
 msgstr "Permite que os administradores do site adicionem novos usuários aos seus sites através da página \"Usuários &rarr; Adicionar Novo\"."
 
-#: wp-admin/network/site-info.php:23 wp-admin/network/site-settings.php:22
-#: wp-admin/network/site-themes.php:43 wp-admin/network/site-users.php:38
+#: wp-admin/network/site-info.php:23 wp-admin/network/site-users.php:38
+#: wp-admin/network/site-themes.php:43 wp-admin/network/site-settings.php:22
 msgid "Invalid site ID."
 msgstr "ID inválido de site."
 

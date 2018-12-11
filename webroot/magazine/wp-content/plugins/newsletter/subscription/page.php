@@ -17,9 +17,15 @@ if (!defined('ABSPATH')) exit;
 $module = NewsletterSubscription::instance();
 $user = $module->get_user_from_request(true);
 $message_key = $module->get_message_key_from_request();
-$message = $newsletter->replace($module->options[$message_key . '_text'], $user);
-if (isset($module->options[$message_key . '_tracking'])) {
-    $message .= $module->options[$message_key . '_tracking'];
+$message = apply_filters('newsletter_page_text', '', $message_key, $user);
+$options = $module->get_options('', $module->get_user_language($user));
+if (!$message) {
+    $message = $options[$message_key . '_text'];
+}
+$message = $module->replace($message, $user);
+
+if (isset($options[$message_key . '_tracking'])) {
+    $message .= $options[$message_key . '_tracking'];
 }
 $alert = '';
 if (isset($_REQUEST['alert'])) $alert = stripslashes($_REQUEST['alert']);

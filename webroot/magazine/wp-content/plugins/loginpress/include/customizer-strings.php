@@ -2,6 +2,7 @@
 /**
  * Customizer strings for the logo control.
  * @since 1.1.3
+ * @version 1.1.10
  */
 $logo_range_control = array( 'customize_logo_width', 'customize_logo_height', 'customize_logo_padding' );
 $logo_range_default = array( '84', '84', '0' );
@@ -54,16 +55,16 @@ $form_range_label   = array(
   __( 'Remember Me Font Size:', 'loginpress' ) );
 $form_range_attrs   = array(
   array( 'min' => 320, 'max' => 800, 'step' => 1, 'suffix' => 'px' ), // form width
-  array( 'min' => 0, 'max' => 500, 'step' => 1, 'suffix' => 'px' ), // form height
-  array( 'min' => 0, 'max' => 100, 'step' => 1, 'suffix' => 'px' ), // form radius
-  array( 'min' => 0, 'max' => 30, 'step' => 1, 'suffix' => 'px' ), // form shadow
-  array( 'min' => 0, 'max' => 100, 'step' => 1, 'suffix' => '%' ), // form Opacity
-  array( 'min' => 0, 'max' => 100, 'step' => 1, 'suffix' => '%' ), // textfield width
-  array( 'min' => 0, 'max' => 30, 'step' => 1, 'suffix' => 'px' ), // textfield radius
-  array( 'min' => 0, 'max' => 30, 'step' => 1, 'suffix' => 'px' ), // textfield shadow
-  array( 'min' => 0, 'max' => 100, 'step' => 1, 'suffix' => '%' ), // textfield Opacity
-  array( 'min' => 9, 'max' => 30, 'step' => 1, 'suffix' => 'px' ), // testfield label
-  array( 'min' => 9, 'max' => 30, 'step' => 1, 'suffix' => 'px' ) // readme label
+  array( 'min' => 0, 'max'   => 500, 'step' => 1, 'suffix' => 'px' ), // form height
+  array( 'min' => 0, 'max'   => 100, 'step' => 1, 'suffix' => 'px' ), // form radius
+  array( 'min' => 0, 'max'   => 30, 'step'  => 1, 'suffix' => 'px' ), // form shadow
+  array( 'min' => 0, 'max'   => 100, 'step' => 1, 'suffix' => '%' ), // form Opacity
+  array( 'min' => 0, 'max'   => 100, 'step' => 1, 'suffix' => '%' ), // textfield width
+  array( 'min' => 0, 'max'   => 30, 'step'  => 1, 'suffix' => 'px' ), // textfield radius
+  array( 'min' => 0, 'max'   => 30, 'step'  => 1, 'suffix' => 'px' ), // textfield shadow
+  array( 'min' => 0, 'max'   => 100, 'step' => 1, 'suffix' => '%' ), // textfield Opacity
+  array( 'min' => 9, 'max'   => 30, 'step'  => 1, 'suffix' => 'px' ), // testfield label
+  array( 'min' => 9, 'max'   => 30, 'step'  => 1, 'suffix' => 'px' ) // readme label
 );
 $form_range_unit    = array( 'px', 'px', 'px', 'px', '%', '%', 'px', 'px', '%', 'px', 'px' );
 //--------------------
@@ -86,6 +87,7 @@ $form_label         = array(
   __( 'Username Label:', 'loginpress' ),
   __( 'Password Label:', 'loginpress' ),
 );
+$form_sanitization = array( 'wp_strip_all_tags', 'wp_strip_all_tags', 'wp_strip_all_tags', 'wp_strip_all_tags', 'wp_strip_all_tags' );
 /** -----------------Sectin Login Form------------------ */
 
 /**
@@ -108,15 +110,15 @@ $button_range_default = array( '100', '13', '13', '5', '0', '80', '15' );
 $button_range_label = array( __( 'Button Size:', 'loginpress' ), __( 'Button Top Padding:', 'loginpress' ), __( 'Button Bottom Padding:', 'loginpress' ), __( 'Radius:', 'loginpress' ), __( 'Shadow:', 'loginpress' ), __( 'Shadow Opacity:', 'loginpress' ), __( 'Text Size:', 'loginpress' ) );
 $button_range_attrs = array(
   array( 'min' => 20, 'max' => 100, 'step' => 1, 'suffix' => '%' ),
-  array( 'min' => 0, 'max' => 30, 'step' => 1, 'suffix' => 'px' ),
-  array( 'min' => 0, 'max' => 30, 'step' => 1, 'suffix' => 'px' ),
-  array( 'min' => 0, 'max' => 50, 'step' => 1, 'suffix' => 'px' ),
-  array( 'min' => 0, 'max' => 30, 'step' => 1, 'suffix' => 'px' ),
-  array( 'min' => 0, 'max' => 100, 'step' => 1, 'suffix' => 'px' ),
-  array( 'min' => 7, 'max' => 35, 'step' => 1, 'suffix' => 'px' ),
+  array( 'min' => 0, 'max'  => 30, 'step'  => 1, 'suffix' => 'px' ),
+  array( 'min' => 0, 'max'  => 30, 'step'  => 1, 'suffix' => 'px' ),
+  array( 'min' => 0, 'max'  => 50, 'step'  => 1, 'suffix' => 'px' ),
+  array( 'min' => 0, 'max'  => 30, 'step'  => 1, 'suffix' => 'px' ),
+  array( 'min' => 0, 'max'  => 100, 'step' => 1, 'suffix' => 'px' ),
+  array( 'min' => 7, 'max'  => 35, 'step'  => 1, 'suffix' => 'px' ),
 );
 $button_range_unit = array( '%', 'px', 'px', 'px', 'px', '%', 'px' );
-/** -----------------Sectin Button Beauty------------------ */
+/** -----------------Section Button Beauty------------------ */
 
 /**
  * [ Customizer strings for the group close. ]

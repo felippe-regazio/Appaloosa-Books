@@ -4,6 +4,7 @@
 *
 * @since  1.0.23
 * @access public
+* @version 1.1.7
 */
 class LoginPress_Radio_Control extends WP_Customize_Control {
 
@@ -15,6 +16,15 @@ class LoginPress_Radio_Control extends WP_Customize_Control {
 	* @var    string
 	*/
 	public $type = 'ios';
+
+	/**
+	* The loader of customize control being rendered.
+	*
+	* @since  1.1.7
+	* @access public
+	* @var    bolean
+	*/
+	public $loader = false;
 
 	/**
 	 * Enqueue scripts/styles.
@@ -62,12 +72,14 @@ class LoginPress_Radio_Control extends WP_Customize_Control {
   * @since  1.0.23
   * @access public
   * @return void
+  * @version 1.1.7
   */
 	public function render_content() {
 		?>
 		<label>
 			<div style="display:flex;flex-direction: row;justify-content: flex-start;">
 				<span class="customize-control-title" style="flex: 2 0 0; vertical-align: middle;"><?php echo esc_html( $this->label ); ?></span>
+				<?php if ( true == $this->loader ) : ?><span class="customize-radio-control-loader"><img src="<?php echo admin_url( 'images/loading.gif' ); ?>" alt="loader"></span><?php endif; ?>
 				<input id="cb<?php echo $this->instance_number ?>" type="checkbox" class="loginpress-radio loginpress-radio-<?php echo $this->type?>" value="<?php echo esc_attr( $this->value() ); ?>" <?php $this->link(); checked( $this->value() ); ?> />
 				<label for="cb<?php echo $this->instance_number ?>" class="loginpress-radio-btn"></label>
 			</div>

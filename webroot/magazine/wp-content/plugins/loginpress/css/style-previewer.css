@@ -20,6 +20,7 @@ body:hover .customize-partial-edit-shortcut button{
 	height: 34px;
 	width: 34px;
 	cursor: pointer;
+	z-index: 99;
 }
 .customize-partial-edit-shortcut button{
 	left: 0;
@@ -111,4 +112,7 @@ body:hover .customize-partial-edit-shortcut button{
 }
 #loginform{
 	overflow: visible;
+}
+html[dir="rtl"] .customize-partial-edit-shortcut button,html[dir="rtl"]  .widget .customize-partial-edit-shortcut button{
+	right: 0;
 }

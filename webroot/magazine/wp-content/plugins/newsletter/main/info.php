@@ -1,6 +1,5 @@
 <?php
-if (!defined('ABSPATH'))
-    exit;
+defined('ABSPATH') || exit;
 
 @include_once NEWSLETTER_INCLUDES_DIR . '/controls.php';
 $module = Newsletter::instance();
@@ -12,7 +11,8 @@ if (!$controls->is_action()) {
 
     if ($controls->is_action('save')) {
         $module->merge_options($controls->data);
-        $controls->messages .= 'Saved.';
+        $module->save_options($controls->data, 'info');
+        $controls->add_message_saved();
     }
 }
 ?>
@@ -157,7 +157,7 @@ if (!$controls->is_action()) {
             </div>
 
             <p>
-                <?php $controls->button('save', 'Save'); ?>
+                <?php $controls->button_save(); ?>
             </p>
 
         </form>

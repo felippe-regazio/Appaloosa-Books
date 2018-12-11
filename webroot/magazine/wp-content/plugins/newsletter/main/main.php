@@ -1,6 +1,5 @@
 <?php
-if (!defined('ABSPATH'))
-    exit;
+defined('ABSPATH') || exit;
 
 @include_once NEWSLETTER_INCLUDES_DIR . '/controls.php';
 $controls = new NewsletterControls();
@@ -14,24 +13,24 @@ if (!$controls->is_action()) {
         $errors = null;
 
         // Validation
-        $controls->data['sender_email'] = $newsletter->normalize_email($controls->data['sender_email']);
-        if (!$newsletter->is_email($controls->data['sender_email'])) {
+        $controls->data['sender_email'] = $module->normalize_email($controls->data['sender_email']);
+        if (!$module->is_email($controls->data['sender_email'])) {
             $controls->errors .= __('The sender email address is not correct.', 'newsletter') . '<br>';
         } else {
-            $controls->data['sender_email'] = $newsletter->normalize_email($controls->data['sender_email']);
+            $controls->data['sender_email'] = $module->normalize_email($controls->data['sender_email']);
         }
 
-        if (!$newsletter->is_email($controls->data['return_path'], true)) {
+        if (!$module->is_email($controls->data['return_path'], true)) {
             $controls->errors .= __('Return path email is not correct.', 'newsletter') . '<br>';
         } else {
-            $controls->data['return_path'] = $newsletter->normalize_email($controls->data['return_path']);
+            $controls->data['return_path'] = $module->normalize_email($controls->data['return_path']);
         }
 
 
-        if (!$newsletter->is_email($controls->data['reply_to'], true)) {
+        if (!$module->is_email($controls->data['reply_to'], true)) {
             $controls->errors .= __('Reply to email is not correct.', 'newsletter') . '<br>';
         } else {
-            $controls->data['reply_to'] = $newsletter->normalize_email($controls->data['reply_to']);
+            $controls->data['reply_to'] = $module->normalize_email($controls->data['reply_to']);
         }
 
         if (!empty($controls->data['contract_key'])) {
@@ -41,12 +40,35 @@ if (!$controls->is_action()) {
         if (empty($controls->errors)) {
             $module->merge_options($controls->data);
             $controls->add_message_saved();
+            $module->logger->debug('Main options saved');
         }
 
         update_option('newsletter_log_level', $controls->data['log_level']);
 
         $module->hook_newsletter_extension_versions(true);
         delete_transient("tnp_extensions_json");
+    }
+
+    if ($controls->is_action('create')) {
+        $page = array();
+        $page['post_title'] = 'Newsletter';
+        $page['post_content'] = '[newsletter]';
+        $page['post_status'] = 'publish';
+        $page['post_type'] = 'page';
+        $page['comment_status'] = 'closed';
+        $page['ping_status'] = 'closed';
+        $page['post_category'] = array(1);
+        
+        $current_language = $module->get_current_language();
+        $module->switch_language('');
+        // Insert the post into the database
+        $page_id = wp_insert_post($page);
+        $module->switch_language($current_language);
+
+        $controls->data['page'] = $page_id;
+        $module->merge_options($controls->data);
+        
+        $controls->messages = 'A new page has been created';
     }
 }
 
@@ -90,7 +112,25 @@ if (!empty($return_path)) {
         $controls->warnings[] = __('Your Return Path domain is different from your Sender domain. Providers may require them to match.', 'newsletter');
     }
 }
+
 ?>
+
+<?php include NEWSLETTER_INCLUDES_DIR . '/codemirror.php'; ?>
+<style>
+    .CodeMirror {
+        border: 1px solid #ddd;
+    }
+</style>
+
+<script>
+    jQuery(function () {
+        var editor = CodeMirror.fromTextArea(document.getElementById("options-css"), {
+            lineNumbers: true,
+            mode: 'css',
+            extraKeys: {"Ctrl-Space": "autocomplete"}
+        });
+    });
+</script>
 
 <div class="wrap" id="tnp-wrap">
 
@@ -102,6 +142,7 @@ if (!empty($return_path)) {
 
     </div>
     <div id="tnp-body" class="tnp-main-main">
+        
 
         <form method="post" action="">
             <?php $controls->init(); ?>
@@ -151,18 +192,31 @@ if (!empty($return_path)) {
                                 <?php $controls->help('https://www.thenewsletterplugin.com/plugins/newsletter/newsletter-configuration#reply-to') ?>
                             </td>
                         </tr>
+                        <tr>
+                            <th><?php _e('Dedicated page', 'newsletter') ?></th>
+                            <td>
+                                <?php $controls->page('page', __('Unstyled page', 'newsletter'), '', true); ?>
+                                <?php
+                                if (empty($controls->data['page'])) {
+                                    $controls->button('create', __('Create the page', 'newsletter'));
+                                }
+                                ?>
+                                <?php $controls->help('https://www.thenewsletterplugin.com/documentation/newsletter-configuration#dedicated-page') ?>
+
+                            </td>
+                        </tr>
 
                         <tr>
                             <th><?php _e('License key', 'newsletter') ?></th>
                             <td>
-                                    <?php if (defined('NEWSLETTER_LICENSE_KEY')) { ?>
-                                        <?php _e('A license key is set','newsletter') ?>
-                                    <?php } else { ?>
-                                        <?php $controls->text('contract_key', 40); ?>
-                                        <p class="description">
-                                            <?php printf(__('Find it in <a href="%s" target="_blank">your account</a> page', 'newsletter'), "https://www.thenewsletterplugin.com/account") ?>
-                                        </p>
-                                    <?php } ?>
+                                <?php if (defined('NEWSLETTER_LICENSE_KEY')) { ?>
+                                    <?php _e('A license key is set', 'newsletter') ?>
+                                <?php } else { ?>
+                                    <?php $controls->text('contract_key', 40); ?>
+                                    <p class="description">
+                                        <?php printf(__('Find it in <a href="%s" target="_blank">your account</a> page', 'newsletter'), "https://www.thenewsletterplugin.com/account") ?>
+                                    </p>
+                                <?php } ?>
                             </td>
                         </tr>
 
@@ -194,7 +248,21 @@ if (!empty($return_path)) {
                     </p>
 
                     <table class="form-table">
-
+                        <tr>
+                            <th><?php _e('Disable standard styles', 'newsletter') ?></th>
+                            <td>
+                                <?php $controls->yesno('css_disabled'); ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th><?php _e('Custom styles', 'newsletter') ?></th>
+                            <td>
+                                <?php if (apply_filters('newsletter_enqueue_style', true) === false) { ?>
+                                    <p><strong>Warning: Newsletter styles and custom styles are disable by your theme or a plugin.</strong></p>
+                                <?php } ?>
+                                <?php $controls->textarea('css'); ?>
+                            </td>
+                        </tr>
                         <tr>
                             <th><?php _e('Enable access to blog editors?', 'newsletter') ?></th>
                             <td>
@@ -208,6 +276,30 @@ if (!empty($return_path)) {
                             </th>
                             <td>
                                 <?php $controls->log_level('log_level'); ?>
+                            </td>
+                        </tr>
+                        <!--
+                        <tr>
+                            <th>
+                                <?php _e('Disable the scheduler notice', 'newsletter') ?>
+                            </th>
+                            <td>
+                                <?php $controls->yesno('disable_cron_notice'); ?>
+                            </td>
+                        </tr>
+                        -->
+                        <tr>
+                            <th><?php _e('IP addresses', 'newsletter')?></th>
+                            <td>
+                                <?php $controls->select('ip', array(''=>__('Store', 'newsletter'), 'anonymize'=> __('Anonymize', 'newsletter'), 'skip'=>__('Do not store', 'newsletter'))); ?>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th><?php _e('Newsletters tracking default', 'newsletter') ?></th>
+                            <td>
+                                <?php $controls->yesno('track'); ?>
+                                <p class="description">It can be changed on each newsletter.</p>
                             </td>
                         </tr>
 
@@ -244,6 +336,7 @@ if (!empty($return_path)) {
             </p>
 
         </form>
+
     </div>
 
     <?php include NEWSLETTER_DIR . '/tnp-footer.php'; ?>

@@ -89,6 +89,9 @@ class LoginPress_Page_Create {
 
     // Pull options from WP.
     $loginpress_setting = get_option( 'loginpress_setting', array() );
+    if ( ! is_array( $loginpress_setting ) && empty( $loginpress_setting ) ) {
+      $loginpress_setting = array();
+    }
     $option_value  = array_key_exists( 'loginpress_page', $loginpress_setting ) ? $loginpress_setting['loginpress_page'] : false;
 
     if ( $option_value > 0 && ( $page_object = get_post( $option_value ) ) ) {

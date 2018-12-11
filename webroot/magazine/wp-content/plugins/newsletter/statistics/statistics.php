@@ -8,6 +8,9 @@ require_once NEWSLETTER_INCLUDES_DIR . '/module.php';
 class NewsletterStatistics extends NewsletterModule {
 
     static $instance;
+    
+    const SENT_READ = 1;
+    const SENT_CLICK = 2;
 
     /**
      * @return NewsletterStatistics
@@ -87,24 +90,19 @@ class NewsletterStatistics extends NewsletterModule {
             setcookie('newsletter', $user->id . '-' . $user->token, time() + 60 * 60 * 24 * 365, '/');
 
             $is_action = strpos($url, '?na=');
-            
+
             $ip = $this->get_remote_ip();
+            $ip = $this->process_ip($ip);
 
             if (!$is_action) {
-
-                $res = $wpdb->insert(NEWSLETTER_STATS_TABLE, array(
-                    'email_id' => $email_id,
-                    'user_id' => $user_id,
-                    'url' => $url,
-                    'ip' => $ip
-                        )
-                );
-                $wpdb->query($wpdb->prepare("update " . NEWSLETTER_SENT_TABLE . " set open=2, ip=%s where email_id=%d and user_id=%d limit 1", $ip, $email_id, $user_id));
+                $this->add_click($url, $user_id, $email_id, $ip);
+                $this->update_open_value(self::SENT_CLICK, $user_id, $email_id, $ip);
             } else {
-                $wpdb->query($wpdb->prepare("update " . NEWSLETTER_SENT_TABLE . " set open=1, ip=%s where email_id=%d and user_id=%d and open=0 limit 1", $ip, $email_id, $user_id));
+                // Track an action as an email read and not a click
+                $this->update_open_value(self::SENT_READ, $user_id, $email_id, $ip);
             }
 
-            $this->update_last_activity($user);
+            $this->update_user_last_activity($user);
 
             header('Location: ' . apply_filters('newsletter_redirect_url', $url, $email, $user));
             die();
@@ -140,28 +138,17 @@ class NewsletterStatistics extends NewsletterModule {
             }
 
             $ip = $this->get_remote_ip();
+            $ip = $this->process_ip($ip); 
 
-            $wpdb->query($wpdb->prepare("update " . NEWSLETTER_SENT_TABLE . " set open=1, ip=%s where email_id=%d and user_id=%d and open=0 limit 1", $ip, $email_id, $user_id));
-            $res = $wpdb->insert(NEWSLETTER_STATS_TABLE, array(
-                'email_id' => (int) $email_id,
-                'user_id' => (int) $user_id,
-                'ip' => $ip)
-            );
-            if (!$res) {
-                $this->logger->fatal($wpdb->last_error);
-            }
-            
-            $this->update_last_activity($user);
+            $this->add_click('', $user_id, $email_id, $ip);
+            $this->update_open_value(self::SENT_READ, $user_id, $email_id, $ip);
 
-            header('Content-Type: image/gif');
+            $this->update_user_last_activity($user);
+
+            header('Content-Type: image/gif', true);
             echo base64_decode('_R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');
             die();
         }
-    }
-    
-    function update_last_activity($user) {
-        global $wpdb;
-        $wpdb->query($wpdb->prepare("update " . NEWSLETTER_USERS_TABLE . " set last_activity=%d where id=%d limit 1", time(), $user->id));
     }
 
     function upgrade() {
@@ -173,7 +160,6 @@ class NewsletterStatistics extends NewsletterModule {
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `url` varchar(255) NOT NULL DEFAULT '',
-  `anchor` varchar(200) NOT NULL DEFAULT '',
   `user_id` int(11) NOT NULL DEFAULT '0',
   `email_id` varchar(10) NOT NULL DEFAULT '0',
   `link_id` int(11) NOT NULL DEFAULT '0',
@@ -267,7 +253,7 @@ class NewsletterStatistics extends NewsletterModule {
 
         // Very old emails was missing the send_on
         if ($email->send_on == 0) {
-            $wpdb->query($wpdb->prepare("update " . NEWSLETTER_EMAILS_TABLE . " set send_on=unix_timestamp(created) where id=%d limit 1", $email->id));
+            $this->query($wpdb->prepare("update " . NEWSLETTER_EMAILS_TABLE . " set send_on=unix_timestamp(created) where id=%d limit 1", $email->id));
             $email = $this->get_email($email->id);
         }
 
@@ -292,7 +278,7 @@ class NewsletterStatistics extends NewsletterModule {
         $query = $email->query . " and unix_timestamp(created)<" . $email->send_on;
 
         $query = str_replace('*', 'id, ' . $email->id . ', ' . $email->send_on, $query);
-        $wpdb->query("insert ignore into " . NEWSLETTER_SENT_TABLE . " (user_id, email_id, time) " . $query);
+        $this->query("insert ignore into " . NEWSLETTER_SENT_TABLE . " (user_id, email_id, time) " . $query);
     }
 
     function update_stats($email) {
@@ -326,15 +312,27 @@ class NewsletterStatistics extends NewsletterModule {
     function add_click($url, $user_id, $email_id, $ip = null) {
         global $wpdb;
         if (is_null($ip)) {
-            $ip = preg_replace('/[^0-9a-fA-F:., ]/', '', $_SERVER['REMOTE_ADDR']);
+            $ip = $this->get_remote_ip();
         }
-        $wpdb->insert(NEWSLETTER_STATS_TABLE, array(
-            'email_id' => $user_id,
-            'user_id' => $email_id,
+        
+        $ip = $this->process_ip($ip);
+        
+        $this->insert(NEWSLETTER_STATS_TABLE, array(
+            'email_id' => $email_id,
+            'user_id' => $user_id,
             'url' => $url,
             'ip' => $ip
                 )
         );
+    }
+
+    function update_open_value($value, $user_id, $email_id, $ip = null) {
+        global $wpdb;
+        if (is_null($ip)) {
+            $ip = $this->get_remote_ip();
+        }
+        $ip = $this->process_ip($ip);
+        $this->query($wpdb->prepare("update " . NEWSLETTER_SENT_TABLE . " set open=%d, ip=%s where email_id=%d and user_id=%d and open<%d limit 1", $value, $ip, $email_id, $user_id, $value));
     }
 
 }

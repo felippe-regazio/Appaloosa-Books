@@ -21,20 +21,20 @@ class TNP {
      */
 
     public static function subscribe($params) {
-        
+
 //        error_reporting(E_ALL);
-        
+
         $newsletter = Newsletter::instance();
         $subscription = NewsletterSubscription::instance();
-        
+
         // Messages
         $options = get_option('newsletter', array());
 
         // Form field configuration
         $options_profile = get_option('newsletter_profile', array());
-        
+
         $optin = (int) $options['noconfirmation']; // 0 - double, 1 - single
-        
+
         $email = $newsletter->normalize_email(stripslashes($params['email']));
 
         // Should never reach this point without a valid email address
@@ -43,9 +43,9 @@ class TNP {
         }
 
         $user = $newsletter->get_user($email);
-        
+
         if ($user != null) {
-            
+
             $newsletter->logger->info('Subscription of an address with status ' . $user->status);
 
             // Bounced
@@ -65,24 +65,13 @@ class TNP {
 
                     // A second subscription always require confirmation otherwise anywan can change other users' data
                     $user->status = 'S';
-
-                    $prefix = 'confirmation_';
-
-                    if (empty($options[$prefix . 'disabled'])) {
-                        
-                        $message = $options[$prefix . 'message'];
-                        // TODO: This is always empty!
-                        //$message_text = $options[$prefix . 'message_text'];
-                        $subject = $options[$prefix . 'subject'];
-                        $message = $subscription->add_microdata($message);
-                        $newsletter->mail($user->email, $newsletter->replace($subject, $user), $newsletter->replace($message, $user));
-                    }
+                    $subscription->send_activation_email($user);
 
                     return $user;
                 }
             }
         }
-        
+
         if ($user != null) {
             $newsletter->logger->info("Email address subscribed but not confirmed");
             $user = array('id' => $user->id);
@@ -96,15 +85,40 @@ class TNP {
             $params['status'] = 'S';
         }
         
-        $user = TNP::add_subscriber($params);
+        // Lists
+ 
+        if (!isset($params['lists']) || !is_array($params['lists'])) {
+            $params['lists'] = array();
+        }
+        
+        // Public lists: rebuild the array keeping only the valid lists
+        $lists = $newsletter->get_lists_public();
+        
+        // Public list IDs
+        $public_lists = array();
+        foreach ($lists as $list) {
+            $public_lists[] = $list->id;
+        }
+        
+        // Keep only the public lists
+        $params['lists'] = array_intersect($public_lists, $params['lists']);
+        
+        // Pre assigned lists
+        $lists = $newsletter->get_lists();
+        foreach ($lists as $list) {
+            if ($list->forced) {
+                $params['lists'][] =  $list->id;
+            }
+        }
 
-//        TODO: decidere se applicare i filtri sulle API
-//        $user = apply_filters('newsletter_user_subscribe', $user);
+        apply_filters('newsletter_api_subscribe', $params);
+        
+        $user = TNP::add_subscriber($params);
 
         if (is_wp_error($user)) {
             return ($user);
         }
-        
+
         // Notification to admin (only for new confirmed subscriptions)
         if ($user->status == 'C') {
             do_action('newsletter_user_confirmed', $user);
@@ -116,23 +130,10 @@ class TNP {
             return $user;
         }
 
-        $prefix = ($user->status == 'C') ? 'confirmed_' : 'confirmation_';
+        $message_type = ($user->status == 'C') ? 'confirmed' : 'confirmation';
+        $subscription->send_message($message_type, $user);
         
-        if (empty($options[$prefix . 'disabled'])) {
-            $message = $options[$prefix . 'message'];
-
-            if ($user->status == 'S') {
-                $message = $subscription->add_microdata($message);
-            }
-
-            // TODO: This is always empty!
-            //$message_text = $options[$prefix . 'message_text'];
-            $subject = $options[$prefix . 'subject'];
-
-            $newsletter->mail($user->email, $newsletter->replace($subject, $user), $newsletter->replace($message, $user));
-        }
         return $user;
-        
     }
 
     /*
@@ -154,12 +155,12 @@ class TNP {
             return $user;
         }
 
-        $newsletter->set_user_status($user->id, 'U');
+        $user = $newsletter->set_user_status($user, 'U');
 
-        if (empty($newsletter->options['unsubscribed_disabled'])) {
-            $newsletter->mail($user->email, $newsletter->replace($newsletter->options['unsubscribed_subject'], $user), $newsletter->replace($newsletter->options['unsubscribed_message'], $user));
+        if (empty(NewsletterSubscription::instance()->options['unsubscribed_disabled'])) {
+            $newsletter->mail($user->email, $newsletter->replace(NewsletterSubscription::instance()->options['unsubscribed_subject'], $user), $newsletter->replace(NewsletterSubscription::instance()->options['unsubscribed_message'], $user));
         }
-        $newsletter->notify_admin($user, 'Newsletter unsubscription');
+        NewsletterSubscription::instance()->notify_admin($user, 'Newsletter unsubscription');
 
         return $user;
     }
@@ -198,11 +199,20 @@ class TNP {
             $user['sex'] = $newsletter->normalize_sex($params['gender']);
         }
 
-        if (is_array($params['profile'])) {
+        if (isset($params['profile']) && is_array($params['profile'])) {
             foreach ($params['profile'] as $key => $value) {
                 $user['profile_' . $key] = trim(stripslashes($value));
             }
         }
+
+        // Lists (an arrayunder the key "lists")
+        // Preferences (field names are nl[] and values the list number so special forms with radio button can work)
+        if (isset($params['lists']) && is_array($params['lists'])) {
+            foreach ($params['lists'] as $list_id) {
+                $user['list_' . ((int)$list_id)] = 1;
+            }
+        }
+
 
         if (!empty($params['status'])) {
             $user['status'] = $params['status'];
@@ -217,7 +227,7 @@ class TNP {
 
         return $user;
     }
-    
+
     /*
      * Subscribers list
      */
@@ -226,10 +236,10 @@ class TNP {
 
         global $wpdb;
         $newsletter = Newsletter::instance();
-        
+
         $items_per_page = 20;
         $where = "";
-        
+
         $query = "select name, email from " . NEWSLETTER_USERS_TABLE . ' ' . $where . " order by id desc";
         $query .= " limit 0," . $items_per_page;
         $list = $wpdb->get_results($query);
@@ -259,7 +269,7 @@ class TNP {
             return new WP_Error('-1', $wpdb->last_error, array('status' => 400));
         }
     }
-    
+
     /*
      * Newsletters list
      */
@@ -267,20 +277,19 @@ class TNP {
     public static function newsletters($params) {
 
         global $wpdb;
-        
+
         $list = $wpdb->get_results("SELECT id, subject, created, status, total, sent, send_on FROM " . NEWSLETTER_EMAILS_TABLE . " ORDER BY id DESC LIMIT 10", OBJECT);
-        
+
         if ($wpdb->last_error) {
             $this->logger->error($wpdb->last_error);
             return false;
         }
-        
+
         if (empty($list)) {
             return array();
         }
-        
+
         return $list;
-        
     }
 
 }

@@ -3,7 +3,7 @@
 function first_presets() {
   ob_start();
   ?>
-  <style media="screen">
+  <style media="screen" id="loginpress-style">
     /*************************************************************
      * Plugin:      LoginPress - Customizing the WordPress Login.*
      * Description: LoginPress is the best Login Page Customizer *
@@ -26,7 +26,7 @@ function first_presets() {
     	padding: 0;
     }
     .header-wrapper{
-    	display: table-row;
+    	/* display: table-row; */
     }
     #login{
     	margin-top: 2%;
@@ -65,6 +65,10 @@ function first_presets() {
     	padding-left: 27px;
     	font-weight: normal;
     }
+    #jetpack_protect_answer{
+      padding-left: 0;
+      text-align : center;
+    }
     .login input[type="submit"] {
     	background: #fff;
     	color: #fff;
@@ -100,7 +104,7 @@ function first_presets() {
     	text-align: center;
     }
     .header-cell{
-    	display: table-cell;
+    	/* display: table-cell; */
     	height: 100px;
     }
     .loginHeaderMenu{
@@ -175,7 +179,9 @@ function first_presets() {
     	display: none;
     }
     .footer-wrapper{
-    	display: table-footer-group;
+    	/* display: table-footer-group; */
+      position: sticky;
+      top: 100vh;
     }
     .footer-cont{
 
@@ -183,9 +189,9 @@ function first_presets() {
     	bottom: 0;
     	left: 0;
     	text-align: center;
-    	display: table-cell;
+    	/* display: table-cell; */
     	vertical-align: bottom;
-    	height: 100px;
+    	/* height: 100px; */
     }
     .loginFooterMenu{
     	text-align: center;
@@ -253,7 +259,7 @@ function first_presets() {
     }
     .loginpress-show-love a:hover{
       color: #4d5d95;
-    }
+	}
     @media screen and (max-width: 767px) {
         #login{
             width: 300px;
@@ -272,7 +278,7 @@ function first_presets() {
             padding: 3px;
         }
     }
-      
+
     </style>
 
   <?php

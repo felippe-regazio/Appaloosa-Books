@@ -66,7 +66,22 @@ class NewsletterEmails extends NewsletterModule {
      */
     function render_block($block_id = null, $wrapper = false, $options = array()) {
         $width = 600;
-        $font_family = 'Helvetica, Arial, sans-serif'; 
+        $font_family = 'Helvetica, Arial, sans-serif';
+
+        $defaults = array(
+            'block_padding_top' => 15,
+            'block_padding_bottom' => 15,
+            'block_padding_right' => 0,
+            'block_padding_left' => 0,
+            'block_background' => '#ffffff'
+        );
+
+        // Just in case...
+        if (!is_array($options)) {
+            $options = array();
+        }
+
+        $options = array_merge($defaults, $options);
 
         $block_options = get_option('newsletter_main');
 
@@ -91,7 +106,7 @@ class NewsletterEmails extends NewsletterModule {
             return;
         }
         $is_old_block = isset($block['filename']) && strpos($block['filename'], '.block');
-        
+
         if ($is_old_block) {
             ob_start();
             include NEWSLETTER_DIR . '/emails/tnp-composer/blocks/' . $block['filename'] . '.php';
@@ -101,22 +116,30 @@ class NewsletterEmails extends NewsletterModule {
             include $block['dir'] . '/block.php';
             $content = ob_get_clean();
         }
-        
+
         // Obsolete
         $content = str_replace('{width}', $width, $content);
+        
         $content = $this->inline_css($content, true);
 
         // CSS driven by the block
-        if (!isset($options['block_background'])) $options['block_background'] = '';
-            $style = '';
-            if (isset($options['block_padding_top'])) $style .= 'padding-top: ' . $options['block_padding_top'] . '; ';
-            if (isset($options['block_padding_left'])) $style .= 'padding-left: ' . $options['block_padding_left'] . '; ';
-            if (isset($options['block_padding_right'])) $style .= 'padding-right: ' . $options['block_padding_right'] . '; ';
-            if (isset($options['block_padding_bottom'])) $style .= 'padding-bottom: ' . $options['block_padding_bottom'] . '; ';
-            
+
+        $style = 'text-align: center; ';
+
+        $options['block_padding_top'] = (int) str_replace('px', '', $options['block_padding_top']);
+        $options['block_padding_bottom'] = (int) str_replace('px', '', $options['block_padding_bottom']);
+        $options['block_padding_right'] = (int) str_replace('px', '', $options['block_padding_right']);
+        $options['block_padding_left'] = (int) str_replace('px', '', $options['block_padding_left']);
+
+        $style .= 'padding-top: ' . $options['block_padding_top'] . 'px; ';
+        $style .= 'padding-left: ' . $options['block_padding_left'] . 'px; ';
+        $style .= 'padding-right: ' . $options['block_padding_right'] . 'px; ';
+        $style .= 'padding-bottom: ' . $options['block_padding_bottom'] . 'px; ';
+        $style .= 'background-color: ' . $options['block_background'] . ';';
+
         // Old block type
         if ($is_old_block) {
-            
+
             echo '<table border="0" cellpadding="0" cellspacing="0" align="center" width="100%" style="border-collapse: collapse; width: 100%;" class="tnpc-row" data-id="', esc_attr($block_id), "\">\n";
             echo "<tr>\n";
             echo '<td align="center" style="padding: 0;">', "\n";
@@ -124,14 +147,13 @@ class NewsletterEmails extends NewsletterModule {
 
             echo '<table border="0" cellpadding="0" align="center" cellspacing="0" width="100%" style="width: 100%!important; max-width: ', $width, 'px!important">', "\n";
             echo "<tr>\n";
-            echo '<td class="edit-block" align="center" style="', $style, 'text-align: center;" bgcolor="', $options['block_background'], '" width="100%">', "\n";
+            echo '<td class="edit-block" align="center" style="', $style, '" bgcolor="', $options['block_background'], '" width="100%">', "\n";
 
             echo $content;
-            
+
             echo "</td>\n</tr>\n</table>";
             echo '<!--[if mso]></td></tr></table><![endif]-->';
             echo "\n</td>\n</tr></table>\n\n";
-            
         } else {
 
             $data = '';
@@ -144,22 +166,22 @@ class NewsletterEmails extends NewsletterModule {
                     }
                 }
             }
-                    
+
             if ($wrapper) {
                 echo '<table border="0" cellpadding="0" cellspacing="0" align="center" width="100%" style="border-collapse: collapse; width: 100%;" class="tnpc-row tnpc-row-block" data-id="', esc_attr($block_id), '">';
                 echo '<tr>';
                 echo '<td data-options="', esc_attr($data), '" align="center" style="padding: 0; font-family: Helvetica, Arial, sans-serif;" class="edit-block">';
             }
-            
+
             // Container that fixes the width and makes the block responsive
             echo '<!--[if mso]><table border="0" cellpadding="0" align="center" cellspacing="0" width="' . $width . '"><tr><td width="' . $width . '"><![endif]-->';
             echo "\n";
             echo '<table border="0" cellpadding="0" align="center" cellspacing="0" width="100%" style="width: 100%!important; max-width: ', $width, 'px!important">', "\n";
             echo "<tr>\n";
-            echo '<td align="center" style="', $style, 'text-align: center;" bgcolor="', $options['block_background'], '" width="100%">', "\n";
+            echo '<td align="center" style="', $style, '" bgcolor="', $options['block_background'], '" width="100%">', "\n";
 
             echo $content;
-            
+
             echo "</td>\n</tr>\n</table>";
             echo '<!--[if mso]></td></tr></table><![endif]-->';
             if ($wrapper) {
@@ -246,7 +268,7 @@ class NewsletterEmails extends NewsletterModule {
                 header('X-Robots-Tag: noindex,nofollow,noarchive');
                 header('Cache-Control: no-cache,no-store,private');
 
-                echo $newsletter->replace($email->message, $user, $email->id);
+                echo $newsletter->replace($email->message, $user, $email);
 
                 die();
                 break;
@@ -275,6 +297,7 @@ class NewsletterEmails extends NewsletterModule {
                 header('Content-Type: text/css');
                 echo file_get_contents(__DIR__ . '/tnp-composer/css/newsletter.css');
                 $dirs = apply_filters('newsletter_blocks_dir', array());
+                array_push($dirs, __DIR__ . '/blocks');
                 foreach ($dirs as $dir) {
                     $dir = str_replace('\\', '/', $dir);
                     $list = NewsletterEmails::instance()->scan_blocks_dir($dir);
@@ -438,6 +461,10 @@ class NewsletterEmails extends NewsletterModule {
         foreach ($main_options as $key => $value) {
             $theme_options['main_' . $key] = $value;
         }
+        $info_options = Newsletter::instance()->get_options('info');
+        foreach ($info_options as $key => $value) {
+            $theme_options['main_' . $key] = $value;
+        }
         return $theme_options;
     }
 
@@ -498,8 +525,9 @@ class NewsletterEmails extends NewsletterModule {
         $relative_dir = substr($dir, strlen(WP_CONTENT_DIR));
         while ($file = readdir($handle)) {
 
-            if ($file == '.' || $file == '..') continue;
-            
+            if ($file == '.' || $file == '..')
+                continue;
+
             // The block unique key, we should find out how to biuld it, maybe an hash of the (relative) dir?
             $block_id = sanitize_key($file);
 
@@ -538,9 +566,10 @@ class NewsletterEmails extends NewsletterModule {
     function get_blocks() {
 
         static $blocks = null;
-        
-        if (!is_null($blocks)) return $blocks;
-        
+
+        if (!is_null($blocks))
+            return $blocks;
+
         $blocks = array();
 
         // Legacy blocks
@@ -589,16 +618,18 @@ class NewsletterEmails extends NewsletterModule {
      */
     function get_block($id) {
         switch ($id) {
-            case 'content-07-twocols.block': 
-            case 'content-06-posts.block': 
+            case 'content-07-twocols.block':
+            case 'content-06-posts.block':
                 $id = 'posts';
                 break;
             case 'content-04-cta.block': $id = 'cta';
                 break;
+            case 'content-01-hero.block': $id = 'hero';
+                break;
 //            case 'content-02-heading.block': $id = '/plugins/newsletter/emails/blocks/heading';
 //                break;
         }
-        
+
         // Conversion for old full path ID
         $id = sanitize_key(basename($id));
 

@@ -30,6 +30,18 @@
             <div id="giphy-preview"></div>
         </td>
     </tr>
+    <tr>
+        <th><?php _e('Background', 'newsletter') ?></th>
+        <td>
+            <?php $controls->block_background() ?>
+        </td>
+    </tr>
+    <tr>
+        <th><?php _e('Padding', 'newsletter') ?></th>
+        <td>
+            <?php $controls->block_padding() ?>
+        </td>
+    </tr>
 </table>
 
 <script type="text/javascript">
@@ -46,7 +58,7 @@
                     window.clearTimeout(tid);
                 }
                 tid = window.setTimeout(function () {
-                            jQuery.get("http://api.giphy.com/v1/gifs/search", {api_key: "57FLbVJJd7oQBZ0fEiRnzhM2VtZp5OP1", q: jQuery("#options-q").val()}, function (data) {
+                            jQuery.get("https://api.giphy.com/v1/gifs/search", {api_key: "57FLbVJJd7oQBZ0fEiRnzhM2VtZp5OP1", q: jQuery("#options-q").val()}, function (data) {
                                 jQuery("#tnp-giphy-results").html("");
                                 jQuery.each(data.data, function (index, value) {
                                     jQuery("#tnp-giphy-results").append('<img src="' + value.images.fixed_width_small.url + '" onclick="choose_gif(\'' + value.images.fixed_height.url + '\')" style="float:left;" />');

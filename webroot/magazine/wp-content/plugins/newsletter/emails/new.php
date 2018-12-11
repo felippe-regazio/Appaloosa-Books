@@ -14,7 +14,7 @@ if ($controls->is_action('theme')) {
         $email = array();
         $email['status'] = 'new';
         $email['subject'] = __('Here the email subject', 'newsletter');
-        $email['track'] = 1;
+        $email['track'] = Newsletter::instance()->options['track'];
         $email['token'] = $module->get_token();
 
         if ($controls->data['theme'] == 'rawhtml') {
@@ -69,7 +69,7 @@ if ($controls->is_action('create')) {
     $email = array();
     $email['status'] = 'new';
     $email['subject'] = __('Here the email subject', 'newsletter');
-    $email['track'] = 1;
+    $email['track'] = Newsletter::instance()->options['track'];
 
     $theme_options = $module->get_current_theme_options();
 

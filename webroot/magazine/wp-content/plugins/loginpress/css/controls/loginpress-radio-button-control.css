@@ -177,6 +177,14 @@ input[type=checkbox].loginpress-radio-flat:checked + .loginpress-radio-btn:after
   top: 0;
   left: 0;
 }
+.customize-radio-control-loader{
+  display: none;
+  padding-right: 8px;
+  padding-top: 2px;
+}
+#sub-accordion-section-customize_menu_section .loginpress-radio.loginpress-radio-ios:disabled + .loginpress-radio-btn{
+  cursor: wait;
+}
 @media screen and (max-width: 992px) {
     .loginpress-multisite-subdir h3{
       font-size: 24px;

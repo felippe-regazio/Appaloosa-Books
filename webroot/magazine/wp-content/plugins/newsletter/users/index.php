@@ -1,6 +1,5 @@
 <?php
-if (!defined('ABSPATH'))
-    exit;
+defined('ABSPATH') || exit;
 
 require_once NEWSLETTER_INCLUDES_DIR . '/controls.php';
 
@@ -8,7 +7,6 @@ $controls = new NewsletterControls();
 $module = NewsletterUsers::instance();
 
 $options = $controls->data;
-$options_lists = get_option('newsletter_profile');
 $options_profile = get_option('newsletter_profile');
 $options_main = get_option('newsletter_main');
 
@@ -26,29 +24,20 @@ if ($controls->is_action()) {
         $controls->data['search_page'] = 0;
 }
 
-$lists = array('' => 'Any List');
-for ($i = 1; $i <= NEWSLETTER_LIST_MAX; $i++) {
-    if (empty($options_lists['list_' . $i]))
-        continue;
-    $lists['' . $i] = '(' . $i . ') ' . $options_lists['list_' . $i];
-}
-
 if ($controls->is_action('resend')) {
-    $user = NewsletterUsers::instance()->get_user($controls->button_data);
-    $opts = get_option('newsletter');
-    NewsletterSubscription::instance()->mail($user->email, $newsletter->replace($opts['confirmation_subject'], $user), $newsletter->replace($opts['confirmation_message'], $user));
-    $controls->messages = 'Activation email resent to ' . $user->email;
+    $user = $module->get_user($controls->button_data);
+    NewsletterSubscription::instance()->send_message('confirmation', $user, true);
+    $controls->messages = __('Activation email sent.', 'newsletter');
 }
 
 if ($controls->is_action('resend_welcome')) {
-    $user = NewsletterUsers::instance()->get_user($controls->button_data);
-    $opts = get_option('newsletter');
-    NewsletterSubscription::instance()->mail($user->email, $newsletter->replace($opts['confirmed_subject'], $user), $newsletter->replace($opts['confirmed_message'], $user));
-    $controls->messages = 'Welcome email resent.';
+    $user = $module->get_user($controls->button_data);
+    NewsletterSubscription::instance()->send_message('confirmed', $user, true);
+    $controls->messages = __('Welcome email sent.', 'newsletter');
 }
 
 if ($controls->is_action('remove')) {
-    $wpdb->query($wpdb->prepare("delete from " . NEWSLETTER_USERS_TABLE . " where id=%d", (int) $controls->button_data));
+    $module->delete_user($controls->button_data);
     unset($controls->data['subscriber_id']);
 }
 
@@ -62,10 +51,6 @@ if ($text) {
     $query_args[] = '%' . $text . '%';
     $where .= " and (email like %s or name like %s or surname like %s)";
 }
-
-//if (isset($controls->data['search_test'])) {
-//    $where .= " and test=1";
-//}
 
 if (!empty($controls->data['search_status'])) {
     if ($controls->data['search_status'] == 'T') {
@@ -144,7 +129,7 @@ $controls->data['search_page'] ++;
 
                 <?php _e('filter by', 'newsletter') ?>:
                 <?php $controls->select('search_status', array('' => 'Any status', 'T' => 'Test subscribers', 'C' => 'Confirmed', 'S' => 'Not confirmed', 'U' => 'Unsubscribed', 'B' => 'Bounced')); ?>
-                <?php $controls->select('search_list', $lists); ?>
+                <?php $controls->lists_select('search_list', '-'); ?>
 
                 <?php $controls->button('search', __('Search', 'newsletter')); ?>
                 <?php if ($where != "where 1=1") { ?>
@@ -185,6 +170,7 @@ $controls->data['search_page'] ++;
                         <th>&nbsp;</th>
                     </tr>
                 </thead>
+                <?php $i = 0; ?>
                 <?php foreach ($list as $s) { ?>
                     <tr class="<?php echo ($i++ % 2 == 0) ? 'alternate' : ''; ?>">
 
@@ -221,12 +207,11 @@ $controls->data['search_page'] ++;
                             <td>
                                 <small>
                                     <?php
-                                    for ($i = 1; $i <= NEWSLETTER_LIST_MAX; $i++) {
-                                        if (!isset($lists['' . $i]))
-                                            continue;
-                                        $l = 'list_' . $i;
+                                    $lists = $module->get_lists();
+                                    foreach ($lists as $item) {
+                                        $l = 'list_' . $item->id;
                                         if ($s->$l == 1)
-                                            echo esc_html($lists['' . $i]) . '<br />';
+                                            echo esc_html($item->name) . '<br>';
                                     }
                                     ?>
                                 </small>
@@ -237,13 +222,13 @@ $controls->data['search_page'] ++;
                             <a class="button-secondary" href="<?php echo $module->get_admin_page_url('edit'); ?>&amp;id=<?php echo $s->id; ?>"><?php _e('Edit', 'newsletter') ?></a>
                         </td>
                         <td>
-                            <?php $controls->button_confirm('remove', __('Remove', 'newsletter'), __('Proceed?', 'newsletter'), $s->id); ?>
+                            <?php $controls->button_confirm('remove', __('Remove', 'newsletter'), '', $s->id); ?>
                         </td>
                         <td style="text-align: center">    
                             <?php if ($s->status == "C") { ?>
-                            <?php $controls->button_confirm('resend_welcome', __('Resend welcome', 'newsletter'), __('Proceed?', 'newsletter'), $s->id); ?>
+                            <?php $controls->button_confirm('resend_welcome', __('Resend welcome', 'newsletter'), '', $s->id); ?>
                             <?php } else { ?>
-                            <?php $controls->button_confirm('resend', __('Resend activation', 'newsletter'), __('Proceed?', 'newsletter'), $s->id); ?>
+                            <?php $controls->button_confirm('resend', __('Resend activation', 'newsletter'), '', $s->id); ?>
                             <?php } ?>
                         </td>
 

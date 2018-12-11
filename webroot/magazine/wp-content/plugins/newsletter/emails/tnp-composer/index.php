@@ -86,6 +86,7 @@ $block_options = get_option('newsletter_main');
 <div style="display: none">
     <div id="newsletter-preloaded-export"></div>
     <div id="draggable-helper" style="width: 500px; border: 3px dashed #ddd; opacity: .7; background-color: #fff; text-align: center; text-transform: uppercase; font-size: 14px; color: #aaa; padding: 20px;"></div>
+    <div id="sortable-helper" style="width: 700px; height: 75px;border: 3px dashed #ddd; opacity: .7; background-color: #fff; text-align: center; text-transform: uppercase; font-size: 14px; color: #aaa; padding: 20px;"></div>
 </div>
 
 <div id="tnp-body" style="margin: 0; padding: 0; overflow: hidden; border: 0;"> 
@@ -99,11 +100,10 @@ $block_options = get_option('newsletter_main');
     TNP_HOME_URL = "<?php echo home_url('/', is_ssl() ? 'https' : 'http') ?>";
 </script>
 <script type="text/javascript" src="<?php echo plugins_url('newsletter'); ?>/emails/tnp-composer/_scripts/newsletter-builder.js?ver=<?php echo time() ?>"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.7.3/tinymce.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.6.8-fix/jquery.nicescroll.min.js"></script>
+
+<script src="<?php echo plugins_url('newsletter') ?>/vendor/tinymce/tinymce.min.js"></script>
 <script>
     jQuery(function () {
-        //jQuery("#tnp-mobile-preview").niceScroll();
         tnp_mobile_preview();
     });
 </script>

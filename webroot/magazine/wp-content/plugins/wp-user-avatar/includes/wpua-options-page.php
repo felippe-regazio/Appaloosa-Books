@@ -203,6 +203,7 @@ $wpua_options_page_title = apply_filters('wpua_options_page_title', $wpua_option
     </table>
     <?php submit_button(); ?>
   </form>
+  
 </td>
     <td>
     <div id="fc-sidebar">

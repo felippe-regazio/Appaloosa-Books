@@ -3,6 +3,7 @@
  * Get option and check the key exists in it.
  *
  * @since 1.0.0
+ * @version 1.1.16
  * * * * * * * * * * * * * * * */
 
 
@@ -17,10 +18,23 @@ function loginpress_get_option_key( $loginpress_key, $loginpress_array ) {
 
 	if ( array_key_exists( $loginpress_key, $loginpress_array ) ) {
 
-		return $loginpress_array[ $loginpress_key ];
+		if ( 'loginpress_custom_js' == $loginpress_key ) {
+			return $loginpress_array[ $loginpress_key ];
+		} else {
+			return esc_js( $loginpress_array[ $loginpress_key ] );
+		}
+
 	}
 }
 
+/**
+ * [loginpress_bg_option Check the background image of the template.]
+ * @param  string $loginpress_key   [description]
+ * @param  array $loginpress_array [description]
+ * @return string                   [description]
+ * @since 1.1.0
+ * @version 1.1.1
+ */
 function loginpress_bg_option( $loginpress_key, $loginpress_array ) {
 
 	if ( array_key_exists( $loginpress_key, $loginpress_array ) ) {
@@ -31,6 +45,12 @@ function loginpress_bg_option( $loginpress_key, $loginpress_array ) {
   }
 }
 
+/**
+ * [loginpress_check_px Return the value with 'px']
+ * @param  string $value [description]
+ * @return string        [description]
+ * @since 1.1.0
+ */
 function loginpress_check_px( $value ) {
 
   if ( strpos( $value, "px" ) ) {
@@ -42,6 +62,12 @@ function loginpress_check_px( $value ) {
   }
 }
 
+/**
+ * [loginpress_check_percentage Return the value with '%']
+ * @param  string $value [description]
+ * @return string        [description]
+ * @since 1.1.0
+ */
 function loginpress_check_percentage( $value ) {
 
   if ( strpos( $value, "%" ) ) {
@@ -170,10 +196,11 @@ $loginpress_display_bg 	        = loginpress_bg_option( 'loginpress_display_bg',
 $loginpress_theme_tem           = get_option( 'customize_presets_settings', 'default1' );
 
 /**
- * loginpress_box_shadow
+ * loginpress_box_shadow [if user pass 0 then we're not going to set the value of box-shedow because it effects the pro templates.]
  * @param  integer $shadow         [Shadow Value]
  * @param  integer $opacity        [Opacity Value]
- * @param  integer $default_shadow [description]
+ * @param  integer $default_shadow [Sset shadow's default value]
+ * @param  boolean $inset 				 [description]
  * @return string                  [box-border value]
  * @since 1.1.3
  */
@@ -241,7 +268,7 @@ function loginpress_box_shadow( $shadow, $opacity, $default_shadow = 0, $inset =
 	<?php if ( ! empty( $loginpress_form_display_bg ) && true == $loginpress_form_display_bg ) : ?>
 	background: transparent;
 	<?php endif; ?>
-	<?php if ( ! empty( $loginpress_form_background_clr ) ) : ?>
+	<?php if ( true != $loginpress_form_display_bg && ! empty( $loginpress_form_background_clr ) ) : ?>
 	background-color: <?php echo $loginpress_form_background_clr; ?>;
 	<?php endif; ?>
 	<?php if ( ! empty( $loginpress_login_form_radius ) ) : ?>
@@ -372,6 +399,7 @@ body.login {
 	<?php if ( ! empty( $loginpress_login_button_bottom ) ) : ?>
 	padding-bottom: <?php echo $loginpress_login_button_bottom . 'px;' ?>;
 	<?php endif; ?>
+	float: none;
 }
 #loginform {
 
@@ -381,7 +409,7 @@ body.login {
 	<?php if ( ! empty( $loginpress_form_background_img ) ) : ?>
 	background-image: url(<?php echo $loginpress_form_background_img; ?>);
 	<?php endif; ?>
-	<?php if ( ! empty( $loginpress_form_background_clr ) ) : ?>
+	<?php if ( true != $loginpress_form_display_bg && ! empty( $loginpress_form_background_clr ) ) : ?>
 	background-color: <?php echo $loginpress_form_background_clr; ?>;
 	<?php endif; ?>
 	<?php if ( ! empty( $loginpress_form_height ) ) : ?>
@@ -464,8 +492,11 @@ box-shadow: <?php echo loginpress_box_shadow( $loginpress_textfield_shadow, $log
   <?php if ( ! empty( $loginpress_form_padding ) ) : ?>
 	padding: <?php echo $loginpress_form_padding; ?>;
 	<?php endif; ?>
-	<?php if ( ! empty( $loginpress_form_background_clr ) ) : ?>
+	<?php if ( true != $loginpress_form_display_bg && ! empty( $loginpress_form_background_clr ) ) : ?>
 	background-color: <?php echo $loginpress_form_background_clr; ?>;
+	<?php endif; ?>
+	<?php if ( ! empty( $loginpress_form_display_bg ) && true == $loginpress_form_display_bg ) : ?>
+	background: transparent;
 	<?php endif; ?>
 }
 
@@ -473,8 +504,11 @@ box-shadow: <?php echo loginpress_box_shadow( $loginpress_textfield_shadow, $log
   <?php if ( ! empty( $loginpress_form_padding ) ) : ?>
 	padding: <?php echo $loginpress_form_padding; ?>;
 	<?php endif; ?>
-	<?php if ( ! empty( $loginpress_form_background_clr ) ) : ?>
+	<?php if ( true != $loginpress_form_display_bg && ! empty( $loginpress_form_background_clr ) ) : ?>
 	background-color: <?php echo $loginpress_form_background_clr; ?>;
+	<?php endif; ?>
+	<?php if ( ! empty( $loginpress_form_display_bg ) && true == $loginpress_form_display_bg ) : ?>
+	background: transparent;
 	<?php endif; ?>
 }
 
@@ -651,6 +685,156 @@ text-shadow: none;
 	left: 0;
 	padding-left: 20px;
 }
+.header-cell{
+	/* display: table-cell; */
+	height: 100px;
+}
+.loginHeaderMenu{
+	text-align: center;
+	position: relative;
+	z-index: 10;
+	list-style: none;
+	background: #333;
+
+}
+.loginHeaderMenu>ul>li{
+	display: inline-block;
+	vertical-align: top;
+	position: relative;
+	list-style: none;
+}
+.loginHeaderMenu>ul>li>a{
+	color: #fff;
+	text-transform: uppercase;
+	text-decoration: none;
+	font-size: 16px;
+	padding: 17px 20px;
+	display: inline-block;
+}
+.loginHeaderMenu>ul>li:hover>a{
+	background: #4CAF50;
+	color: #fff;
+}
+.loginHeaderMenu>ul>li>ul{
+	position: absolute;
+	width: 200px;
+	padding: 0;
+	top: 100%;
+	left: 0;
+	background: #fff;
+	list-style: none;
+	text-align: left;
+	border-radius: 0 0 5px 5px;
+	-webkit-box-shadow: 0px 5px 10px -1px rgba(0,0,0,0.31);
+	-moz-box-shadow: 0px 5px 10px -1px rgba(0,0,0,0.31);
+	box-shadow: 0px 5px 10px -1px rgba(0,0,0,0.31);
+	overflow: hidden;
+	opacity: 0;
+	visibility: hidden;
+}
+.loginHeaderMenu>ul>li:hover>ul{
+	opacity: 1;
+	visibility: visible;
+}
+.loginHeaderMenu>ul>li>ul>li{
+	font-size: 15px;
+	color: #333;
+}
+.loginHeaderMenu>ul>li>ul>li>a{
+	color: #333;
+	padding: 10px;
+	display: block;
+	text-decoration: none;
+}
+.loginHeaderMenu>ul>li>ul>li>a:hover {
+	background: rgba(51, 51, 51, 0.35);
+	color: #fff;
+}
+.loginHeaderMenu>ul {
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: center;
+}
+.loginFooterMenu{
+	text-align: center;
+	background-color: rgba(0,0,0,.7);
+}
+.loginFooterMenu>ul{
+	display: inline-flex;
+}
+
+.loginFooterMenu>ul>li{
+	display: inline-block;
+	padding: 18px;
+}
+.loginFooterMenu>ul>li:focus{
+	outline: none;
+	border: 0;
+}
+.loginFooterMenu>ul>li>a:focus{
+	outline: none;
+	border: 0;
+}
+.loginFooterMenu>ul>li>a{
+	color: #fff;
+	text-transform: uppercase;
+	text-decoration: none;
+	font-size: 14px;
+}
+.loginFooterMenu>ul {
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: center;
+}
+.loginpress-caps-lock{
+	background: rgba(51, 56, 61, 0.9);
+    color: #fff;
+    display: none;
+    font-size: 14px;
+    width: 120px;
+	padding: 5px 10px;
+	line-height: 20px;
+    position: absolute;
+    left: calc(100% + 10px);
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 5px;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    text-align: center;
+    -webkit-box-shadow: 0 0 9px 0px rgba(0, 0, 0, 0.20);
+    box-shadow: 0 0 9px 0px rgba(0, 0, 0, 0.20);
+    margin-left: 5px;
+    font-weight: normal;
+	margin: 0;
+	display: none;
+}
+.loginpress-caps-lock:before{
+	content: '';
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 5px 5px 5px 0;
+    border-color: transparent rgba(51, 56, 61, 0.9) transparent transparent;
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    margin-left: 0;
+    margin-top: -5px;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    z-index: 1;
+}
+.login form{
+    overflow: visible;
+}
+#loginform .user-pass-fields input{
+    margin-bottom: 0;
+}
+#loginform .user-pass-fields {
+	margin-bottom: 18px;
+	position: relative;
+}
 @media screen and (max-width: 767px) {
 		.login h1 a {
 				max-width: 100%;
@@ -658,7 +842,24 @@ text-shadow: none;
 		}
     .copyRight{
     	padding: 12px;
-    }
+	}
+	.loginpress-caps-lock{
+		left: auto;
+		right: 0;
+		top: 149%;
+	}
+	.loginpress-caps-lock:before{
+		content: '';
+		width: 0;
+		height: 0;
+		border-style: solid;
+		border-width: 0 5px 5px 5px;
+		border-color: transparent transparent rgba(51, 56, 61, 0.9) transparent;
+		position: absolute;
+		top: 0px;
+		left: 5px;
+		right: auto;
+	}
 }
 
 </style>

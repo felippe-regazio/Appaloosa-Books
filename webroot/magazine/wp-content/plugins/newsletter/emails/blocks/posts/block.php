@@ -15,15 +15,28 @@ $defaults = array(
     'color' => '#999999',
     'font_family' => 'Helvetica, Arial, sans-serif',
     'font_size' => '13',
+    'title_font_family' => 'Helvetica, Arial, sans-serif',
+    'title_font_size' => '25',
     'max' => 4,
     'read_more' => __('Read more...', 'newsletter'),
     'categories' => '',
     'tags' => '',
     'block_background' => '#ffffff',
-    'layout' => 'one'
+    'layout' => 'one',
+    'language' => '',
+    'button_color' => '#256F9C',
+    'show_image'=> 1
 );
 
 $options = array_merge($defaults, $options);
+
+$font_family = $options['font_family'];
+$font_size = $options['font_size'];
+
+$title_font_family = $options['title_font_family'];
+$title_font_size = $options['title_font_size'];
+
+$show_image = !empty($options['show_image']);
 
 $filters = array();
 $filters['posts_per_page'] = (int) $options['max'];
@@ -36,9 +49,12 @@ if (!empty($options['tags'])) {
     $filters['tag'] = $options['tags'];
 }
 
-$posts = get_posts($filters);
+$posts = Newsletter::instance()->get_posts($filters, $options['language']);
+
+$button_color = $options['button_color'];
 
 $alternative = plugins_url('newsletter') . '/emails/blocks/posts/images/blank.png';
+$alternative_2 = plugins_url('newsletter') . '/emails/blocks/posts/images/blank-240x160.png';
 
 ?>
 
@@ -47,23 +63,48 @@ $alternative = plugins_url('newsletter') . '/emails/blocks/posts/images/blank.pn
         .posts-title {
             padding: 0 0 10px 0; 
             font-size: 25px; 
-            font-family: <?php echo $font_family?>; 
+            font-family: <?php echo $title_font_family ?>;
             font-weight: normal; 
             color: #333333;
+            line-height: 1.5em;
         }
         .posts-post-date {
             padding: 0 0 5px 25px; 
-            font-size: 13px; 
-            font-family: <?php echo $font_family?>; 
+            font-size: 13px;
+            font-family: <?php echo $font_family ?>; 
             font-weight: normal; 
             color: #aaaaaa;
         }
         .posts-post-title {
             padding: 0 0 5px 25px; 
-            font-size: 22px; 
-            font-family: <?php echo $font_family?>; 
+            font-size: <?php echo $title_font_size ?>px; 
+            font-family: <?php echo $title_font_family ?>;
             font-weight: normal; 
             color: #333333;
+            line-height: 1.5em;
+        }
+        .posts-post-excerpt {
+            padding: 10px 0 15px 25px;
+            font-family: <?php echo $font_family ?>; 
+            color: #666666; 
+            font-size: <?php echo $font_size ?>px; 
+            line-height: 1.5em;
+        }
+        .posts-post-button {
+            font-size: 15px; 
+            font-family: <?php echo $font_family ?>; 
+            font-weight: normal; 
+            color: #ffffff; 
+            text-decoration: none; 
+            background-color: <?php echo $button_color ?>; 
+            border-top: 10px solid <?php echo $button_color ?>; 
+            border-bottom: 10px solid <?php echo $button_color ?>; 
+            border-left: 20px solid <?php echo $button_color ?>; 
+            border-right: 20px solid <?php echo $button_color ?>; 
+            border-radius: 3px; 
+            -webkit-border-radius: 3px; 
+            -moz-border-radius: 3px; 
+            display: inline-block;
         }
     </style>
     <!-- COMPACT ARTICLE SECTION -->
@@ -81,34 +122,38 @@ $alternative = plugins_url('newsletter') . '/emails/blocks/posts/images/blank.pn
             <td align="center" inline-class="posts-title" class="padding-copy tnpc-row-edit" data-type="title" colspan="2"><?php echo $options['title'] ?></td>
         </tr>
 
-        <?php foreach ($posts AS $post) { ?>
+        <?php foreach ($posts as $post) { ?>
 
             <tr>
-                <td valign="top" style="padding: 40px 0 0 0;" class="mobile-hide tnpc-row-edit" data-type="image">
+                <?php if ($show_image) { ?>
+                <td valign="top" style="padding: 30px 0 0 0; width: 105px!important" class="mobile-hide">
                     <a href="<?php echo tnp_post_permalink($post) ?>" target="_blank">
-                        <img src="<?php echo tnp_post_thumbnail_src($post, array(105, 105, true), $alternative) ?>" width="105" height="105" border="0" style="display: block; font-family: Arial; color: #666666; font-size: 14px; width: 105px!important; height: 105px!important;">
+                        <img src="<?php echo tnp_post_thumbnail_src($post, array(105, 105, true), $alternative) ?>" width="105" height="105" border="0" style="display: block; font-family: Arial; color: #666666; font-size: 14px; min-width: 105px!important; width: 105px!important;">
                     </a>
                 </td>
-                <td style="padding: 40px 0 0 0;" class="no-padding">
+                <?php } ?>
+                <td style="padding: 30px 0 0 0;" class="no-padding">
                     <!-- ARTICLE -->
                     <table border="0" cellspacing="0" cellpadding="0" width="100%">
-                        <tr>
-                            <td align="left" inline-class="posts-post-date" class="padding-meta">
-                                <?php echo tnp_post_date($post) ?>
-                            </td>
-                        </tr>
+                        <?php if (!empty($options['show_date'])) { ?>
+                            <tr>
+                                <td align="left" inline-class="posts-post-date" class="padding-meta">
+                                    <?php echo tnp_post_date($post) ?>
+                                </td>
+                            </tr>
+                        <?php } ?>
                         <tr>
                             <td align="left" inline-class="posts-post-title" class="padding-copy tnpc-row-edit" data-type="title">
                                 <?php echo tnp_post_title($post) ?>
                             </td>  
                         </tr>
                         <tr>
-                            <td align="left" style="padding: 10px 0 15px 25px; font-size: 16px; line-height: 24px; font-family: Helvetica, Arial, sans-serif; color: #666666;" class="padding-copy tnpc-row-edit" data-type="text">
+                            <td align="left" inline-class="posts-post-excerpt" class="padding-copy tnpc-row-edit" data-type="text">
                                 <?php echo tnp_post_excerpt($post) ?>
                             </td>
                         </tr>
                         <tr>
-                            <td style="padding:0 0 45px 25px;" align="left" class="padding">
+                            <td style="padding:0 0 35px 25px;" align="left" class="padding">
                                 <table border="0" cellspacing="0" cellpadding="0" class="mobile-button-container">
                                     <tr>
                                         <td align="center">
@@ -119,7 +164,7 @@ $alternative = plugins_url('newsletter') . '/emails/blocks/posts/images/blank.pn
                                                         <table border="0" cellspacing="0" cellpadding="0" class="responsive-table">
                                                             <tr>
                                                                 <td align="center">
-                                                                    <a href="<?php echo tnp_post_permalink($post) ?>" target="_blank" style="font-size: 15px; font-family: Helvetica, Arial, sans-serif; font-weight: normal; color: #ffffff; text-decoration: none; background-color: #256F9C; border-top: 10px solid #256F9C; border-bottom: 10px solid #256F9C; border-left: 20px solid #256F9C; border-right: 20px solid #256F9C; border-radius: 3px; -webkit-border-radius: 3px; -moz-border-radius: 3px; display: inline-block;" class="mobile-button tnpc-row-edit" data-type="link"><?php echo $options['read_more'] ?></a>
+                                                                    <a href="<?php echo tnp_post_permalink($post) ?>" target="_blank" inline-class="posts-post-button" class="mobile-button tnpc-row-edit" data-type="link"><?php echo $options['read_more'] ?></a>
                                                                 </td>
                                                             </tr>
                                                         </table>
@@ -147,29 +192,29 @@ $alternative = plugins_url('newsletter') . '/emails/blocks/posts/images/blank.pn
         .posts-title {
             font-size: 25px; 
             line-height: 30px; 
-            font-family: <?php echo $font_family?>; 
+            font-family: <?php echo $title_font_family ?>; 
             color: #333333;
         }
         .post-subtitle {
             padding: 20px 0 20px 0; 
             font-size: 16px; 
             line-height: 25px; 
-            font-family: <?php echo $font_family?>; 
+            font-family: <?php echo $font_family ?>; 
             color: #666666;
         }
         .posts-post-title {
             padding: 15px 0 0 0; 
-            font-family: <?php echo $font_family?>; 
+            font-family: <?php echo $title_font_family ?>; 
             color: #333333; 
-            font-size: 20px;
-            line-height: 25px; 
+            font-size: <?php echo $title_font_size ?>px; 
+            line-height: 1.3em; 
         }
         .posts-post-excerpt {
             padding: 5px 0 0 0; 
-            font-family: <?php echo $font_family?>; 
+            font-family: <?php echo $font_family ?>; 
             color: #666666; 
-            font-size: 14px; 
-            line-height: 20px;
+            font-size: <?php echo $font_size ?>px; 
+            line-height: 1.4em;
         }
     </style>
     <!-- TWO COLUMN SECTION -->
@@ -182,9 +227,11 @@ $alternative = plugins_url('newsletter') . '/emails/blocks/posts/images/blank.pn
                     <tr>
                         <td align="center" inline-class="posts-title" class="padding-copy tnpc-row-edit" data-type="title"><?php echo $options['title'] ?></td>
                     </tr>
+                    <!--
                     <tr>
                         <td align="center" inline-class="posts-subtitle" class="padding-copy tnpc-row-edit" data-type="text">The twelve jurors were all writing very busily on slates.</td>
                     </tr>
+                    -->
                 </table>
             </td>
         </tr>
@@ -201,13 +248,15 @@ $alternative = plugins_url('newsletter') . '/emails/blocks/posts/images/blank.pn
                         <tr>
                             <td style="padding: 20px 0 40px 0;">
                                 <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                                    <?php if ($show_image) { ?>
                                     <tr>
                                         <td align="center" valign="middle" class="tnpc-row-edit" data-type="image">
                                             <a href="<?php echo tnp_post_permalink($row[0]) ?>" target="_blank">
-                                                <img src="<?php echo tnp_post_thumbnail_src($row[0], array(240, 160, true)) ?>" width="240" height="160" border="0" class="img-max">
+                                                <img src="<?php echo tnp_post_thumbnail_src($row[0], array(240, 160, true), $alternative_2) ?>" width="240" height="160" border="0" class="img-max">
                                             </a>
                                         </td>
                                     </tr>
+                                    <?php } ?>
                                     <tr>
                                         <td align="center" inline-class="posts-post-title" class="tnpc-row-edit" data-type="title"><?php echo tnp_post_title($row[0]) ?></td>
                                     </tr>
@@ -215,7 +264,9 @@ $alternative = plugins_url('newsletter') . '/emails/blocks/posts/images/blank.pn
                                         <td align="center" inline-class="posts-post-excerpt" class="tnpc-row-edit" data-type="text"><?php echo tnp_post_excerpt($row[0]) ?></td>
                                     </tr>
                                     <tr>
-                                        <td align="center" style="padding: 5px 0 0 0; font-family: Arial, sans-serif; color: #666666; font-size: 14px; line-height: 20px;"><a href="<?php echo tnp_post_permalink($row[0]) ?>" style="color: #256F9C; text-decoration: none;" class="tnpc-row-edit" data-type="link"><?php echo $options['read_more'] ?></a></td>
+                                        <td align="center" style="padding: 5px 0 0 0; font-family: Arial, sans-serif; color: #666666; font-size: 14px; line-height: 20px;">
+                                            <a href="<?php echo tnp_post_permalink($row[0]) ?>" target="_blank" style="font-size: 15px; font-family: Helvetica, Arial, sans-serif; font-weight: normal; color: #ffffff; text-decoration: none; background-color: <?php echo $button_color ?>; border-top: 10px solid <?php echo $button_color ?>; border-bottom: 10px solid <?php echo $button_color ?>; border-left: 20px solid <?php echo $button_color ?>; border-right: 20px solid <?php echo $button_color ?>; border-radius: 3px; -webkit-border-radius: 3px; -moz-border-radius: 3px; display: inline-block;" class="mobile-button tnpc-row-edit" data-type="link"><?php echo $options['read_more'] ?></a>
+                                        </td>
                                     </tr>
                                 </table>
                             </td>
@@ -228,13 +279,15 @@ $alternative = plugins_url('newsletter') . '/emails/blocks/posts/images/blank.pn
                             <tr>
                                 <td style="padding: 20px 0 40px 0;">
                                     <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                                        <?php if ($show_image) { ?>
                                         <tr>
                                             <td align="center" valign="middle" class="tnpc-row-edit" data-type="image">
                                                 <a href="<?php echo tnp_post_permalink($row[1]) ?>" target="_blank">
-                                                    <img src="<?php echo tnp_post_thumbnail_src($row[1], array(240, 160, true)) ?>" width="240" height="160" border="0" class="img-max">
+                                                    <img src="<?php echo tnp_post_thumbnail_src($row[1], array(240, 160, true), $alternative_2) ?>" width="240" height="160" border="0" class="img-max">
                                                 </a>
                                             </td>
                                         </tr>
+                                        <?php } ?>
                                         <tr>
                                             <td align="center" inline-class="posts-post-title" class="tnpc-row-edit" data-type="title"><?php echo tnp_post_title($row[1]) ?></td>
                                         </tr>
@@ -242,7 +295,10 @@ $alternative = plugins_url('newsletter') . '/emails/blocks/posts/images/blank.pn
                                             <td align="center" inline-class="posts-post-excerpt" class="tnpc-row-edit" data-type="text"><?php echo tnp_post_excerpt($row[1]) ?></td>
                                         </tr>
                                         <tr>
-                                            <td align="center" style="padding: 5px 0 0 0; font-family: Arial, sans-serif; color: #666666; font-size: 14px; line-height: 20px;"><a href="<?php echo tnp_post_permalink($row[1]) ?>" style="color: #256F9C; text-decoration: none;" class="tnpc-row-edit" data-type="link"><?php echo $options['read_more'] ?></a></td>
+
+                                            <td align="center" style="padding: 5px 0 0 0; font-family: Arial, sans-serif; color: #666666; font-size: 14px; line-height: 20px;">
+                                                <a href="<?php echo tnp_post_permalink($row[1]) ?>" target="_blank" style="font-size: 15px; font-family: Helvetica, Arial, sans-serif; font-weight: normal; color: #ffffff; text-decoration: none; background-color: <?php echo $button_color ?>; border-top: 10px solid <?php echo $button_color ?>; border-bottom: 10px solid <?php echo $button_color ?>; border-left: 20px solid <?php echo $button_color ?>; border-right: 20px solid <?php echo $button_color ?>; border-radius: 3px; -webkit-border-radius: 3px; -moz-border-radius: 3px; display: inline-block;" class="mobile-button tnpc-row-edit" data-type="link"><?php echo $options['read_more'] ?></a>
+                                            </td>
                                         </tr>
                                     </table>
                                 </td>

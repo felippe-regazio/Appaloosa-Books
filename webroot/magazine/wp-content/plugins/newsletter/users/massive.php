@@ -8,15 +8,6 @@ defined('ABSPATH') || exit;
 $controls = new NewsletterControls();
 $module = NewsletterUsers::instance();
 
-$options_profile = get_option('newsletter_profile');
-
-$lists = array();
-for ($i = 1; $i <= NEWSLETTER_LIST_MAX; $i++) {
-    if (!isset($options_profile['list_' . $i]))
-        $options_profile['list_' . $i] = '';
-    $lists['' . $i] = '(' . $i . ') ' . $options_profile['list_' . $i];
-}
-
 if ($controls->is_action('remove_unconfirmed')) {
     $r = $wpdb->query("delete from " . NEWSLETTER_USERS_TABLE . " where status='S'");
     $controls->messages = __('Subscribers not confirmed deleted: ', 'newsletter') . $r . '.';
@@ -59,8 +50,9 @@ if ($controls->is_action('list_remove')) {
 
 if ($controls->is_action('list_delete')) {
     $count = $wpdb->query("delete from " . NEWSLETTER_USERS_TABLE . " where list_" . ((int) $controls->data['list']) . "<>0");
-    $wpdb->query("delete s from `{$wpdb->prefix}newsletter_sent` s left join `{$wpdb->prefix}newsletter` u on s.user_id=u.id where u.id is null");
-    $wpdb->query("delete s from `{$wpdb->prefix}newsletter_stats` s left join `{$wpdb->prefix}newsletter` u on s.user_id=u.id where u.id is null");
+    $module->clean_sent_table();
+    $module->clean_stats_table();
+
     $controls->messages = $count . ' ' . __('deleted', 'newsletter');
 }
 
@@ -136,8 +128,8 @@ if ($controls->is_action('bounces')) {
             continue;
         }
 
-        $r = NewsletterUsers::instance()->set_user_status($email, 'B');
-        if ($r === 0) {
+        $r = $wpdb->query($wpdb->prepare('update ' . NEWSLETTER_USERS_TABLE . " set status='B' where email=%s limit 1", $email));
+        if ($r === 1) {
             $results .= '[BOUNCED] ' . $email . "\n";
             $marked++;
             continue;
@@ -208,7 +200,7 @@ if ($controls->is_action('bounces')) {
                                 <?php echo $wpdb->get_var("select count(*) from " . NEWSLETTER_USERS_TABLE . " where status='C'"); ?>
                             </td>
                             <td nowrap>
-                                <?php $controls->button_confirm('unconfirm_all', __('Unconfirm all', 'newsletter'), __('Are you sure?', 'newsletter')); ?>
+                                <?php $controls->button_confirm('unconfirm_all', __('Unconfirm all', 'newsletter')); ?>
                             </td>
                         </tr>
                         <tr>
@@ -230,7 +222,7 @@ if ($controls->is_action('bounces')) {
                                 <?php echo $wpdb->get_var("select count(*) from " . NEWSLETTER_USERS_TABLE . " where status='U'"); ?>
                             </td>
                             <td>
-                                <?php $controls->button_confirm('remove_unsubscribed', __('Delete all unsubscribed', 'newsletter'), __('Are you sure?', 'newsletter')); ?>
+                                <?php $controls->button_confirm('remove_unsubscribed', __('Delete all unsubscribed', 'newsletter')); ?>
                             </td>
                         </tr>
 
@@ -240,7 +232,7 @@ if ($controls->is_action('bounces')) {
                                 <?php echo $wpdb->get_var("select count(*) from " . NEWSLETTER_USERS_TABLE . " where status='B'"); ?>
                             </td>
                             <td>
-                                <?php $controls->button_confirm('remove_bounced', __('Delete all bounced', 'newsletter'), __('Are you sure?', 'newsletter')); ?>
+                                <?php $controls->button_confirm('remove_bounced', __('Delete all bounced', 'newsletter')); ?>
                             </td>
                         </tr>
                         <tr>
@@ -262,11 +254,11 @@ if ($controls->is_action('bounces')) {
                                 ))
                                 ?> 
                                 to
-                                <?php $controls->select('list_inactive', $lists); ?>
+                                <?php $controls->lists_select('list_inactive'); ?>
                                 
                             </td>
                             <td>
-                                <?php $controls->button_confirm('update_inactive', __('Update', 'newsletter'), __('Are you sure?', 'newsletter')); ?>
+                                <?php $controls->button_confirm('update_inactive', __('Update', 'newsletter')); ?>
                             </td>
                         </tr>
                     </table>
@@ -280,10 +272,15 @@ if ($controls->is_action('bounces')) {
                         <tr>
                             <th>&nbsp;</th>
                             <td>
-                                <?php $controls->select('list', $lists) ?>:
-                                <?php $controls->button_confirm('list_add', 'Activate for everyone', __('Are you sure?', 'newsletter')); ?>
-                                <?php $controls->button_confirm('list_remove', 'Deactivate for everyone', __('Are you sure?', 'newsletter')); ?>
-                                <?php $controls->button_confirm('list_delete', 'Delete everyone in that list', __('Are you sure?', 'newsletter')); ?>
+                                <?php $controls->lists_select('list') ?>:
+                                <?php $controls->button_confirm('list_add', 'Activate for everyone'); ?>
+                                <?php $controls->button_confirm('list_remove', 'Deactivate for everyone'); ?>
+                                <?php $controls->button_confirm('list_delete', 'Delete everyone in that list'); ?>
+                                <br><br>
+                                <?php $controls->select('list_action', array('move' => 'Change', 'add' => 'Add')); ?>
+                                <?php _e('all subscribers in', 'newsletter') ?> <?php $controls->lists_select('list_1'); ?>
+                                <?php _e('to', 'newsletter') ?> <?php $controls->lists_select('list_2'); ?>
+                                <?php $controls->button_confirm('list_manage', '&raquo;'); ?>
                                 <p class="description">
                                     If you choose to <strong>delete</strong> users in a list, they will be
                                     <strong>physically deleted</strong> from the database (no way back).
@@ -293,17 +290,8 @@ if ($controls->is_action('bounces')) {
                         <tr>
                             <th>&nbsp;</th>
                             <td>
-                                <?php $controls->select('list_action', array('move' => 'Move', 'add' => 'Add')); ?>
-                                <?php _e('all subscribers in', 'newsletter') ?> <?php $controls->select('list_1', $lists); ?>
-                                <?php _e('to', 'newsletter') ?> <?php $controls->select('list_2', $lists); ?>
-                                <?php $controls->button_confirm('list_manage', 'Go!', 'Are you sure?'); ?>   
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>&nbsp;</th>
-                            <td>
-                                <?php _e('Add to', 'newsletter') ?>
-                                <?php $controls->select('list_3', $lists) ?> <?php _e('subscribers without a list', 'newsletter') ?> <?php $controls->button_confirm('list_none', '&raquo;', __('Are you sure?', 'newsletter')); ?>
+                                <?php _e('Add to list', 'newsletter') ?>
+                                <?php $controls->lists_select('list_3') ?> <?php _e('subscribers without a list', 'newsletter') ?> <?php $controls->button_confirm('list_none', '&raquo;'); ?>
                             </td>
                         </tr>
 
@@ -330,7 +318,7 @@ if ($controls->is_action('bounces')) {
                         </tr>
                     </table>
 
-                    <?php $controls->button_confirm('bounces', 'Mark those emails as bounced', __('Are you sure?', 'newsletter')); ?>
+                    <?php $controls->button_confirm('bounces', 'Mark those emails as bounced'); ?>
                 </div>
 
             </div>

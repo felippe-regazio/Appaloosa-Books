@@ -3,6 +3,7 @@
  * LoginPress Settings
  *
  * @since 1.0.9
+ * @version 1.1.9
  */
 if ( ! class_exists( 'LoginPress_Settings' ) ):
 
@@ -184,11 +185,19 @@ class LoginPress_Settings {
     //   ) );
     // }
 
+    // Add WooCommerce lostpassword_url field in version 1.1.7
+    if ( class_exists( 'WooCommerce' ) ) {
+      $_free_fields = $this->loginpress_woocommerce_lostpasword_url( $_free_fields );
+    }
+
+    // Add loginpress_uninstall field in version 1.1.9
+    $_free_fields     = $this->loginpress_uninstallation_tool( $_free_fields );
+
     $_settings_fields = apply_filters( 'loginpress_pro_settings', $_free_fields );
 
-    $settings_fields = array( 'loginpress_setting' => $_settings_fields );
+    $settings_fields  = array( 'loginpress_setting' => $_settings_fields );
 
-    $tab = apply_filters( 'loginpress_settings_fields', $settings_fields );
+    $tab              = apply_filters( 'loginpress_settings_fields', $settings_fields );
 
     return $tab;
   }
@@ -264,6 +273,67 @@ class LoginPress_Settings {
     }
 
     return $pages_options;
+  }
+
+  /**
+   * loginpress_woocommerce_lostpasword_url [merge a woocommerce lostpassword url field with the last element of array.]
+   * @param  array $fields_list
+   * @since 1.1.7
+   * @return array
+   */
+  function loginpress_woocommerce_lostpasword_url( $fields_list ) {
+
+    $array_elements   = array_slice( $fields_list, 0, -1 ); //slice a last element of array.
+    $last_element     = end( $fields_list ); // last element of array.
+    $lostpassword_url = array(
+      'name'  => 'lostpassword_url',
+      'label' => __( 'Lost Password URL', 'loginpress' ),
+      'desc'  => __( 'Use WordPress default lost password URL instead of WooCommerce custom lost password URL.', 'loginpress' ),
+      'type'  => 'checkbox'
+    );
+    $last_two_elements = array_merge( array( $lostpassword_url, $last_element ) ); // merge last 2 elements of array.
+    return array_merge( $array_elements, $last_two_elements ); // merge an array and return.
+  }
+
+  /**
+   * loginpress_uninstallation_filed [merge a uninstall loginpress field with array of element.]
+   * @param  array $fields_list
+   * @since 1.1.9
+   * @return array
+   */
+  function loginpress_uninstallation_filed( $fields_list ) {
+
+    $loginpress_page_check = '';
+    if ( is_multisite() ) {
+      $loginpress_page_check = __( 'and LoginPress page', 'loginpress' );
+    }
+
+    $loginpress_db_check = array( array(
+      'name'  => 'loginpress_uninstall',
+      'label' => __( 'Remove Settings on Uninstall', 'loginpress' ),
+      'desc'  => sprintf( esc_html__( 'This tool will remove all LoginPress settings %1$s upon uninstall.', 'loginpress' ), $loginpress_page_check ),
+      'type'  => 'checkbox'
+    ) );
+    return array_merge( $fields_list, $loginpress_db_check ); // merge an array and return.
+  }
+
+  /**
+   * loginpress_uninstallation_tool [Pass return true in loginpress_multisite_uninstallation_tool filter's callback for enable uninsatalltion control on each site.]
+   * @param  array $_free_fields
+   * @since 1.1.9
+   * @return array
+   */
+  function loginpress_uninstallation_tool( $_free_fields ) {
+
+    if ( is_multisite() && ! apply_filters( 'loginpress_multisite_uninstallation_tool', false ) ) {
+      if ( get_current_blog_id() == '1' ) {
+        $_free_fields = $this->loginpress_uninstallation_filed( $_free_fields );
+      }
+    } else {
+      $_free_fields = $this->loginpress_uninstallation_filed( $_free_fields );
+    }
+
+    return $_free_fields;
   }
 
 }

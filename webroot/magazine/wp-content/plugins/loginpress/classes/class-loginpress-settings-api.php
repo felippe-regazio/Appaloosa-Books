@@ -562,7 +562,7 @@ if ( !class_exists( 'LoginPress_Settings_API' ) ):
     *
     * This function displays every sections in a different form.
     * @since 1.0.9
-    * @version 1.0.23
+    * @version 1.1.6
     */
     function show_forms() {
       ?>
@@ -619,7 +619,16 @@ if ( !class_exists( 'LoginPress_Settings_API' ) ):
                */
               if ( $form['id'] == 'loginpress_register_fields' ) :
                 do_action( 'loginpress_register_fields_script' );
-              endif;?>
+              endif;
+              /**
+               * Add Social Login Addon Action Hook.
+               * @since 1.1.6
+               * @return string
+               */
+              if ( $form['id'] == 'loginpress_social_logins' ) :
+                do_action( 'loginpress_social_login_help_tab_script' );
+              endif;
+              ?>
           </div>
         <?php endforeach; ?>
 

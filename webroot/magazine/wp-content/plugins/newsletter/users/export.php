@@ -5,13 +5,6 @@ $options_profile = get_option('newsletter_profile');
 $controls = new NewsletterControls();
 $module = NewsletterUsers::instance();
 
-$lists = array('0' => 'All');
-for ($i = 1; $i <= NEWSLETTER_LIST_MAX; $i++) {
-    if (!isset($options_profile['list_' . $i])) {
-        $options_profile['list_' . $i] = '';
-    }
-    $lists['' . $i] = '(' . $i . ') ' . $options_profile['list_' . $i];
-}
 ?>
 
 <div class="wrap" id="tnp-wrap">
@@ -44,7 +37,7 @@ for ($i = 1; $i <= NEWSLETTER_LIST_MAX; $i++) {
                 <tr>
                     <th><?php _e('List', 'newsletter') ?></th>
                     <td>
-                        <?php $controls->select('list', $lists); ?>
+                        <?php $controls->lists_select('list', __('All', 'newsletter')); ?>
                     </td>
                 </tr>
             </table>

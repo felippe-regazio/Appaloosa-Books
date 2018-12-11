@@ -1309,3 +1309,7 @@ exit(0);
 1542590745_4926:"Notice: 127.0.0.1; User authentication succeeded: ApMag"
 1542590775_5994:"Notice: 127.0.0.1; User authentication succeeded: ApMag"
 1542769132_0003:"Warning: 127.0.0.1; Post deleted: (multiple entries): Post id: 666,Post author: 3,Post type: post,Post status: auto-draft,Post inserted: 2018-11-12 17:43:12,Post modified: 2018-11-12 17:43:12,Post guid: http:\/\/www.appaloosabooks.com\/magazine\/?p=666,Post title: Rascunho autom\u00e1tico"
+1544486406_9595:"Notice: 127.0.0.1; User authentication succeeded: ApMag"
+1544486431_3628:"Notice: 127.0.0.1; User authentication succeeded: ApMag"
+1544486450_839:"Critical: ApMag, 127.0.0.1; WordPress updated to version: 5.0"
+1544486503_1532:"Warning: ApMag, 127.0.0.1; Plugins updated: (multiple entries): Classic Editor (v0.5; classic-editor\/classic-editor.php),Coming Soon Page &amp; Maintenance Mode by SeedProd (v5.0.19; coming-soon\/coming-soon.php),LoginPress - Customizing the WordPress Login (v1.1.4; loginpress\/loginpress.php),Newsletter (v5.4.0; newsletter\/plugin.php),Sucuri Security - Auditing, Malware Scanner and Hardening (v1.8.15; sucuri-scanner\/sucuri.php),User Role Editor (v4.40.3; user-role-editor\/user-role-editor.php),WP User Avatar (v2.0.9; wp-user-avatar\/wp-user-avatar.php)"

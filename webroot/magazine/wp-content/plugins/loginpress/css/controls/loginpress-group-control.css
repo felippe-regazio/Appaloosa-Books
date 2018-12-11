@@ -93,3 +93,16 @@
   box-shadow: 0 0 0 1px #5b9dd9, 0 0 2px 1px rgba(30,140,190,.8);
   color: #5b9dd9;
 }
+/* Code start for RTL */
+html[dir="rtl"] #customize-controls h3.loginpress-group-heading .customize-help-toggle{
+  left: 1px;
+  right: auto;
+}
+html[dir="rtl"] input[type=checkbox].loginpress-radio:checked + .loginpress-radio-btn:after{
+  right: 15px;
+  left: auto;
+}
+html[dir="rtl"] .customize-partial-edit-shortcut button,html[dir="rtl"]  .widget .customize-partial-edit-shortcut button{
+  right: 0;
+}
+/* Code End for RTL */

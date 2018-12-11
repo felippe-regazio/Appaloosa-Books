@@ -7,6 +7,7 @@ class LoginPress_Entities {
   *
   * @var string
   * @since 1.0.0
+  * @version 1.1.16
   */
   public $loginpress_key;
 
@@ -85,6 +86,8 @@ class LoginPress_Entities {
       'plugin_url'        => plugins_url(),
       'login_theme'       => get_option( 'customize_presets_settings', true ),
       'loginpress_bg_url' => $loginpress_bg_url,
+      'preset_nonce'      => wp_create_nonce('loginpress-preset-nonce'),
+      'preset_loader'     => includes_url( 'js/tinymce/skins/lightgray/img/loader.gif' ),
     );
 
     wp_localize_script( 'loginpress-customize-control', 'loginpress_script', $loginpress_localize );
@@ -183,9 +186,10 @@ class LoginPress_Entities {
 
     $wp_customize->add_setting( "loginpress_customization[{$control[$index]}]", array(
       // 'default'				=> $form_color_default[$form_color],
-      'type'					=> 'option',
-      'capability'		=> 'manage_options',
-      'transport'     => 'postMessage'
+      'type'					    => 'option',
+      'capability'		    => 'manage_options',
+      'transport'         => 'postMessage',
+      'sanitize_callback' => 'sanitize_hex_color' // validates 3 or 6 digit HTML hex color code.
     ) );
 
     $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, "loginpress_customization[{$control[$index]}]", array(
@@ -217,22 +221,24 @@ class LoginPress_Entities {
   */
   public function customize_login_panel( $wp_customize ) {
 
-    include LOGINPRESS_ROOT_PATH .'classes/control-presets.php';
+    include LOGINPRESS_ROOT_PATH . 'classes/control-presets.php';
 
-    include LOGINPRESS_ROOT_PATH .'classes/controls/background-gallery.php';
+    include LOGINPRESS_ROOT_PATH . 'classes/controls/background-gallery.php';
 
-    include LOGINPRESS_ROOT_PATH .'classes/controls/range.php';
+    include LOGINPRESS_ROOT_PATH . 'classes/controls/range.php';
 
-    include LOGINPRESS_ROOT_PATH .'classes/controls/group.php';
+    include LOGINPRESS_ROOT_PATH . 'classes/controls/group.php';
 
-    include LOGINPRESS_ROOT_PATH .'classes/controls/radio-button.php';
+    include LOGINPRESS_ROOT_PATH . 'classes/controls/radio-button.php';
 
-    include LOGINPRESS_ROOT_PATH .'classes/controls/miscellaneous.php';
+    include LOGINPRESS_ROOT_PATH . 'classes/controls/miscellaneous.php';
 
-    include LOGINPRESS_ROOT_PATH .'include/customizer-strings.php';
+    include LOGINPRESS_ROOT_PATH . 'include/customizer-strings.php';
+
+    include LOGINPRESS_ROOT_PATH . 'include/customizer-validation.php';
 
     if ( ! has_action( 'loginpress_pro_add_template' ) ) :
-      include LOGINPRESS_ROOT_PATH .'classes/class-loginpress-promo.php';
+      include LOGINPRESS_ROOT_PATH . 'classes/class-loginpress-promo.php';
     endif;
 
     //	=============================
@@ -250,7 +256,7 @@ class LoginPress_Entities {
     * =============================
     *
     * @since	1.0.9
-    * @version 1.0.23
+    * @version 1.1.16
     */
     $wp_customize->add_section( 'customize_presets', array(
       'title'				   => __( 'Themes', 'loginpress' ),
@@ -262,6 +268,7 @@ class LoginPress_Entities {
       $wp_customize->add_setting( 'customize_presets_settings', array(
         'default'				=> 'default1',
         'type'					=> 'option',
+        // 'transport'     => 'postMessage',
         'capability'		=> 'manage_options',
       ) );
 
@@ -331,7 +338,7 @@ class LoginPress_Entities {
     $wp_customize->add_section( 'customize_logo_section', array(
       'title'				 => __( 'Logo', 'loginpress' ),
       'description'	 => __( 'Customize Your Logo Section', 'loginpress' ),
-      'priority'			=> 5,
+      'priority'		 => 5,
       'panel'				 => 'loginpress_panel',
     ) );
 
@@ -341,24 +348,26 @@ class LoginPress_Entities {
      */
 
      $wp_customize->add_setting( 'loginpress_customization[setting_logo_display]', array(
-       'default'        => false,
-       'type'           => 'option',
-       'capability'		  => 'manage_options',
-       'transport'      => 'postMessage'
+       'default'           => false,
+       'type'              => 'option',
+       'capability'		     => 'manage_options',
+       'transport'         => 'postMessage',
+       'sanitize_callback' => 'loginpress_sanitize_checkbox'
      ) );
 
      $wp_customize->add_control( new LoginPress_Radio_Control( $wp_customize, 'loginpress_customization[setting_logo_display]', array(
       'settings'    => 'loginpress_customization[setting_logo_display]',
    		'label'	      => __( 'Disable Logo:', 'loginpress'),
    		'section'     => 'customize_logo_section',
-      'priority'	=> 4,
-   		'type'        => 'ios',// light, ios, flat
+      'priority'	  => 4,
+   		'type'        => 'ios', // light, ios, flat
      ) ) );
 
     $wp_customize->add_setting( 'loginpress_customization[setting_logo]', array(
-      'type'					=> 'option',
-      'capability'		=> 'manage_options',
-      'transport'      => 'postMessage'
+      'type'					    => 'option',
+      'capability'		    => 'manage_options',
+      'transport'         => 'postMessage',
+      'sanitize_callback' => 'loginpress_sanitize_image'
     ) );
 
     $wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'loginpress_customization[setting_logo]', array(
@@ -381,15 +390,17 @@ class LoginPress_Entities {
     $logo_control = array( 'customize_logo_hover', 'customize_logo_hover_title' );
     $logo_default = array( '', '' );
     $logo_label = array( __( 'Logo URL:', 'loginpress' ), __( 'Logo Hover Title:', 'loginpress' ) );
+    $logo_sanitization = array( 'esc_url_raw', 'wp_strip_all_tags' );
 
     $logo = 0;
     while ( $logo < 2 ) :
 
       $wp_customize->add_setting( "loginpress_customization[{$logo_control[$logo]}]", array(
-        'default'					=> $logo_default[$logo],
-        'type'						=> 'option',
-        'capability'			=> 'manage_options',
-        'transport'       => 'postMessage'
+        'default'					  => $logo_default[$logo],
+        'type'						  => 'option',
+        'capability'			  => 'manage_options',
+        'transport'         => 'postMessage',
+        'sanitize_callback' => $logo_sanitization[$logo]
       ) );
 
       $wp_customize->add_control( "loginpress_customization[{$logo_control[$logo]}]", array(
@@ -414,23 +425,25 @@ class LoginPress_Entities {
 
     $wp_customize->add_setting( 'loginpress_customization[setting_background_color]', array(
       // 'default'				=> '#ddd5c3',
-      'type'					=> 'option',
-      'capability'		=> 'manage_options',
-      'transport'     => 'postMessage'
+      'type'					    => 'option',
+      'capability'		    => 'manage_options',
+      'transport'         => 'postMessage',
+      'sanitize_callback' => 'sanitize_hex_color' // validates 3 or 6 digit HTML hex color code.
     ) );
 
     $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'loginpress_customization[setting_background_color]', array(
-      'label'		 => __( 'Background Color:', 'loginpress' ),
-      'section'	 => 'section_background',
-      'priority'	=> 5,
-      'settings'	=> 'loginpress_customization[setting_background_color]'
+      'label'		   => __( 'Background Color:', 'loginpress' ),
+      'section'	   => 'section_background',
+      'priority'	 => 5,
+      'settings'	 => 'loginpress_customization[setting_background_color]'
     ) ) );
 
     $wp_customize->add_setting( 'loginpress_customization[loginpress_display_bg]', array(
       'default'        => true,
       'type'           => 'option',
       'capability'		 => 'manage_options',
-      'transport'      => 'postMessage'
+      'transport'      => 'postMessage',
+      'sanitize_callback' => 'loginpress_sanitize_checkbox'
     ) );
     /**
      * [Enable / Disabe Background Image with LoginPress_Radio_Control]
@@ -447,9 +460,10 @@ class LoginPress_Entities {
 
     $wp_customize->add_setting( 'loginpress_customization[setting_background]', array(
       // 'default'       =>  plugins_url( 'img/bg.jpg', LOGINPRESS_ROOT_FILE ) ,
-      'type'					 => 'option',
-      'capability'		 => 'manage_options',
-      'transport'      => 'postMessage'
+      'type'					    => 'option',
+      'capability'		    => 'manage_options',
+      'transport'         => 'postMessage',
+      'sanitize_callback' => 'loginpress_sanitize_image'
     ) );
 
     $wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'loginpress_customization[setting_background]', array(
@@ -506,10 +520,11 @@ class LoginPress_Entities {
 
 
     $wp_customize->add_setting( 'loginpress_customization[background_repeat_radio]', array(
-      'default'				=> 'no-repeat',
-      'type'					=> 'option',
-      'capability'		=> 'manage_options',
-      'transport'     => 'postMessage'
+      'default'				    => 'no-repeat',
+      'type'					    => 'option',
+      'capability'		    => 'manage_options',
+      'transport'         => 'postMessage',
+      'sanitize_callback' => 'loginpress_sanitize_checkbox'
     ) );
 
     $wp_customize->add_control( 'loginpress_customization[background_repeat_radio]', array(
@@ -529,10 +544,11 @@ class LoginPress_Entities {
     ) );
 
     $wp_customize->add_setting( 'loginpress_customization[background_position]', array(
-      'default'				=> 'center',
-      'type'					=> 'option',
-      'capability'		=> 'manage_options',
-      'transport'     => 'postMessage'
+      'default'				    => 'center',
+      'type'					    => 'option',
+      'capability'		    => 'manage_options',
+      'transport'         => 'postMessage',
+      'sanitize_callback' => 'loginpress_sanitize_select'
     ) );
     $wp_customize->add_control( 'loginpress_customization[background_position]', array(
       'settings'			=> 'loginpress_customization[background_position]',
@@ -554,10 +570,11 @@ class LoginPress_Entities {
     ) );
 
     $wp_customize->add_setting( 'loginpress_customization[background_image_size]', array(
-      'default'				=> 'cover',
-      'type'					=> 'option',
-      'capability'		=> 'manage_options',
-      'transport'     => 'postMessage'
+      'default'				    => 'cover',
+      'type'					    => 'option',
+      'capability'		    => 'manage_options',
+      'transport'         => 'postMessage',
+      'sanitize_callback' => 'loginpress_sanitize_select'
     ));
 
     $wp_customize->add_control( 'loginpress_customization[background_image_size]', array(
@@ -593,24 +610,26 @@ class LoginPress_Entities {
      */
 
      $wp_customize->add_setting( 'loginpress_customization[setting_form_display_bg]', array(
-       'default'        => false,
-       'type'           => 'option',
-       'capability'		 => 'manage_options',
-       'transport'      => 'postMessage'
+       'default'           => false,
+       'type'              => 'option',
+       'capability'		     => 'manage_options',
+       'transport'         => 'postMessage',
+       'sanitize_callback' => 'loginpress_sanitize_checkbox'
      ) );
 
      $wp_customize->add_control( new LoginPress_Radio_Control( $wp_customize, 'loginpress_customization[setting_form_display_bg]', array(
-       'settings'    => 'loginpress_customization[setting_form_display_bg]',
-   		'label'	      => __( 'Enable Form Transparency:', 'loginpress'),
-   		'section'     => 'section_form',
+      'settings'   => 'loginpress_customization[setting_form_display_bg]',
+   		'label'	     => __( 'Enable Form Transparency:', 'loginpress'),
+   		'section'    => 'section_form',
       'priority'	 => 5,
-   		'type'        => 'ios',
+   		'type'       => 'ios',
      ) ) );
 
     $wp_customize->add_setting( 'loginpress_customization[setting_form_background]', array(
-      'type'          => 'option',
-      'capability'		=> 'manage_options',
-      'transport'     => 'postMessage'
+      'type'              => 'option',
+      'capability'		    => 'manage_options',
+      'transport'         => 'postMessage',
+      'sanitize_callback' => 'loginpress_sanitize_image'
     ) );
 
     $wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'loginpress_customization[setting_form_background]', array(
@@ -635,7 +654,8 @@ class LoginPress_Entities {
         'default'				=> $form_default[$form_padding],
         'type'					=> 'option',
         'capability'		=> 'manage_options',
-        'transport'     => 'postMessage'
+        'transport'     => 'postMessage',
+        'sanitize_callback' => $form_sanitization[$form_padding]
       ) );
 
       $wp_customize->add_control( "loginpress_customization[{$form_control[$form_padding]}]", array(
@@ -687,17 +707,18 @@ class LoginPress_Entities {
     while ( $input_padding < 3 ) :
 
       $wp_customize->add_setting( "loginpress_customization[{$form_control[$input_padding]}]", array(
-        'default'				=> $form_default[$input_padding],
-        'type'					=> 'option',
-        'capability'		=> 'manage_options',
-        'transport'     => 'postMessage'
+        'default'				    => $form_default[$input_padding],
+        'type'					    => 'option',
+        'capability'		    => 'manage_options',
+        'transport'         => 'postMessage',
+        'sanitize_callback' => $form_sanitization[$input_padding]
       ) );
 
       $wp_customize->add_control( "loginpress_customization[{$form_control[$input_padding]}]", array(
-        'label'						 => $form_label[$input_padding],
-        'section'					 => 'section_form',
-        'priority'					=> 85,
-        'settings'				 => "loginpress_customization[{$form_control[$input_padding]}]"
+        'label'						   => $form_label[$input_padding],
+        'section'					   => 'section_form',
+        'priority'					 => 85,
+        'settings'				   => "loginpress_customization[{$form_control[$input_padding]}]"
       ) );
 
       $input_padding++;
@@ -748,9 +769,10 @@ class LoginPress_Entities {
     ) );
 
     $wp_customize->add_setting( 'loginpress_customization[forget_form_background]', array(
-      'type'          => 'option',
-      'capability'		=> 'manage_options',
-      'transport'     => 'postMessage'
+      'type'              => 'option',
+      'capability'		    => 'manage_options',
+      'transport'         => 'postMessage',
+      'sanitize_callback' => 'loginpress_sanitize_image'
     ) );
 
     $wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'loginpress_customization[forget_form_background]', array(
@@ -762,16 +784,17 @@ class LoginPress_Entities {
 
     $wp_customize->add_setting( 'loginpress_customization[forget_form_background_color]', array(
       // 'default'				=> '#FFF',
-      'type'					=> 'option',
-      'capability'		=> 'manage_options',
-      'transport'     => 'postMessage'
+      'type'					    => 'option',
+      'capability'		    => 'manage_options',
+      'transport'         => 'postMessage',
+      'sanitize_callback' => 'sanitize_hex_color' // validates 3 or 6 digit HTML hex color code.
     ) );
 
     $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'loginpress_customization[forget_form_background_color]', array(
-      'label'		 => __( 'Forget Form Background Color:', 'loginpress' ),
-      'section'	 => 'section_forget_form',
-      'priority'	=> 10,
-      'settings'	=> 'loginpress_customization[forget_form_background_color]'
+      'label'		   => __( 'Forget Form Background Color:', 'loginpress' ),
+      'section'	   => 'section_forget_form',
+      'priority'	 => 10,
+      'settings'	 => 'loginpress_customization[forget_form_background_color]'
     ) ) );
 
     //	=============================
@@ -843,10 +866,11 @@ class LoginPress_Entities {
     while ( $error < 10 ) :
 
       $wp_customize->add_setting( "loginpress_customization[{$error_control[$error]}]", array(
-        'default'				=> $error_default[$error],
-        'type'					=> 'option',
-        'capability'		=> 'manage_options',
-        'transport'     => 'postMessage'
+        'default'				    => $error_default[$error],
+        'type'					    => 'option',
+        'capability'		    => 'manage_options',
+        'transport'         => 'postMessage',
+        'sanitize_callback' => 'wp_kses_post'
       ) );
 
       $wp_customize->add_control( "loginpress_customization[{$error_control[$error]}]", array(
@@ -878,21 +902,23 @@ class LoginPress_Entities {
       __( 'Logout Message:', 'loginpress' ),
       __( 'Message Field Border: ( Example: 1px solid #00a0d2; )', 'loginpress' ),
     );
+    $welcome_sanitization = array( 'wp_kses_post', 'wp_kses_post', 'wp_kses_post', 'wp_kses_post', 'wp_strip_all_tags' );
 
     $welcome = 0;
     while ( $welcome < 5 ) :
 
       $wp_customize->add_setting( "loginpress_customization[{$welcome_control[$welcome]}]", array(
-        'type'					=> 'option',
-        'capability'		=> 'manage_options',
-        'transport'     => 'postMessage'
+        'type'					    => 'option',
+        'capability'		    => 'manage_options',
+        'transport'         => 'postMessage',
+        'sanitize_callback' => $welcome_sanitization[$welcome]
       ));
 
       $wp_customize->add_control( "loginpress_customization[{$welcome_control[$welcome]}]", array(
-        'label'						 => $welcome_label[ $welcome ],
-        'section'					 => 'section_welcome',
-        'priority'					=> 5,
-        'settings'					=> "loginpress_customization[{$welcome_control[$welcome]}]",
+        'label'						   => $welcome_label[ $welcome ],
+        'section'					   => 'section_welcome',
+        'priority'					 => 5,
+        'settings'					 => "loginpress_customization[{$welcome_control[$welcome]}]",
         'input_attrs' => array(
             'placeholder' => $welcome_default[ $welcome ],
         )
@@ -903,16 +929,17 @@ class LoginPress_Entities {
 
     $wp_customize->add_setting( 'loginpress_customization[message_background_color]', array(
       // 'default'				=> '#fff',
-      'type'					=> 'option',
-      'capability'		=> 'manage_options',
-      'transport'     => 'postMessage'
+      'type'					    => 'option',
+      'capability'		    => 'manage_options',
+      'transport'         => 'postMessage',
+      'sanitize_callback' => 'sanitize_hex_color' // validates 3 or 6 digit HTML hex color code.
     ) );
 
     $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'loginpress_customization[message_background_color]', array(
-      'label'		 => __( 'Message Field Background Color:', 'loginpress' ),
-      'section'	 => 'section_welcome',
-      'priority'	=> 30,
-      'settings'	=> 'loginpress_customization[message_background_color]'
+      'label'		   => __( 'Message Field Background Color:', 'loginpress' ),
+      'section'	   => 'section_welcome',
+      'priority'	 => 30,
+      'settings'	 => 'loginpress_customization[message_background_color]'
     ) ) );
 
     //	=============================
@@ -1018,94 +1045,23 @@ class LoginPress_Entities {
     //		 )));
 
     //	=============================
-    //	= Custom Header Login menu	=
-    //	=============================
-    // $menuVals	 = array();
-    // $menus			= get_registered_nav_menus();
-    //
-    // foreach ( $menus as $location => $name ) {
-    //   $menuVals[$location] =	 $name ;
-    // }
-    // $wp_customize->add_section(
-    // 'customize_menu_section',
-    // array(
-    //   'title'				 => __( 'Login Page Menus', 'loginpress' ),
-    //   'description'	 => '',
-    //   'priority'			=> 32,
-    //   'panel'				 => 'loginpress_panel',
-    // ));
-    //
-    // $wp_customize->add_setting('loginpress_customization[header_login_menu]', array(
-    //   'capability' => 'edit_theme_options',
-    //   'type'			 => 'option',
-    // ));
-    //
-    // $wp_customize->add_control('header_login_menu', array(
-    //   'settings' => 'loginpress_customization[header_login_menu]',
-    //   'label'		=> __( 'Display Header Menu?', 'loginpress'),
-    //   'section'	=> 'customize_menu_section',
-    //   'priority' => 5,
-    //   'type'		 => 'checkbox',
-    // ));
-    //
-    // $wp_customize->add_setting('loginpress_customization[customize_login_menu]', array(
-    //   'capability'		 => 'edit_theme_options',
-    //   'type'					 => 'option',
-    //
-    // ));
-    // $wp_customize->add_control( 'customize_login_menu', array(
-    //   'settings' => 'loginpress_customization[customize_login_menu]',
-    //   'label'	 => __( 'Select Menu for Header:', 'loginpress' ),
-    //   'section' => 'customize_menu_section',
-    //   'type'		=> 'select',
-    //   'priority' => 10,
-    //   'choices'		=> $menuVals,
-    // ));
-    //
-    // $wp_customize->add_setting('loginpress_customization[footer_login_menu]', array(
-    //   'capability' => 'edit_theme_options',
-    //   'type'			 => 'option',
-    // ));
-    //
-    // $wp_customize->add_control('footer_login_menu', array(
-    //   'settings' => 'loginpress_customization[footer_login_menu]',
-    //   'label'		=> __( 'Display Footer Menu?', 'loginpress' ),
-    //   'section'	=> 'customize_menu_section',
-    //   'priority' => 15,
-    //   'type'		 => 'checkbox',
-    // ));
-    //
-    // $wp_customize->add_setting('loginpress_customization[customize_login_footer_menu]', array(
-    //   'capability'		 => 'edit_theme_options',
-    //   'type'					 => 'option',
-    //
-    // ));
-    // $wp_customize->add_control( 'customize_login_footer_menu', array(
-    //   'settings' => 'loginpress_customization[customize_login_footer_menu]',
-    //   'label'	 => __( 'Select Menu:', 'loginpress' ),
-    //   'section' => 'customize_menu_section',
-    //   'priority' => 20,
-    //   'type'		=> 'select',
-    //   'choices'		=> $menuVals,
-    // ));
-
-    //	=============================
     //	= Section for Form Footer	 =
     //	=============================
     $wp_customize->add_section( 'section_fotter', array(
-      'title'				 => __( 'Form Footer', 'loginpress' ),
-      'description'	 => '',
-      'priority'			=> 40,
-      'panel'				 => 'loginpress_panel',
+      'title'				   => __( 'Form Footer', 'loginpress' ),
+      'description'	   => '',
+      'priority'			 => 40,
+      'panel'				   => 'loginpress_panel',
     ) );
 
     $this->loginpress_group_setting( $wp_customize, $group_control, $group_label, $group_info, 'section_fotter', 3, 4 );
 
     $wp_customize->add_setting( 'loginpress_customization[footer_display_text]', array(
-      'default'					=> true,
-      'type'						=> 'option',
-      'capability'			=> 'manage_options',
-      'transport'       => 'postMessage'
+      'default'					  => true,
+      'type'						  => 'option',
+      'capability'			  => 'manage_options',
+      'transport'         => 'postMessage',
+      'sanitize_callback' => 'loginpress_sanitize_checkbox'
     ));
 
     /**
@@ -1122,10 +1078,11 @@ class LoginPress_Entities {
     ) ) );
 
     $wp_customize->add_setting( 'loginpress_customization[login_footer_text]', array(
-      'default'					=> 'Lost your password?',
-      'type'						=> 'option',
-      'capability'			=> 'manage_options',
-      'transport'       => 'postMessage'
+      'default'					  => 'Lost your password?',
+      'type'						  => 'option',
+      'capability'			  => 'manage_options',
+      'transport'         => 'postMessage',
+      'sanitize_callback' => 'wp_kses_post'
     ) );
 
     $wp_customize->add_control( 'loginpress_customization[login_footer_text]', array(
@@ -1136,10 +1093,11 @@ class LoginPress_Entities {
     ) );
 
     $wp_customize->add_setting( 'loginpress_customization[login_footer_text_decoration]', array(
-      'default'					=> 'none',
-      'type'						=> 'option',
-      'capability'			=> 'manage_options',
-      'transport'       => 'postMessage'
+      'default'					  => 'none',
+      'type'						  => 'option',
+      'capability'			  => 'manage_options',
+      'transport'         => 'postMessage',
+      'sanitize_callback' => 'loginpress_sanitize_select'
 
     ) );
     $wp_customize->add_control( 'loginpress_customization[login_footer_text_decoration]', array(
@@ -1158,9 +1116,10 @@ class LoginPress_Entities {
 
     $wp_customize->add_setting( 'loginpress_customization[login_footer_color]', array(
       // 'default'					=> '#17a8e3',
-      'type'						=> 'option',
-      'capability'			=> 'manage_options',
-      'transport'       => 'postMessage'
+      'type'						  => 'option',
+      'capability'			  => 'manage_options',
+      'transport'         => 'postMessage',
+      'sanitize_callback' => 'sanitize_hex_color' // validates 3 or 6 digit HTML hex color code.
     ) );
 
     $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'loginpress_customization[login_footer_color]', array(
@@ -1172,9 +1131,10 @@ class LoginPress_Entities {
 
     $wp_customize->add_setting( 'loginpress_customization[login_footer_color_hover]', array(
       // 'default'				  => '#17a8e3',
-      'type'						=> 'option',
-      'capability'			=> 'manage_options',
-      'transport'       => 'postMessage'
+      'type'						  => 'option',
+      'capability'			  => 'manage_options',
+      'transport'         => 'postMessage',
+      'sanitize_callback' => 'sanitize_hex_color' // validates 3 or 6 digit HTML hex color code.
     ) );
 
     $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'loginpress_customization[login_footer_color_hover]', array(
@@ -1209,16 +1169,17 @@ class LoginPress_Entities {
 
     $wp_customize->add_setting( 'loginpress_customization[login_footer_bg_color]', array(
       // 'default'					 => '#17a8e3',
-      'type'						=> 'option',
-      'capability'			=> 'manage_options',
-      'transport'       => 'postMessage'
+      'type'						  => 'option',
+      'capability'			  => 'manage_options',
+      'transport'         => 'postMessage',
+      'sanitize_callback' => 'sanitize_hex_color' // validates 3 or 6 digit HTML hex color code.
     ) );
 
     $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'loginpress_customization[login_footer_bg_color]', array(
-      'label'		 => __( 'Footer Background Color:', 'loginpress' ),
-      'section'	 => 'section_fotter',
-      'priority'	=> 35,
-      'settings'	=> 'loginpress_customization[login_footer_bg_color]'
+      'label'		   => __( 'Footer Background Color:', 'loginpress' ),
+      'section'	   => 'section_fotter',
+      'priority'	 => 35,
+      'settings'	 => 'loginpress_customization[login_footer_bg_color]'
     ) ) );
 
     $this->loginpress_hr_setting( $wp_customize, $close_control, 'section_fotter', 0, 36 );
@@ -1226,10 +1187,11 @@ class LoginPress_Entities {
     $this->loginpress_group_setting( $wp_customize, $group_control, $group_label, $group_info, 'section_fotter', 4, 40 );
 
     $wp_customize->add_setting( 'loginpress_customization[back_display_text]', array(
-      'default'					=> true,
-      'type'						=> 'option',
-      'capability'			=> 'manage_options',
-      'transport'       => 'postMessage'
+      'default'					  => true,
+      'type'						  => 'option',
+      'capability'			  => 'manage_options',
+      'transport'         => 'postMessage',
+      'sanitize_callback' => 'loginpress_sanitize_checkbox'
     ) );
 
     /**
@@ -1242,14 +1204,15 @@ class LoginPress_Entities {
   		'label'	      => __( 'Enable "Back to" Text:', 'loginpress' ),
   		'section'     => 'section_fotter',
       'priority'    => 45,
-  		'type'        => 'ios',// light, ios, flat
+  		'type'        => 'ios', // light, ios, flat
     ) ) );
 
     $wp_customize->add_setting( 'loginpress_customization[login_back_text_decoration]', array(
-      'default'					=> 'none',
-      'type'						=> 'option',
-      'capability'			=> 'manage_options',
-      'transport'       => 'postMessage'
+      'default'					  => 'none',
+      'type'						  => 'option',
+      'capability'			  => 'manage_options',
+      'transport'         => 'postMessage',
+      'sanitize_callback' => 'loginpress_sanitize_select'
 
     ) );
     $wp_customize->add_control( 'loginpress_customization[login_back_text_decoration]', array(
@@ -1268,9 +1231,10 @@ class LoginPress_Entities {
 
     $wp_customize->add_setting( 'loginpress_customization[login_back_color]', array(
       // 'default'					=> '#17a8e3',
-      'type'						=> 'option',
-      'capability'			=> 'manage_options',
-      'transport'       => 'postMessage'
+      'type'						  => 'option',
+      'capability'			  => 'manage_options',
+      'transport'         => 'postMessage',
+      'sanitize_callback' => 'sanitize_hex_color' // validates 3 or 6 digit HTML hex color code.
     ) );
 
     $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'loginpress_customization[login_back_color]', array(
@@ -1282,9 +1246,10 @@ class LoginPress_Entities {
 
     $wp_customize->add_setting( 'loginpress_customization[login_back_color_hover]', array(
       // 'default'					 => '#17a8e3',
-      'type'						=> 'option',
-      'capability'			=> 'manage_options',
-      'transport'       => 'postMessage'
+      'type'						  => 'option',
+      'capability'			  => 'manage_options',
+      'transport'         => 'postMessage',
+      'sanitize_callback' => 'sanitize_hex_color' // validates 3 or 6 digit HTML hex color code.
     ) );
 
     $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'loginpress_customization[login_back_color_hover]', array(
@@ -1319,9 +1284,10 @@ class LoginPress_Entities {
 
     $wp_customize->add_setting( 'loginpress_customization[login_back_bg_color]', array(
       // 'default'					 => '#17a8e3',
-      'type'						=> 'option',
-      'capability'			=> 'manage_options',
-      'transport'       => 'postMessage'
+      'type'						  => 'option',
+      'capability'			  => 'manage_options',
+      'transport'         => 'postMessage',
+      'sanitize_callback' => 'sanitize_hex_color' // validates 3 or 6 digit HTML hex color code.
     ) );
 
     $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'loginpress_customization[login_back_bg_color]', array(
@@ -1340,10 +1306,11 @@ class LoginPress_Entities {
      * @since 1.1.3
      */
     $wp_customize->add_setting( 'loginpress_customization[login_copy_right_display]', array(
-      'default'          => false,
-      'type'             => 'option',
-      'capability'		   => 'manage_options',
-      'transport'        => 'postMessage'
+      'default'           => false,
+      'type'              => 'option',
+      'capability'		    => 'manage_options',
+      'transport'         => 'postMessage',
+      'sanitize_callback' => 'loginpress_sanitize_checkbox'
     ) );
     $wp_customize->add_control( new LoginPress_Radio_Control( $wp_customize, 'loginpress_customization[login_copy_right_display]', array(
       'settings'    => 'loginpress_customization[login_copy_right_display]',
@@ -1355,9 +1322,10 @@ class LoginPress_Entities {
 
     $wp_customize->add_setting( 'loginpress_customization[login_footer_copy_right]', array(
       'default'					=> sprintf( __('© %1$s %2$s, All Rights Reserved.', 'loginpress'), date("Y"), get_bloginfo('name') ),
-      'type'						=> 'option',
-      'capability'			=> 'manage_options',
-      'transport'       => 'postMessage'
+      'type'						  => 'option',
+      'capability'			  => 'manage_options',
+      'transport'         => 'postMessage',
+      'sanitize_callback' => 'wp_kses_post'
     ) );
 
     $wp_customize->add_control( 'loginpress_customization[login_footer_copy_right]', array(
@@ -1369,10 +1337,11 @@ class LoginPress_Entities {
     ) );
 
     $wp_customize->add_setting( 'loginpress_customization[loginpress_show_love]', array(
-      'default'          => true,
-      'type'             => 'option',
-      'capability'		   => 'manage_options',
-      'transport'        => 'postMessage'
+      'default'           => true,
+      'type'              => 'option',
+      'capability'		    => 'manage_options',
+      'transport'         => 'postMessage',
+      'sanitize_callback' => 'loginpress_sanitize_checkbox'
     ) );
 
     /**
@@ -1393,10 +1362,11 @@ class LoginPress_Entities {
      * @since 1.1.3
      */
     $wp_customize->add_setting( 'loginpress_customization[show_love_position]', array(
-      'default'				=> 'right',
-      'type'					=> 'option',
-      'capability'		=> 'manage_options',
-      'transport'     => 'postMessage'
+      'default'				    => 'right',
+      'type'					    => 'option',
+      'capability'		    => 'manage_options',
+      'transport'         => 'postMessage',
+      // 'sanitize_callback' => 'loginpress_sanitize_checkbox'
     ) );
 
     $wp_customize->add_control( 'loginpress_customization[show_love_position]', array(
@@ -1485,7 +1455,7 @@ class LoginPress_Entities {
   * Manage the Login Footer Links
   *
   * @since	1.0.0
-  * @version 1.1.3
+  * @version 1.1.7
   * * * * * * * * * * * * * * * */
   public function login_page_custom_footer() {
 
@@ -1511,20 +1481,8 @@ class LoginPress_Entities {
 
     if ( $this->loginpress_key ) {
 
-      // echo '</div></div>';
-
-
-      //   if ( array_key_exists( 'footer_login_menu', $this->loginpress_key ) && checked( $this->loginpress_key['footer_login_menu'], true, false ) ) {
-      //
-      //     wp_nav_menu( array(
-      //       'theme_location' => $this->loginpress_key['customize_login_footer_menu'],
-      //       'container' => false,
-      //       'menu_class' => 'loginFooterMenu',
-      //       'echo' => true,
-      //     )
-      //   );
-      //
-      // }
+      // do_action( 'loginpress_footer_wrapper' );
+      do_action( 'loginpress_footer_menu' );
 
       if ( array_key_exists( 'login_copy_right_display', $this->loginpress_key ) && true == $this->loginpress_key['login_copy_right_display'] ) {
         if ( array_key_exists( 'login_footer_copy_right', $this->loginpress_key ) && ! empty( $this->loginpress_key['login_footer_copy_right'] ) ) {
@@ -1542,32 +1500,26 @@ class LoginPress_Entities {
   * Manage the Login Head
   *
   * @since	1.0.0
+  * @version 1.1.7
   * * * * * * * * * * * */
   public function login_page_custom_head() {
 
+    $loginpress_setting = get_option( 'loginpress_setting' );
+    $lostpassword_url 	= isset( $loginpress_setting['lostpassword_url'] ) ? $loginpress_setting['lostpassword_url'] : 'off';
+
 		add_filter( 'gettext', array( $this, 'change_lostpassword_message' ), 20, 3 );
     add_filter( 'gettext', array( $this, 'change_username_label' ), 20, 3 );
-    add_filter( 'gettext', array( $this, 'change_password_label' ), 20, 3 );
+    // add_filter( 'gettext', array( $this, 'change_password_label' ), 20, 3 );
     // Include CSS File in heared.
     wp_enqueue_script( 'jquery' );
     include( LOGINPRESS_DIR_PATH . 'css/style-presets.php' );
     include( LOGINPRESS_DIR_PATH . 'css/style-login.php' );
 
-    if ( $this->loginpress_key && array_key_exists( 'header_login_menu', $this->loginpress_key ) ) {
+    do_action( 'loginpress_header_menu' );
+    // do_action( 'loginpress_header_wrapper' );
 
-      // echo '<div class="header-wrapper">';
-      // echo '<div class="header-cell">';
-      //   if ( array_key_exists( 'header_login_menu', $this->loginpress_key ) && checked( $this->loginpress_key['header_login_menu'], true, false ) ) {
-      //
-      //     wp_nav_menu( array(
-      //       'theme_location' => $this->loginpress_key['customize_login_menu'],
-      //       'container' => false,
-      //       'menu_class' => 'loginHeaderMenu',
-      //       'echo' => true,
-      //     )
-      //   );
-      // }
-      // echo '</div></div><div class="login-wrapper"><div class="login-cell">';
+    if ( 'on' == $lostpassword_url ) {
+      remove_filter( 'lostpassword_url', 'wc_lostpassword_url', 10 );
     }
   }
   /**
@@ -1691,20 +1643,22 @@ class LoginPress_Entities {
     return $translated_text;
   }
   /**
-   * Change Username Label from Form.
+   * Change Label of the Username from login Form.
    * @param  [type] $translated_text [description]
    * @param  [type] $text            [description]
    * @param  [type] $domain          [description]
    * @return string
    * @since 1.1.3
+   * @version 1.1.7
    */
   public function change_username_label( $translated_text, $text, $domain ){
 
-    if ( $this->loginpress_key ) {
-      $default = 'Username or Email Address';
-  		$options = $this->loginpress_key;
-      $loginpress_setting = get_option( 'loginpress_setting' );
+    $loginpress_setting = get_option( 'loginpress_setting' );
 
+    if ( $loginpress_setting ) {
+
+      $default = 'Username or Email Address';
+  		// $options = $this->loginpress_key;
   		// $label   = array_key_exists( 'form_username_label', $options ) ? $options['form_username_label'] : '';
       $login_order 	= isset( $loginpress_setting['login_order'] ) ? $loginpress_setting['login_order'] : '';
 
@@ -1717,7 +1671,7 @@ class LoginPress_Entities {
   		if ( $loginpress_setting && $default === $text ) {
 
   			// Check if the option exists.
-  			if ( '' != $login_order ) {
+  			if ( '' != $login_order && 'default' != $login_order ) {
           if ( 'username' == $login_order ) {
             $label = __( 'Username', 'loginpress' );
           } elseif ( 'email' == $login_order ) {

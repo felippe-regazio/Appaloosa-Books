@@ -10,20 +10,24 @@
 /* @var $wpdb wpdb */
 
 $default_options = array(
-    'view'=>'View online',
-    'text'=>'Few words summary',
-    'block_background'=>'#ffffff',
-    'font_family'=>$font_family,
-    'font_size'=>13,
-    'color'=>'#999999'
+    'view' => 'View online',
+    'text' => 'Few words summary',
+    'block_background' => '#ffffff',
+    'font_family' => $font_family,
+    'font_size' => 13,
+    'color' => '#999999'
 );
 
 $options = array_merge($default_options, $options);
-
 ?>
 <style>
+    .preheader-table {
+        width: 100%!important
+            border: 0;
+        border-collapse: collapse;
+    }
     .preheader-link {
-        padding: 20px; 
+        padding: 10px; 
         text-align: center; 
         font-size: <?php echo $options['font_size'] ?>px; 
         font-family: <?php echo $options['font_family'] ?>; 
@@ -31,7 +35,7 @@ $options = array_merge($default_options, $options);
     }
 </style>
 
-<table width="100%" border="0" cellpadding="0" align="center" cellspacing="0">
+<table width="100%" border="0" cellpadding="0" align="center" cellspacing="0" inline-class="preheader-table">
     <tr>
         <td class="preheader-link" width="50%" valign="top" align="center">
             <?php echo $options['text'] ?>

@@ -7,46 +7,60 @@
 
 <table class="form-table">
     <tr>
-        <th>Text</th>
+        <th><?php _e('Label and link', 'newsletter') ?></th>
         <td>
-            <?php $controls->text('text') ?>
+            <?php $controls->text('text', 70) ?>
+            <br>
+            <?php $controls->text('url', 70, 'https://...') ?>
         </td>
     </tr>
     <tr>
-        <th>Button color</th>
+        <th></th>
         <td>
-            <?php $controls->color('background') ?>
-        </td>
-    </tr>
-    <tr>
-        <th><?php _e('Color', 'newsletter') ?></th>
-        <td>
-            <?php $controls->color('color') ?>
-        </td>
-    </tr>
-    <tr>
-        <th>Link to</th>
-        <td>
-            <?php $controls->text('url', 50, 'https://...') ?>
-        </td>
-    </tr>
-    <tr>
-        <th>Font size</th>
-        <td>
-            <?php $controls->css_font_size('font_size') ?>
-        </td>
-    </tr>
-    <tr>
-        <th>Font family</th>
-        <td>
-            <?php $controls->css_font_family('font_family') ?>
+            <table class="tnp-button-colors">
+                <tr>
+                    <td>
+                        <?php _e('Background', 'newsletter') ?><br>
+                        <?php $controls->color('background') ?>
+                    </td>
+                    <td>
+                        <?php _e('Label', 'newsletter') ?><br>
+                        <?php $controls->color('color') ?>
+                    </td>
+                </tr>
+            </table>
+            <?php $controls->css_font('font') ?>
         </td>
     </tr>
 
     <tr>
-        <th><?php _e('Background', 'newsletter') ?></th>
+        <th><?php _e('Width', 'newsletter') ?></th>
+        <td>
+            <?php $controls->text('width') ?>px
+        </td>
+    </tr>
+
+    <tr>
+        <th><?php _e('Block background', 'newsletter') ?></th>
         <td>
             <?php $controls->color('block_background') ?>
+        </td>
+    </tr>
+    <tr>
+        <th><?php _e('Block padding', 'newsletter') ?></th>
+        <td>
+            <table class="tnp-button-colors">
+                <tr>
+                    <td>
+                        Top<br>
+                        <?php $controls->text('block_padding_top', 4) ?> 
+                    </td>
+                    <td>
+                        Bottom<br>
+                        <?php $controls->text('block_padding_bottom', 4) ?>
+                    </td>
+                </tr>
+            </table>
         </td>
     </tr>
 </table>

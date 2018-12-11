@@ -114,7 +114,7 @@
 
 #newsletter-builder-area {
     xbackground-color: #EDF1F4;
-    width: 860px;
+    width: 750px;
     margin-left: 30px;
     box-sizing: border-box;
     padding-left: 50px;
@@ -122,18 +122,19 @@
     margin-top: 30px;
     padding-top: 10px;
     border-radius: 10px;
-    border: 1px solid #eee;
+    border: 1px solid #ddd;
     margin-bottom: 30px;
 }
 
 
+
 #newsletter-builder-area-center-frame-content {
     /*float: left;*/
-    width: 750px;
+    /*width: 730px;*/
     /*background-color: rgba(153,153,153,1);*/
     min-height: 50px;
     padding-bottom: 75px;
-    border: 1px dashed #eee;
+    /*border: 1px dashed #eee;*/
 }
 
 #newsletter-mobile-preview-area {
@@ -141,22 +142,23 @@
     box-sizing: border-box;
     margin-top: 30px;
     text-align: center;
-    border: 1px solid #eee;
+    border: 1px solid #ddd;
     border-radius: 10px;
     padding-left: 10px;
     padding-right: 10px;
+    padding-top: 10px;
 }
 #newsletter-mobile-preview-area input {
     width: 100px;
 }
 
-#tnp-mobile-preview {
+iframe#tnp-mobile-preview {
     width: 340px!important; 
     height: 95%; 
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding: 0;
     box-sizing: border-box;
 }
+
 .tnpc-row {
     -webkit-transition: box-shadow 0.5s;
     -moz-transition: box-shadow 0.5s;
@@ -166,9 +168,13 @@
 }
 .tnpc-row:hover {
     cursor: move;
+    /*border: 2px dashed #999;*/
     -webkit-box-shadow:  0px 0px 20px 0px rgba(0,0,0,0.2);
     -moz-box-shadow:  0px 0px 20px 0px rgba(0,0,0,0.2);
     box-shadow:  0px 0px 20px 0px rgba(0,0,0,0.2);
+}
+.tnpc-row.ui-sortable-helper {
+    max-width: 700px!important;
 }
 .tnpc-row-delete, .tnpc-row-edit-block {
     height: 30px;
@@ -479,6 +485,13 @@
     margin-top: 10px;
 }
 
+.tnpc-preview .fake-browser-ui iframe {
+    width: 700px;
+}
+
+.tnpc-preview .fake-mobile-browser-ui iframe {
+    width: 320px;
+}
 
 .fake-browser-ui {
     padding: 30px 0 0;
@@ -585,12 +598,33 @@
     padding: 10px;
 }
 
-#tnpc-block-options-form th, #tnpc-block-options-form td {
+#tnpc-block-options-form h3 {
+    color: #000;
+}
+
+#tnpc-block-options-form table.form-table th {
+    background-color: #f4f4f4;
+    width: 150px;
+    vertical-align: top;
+}
+
+#tnpc-block-options-form table.form-table th, #tnpc-block-options-form table.form-table td {
     padding: 5px;
+    padding-right: 15px;
+    padding-top: 15px;
 }
 
 #tnpc-block-options-form table.form-table {
     margin: 0px;
     border-collapse: separate!important;
-    border-spacing: 3px!important;
+    border-spacing: 1px!important;
 } 
+
+#tnpc-block-options-form table.form-table table.tnp-button-colors {
+    border: 0;
+    border-collapse: collapse;
+}
+#tnpc-block-options-form table.form-table table.tnp-button-colors td {
+    border: 0;
+    padding-top: 0;
+}

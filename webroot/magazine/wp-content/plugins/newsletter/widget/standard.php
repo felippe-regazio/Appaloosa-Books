@@ -1,6 +1,9 @@
 <?php
-if (!defined('ABSPATH')) exit;
-if (version_compare(phpversion(), '5.3', '<')) return;
+defined('ABSPATH') || exit;
+
+if (version_compare(phpversion(), '5.3', '<')) {
+    return;
+}
 
 /**
  * Newsletter widget version 2.0: it'll replace the old version left for compatibility.
@@ -14,120 +17,32 @@ class NewsletterWidget extends WP_Widget {
     static function get_widget_form($instance) {
 
         $field_wrapper_tag = 'div';
-        if (!isset($instance['nl']) || !is_array($instance['nl'])) $instance['nl'] = array();
+        if (!isset($instance['nl']) || !is_array($instance['nl']))
+            $instance['nl'] = array();
 
         $instance = array_merge(array('lists_layout' => '',
             'lists_empty_label' => '',
-            'lists_label' => ''), $instance);
-        
+            'lists_field_label' => ''), $instance);
+
         $options_profile = get_option('newsletter_profile');
-        //$form = NewsletterSubscription::instance()->get_form_javascript();
         $form = '';
-        
+
         $form .= '<div class="tnp tnp-widget">';
-        $form .= NewsletterSubscription::instance()->get_subscription_form_html5('widget', null, array(
-            'list'=> implode(',', $instance['nl']),
+        $form .= NewsletterSubscription::instance()->get_subscription_form('widget', null, array(
+            'list' => implode(',', $instance['nl']),
             'lists_field_layout' => $instance['lists_layout'],
             'lists_field_empty_label' => $instance['lists_empty_label'],
             'lists_field_label' => $instance['lists_field_label'],
-            
-            ));
+        ));
         $form .= "</div>\n";
-        
-        return $form;
-    }
-
-    static function get_old_widget_form($instance) {
-        $options_profile = get_option('newsletter_profile');
-        $form = NewsletterSubscription::instance()->get_form_javascript();
-        
-        $form .= '<div class="tnp tnp-widget">';
-        $form .= '<form action="' . home_url('/') . '?na=s" onsubmit="return newsletter_check(this)" method="post">';
-        // Referrer
-        $form .= '<input type="hidden" name="nr" value="widget"/>';
-        
-        if (isset($instance['nl']) && is_array($instance['nl'])) {
-            foreach ($instance['nl'] as $a) {
-                $form .= "<input type='hidden' name='nl[]' value='" . ((int) trim($a)) . "'>\n";
-            }
-        }
-
-        if ($options_profile['name_status'] == 2) {
-            $form .= '<p><input class="tnp-firstname" type="text" name="nn" value="' . esc_attr($options_profile['name']) . '" onclick="if (this.defaultValue==this.value) this.value=\'\'" onblur="if (this.value==\'\') this.value=this.defaultValue"/></p>';
-        }
-
-        if ($options_profile['surname_status'] == 2) {
-            $form .= '<p><input class="tnp-lastname" type="text" name="ns" value="' . esc_attr($options_profile['surname']) . '" onclick="if (this.defaultValue==this.value) this.value=\'\'" onblur="if (this.value==\'\') this.value=this.defaultValue"/></p>';
-        }
-
-        $form .= '<p><input class="tnp-email" type="email" required name="ne" value="' . esc_attr($options_profile['email']) . '" onclick="if (this.defaultValue==this.value) this.value=\'\'" onblur="if (this.value==\'\') this.value=this.defaultValue"/></p>';
-
-        if (isset($options_profile['sex_status']) && $options_profile['sex_status'] == 2) {
-            $form .= '<p><select name="nx" class="tnp-gender">';
-            $form .= '<option value="m">' . $options_profile['sex_male'] . '</option>';
-            $form .= '<option value="f">' . $options_profile['sex_female'] . '</option>';
-            $form .= '</select></p>';
-        }
-
-        // Extra profile fields
-        for ($i = 1; $i <= NEWSLETTER_PROFILE_MAX; $i++) {
-            if ($options_profile['profile_' . $i . '_status'] != 2)
-                continue;
-            if ($options_profile['profile_' . $i . '_type'] == 'text') {
-                $form .= '<p><input class="tnp-profile tnp-profile-' . $i . '" type="text" name="np' . $i . '" value="' . $options_profile['profile_' . $i] . '" onclick="if (this.defaultValue==this.value) this.value=\'\'" onblur="if (this.value==\'\') this.value=this.defaultValue"/></p>';
-            }
-            if ($options_profile['profile_' . $i . '_type'] == 'select') {
-                $form .= '<p>' . $options_profile['profile_' . $i] . '<br /><select class="tnp-profile tnp-profile-' . $i . '" name="np' . $i . '">';
-                $opts = explode(',', $options_profile['profile_' . $i . '_options']);
-                for ($t = 0; $t < count($opts); $t++) {
-                    $form .= '<option>' . trim($opts[$t]) . '</option>';
-                }
-                $form .= '</select></p>';
-            }
-        }
-
-        $lists = '';
-        for ($i = 1; $i <= NEWSLETTER_LIST_MAX; $i++) {
-            if ($options_profile['list_' . $i . '_status'] != 2)
-                continue;
-            $lists .= '<input type="checkbox" name="nl[]" value="' . $i . '"';
-            if ($options_profile['list_' . $i . '_checked'] == 1)
-                $lists .= ' checked';
-            $lists .= '/>&nbsp;' . $options_profile['list_' . $i] . '<br />';
-        }
-        if (!empty($lists))
-            $form .= '<p>' . $lists . '</p>';
-
-
-        $extra = apply_filters('newsletter_subscription_extra', array());
-        foreach ($extra as &$x) {
-            $form .= "<p>";
-            if (!empty($x['label']))
-                $form .= $x['label'] . "<br/>";
-            $form .= $x['field'] . "</p>";
-        }
-
-        if ($options_profile['privacy_status'] == 1) {
-            if (!empty($options_profile['privacy_url'])) {
-                $form .= '<p><input type="checkbox" name="ny"/>&nbsp;<a target="_blank" href="' . $options_profile['privacy_url'] . '">' . $options_profile['privacy'] . '</a></p>';
-            } else
-                $form .= '<p><input type="checkbox" name="ny"/>&nbsp;' . $options_profile['privacy'] . '</p>';
-        }
-
-        if (strpos($options_profile['subscribe'], 'http://') !== false) {
-            $form .= '<p><input class="tnp-submit" type="image" src="' . $options_profile['subscribe'] . '"/></p>';
-        } else {
-            $form .= '<p><input class="tnp-submit" type="submit" value="' . $options_profile['subscribe'] . '"/></p>';
-        }
-
-        $form .= '</form>';
-        $form .= '</div>';
 
         return $form;
     }
 
     function widget($args, $instance) {
-        global $newsletter;
+        
+        $newsletter = Newsletter::instance();
+
         extract($args);
 
         if (empty($instance))
@@ -148,11 +63,7 @@ class NewsletterWidget extends WP_Widget {
 
         if (stripos($instance['text'], '<form') === false) {
 
-            if (isset($instance['old_form'])) {
-                $form = NewsletterWidget::get_old_widget_form($instance);
-            } else {
-                $form = NewsletterWidget::get_widget_form($instance);
-            }
+            $form = NewsletterWidget::get_widget_form($instance);
 
             // Canot user directly the replace, since the form is different on the widget...
             if (strpos($buffer, '{subscription_form}') !== false)
@@ -166,7 +77,7 @@ class NewsletterWidget extends WP_Widget {
                 }
             }
         } else {
-            $buffer = str_ireplace('<form', '<form method="post" action="' . esc_attr(home_url('/') . '?na=s') . '" onsubmit="return newsletter_check(this)"', $buffer);
+            $buffer = str_ireplace('<form', '<form method="post" action="' . esc_attr($newsletter->get_subscribe_url())  . '" onsubmit="return newsletter_check(this)"', $buffer);
             $buffer = str_ireplace('</form>', '<input type="hidden" name="nr" value="widget"/></form>', $buffer);
         }
 
@@ -185,13 +96,14 @@ class NewsletterWidget extends WP_Widget {
         if (!is_array($instance)) {
             $instance = array();
         }
-        $instance = array_merge(array('title' => '', 'text' => '', 'lists_layout'=>'', 'lists_empty_label'=>'', 'lists_field_label'=>''), $instance);
+        $instance = array_merge(array('title' => '', 'text' => '', 'lists_layout' => '', 'lists_empty_label' => '', 'lists_field_label' => ''), $instance);
         $options_profile = get_option('newsletter_profile');
-        if (!isset($instance['nl']) || !is_array($instance['nl'])) $instance['nl'] = array();
+        if (!isset($instance['nl']) || !is_array($instance['nl']))
+            $instance['nl'] = array();
         ?>
         <p>
             <label for="<?php echo $this->get_field_id('title'); ?>">
-                Title:
+                <?php _e('Title')?>:
                 <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo esc_attr($instance['title']); ?>" />
             </label>
 
@@ -199,12 +111,12 @@ class NewsletterWidget extends WP_Widget {
                 Introduction:
                 <textarea class="widefat" rows="10" cols="20" id="<?php echo $this->get_field_id('text'); ?>" name="<?php echo $this->get_field_name('text'); ?>"><?php echo esc_html($instance['text']); ?></textarea>
             </label>
-            
+
             <label>
                 Show lists as:
                 <select name="<?php echo $this->get_field_name('lists_layout'); ?>" id="<?php echo $this->get_field_id('lists_layout'); ?>" style="width: 100%">
                     <option value="">Checkboxes</option>
-                    <option value="dropdown" <?php echo $instance['lists_layout']=='dropdown'?'selected':''?>>Dropdown</option>
+                    <option value="dropdown" <?php echo $instance['lists_layout'] == 'dropdown' ? 'selected' : '' ?>>Dropdown</option>
                 </select>
             </label>
             <br>
@@ -217,28 +129,23 @@ class NewsletterWidget extends WP_Widget {
                 Lists field label:
                 <input class="widefat" id="<?php echo $this->get_field_id('lists_field_label'); ?>" name="<?php echo $this->get_field_name('lists_field_label'); ?>" type="text" value="<?php echo esc_attr($instance['lists_field_label']); ?>" />
             </label>
-            
+
             <br><br>
-            <?php _e('Automatically subscribe to', 'newsletter')?>
+            <?php _e('Automatically subscribe to', 'newsletter') ?>
             <br>
             <?php
-            for ($i = 1; $i <= NEWSLETTER_LIST_MAX; $i++) {
-            if (empty($options_profile['list_' . $i])) continue;
-            if (empty($options_profile['list_' . $i . '_status'])) continue;
-            ?>
-            <label for="nl<?php echo $i?>">
-                <input type="checkbox" value="<?php echo $i?>" name="<?php echo $this->get_field_name('nl[]') ?>" <?php echo array_search($i, $instance['nl']) !== false?'checked':''?>> <?php echo esc_html($options_profile['list_' . $i]) ?>
-            </label>
-            <br>
+            $lists = Newsletter::instance()->get_lists_public();
+            foreach ($lists as $list) {
+                ?>
+                <label for="nl<?php echo $list->id ?>">
+                    <input type="checkbox" value="<?php echo $list->id ?>" name="<?php echo $this->get_field_name('nl[]') ?>" <?php echo array_search($list->id, $instance['nl']) !== false ? 'checked' : '' ?>> <?php echo esc_html($list->name) ?>
+                </label>
+                <br>
             <?php } ?>
-          
-        
-        <br>
-            
-            <label for="<?php echo $this->get_field_id('old_form'); ?>">
-                <input type="checkbox" id="<?php echo $this->get_field_id('old_form'); ?>" name="<?php echo $this->get_field_name('old_form'); ?>" <?php echo isset($instance['old_form']) ? 'checked' : '' ?>>
-                       Use the old form (will be removed in future versions)
-            </label>
+
+
+            <br>
+
         </p>
 
         <p>
@@ -249,5 +156,6 @@ class NewsletterWidget extends WP_Widget {
 
 }
 
-add_action('widgets_init', function () {return register_widget("NewsletterWidget");});
-?>
+add_action('widgets_init', function () {
+    return register_widget("NewsletterWidget");
+});

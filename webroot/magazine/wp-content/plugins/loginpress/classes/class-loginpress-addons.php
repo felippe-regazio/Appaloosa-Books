@@ -45,8 +45,8 @@ if ( ! class_exists( 'LoginPress_Addons' ) ) :
 		    $url = 'https://wpbrigade.com/wp-json/wpbrigade/v1/plugins?addons=loginpress-pro-add-ons';
 
 		    // Get data from the remote URL.
-		    $response = wp_remote_get( $url, array( 'timeout' => 20) );
-				
+		    $response = wp_remote_get( $url, array( 'timeout' => 20 ) );
+
 		    if ( ! is_wp_error( $response ) ) {
 
 		        // Decode the data that we got.
@@ -155,10 +155,11 @@ if ( ! class_exists( 'LoginPress_Addons' ) ) :
 		function is_addon_licensed( $categories ) {
 
 			if( LoginPress_Pro::get_license_id() == 2 and in_array('loginpress-pro-small-business', $categories) ){
-
 				return true;
 			}
 			else if( LoginPress_Pro::get_license_id() == 3 and in_array('loginpress-pro-agency', $categories) ){
+				return true;
+			}else if( LoginPress_Pro::get_license_id() == 4 and in_array('loginpress-pro-agency', $categories) ){
 				return true;
 			}else if( LoginPress_Pro::get_license_id() == 1 and in_array('loginpress-free-add-ons', $categories) ){
 				return true;

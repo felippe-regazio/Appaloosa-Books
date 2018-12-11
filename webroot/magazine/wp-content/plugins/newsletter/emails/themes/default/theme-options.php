@@ -21,6 +21,12 @@ defined('ABSPATH') || exit;
 <h3><?php _e('Posts', 'newsletter') ?></h3>
 <table class="form-table">
     <tr>
+        <th>Language</th>
+        <td>
+            <?php $controls->language(); ?>
+        </td>
+    </tr>
+    <tr>
         <th>&nbsp;</th>
         <td>
             <?php $controls->checkbox('theme_posts', 'Add latest posts'); ?>

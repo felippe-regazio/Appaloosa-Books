@@ -1,15 +1,9 @@
 <?php
-if (!defined('ABSPATH'))
-    exit;
+defined('ABSPATH') || exit;
 
 require_once NEWSLETTER_INCLUDES_DIR . '/controls.php';
 $controls = new NewsletterControls();
 $module = NewsletterEmails::instance();
-
-if ($controls->is_action('convert')) {
-    $module->convert_old_emails();
-    $controls->messages = 'Converted!';
-}
 
 if ($controls->is_action('copy')) {
     $original = Newsletter::instance()->get_email($_POST['btn']);
@@ -23,13 +17,13 @@ if ($controls->is_action('copy')) {
     $email['track'] = $original->track;
     $email['options'] = $original->options;
 
-    Newsletter::instance()->save_email($email);
+    $module->save_email($email);
     $controls->messages .= __('Message duplicated.', 'newsletter');
 }
 
 if ($controls->is_action('delete')) {
-    Newsletter::instance()->delete_email($_POST['btn']);
-    $controls->messages .= __('Message deleted.', 'newsletter');
+    $module->delete_email($_POST['btn']);
+    $controls->add_message_deleted();
 }
 
 if ($controls->is_action('delete_selected')) {
@@ -37,7 +31,7 @@ if ($controls->is_action('delete_selected')) {
     $controls->messages .= $r . ' message(s) deleted';
 }
 
-$emails = Newsletter::instance()->get_emails('message');
+$emails = $module->get_emails('message');
 ?>
 
 <div class="wrap tnp-emails tnp-emails-index" id="tnp-wrap">
@@ -57,7 +51,7 @@ $emails = Newsletter::instance()->get_emails('message');
 
             <p>
                 <a href="<?php echo $module->get_admin_page_url('theme'); ?>" class="button-primary"><?php _e('New newsletter', 'newsletter') ?></a>
-                <?php $controls->button_confirm('delete_selected', __('Delete selected newsletters', 'newsletter'), __('Proceed?', 'newsletter')); ?>
+                <?php $controls->button_confirm('delete_selected', __('Delete selected newsletters', 'newsletter')); ?>
 
             </p>
             <table class="widefat" style="width: 100%">

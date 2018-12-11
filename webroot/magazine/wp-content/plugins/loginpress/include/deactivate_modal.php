@@ -1,3 +1,11 @@
+<?php
+/**
+ * LoginPress deactivation Content.
+ * @package LoginPress
+ * @version 1.1.14
+ */
+
+$loginpress_deactivate_nonce = wp_create_nonce( 'loginpress-deactivate-nonce' ); ?>
 <style>
     .loginpress-hidden{
 
@@ -28,7 +36,10 @@
     overflow: auto;
     visibility: hidden;
     opacity: 0;
-    transition: opacity 0.3s ease-in-out:
+    transition: opacity 0.3s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   .loginpress-popup-overlay.loginpress-active{
     opacity: 1;
@@ -37,7 +48,8 @@
   .loginpress-serveypanel{
     width: 600px;
     background: #fff;
-    margin: 65px auto 0;
+    margin: 0 auto 0;
+    border-radius: 3px;
   }
   .loginpress-popup-header{
     background: #f1f1f1;
@@ -46,6 +58,7 @@
   }
   .loginpress-popup-header h2{
     margin: 0;
+    text-transform: uppercase;
   }
   .loginpress-popup-body{
       padding: 10px 20px;
@@ -85,7 +98,39 @@
     font-weight: 600;
     display: none;
   }
+  .loginpress-popup-header{
+    background: none;
+        padding: 18px 15px;
+    -webkit-box-shadow: 0 0 8px rgba(0,0,0,.1);
+    box-shadow: 0 0 8px rgba(0,0,0,.1);
+    border: 0;
+}
+.loginpress-popup-body h3{
+    margin-top: 0;
+    margin-bottom: 30px;
+        font-weight: 700;
+    font-size: 15px;
+    color: #495157;
+    line-height: 1.4;
+    text-tranform: uppercase;
+}
+.loginpress-reason{
+    font-size: 13px;
+    color: #6d7882;
+    margin-bottom: 15px;
+}
+.loginpress-reason input[type="radio"]{
+margin-right: 15px;
+}
+.loginpress-popup-body{
+padding: 30px 30px 0;
 
+}
+.loginpress-popup-footer{
+background: none;
+    border: 0;
+    padding: 29px 39px 39px;
+}
 </style>
 <div class="loginpress-popup-overlay">
   <div class="loginpress-serveypanel">
@@ -95,6 +140,7 @@
     </div>
     <div class="loginpress-popup-body">
       <h3><?php _e( 'If you have a moment, please let us know why you are deactivating:', 'loginpress' ); ?></h3>
+      <input type="hidden" class="loginpress_deactivate_nonce" name="loginpress_deactivate_nonce" value="<?php echo $loginpress_deactivate_nonce; ?>">
       <ul id="loginpress-reason-list">
         <li class="loginpress-reason loginpress-reason-pro" data-input-type="" data-input-placeholder="">
           <label>
@@ -237,6 +283,8 @@
           var _reason =  $('input[type="radio"][name="loginpress-selected-reason"]:checked').val();
           var _reason_details = '';
 
+          var deactivate_nonce = $('.loginpress_deactivate_nonce').val();
+
           if ( _reason == 2 ) {
             _reason_details = $("input[type='text'][name='better_plugin']").val();
           } else if ( _reason == 7 ) {
@@ -254,6 +302,7 @@
               action        : 'loginpress_deactivate',
               reason        : _reason,
               reason_detail : _reason_details,
+              security      : deactivate_nonce
             },
             beforeSend: function(){
               $(".loginpress-spinner").show();

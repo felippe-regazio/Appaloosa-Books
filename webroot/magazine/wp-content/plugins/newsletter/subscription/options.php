@@ -1,22 +1,22 @@
 <?php
-if (!defined('ABSPATH'))
-    exit;
+defined('ABSPATH') || exit;
 
 @include_once NEWSLETTER_INCLUDES_DIR . '/controls.php';
 $controls = new NewsletterControls();
 $module = NewsletterSubscription::instance();
 
-// TODO: Remove and use the $module->options.
-$options = get_option('newsletter', array());
+$current_language = $module->get_current_language();
+
+$is_all_languages = $module->is_all_languages();
+
+$controls->add_language_warning();
+
+$options = $module->get_options('', $current_language);
 
 if ($controls->is_action()) {
     if ($controls->is_action('save')) {
 
         $defaults = $module->get_default_options();
-
-        if (empty($controls->data['profile_text'])) {
-            $controls->data['profile_text'] = $defaults['profile_text'];
-        }
 
         // Without the last curly bracket since there can be a form number apended
         if (empty($controls->data['subscription_text'])) {
@@ -55,29 +55,8 @@ if ($controls->is_action()) {
         $controls->data['confirmed_url'] = trim($controls->data['confirmed_url']);
         $controls->data['confirmation_url'] = trim($controls->data['confirmation_url']);
 
-        if (!empty($controls->data['page'])) {
-            $controls->data['url'] = ''; // do not unset
-        }
-
-        $module->merge_options($controls->data);
+        $module->save_options($controls->data, '', null, $current_language);
         $controls->add_message_saved();
-    }
-
-    if ($controls->is_action('create')) {
-        $page = array();
-        $page['post_title'] = 'Newsletter';
-        $page['post_content'] = '[newsletter]';
-        $page['post_status'] = 'publish';
-        $page['post_type'] = 'page';
-        $page['comment_status'] = 'closed';
-        $page['ping_status'] = 'closed';
-        $page['post_category'] = array(1);
-
-        // Insert the post into the database
-        $page_id = wp_insert_post($page);
-
-        $controls->data['page'] = $page_id;
-        $module->merge_options($controls->data);
     }
 
     if ($controls->is_action('reset')) {
@@ -93,7 +72,7 @@ if ($controls->is_action()) {
             $addresses = array();
             foreach ($users as &$user) {
                 $addresses[] = $user->email;
-                $res = $module->mail($user->email, $newsletter->replace($module->options['confirmation_subject']), $newsletter->replace($module->options['confirmation_message'], $user));
+                $res = $module->mail($user->email, $module->replace($module->options['confirmation_subject']), $module->replace($module->options['confirmation_message'], $user));
                 if (!$res) {
                     $controls->errors = 'The email address ' . $user->email . ' failed.';
                     break;
@@ -112,9 +91,9 @@ if ($controls->is_action()) {
             $controls->errors = 'There are no test subscribers. Read more about test subscribers <a href="https://www.thenewsletterplugin.com/plugins/newsletter/subscribers-module#test" target="_blank">here</a>.';
         } else {
             $addresses = array();
-            foreach ($users as &$user) {
+            foreach ($users as $user) {
                 $addresses[] = $user->email;
-                $res = $module->mail($user->email, $newsletter->replace($module->options['confirmed_subject']), $newsletter->replace($module->options['confirmed_message'], $user));
+                $res = $module->mail($user->email, $module->replace($module->options['confirmed_subject']), $module->replace($module->options['confirmed_message'], $user));
                 if (!$res) {
                     $controls->errors = 'The email address ' . $user->email . ' failed.';
                     break;
@@ -126,44 +105,10 @@ if ($controls->is_action()) {
         }
     }
 } else {
-    $controls->data = get_option('newsletter', array());
+    $controls->data = $module->get_options('', $current_language);
 }
 
-if (empty($controls->data['page'])) {
-    $controls->messages .= '<p>You should set a dedicated page for Newsletter which used to interact with your subscribers.</p>';
-} else {
-    $post = get_post($controls->data['page']);
-
-    if (!$post || $post->post_status != 'publish') {
-        $controls->errors .= '<p>The dedicated page selected below does not exist anymore or has been unpublished. Please, select a different one.</p>';
-    } else {
-        if (strpos($post->post_content, '[newsletter') === false) {
-            $controls->errors .= '<p>The dedicated page selected DOES NOT contain the [newsletter] shortcode. Please fix it. It should contain ONLY the [newsletter] shortcode.</p>';
-        }
-    }
-}
 ?>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.20.2/codemirror.css" type="text/css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.20.2/addon/hint/show-hint.css">
-<style>
-    .CodeMirror {
-        border: 1px solid #ddd;
-    }
-</style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.20.2/codemirror.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.20.2/mode/css/css.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.20.2/addon/hint/show-hint.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.20.2/addon/hint/css-hint.js"></script>
-<script>
-    jQuery(function () {
-        var editor = CodeMirror.fromTextArea(document.getElementById("options-css"), {
-            lineNumbers: true,
-            mode: 'css',
-            extraKeys: {"Ctrl-Space": "autocomplete"}
-        });
-    });
-</script>
 
 <div class="wrap" id="tnp-wrap">
 
@@ -171,12 +116,13 @@ if (empty($controls->data['page'])) {
 
     <div id="tnp-heading">
 
-        <h2><?php _e('Subscription, Profile Page Configuration', 'newsletter') ?></h2>
+        <h2><?php _e('Subscription Configuration', 'newsletter') ?></h2>
         <?php $controls->page_help('https://www.thenewsletterplugin.com/documentation/subscription') ?>
 
     </div>
 
     <div id="tnp-body">
+        
 
         <form method="post" action="">
             <?php $controls->init(); ?>
@@ -186,11 +132,12 @@ if (empty($controls->data['page'])) {
                     <li><a href="#tabs-2"><?php _e('Subscription', 'newsletter') ?></a></li>
                     <li><a href="#tabs-4"><?php _e('Welcome', 'newsletter') ?></a></li>
                     <li><a href="#tabs-3"><?php _e('Activation', 'newsletter') ?></a></li>
-                    <li><a href="#tabs-9"><?php _e('Profile', 'newsletter') ?></a></li>
                 </ul>
 
                 <div id="tabs-general">
+                    <?php if ($is_all_languages) { ?>
                     <table class="form-table">
+                        
                         <tr>
                             <th><?php _e('Opt In', 'newsletter') ?></th>
                             <td>
@@ -199,25 +146,20 @@ if (empty($controls->data['page'])) {
                             </td>
                         </tr>
                         <tr>
-                            <th><?php _e('Dedicated page', 'newsletter') ?></th>
+                            <th><?php _e('Override Opt In', 'newsletter') ?></th>
                             <td>
-                                <?php $controls->page('page', __('Unstyled page', 'newsletter')); ?>
-                                <?php
-                                if (empty($controls->data['url']) && empty($controls->data['page'])) {
-                                    $controls->button('create', __('Create the page', 'newsletter'));
-                                }
-                                ?>
-                                <?php if (!empty($controls->data['url'])) { ?>
-                                    <!-- do not translate, will be removed -->
-                                    <p class="description">
-                                        <strong>
-                                            You're currently using the URL <code><?php echo esc_html($controls->data['url']) ?></code>
-                                            as dedicated page. Please select the corrisponding page above (new as version 4.6.5+).
-                                        </strong>
-                                    </p>
-                                <?php } ?>
+                                <?php $controls->yesno('optin_override'); ?>
                             </td>
                         </tr>
+                        <tr>
+                            <th><?php _e('Repeated subscriptions', 'newsletter') ?></th>
+                            <td>
+                                <?php //$controls->select('multiple', array('0'=>__('No', 'newsletter'), '1'=>__('Yes', 'newsletter'), '2'=>__('On new lists added', 'newsletter'))); ?> 
+                                <?php $controls->select('multiple', array('0'=>__('No', 'newsletter'), '1'=>__('Yes', 'newsletter'))); ?> 
+                                <?php $controls->help('https://www.thenewsletterplugin.com/documentation/subscription#repeated')?>
+                            </td>
+                        </tr>
+                        
                         <tr>
                             <th><?php _e('Notifications', 'newsletter') ?></th>
                             <td>
@@ -225,16 +167,11 @@ if (empty($controls->data['page'])) {
                                 <?php $controls->text_email('notify_email'); ?>
                             </td>
                         </tr>
-                        <tr>
-                            <th><?php _e('Custom styles', 'newsletter') ?></th>
-                            <td>
-                                <?php if (apply_filters('newsletter_enqueue_style', true) === false) { ?>
-                                    <p><strong>Warning: Newsletter styles and custom styles are disable by your theme or a plugin.</strong></p>
-                                <?php } ?>
-                                <?php $controls->textarea('css'); ?>
-                            </td>
-                        </tr>
                     </table>
+                    <?php } else { ?>
+                    <p>Switch to "All languages" to manage these options.</p>
+                    <?php } ?>
+                    
                 </div>
 
 
@@ -247,31 +184,12 @@ if (empty($controls->data['page'])) {
                                 <?php $controls->wp_editor('subscription_text'); ?>
                             </td>
                         </tr>
-                        <tr>
-                            <th><?php _e('Forced lists', 'newsletter') ?></th>
-                            <td>
-                                <?php $controls->preferences(); ?>
-                            </td>
-                        </tr>
+                        
                     </table>
 
                     <h3>Special cases</h3>
 
                     <table class="form-table">
-                        <!--
-                        <tr>
-                            <th>Already subscribed page content</th>
-                            <td>
-                        <?php //$controls->wp_editor('already_confirmed_text');  ?><br>
-                        <?php //$controls->checkbox('resend_welcome_email_disabled', 'Do not resend the welcome email');  ?>
-                                <p class="description">
-                                    Shown when the email is already subscribed and confirmed. The welcome email, if not disabled, will
-                                    be sent. Find out more on this topic on its
-                                    <a href="https://www.thenewsletterplugin.com/plugins/newsletter/subscription-module#repeated" target="_blank">documentation page</a>.
-                                </p>
-                            </td>
-                        </tr>
-                        -->
                         <tr>
                             <th><?php _e('Error page', 'newsletter') ?></th>
                             <td>
@@ -355,44 +273,6 @@ if (empty($controls->data['page'])) {
                             </td>
                         </tr>
 
-                    </table>
-                </div>
-
-                <!-- PROFILE -->
-                <div id="tabs-9">
-
-                    <table class="form-table">
-
-                        <tr>
-                            <th><?php _e('Profile page', 'newsletter') ?>
-                                <br><?php $controls->help('https://www.thenewsletterplugin.com/documentation/subscription#profile') ?>
-                            </th>
-                            <td>
-                                <?php $controls->wp_editor('profile_text'); ?>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <th><?php _e('Alternative profile page URL', 'newsletter') ?></th>
-                            <td>
-                                <?php $controls->text('profile_url', 70); ?>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <th>Other messages</th>
-                            <td>
-                                confirmation after profile save<br>
-                                <?php $controls->text('profile_saved', 80); ?><br><br>
-                                email changed notice<br>
-                                <?php $controls->text('profile_email_changed', 80); ?>
-                                <p class="description">when a subscriber changes his email, he will be unconfirmed and a new confirmation email is sent</p>
-                                <br><br>
-                                generic error<br>
-                                <?php $controls->text('profile_error', 80); ?>
-                                <p class="description">when the email is not valid or already used by another subscriber</p>
-                            </td>
-                        </tr>
                     </table>
                 </div>
 

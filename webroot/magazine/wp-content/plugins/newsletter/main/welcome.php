@@ -56,9 +56,12 @@ $profile_options = NewsletterSubscription::instance()->get_options('profile');
 $main_options = Newsletter::instance()->get_options();
 $subscription_options = NewsletterSubscription::instance()->get_options();
 
-$page_exists = !empty($subscription_options['page']) && get_permalink($subscription_options['page']);
+$logger = Newsletter::instance()->logger;
+
+$page_exists = !empty($main_options['page']) && get_permalink($main_options['page']);
 
 if (!$page_exists) {
+    $logger->info('Dedicated page creation');
         // Page creation
         $page = array();
         $page['post_title'] = 'Newsletter';
@@ -72,10 +75,12 @@ if (!$page_exists) {
         // Insert the post into the database
         $page_id = wp_insert_post($page);
 
-        $subscription_options['page'] = $page_id;
-        NewsletterSubscription::instance()->save_options($subscription_options);
-        $subscription_options = NewsletterSubscription::instance()->get_options();
+        $main_options['page'] = $page_id;
+        Newsletter::instance()->save_options($main_options);
+        $main_options = Newsletter::instance()->get_options();
         $page_exists = true;
+    } else {
+        $logger->info('Dedicated page already exists');
     }
 ?>
 

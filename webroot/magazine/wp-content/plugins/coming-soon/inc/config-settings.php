@@ -18,8 +18,8 @@ function seed_csp4_get_options(){
 
     $seed_csp4_options[ ] = array(
         "type" => "menu",
-        "menu_type" => "add_options_page",
-        "page_name" => __( "Coming Soon", 'coming-soon' ),
+        "menu_type" => "add_menu_page",
+        "page_name" => __( "SeedProd", 'coming-soon' ),
         "menu_slug" => "seed_csp4",
         "layout" => "2-col"
     );
@@ -33,10 +33,27 @@ function seed_csp4_get_options(){
         "label" => __( "Content", 'coming-soon' ),
     );
 
+
     $seed_csp4_options[ ] = array(
         "type" => "setting",
         "id" => "seed_csp4_settings_content",
     );
+
+    $seed_csp4_options[ ] = array(
+        "type" => "section",
+        "id" => "seed_csp4_section_license",
+        "label" => __( "License", 'coming-soon' ),
+    );
+
+    $seed_csp4_options[ ] = array(
+        "type" => "text",
+        "id" => "license-key",
+        "label" => __( "License Key", 'coming-soon' ),
+        "desc" => __( '
+        <p>You\'re using SeedProd Lite - no license needed. Enjoy! <img draggable="false" class="emoji" alt="🙂" src="https://s.w.org/images/core/emoji/11/svg/1f642.svg"></p><p>To unlock more features consider <a href="'.seed_csp4_admin_upgrade_link( 'settings-license' ).'" target="blank" rel="noopener noreferrer" class="seed-csp4-cta">upgrading to PRO</a></p><p class="discount-note">As a valued SeedProd Lite user you receive <strong>20% off</strong>, automatically applied at checkout!</p></p> ', 'coming-soon' )
+    );
+
+
 
     $seed_csp4_options[ ] = array(
         "type" => "section",
@@ -53,7 +70,7 @@ function seed_csp4_get_options(){
             '1' => __( 'Enable Coming Soon Mode', 'coming-soon' ),
             '2' => __( 'Enable Maintenance Mode', 'coming-soon' )
         ),
-        "desc" => __( "When you are logged in you'll see your normal website. Logged out visitors will see the Coming Soon or Maintenance page. Coming Soon Mode will be available to search engines if your site is not private. Maintenance Mode will notify search engines that the site is unavailable. <a href='https://www.seedprod.com/coming-soon-vs-maintenance-mode/' target='_blank'>Learn the difference between Coming Soon and Maintenance Mode</a>", 'coming-soon' ),
+        "desc" => __( "When you are logged in you'll see your normal website. Logged out visitors will see the Coming Soon or Maintenance page. Coming Soon Mode will be available to search engines if your site is not private. Maintenance Mode will notify search engines that the site is unavailable. <a href='https://www.seedprod.com/coming-soon-vs-maintenance-mode/?utm_source=coming-soon-plugin&utm_medium=link&utm_campaign=cc-vs-mm' target='_blank'>Learn the difference between Coming Soon and Maintenance Mode</a>", 'coming-soon' ),
         "default_value" => "0"
     );
 
@@ -98,7 +115,7 @@ function seed_csp4_get_options(){
         "type" => "wpeditor",
         "id" => "description",
         "label" => __( "Message", 'coming-soon' ),
-        "desc" => __( "Tell the visitor what to expect from your site. Check out the Pro Version if you need ShortCode support.", 'coming-soon' ),
+        "desc" => __( "Need Shortcode Support? <a href='".seed_csp4_admin_upgrade_link( 'settings-content-shortcode' )."' target='blank' rel='noopener noreferrer' class='seed-csp4-cta'>Check out the Pro Verion</a> which supports shortcodes, realtime page builder and adds many more features.", 'coming-soon' ),
         "class" => "large-text"
     );
 
@@ -162,6 +179,20 @@ function seed_csp4_get_options(){
         "id" => "seed_csp4_settings_design"
     );
 
+    // Themes
+    $seed_csp4_options[ ] = array(
+        "type" => "section",
+        "id" => "seed_csp4_section_themes",
+        "label" => __( "Pro Themes", 'coming-soon' )
+    );
+
+    $seed_csp4_options[ ] = array(
+        "type" => "themes",
+        "id" => "themes",
+        "label" => __( "Available Pro Themes", 'coming-soon' )
+    );
+    
+
 
     // Background
     $seed_csp4_options[ ] = array(
@@ -185,7 +216,7 @@ function seed_csp4_get_options(){
         "type" => "upload",
         "id" => "bg_image",
         "desc" => '
-        Looking for free background images? Confirm that\'s your email and click the button below.<br>
+        <a href="admin.php?page=seed_csp4_stockimages">Looking for free background images?</a> Confirm that\'s your email and click the button below.<br>
         <div id="seed-bg-images-form"><input type="email" id="seed-bg-images-email"  value="'.get_option('admin_email').'" /><button id="seed-bg-images-btn" class="button-primary">Send Me FREE Background Images</button></div>
         <script>
         jQuery( "#seed-bg-images-btn" ).click(function(e) {
@@ -369,6 +400,21 @@ function seed_csp4_get_options(){
         "label" => __( "Custom CSS", 'coming-soon' ),
         "desc" => __('Need to tweaks the styles? Add your custom CSS here.','coming-soon'),
     );
+
+    /**
+     * Subscribers Tab
+     */
+    $seed_csp4_options[ ] = array(
+        "type" => "tab",
+        "id" => "seed_csp4_subscribers",
+        "label" => __( "Subscribers", 'coming-soon' )
+    );
+
+    $seed_csp4_options[ ] = array(
+        "type" => "setting",
+        "id" => "seed_csp4_settings_subscribers"
+    );
+
 
     /**
      * Advanced Tab

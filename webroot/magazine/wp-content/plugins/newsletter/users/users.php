@@ -1,7 +1,6 @@
 <?php
 
-if (!defined('ABSPATH'))
-    exit;
+defined('ABSPATH') || exit;
 
 require_once NEWSLETTER_INCLUDES_DIR . '/module.php';
 
@@ -20,7 +19,7 @@ class NewsletterUsers extends NewsletterModule {
     }
 
     function __construct() {
-        parent::__construct('users', '1.1.5');
+        parent::__construct('users', '1.2.4');
         add_action('init', array($this, 'hook_init'));
     }
 
@@ -33,11 +32,12 @@ class NewsletterUsers extends NewsletterModule {
     function hook_wp_ajax_newsletter_users_export() {
         require_once NEWSLETTER_INCLUDES_DIR . '/controls.php';
         $controls = new NewsletterControls();
+        $newsletter = Newsletter::instance();
         if (current_user_can('manage_options') || ($newsletter->options['editor'] == 1 && current_user_can('manage_categories'))) {
             $controls = new NewsletterControls();
 
             if ($controls->is_action('export')) {
-                NewsletterUsers::instance()->export($controls->data);
+                $this->export($controls->data);
             }
         } else {
             die('Not allowed.');
@@ -53,9 +53,9 @@ class NewsletterUsers extends NewsletterModule {
   `name` varchar(100) NOT NULL DEFAULT '',
   `email` varchar(100) NOT NULL DEFAULT '',
   `token` varchar(50) NOT NULL DEFAULT '',
+  `language` varchar(10) NOT NULL DEFAULT '',
   `status` varchar(1) NOT NULL DEFAULT 'S',
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `list` int(11) NOT NULL DEFAULT '0',
   `profile` mediumtext,
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated` int(11) NOT NULL DEFAULT '0',
@@ -91,7 +91,6 @@ class NewsletterUsers extends NewsletterModule {
         $sql .= "PRIMARY KEY (`id`),\nUNIQUE KEY `email` (`email`),\nKEY `wp_user_id` (`wp_user_id`)\n) $charset_collate;";
 
         dbDelta($sql);
-        $this->upgrade_query("alter table " . NEWSLETTER_USERS_TABLE . " convert to character set $charset_collate");
         
     }
 
@@ -123,7 +122,7 @@ class NewsletterUsers extends NewsletterModule {
         }
 
         // CSV header
-        echo '"Email"' . $sep . '"Name"' . $sep . '"Surname"' . $sep . '"Sex"' . $sep . '"Status"' . $sep . '"Date"' . $sep . '"Token"' . $sep;
+        echo '"Email"' . $sep . '"Name"' . $sep . '"Surname"' . $sep . '"Gender"' . $sep . '"Status"' . $sep . '"Date"' . $sep . '"Token"' . $sep;
 
         // In table profiles
         for ($i = 1; $i <= NEWSLETTER_PROFILE_MAX; $i++) {

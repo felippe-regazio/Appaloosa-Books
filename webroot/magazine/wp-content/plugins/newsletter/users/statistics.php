@@ -103,13 +103,13 @@ $controls = new NewsletterControls();
                         </tr>
                     </thead>
                     <tbody>
-                        <?php for ($i = 1; $i <= NEWSLETTER_LIST_MAX; $i++) { ?>
-                            <?php if (empty($options_profile['list_' . $i])) continue; ?>
+                        <?php $lists = $module->get_lists(); ?>
+                        <?php foreach ($lists as $list) { ?>
                             <tr>
-                                <td><?php echo $i ?></td>
-                                <td><?php echo esc_html($options_profile['list_' . $i]) ?></td>
+                                <td><?php echo $list->id ?></td>
+                                <td><?php echo esc_html($list->name) ?></td>
                                 <td>
-                                    <?php echo $wpdb->get_var("select count(*) from " . NEWSLETTER_USERS_TABLE . " where list_" . $i . "=1 and status='C'"); ?>
+                                    <?php echo $wpdb->get_var("select count(*) from " . NEWSLETTER_USERS_TABLE . " where list_" . $list->id . "=1 and status='C'"); ?>
                                 </td>
                             </tr>
                         <?php } ?>
@@ -224,7 +224,7 @@ $controls = new NewsletterControls();
                                 <td><?php echo $female_count->bounced; ?></td>
                             </tr>
                             <tr>
-                                <td><?php _e('Female', 'newsletter')?></td>
+                                <td><?php _e('Male', 'newsletter')?></td>
                                 <td><?php echo $male_count->confirmed; ?></td>
                                 <td><?php echo $male_count->unconfirmed; ?></td>
                                 <td><?php echo $male_count->unsubscribed; ?></td>

@@ -90,7 +90,7 @@ if (!$controls->is_action()) {
 }
 
 if (empty($controls->data['enabled']) && !empty($controls->data['host'])) {
-    $controls->warnings[] = 'SMTP configured by NOT enabled.';
+    $controls->warnings[] = 'SMTP configured but NOT enabled.';
 }
 ?>
 

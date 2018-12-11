@@ -18,11 +18,14 @@ class LoginPress_Log_Info {
 	public static function get_sysinfo() {
 
 		global $wpdb;
-		$loginpress_setting = get_option( 'loginpress_setting' );
-		$loginpress_config 	= get_option( 'loginpress_customization' );
-		$session_expiration = ( isset( $loginpress_setting['session_expiration'] ) && '0' != $loginpress_setting['session_expiration'] ) ? $loginpress_setting['session_expiration'] . ' Minute' : 'Not Set';
-		$login_order 	= isset( $loginpress_setting['login_order'] ) ? $loginpress_setting['login_order'] : 'Default';
-		$customization 			= isset( $loginpress_config ) ? print_r( $loginpress_config, true ) : 'No customization yet';
+		$loginpress_setting  = get_option( 'loginpress_setting' );
+		$loginpress_config 	 = get_option( 'loginpress_customization' );
+		$session_expiration  = ( isset( $loginpress_setting['session_expiration'] ) && '0' != $loginpress_setting['session_expiration'] ) ? $loginpress_setting['session_expiration'] . ' Minute' : 'Not Set';
+		$login_order 	       = isset( $loginpress_setting['login_order'] ) ? $loginpress_setting['login_order'] : 'Default';
+		$customization 			 = isset( $loginpress_config ) ? print_r( $loginpress_config, true ) : 'No customization yet';
+		$lostpassword_url 	 = isset( $loginpress_setting['lostpassword_url'] ) ? $loginpress_setting['lostpassword_url'] : 'off';
+		$_loginpassword_url  = ( $lostpassword_url == 'on' ) ? 'WordPress Default' : "WooCommerce Custom URL";
+		$loginpress_uninstall= isset( $loginpress_setting['loginpress_uninstall'] ) ? $loginpress_setting['loginpress_uninstall'] : 'off';
 
 		$html = '### Begin System Info ###' . "\n\n";
 
@@ -42,6 +45,10 @@ class LoginPress_Log_Info {
 		$html .= 'Plugin Version:           ' . LOGINPRESS_VERSION . "\n";
 		$html .= 'Expiration:           	  ' . $session_expiration . "\n";
 		$html .= 'Login Order:              ' . ucfirst( $login_order ) . "\n";
+		if ( class_exists( 'WooCommerce' ) ) {
+		$html .= 'Lost Password URL:        ' . $_loginpassword_url . "\n";
+		}
+		$html .= 'Uninstallation:       	  ' . $loginpress_uninstall . "\n";
 		$html .= 'Total Customized Fields:  ' . count( $loginpress_config ) . "\n";
 		$html .= 'Customization Detail:     ' . $customization . "\n";
 
@@ -57,11 +64,11 @@ class LoginPress_Log_Info {
 			$html .= 'Google Repatcha Status:   ' . $enable_repatcha . "\n";
 
 			if ( 'on' == $enable_repatcha ) {
-				$site_key = ( isset( $loginpress_setting['site_key'] ) ) ? $loginpress_setting['site_key'] : 'Not Set';
-				$secret_key = ( isset( $loginpress_setting['secret_key'] ) ) ? $loginpress_setting['secret_key'] : 'Not Set';
-				$captcha_theme = ( isset( $loginpress_setting['captcha_theme'] ) ) ? $loginpress_setting['captcha_theme'] : 'Light';
-				$captcha_language = ( isset( $loginpress_setting['captcha_language'] ) ) ? $loginpress_setting['captcha_language'] : 'English (US)';
-				$captcha_enable_on = ( isset( $loginpress_setting['captcha_enable'] ) ) ? $loginpress_setting['captcha_enable'] : 'Not Set';
+				$site_key          = ( isset( $loginpress_setting['site_key'] ) ) ? $loginpress_setting['site_key']                 : 'Not Set';
+				$secret_key        = ( isset( $loginpress_setting['secret_key'] ) ) ? $loginpress_setting['secret_key']             : 'Not Set';
+				$captcha_theme     = ( isset( $loginpress_setting['captcha_theme'] ) ) ? $loginpress_setting['captcha_theme']       : 'Light';
+				$captcha_language  = ( isset( $loginpress_setting['captcha_language'] ) ) ? $loginpress_setting['captcha_language'] : 'English (US)';
+				$captcha_enable_on = ( isset( $loginpress_setting['captcha_enable'] ) ) ? $loginpress_setting['captcha_enable']     : 'Not Set';
 
 				$html .= 'Repatcha Site Key:        ' . $site_key . "\n";
 				$html .= 'Repatcha Secret Key:      ' . $secret_key . "\n";
@@ -92,6 +99,14 @@ class LoginPress_Log_Info {
 		$html .= 'Max Input Vars:           ' . ini_get( 'max_input_vars' ) . "\n";
 		$html .= 'Display Errors:           ' . ( ini_get( 'display_errors' ) ? 'On (' . ini_get( 'display_errors' ) . ')' : 'N/A' ) . "\n";
 
+		// WordPress active themes
+		$html .= "\n" . '-- WordPress Active Theme --' . "\n\n";
+		$my_theme = wp_get_theme();
+		$html .= 'Name:                     ' . $my_theme->get( 'Name' ) . "\n";
+		$html .= 'URI:                      ' . $my_theme->get( 'ThemeURI' ) . "\n";
+		$html .= 'Author:                   ' . $my_theme->get( 'Author' ) . "\n";
+		$html .= 'Version:                  ' . $my_theme->get( 'Version' ) . "\n";
+
 		// WordPress active plugins
 		$html .= "\n" . '-- WordPress Active Plugins --' . "\n\n";
 		$plugins = get_plugins();
@@ -117,7 +132,7 @@ class LoginPress_Log_Info {
 			$active_plugins = get_site_option( 'active_sitewide_plugins', array() );
 			foreach( $plugins as $plugin_path ) {
 				$plugin_base = plugin_basename( $plugin_path );
-				if( !array_key_exists( $plugin_base, $active_plugins ) )
+				if( ! array_key_exists( $plugin_base, $active_plugins ) )
 					continue;
 				$plugin  = get_plugin_data( $plugin_path );
 				$html .= $plugin['Name'] . ': ' . $plugin['Version'] . "\n";

@@ -811,6 +811,39 @@ jQuery(document).ready(function($) {
     });
   });
 
+  // Live Templates Change. 1.1.16
+  // wp.customize( 'customize_presets_settings', function(value) {
+  //   value.bind( function(loginPressVal) {
+  //
+  //     customizer_bg = change_theme ? change_theme : loginpress_script.login_theme;
+  //
+  //       var preset_nonce = loginpress_script.preset_nonce;
+  //
+  //       $.ajax({
+  //
+  //         url : ajaxurl,
+  //         type: 'POST',
+  //         data: {
+  //           action   : 'loginpress_presets',
+  //           security : preset_nonce
+  //         },
+  //         beforeSend: function() {
+  //           loginpress_find('.login').append('<div class="loginpres-previewer-loader" style="position: fixed;top: 0;left: 0; height: 100%; width: 100%; background: rgba(255,255, 255, .5) url(' + loginpress_script.preset_loader + ') no-repeat center center; z-index: 9999999;"></div>');
+  //         },
+  //         success: function(response) {
+  //
+  //           loginpress_find('#loginpress-style').remove();
+  //           loginpress_find('head').append(response);
+  //           loginpress_find('.loginpres-previewer-loader').remove();
+  //
+  //           // setTimeout(function() {
+  //           //   $(".log-file-text").fadeOut()
+  //           // }, 3000);
+  //         }
+  //       });
+  //   });
+  // });
+
 
   loginpress_background_img( 'loginpress_customization[setting_form_background]', '#loginform');
 
@@ -891,7 +924,6 @@ jQuery(document).ready(function($) {
   // Update the login form button border-color in real time...
   wp.customize( 'loginpress_customization[button_hover_color]', function(value) {
     value.bind( function(loginPressVal) {
-      console.log(loginPressVal);
       if ( loginPressVal == '' ) {
         loginPressBtnHvr = undefined;
         // loginpress_find('.wp-core-ui #login  .button-primary').css( 'background', '' );
@@ -1202,7 +1234,7 @@ jQuery(document).ready(function($) {
     value.bind( function( loginPressVal ) {
       if ( loginPressVal == true ) {
         if( loginpress_find('.copyRight').length == 0 ){
-          loginpress_find('.footer-cont').html('<div class="copyRight">'+$('[id="_customize-input-loginpress_customization[login_footer_copy_right]"]').val()+'</div>');
+          loginpress_find('.footer-cont').append('<div class="copyRight">'+$('[id="_customize-input-loginpress_customization[login_footer_copy_right]"]').val()+'</div>');
         }
         $('#customize-control-loginpress_customization-login_footer_copy_right').show();
       } else {
@@ -1225,7 +1257,10 @@ jQuery(document).ready(function($) {
       }
     });
   });
-
+  /**
+   * @since 1.0.9
+   * @version 1.0.12
+   */
   $(window).on('load', function() {
 
     if ( $('#customize-control-loginpress_customization-setting_logo_display input[type="checkbox"]').is(":checked") ) {
@@ -1255,8 +1290,10 @@ jQuery(document).ready(function($) {
 
     if ( $('#customize-control-loginpress_customization-setting_form_display_bg input[type="checkbox"]').is(":checked") ) {
       $('#customize-control-loginpress_customization-form_background_color').css( 'display', 'none' );
+      $('#customize-control-loginpress_customization-setting_form_background').css( 'display', 'none' );
     } else {
       $('#customize-control-loginpress_customization-form_background_color').css( 'display', 'list-item' );
+      $('#customize-control-loginpress_customization-setting_form_background').css( 'display', 'list-item' );
     }
 
     if ( $('#customize-control-loginpress_customization-footer_display_text input[type="checkbox"]').is(":checked") ) {

@@ -6,11 +6,11 @@ $controls = new NewsletterControls();
 $module = NewsletterSubscription::instance();
 
 if (!$controls->is_action()) {
-    $controls->data = get_option('newsletter_forms');
+    $controls->data = $module->get_options('forms');
 }
 
 if ($controls->is_action('save')) {
-    update_option('newsletter_forms', $controls->data);
+    $module->save_options($controls->data, 'forms');
     $controls->add_message_saved();
 }
 ?>

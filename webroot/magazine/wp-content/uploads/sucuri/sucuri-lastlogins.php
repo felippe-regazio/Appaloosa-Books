@@ -122,3 +122,5 @@
 {"user_id":1,"user_login":"ApMag","user_remoteaddr":"127.0.0.1","user_hostname":"localhost","user_lastlogin":"2018-11-15 21:28:51"}
 {"user_id":1,"user_login":"ApMag","user_remoteaddr":"127.0.0.1","user_hostname":"localhost","user_lastlogin":"2018-11-19 01:25:45"}
 {"user_id":1,"user_login":"ApMag","user_remoteaddr":"127.0.0.1","user_hostname":"localhost","user_lastlogin":"2018-11-19 01:26:15"}
+{"user_id":1,"user_login":"ApMag","user_remoteaddr":"127.0.0.1","user_hostname":"localhost","user_lastlogin":"2018-12-11 00:00:06"}
+{"user_id":1,"user_login":"ApMag","user_remoteaddr":"127.0.0.1","user_hostname":"localhost","user_lastlogin":"2018-12-11 00:00:31"}

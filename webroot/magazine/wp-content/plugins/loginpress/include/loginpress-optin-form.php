@@ -310,17 +310,17 @@ echo '<h1> <img id="loginpress-logo-text" src="' . plugins_url( 'img/loginpress.
       echo '<div id="loginpress-splash-permissions" class="loginpress-splash-box">';
         echo '<a id="loginpress-splash-permissions-toggle" href="#" >' . __( 'What permissions are being granted?', 'loginpress' ) . '</a>';
         echo '<div id="loginpress-splash-permissions-dropdown" style="display: none;">';
-          echo '<h3>' .  __( 'Your Website Overview', 'loginpress' ) . '</h3>';
-          echo '<p>' .  __( 'Your Site URL, WordPress & PHP version, plugins & themes. This data lets us make sure this plugin always stays compatible with the most popular plugins and themes.', 'loginpress' ) . '</p>';
+          echo '<h3>' . __( 'Your Website Overview', 'loginpress' ) . '</h3>';
+          echo '<p>' . __( 'Your Site URL, WordPress & PHP version, plugins & themes. This data lets us make sure this plugin always stays compatible with the most popular plugins and themes.', 'loginpress' ) . '</p>';
 
-          echo '<h3>' .  __( 'Your Profile Overview', 'loginpress' ) . '</h3>';
-          echo '<p>' .  __( 'Your name and email address.', 'loginpress' ) . '</p>';
+          echo '<h3>' . __( 'Your Profile Overview', 'loginpress' ) . '</h3>';
+          echo '<p>' . __( 'Your name and email address.', 'loginpress' ) . '</p>';
 
-          echo '<h3>' .  __( 'Admin Notices', 'loginpress' ) . '</h3>';
-          echo '<p>' .  __( "Updates, Announcement, Marketing. No Spam, I promise.", 'loginpress' ) . '</p>';
+          echo '<h3>' . __( 'Admin Notices', 'loginpress' ) . '</h3>';
+          echo '<p>' . __( "Updates, Announcement, Marketing. No Spam, I promise.", 'loginpress' ) . '</p>';
 
-          echo '<h3>' .  __( 'Plugin Actions', 'loginpress' ) . '</h3>';
-          echo '<p>' .  __( "Active, Deactive, Uninstallation and How you use this plugin's features and settings. This is limited to usage data. It does not include any of your sensitive LoginPress data, such as traffic. This data helps us learn which features are most popular, so we can improve the plugin further.", 'loginpress' ) . '</p>';
+          echo '<h3>' . __( 'Plugin Actions', 'loginpress' ) . '</h3>';
+          echo '<p>' . __( "Active, Deactive, Uninstallation and How you use this plugin's features and settings. This is limited to usage data. It does not include any of your sensitive LoginPress data, such as traffic. This data helps us learn which features are most popular, so we can improve the plugin further.", 'loginpress' ) . '</p>';
         echo '</div>';
       echo '</div>';
     echo '</div>';

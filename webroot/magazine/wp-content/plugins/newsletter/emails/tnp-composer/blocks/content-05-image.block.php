@@ -5,7 +5,7 @@
             
             <div class="tnpc-row-edit" data-type="image">
                 <a href="#" target="_blank">
-                    <img src="https://unsplash.it/800/300?image=998" border="0" alt="Insert alt text here" width="<?php echo $width ?>" style="width: <?php echo $width ?>px; max-width: 100%!important; height: auto!important;display: block; color: #666666;" class="img-max">
+                    <img src="https://unsplash.it/800/300?image=998" border="0" alt="Insert alt text here" style="max-width: 100%!important; height: auto!important;display: block;" class="img-max">
                 </a>
             </div>
             

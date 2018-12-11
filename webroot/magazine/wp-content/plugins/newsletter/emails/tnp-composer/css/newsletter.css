@@ -8,7 +8,7 @@ img{-ms-interpolation-mode:bicubic;} /* Allow smoother rendering of resized imag
 
 /* RESET STYLES */
 body{margin:0; padding:0; height:100% !important; margin:0; padding:0; width:100% !important;}
-img{border:0; height:auto; line-height:100%; outline:none; text-decoration:none;}
+img{border:0; height:auto; line-height:100%; outline:none; text-decoration:none; max-width: 100%!important}
 table{border-collapse:collapse !important;}
 
 
@@ -40,7 +40,7 @@ table{border-collapse:collapse !important;}
 
     img[class="img-max"]{
         max-width: 100% !important;
-        width: 100% !important;
+        /*width: 100% !important;*/
         height:auto !important;
     }
 

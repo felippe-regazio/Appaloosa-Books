@@ -23,7 +23,7 @@
           3 => [
             "icon" => "fa-hand-holding-usd",
             "link" => "info/#noncomercial",
-            "text" => "A AP Books é uma Editora Não Comercial"
+            "text" => "Editora Não Comercial. Publicamos os/as fodas"
           ],
           4 => [
             "icon" => "fa-smile",

@@ -1,5 +1,7 @@
 (function(){
 
+	var MagApiAddress = "magazine?rest_route=/wp/v2/posts/&_embed&filter[status]=publish";
+
 	/*
 		Not run if has no magcards
 	*/
@@ -18,12 +20,22 @@
 			data = JSON.parse(sessionStorage.getItem("magposts-items"));
 			renderMagPosts(data);
 		} else {
-			$.get("magazine?rest_route=/wp/v2/posts/&_embed&filter[status]=publish", function(data){
-				if(data){
-					sessionStorage.setItem("magposts-items", JSON.stringify(data));
-					renderMagPosts(data);
-				} else {
-					$postswrapper.removeClass("loading").addClass("empty");
+
+			$.ajax({
+				url: MagApiAddress,
+				method: "GET",
+				dataType: "json",
+				success: function(data){
+					if(data){
+						sessionStorage.setItem("magposts-items", JSON.stringify(data));
+						renderMagPosts(data);
+					} else {
+						$postswrapper.removeClass("loading").addClass("empty");
+					}
+				},
+				error: function(err){
+					$("section.magcards").remove();
+					console.warn("Error while getting magazine cards: "+err.status+" "+err.statusText+" - "+err.responseJSON.message+" The Magazine Cards session wont be showed.");
 				}
 			});
 		}

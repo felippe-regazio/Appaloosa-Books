@@ -945,12 +945,5 @@ class AdminController extends Controller
                 return null;  
             }
         }    
-    } 
-
-    public function analytics(){
-        $admin_data = $this->checkAdmin();
-        if( $admin_data['role'] != 'admin' ){
-            $this->redirect([ 'controller' => 'appaloosa', 'action' => 'index' ]);
-        }
-    }  
+    }
 }

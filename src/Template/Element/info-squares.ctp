@@ -23,7 +23,7 @@
           3 => [
             "icon" => "fa-hand-holding-usd",
             "link" => "info/#noncomercial",
-            "text" => "Editora Não Comercial. Publicamos os/as fodas"
+            "text" => "Editora Não Comercial. Literatura > $"
           ],
           4 => [
             "icon" => "fa-smile",

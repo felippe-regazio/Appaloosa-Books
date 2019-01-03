@@ -107,11 +107,6 @@
 							<i class="fa fa-envelope"></i> Subscribers
 						</a>
 					</li>
-					<li>
-						<a href="<?= Router::url(["controller"=>"admin", "action"=>"analytics"]) ?>">
-							<i class="fa fa-pie-chart"></i> Analytics
-						</a>
-					</li>
 				</ul>
 			</li>
 		</ul>

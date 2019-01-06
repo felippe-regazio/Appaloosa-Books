@@ -35,7 +35,8 @@
 				},
 				error: function(err){
 					$("section.magcards").remove();
-					console.warn("Error while getting magazine cards: "+err.status+" "+err.statusText+" - "+err.responseJSON.message+" The Magazine Cards session wont be showed.");
+					console.log(err.responseJSON);
+					console.warn("Error while getting magazine cards: "+err.status+" "+err.statusText+" - The Magazine Cards session wont be showed.");
 				}
 			});
 		}

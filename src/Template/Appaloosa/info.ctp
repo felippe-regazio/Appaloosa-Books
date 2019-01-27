@@ -148,24 +148,39 @@
          data-aos-offset="150" 
          data-aos-once="true">      
     </div>
-<!-- FOUNDER -->
-    <div class="founder">
-        <div class="founder__content padding-bottom-xl">
-            <div class="founder__content-title">
+<!-- TEAM -->
+    <div class="team">
+        <div class="team__content">
+            <div class="team__content-title">
                 <span class="about-toggle">
-                    <h1><i class="fa fa-coffee"></i> Quem criou a Appaloosa Books?</h1>
+                    <h1><i class="fa fa-coffee"></i> Conheça o Nosso Time</h1>
                 </span>            
             </div>
-            <div class="founder__content-img">
-                <?= $this->Html->Image("founder.jpg", ["alt"=>"Imagem do fundador da Appaloosa Books"]); ?>
+            <div class="padding-bottom-xl">
+                <div class="team__content-img">
+                    <?= $this->Html->Image("chief-editor.png", ["alt"=>"Imagem do editor chefe da Appaloosa Books"]); ?>
+                </div>
+                <div class="team__content-about">
+                    <h2>Matheus Peleteiro</h2>
+                    <span>Editor Chefe</span>
+                    <br/>
+                    <p>
+                        Nascido em Salvador – BA em 1995, escritor, poeta e contista, Matheus Peleteiro publicou em 2015 o seu primeiro romance, Mundo Cão, pela editora Novo Século. Em 2016, lançou a novela intitulada “Notas de um Megalomaníaco Minimalista”, (Giostri), e o livro de poemas “Tudo Que Arde Em Minha Garganta Sem Voz”, (Penalux). Em 2017, publicou “Pro Inferno com Isso”, seu primeiro livro de contos. Em 2018 publicou digitalmente “O Ditador Honesto”, que figurou entre os Best Sellers da Amazon Books, e “O Homem Acinzentado” pela Appaloosa Books.
+                    </p>
+                </div>
             </div>
-            <div class="founder__content-about">
-                <h2>Felippe Regazio</h2>
-                <span>Programador e Fundador</span>
-                <br/>
-                <p>
-                    Desenvolvedor web, apaixonado por literatura, skatista das antigas, mochileiro aposentado e um incurável longlife learner. Felippe tem sido desenvolvedor uno da Appaloosa no que tange sua concepção, design, e programação (webpage e algoritmos para melhor desempenho). Dentro da Appaloosa Felippe atua majoritariamente no desenvolvimento e aperfeiçoamento da plataforma digital, e também como editor, promovendo antologias e descobrindo novos autores. Embora tenha publicado alguns livros, declara-se um escritor aposentado do mundo das publicações, e atualmente escreve e finge que esqueceu. Felippe tem <?= date("Y") - 1991 ?> anos e mora em Caçapava - SP.
-                </p>
+            <div>
+                <div class="team__content-img">
+                    <?= $this->Html->Image("founder.jpg", ["alt"=>"Imagem do fundador da Appaloosa Books"]); ?>
+                </div>
+                <div class="team__content-about">
+                    <h2>Felippe Regazio</h2>
+                    <span>Programador e Fundador</span>
+                    <br/>
+                    <p>
+                        Desenvolvedor web, apaixonado por literatura, skatista das antigas, mochileiro aposentado e um incurável Lifelong Learner. Felippe tem sido desenvolvedor uno da Appaloosa no que tange sua concepção, design, e programação (webpage e algoritmos para melhor desempenho). Dentro da Appaloosa Felippe atua majoritariamente no desenvolvimento e aperfeiçoamento da plataforma digital, e também como editor, promovendo antologias e descobrindo novos autores. Embora tenha publicado alguns livros, declara-se um escritor aposentado do mundo das publicações, e atualmente escreve e finge que esqueceu. Felippe tem <?= date("Y") - 1991 ?> anos e mora em Caçapava - SP.
+                    </p>
+                </div>
             </div>
         </div>
     </div>

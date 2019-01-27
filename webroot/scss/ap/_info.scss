@@ -56,6 +56,9 @@ $info-content-width: 980px;
 			}
 			&-body{
 				padding-left: $gutter;
+				p{
+					line-height: 1.6 !important;
+				}
 			}
 			&-footer{
 				padding: $gutter*2 0;
@@ -69,7 +72,7 @@ $info-content-width: 980px;
 			}
 		}	
 	}
-	.founder{
+	.team{
 		&__content{
 			padding: $gutter*3 $gutter*2;
 			min-height: 300px;
@@ -81,9 +84,6 @@ $info-content-width: 980px;
 					margin: 0;
 					padding-bottom: $gutter*3;
 				}	
-			}
-			&.padding-bottom-xl{
-				padding-bottom: $gutter*4;
 			}
 			&-img{
 				float: left;
@@ -111,6 +111,9 @@ $info-content-width: 980px;
 					}
 				}
 			}
+		}
+		.padding-bottom-xl{
+			padding-bottom: $gutter*4;
 		}
 	}
 }

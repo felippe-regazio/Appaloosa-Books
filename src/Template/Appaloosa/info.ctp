@@ -11,7 +11,7 @@
             </div>
         </div>
     </div>
-<!-- PUBLIQUE  -->
+    <!-- PUBLIQUE  -->
     <div id="publish" class="about">
         <div class="about__content">
             <div class="about__content-header">
@@ -27,7 +27,7 @@
             </div>
         </div>
     </div>
-<!-- APOIE O AUTOR INDEPENDENTE  -->
+    <!-- APOIE O AUTOR INDEPENDENTE  -->
     <div id="support" class="indieauthors" class="about">
         <div class="about__content">
             <div class="about__content-header">
@@ -43,7 +43,7 @@
             </div>
         </div>
     </div>
-<!-- ITS FREE  -->
+    <!-- ITS FREE  -->
     <div id="itsfree" class="indieauthors" class="about">
         <div class="about__content">
             <div class="about__content-header">
@@ -58,8 +58,8 @@
                 </p>
             </div>
         </div>
-    </div>    
-<!-- NAO SOMOS UMA EDITORA COMERCIAL  -->
+    </div>
+    <!-- NAO SOMOS UMA EDITORA COMERCIAL  -->
     <div id="noncomercial" class="about">
         <div class="about__content">
             <div class="about__content-header">
@@ -75,7 +75,7 @@
             </div>
         </div>
     </div>
-<!-- AD FREE  -->
+    <!-- AD FREE  -->
     <div id="adfree" class="about">
         <div class="about__content">
             <div class="about__content-header">
@@ -91,7 +91,7 @@
             </div>
         </div>
     </div>
-<!-- 100% ONLINE -->
+    <!-- 100% ONLINE -->
     <div id="allonline" class="about">
         <div class="about__content">
             <div class="about__content-header">
@@ -106,8 +106,8 @@
                 </p>
             </div>
         </div>
-    </div>                
-<!-- O QUE SAO LIVROS DIGITAIS  -->
+    </div>
+    <!-- O QUE SAO LIVROS DIGITAIS  -->
     <div id="yepub" class="about">
         <div class="about__content">
             <div class="about__content-header">
@@ -122,7 +122,7 @@
             </div>
         </div>
     </div>
-<!-- PARCERIA COLAB DOACAO  -->
+    <!-- PARCERIA COLAB DOACAO  -->
     <div id="friends" class="about">
         <div class="about__content">
             <div class="about__content-header">
@@ -136,52 +136,16 @@
                 </p>
             </div>
             <div class="about__content-footer">
-                <a class="ap-btn ap-btn--primary" href=""><i class="fa fa-heart"></i> Doar</a> 
-                <p class="btc">BTC: 17mwnEWhckrWSVbJNPHTFstcVbYYyMJhPx</p>                   
+                <a class="ap-btn ap-btn--primary" href=""><i class="fa fa-heart"></i> Doar</a>
+                <p class="btc">BTC: 17mwnEWhckrWSVbJNPHTFstcVbYYyMJhPx</p>
             </div>
         </div>
-    </div>        
-<!-- BLACK LINE -->
-    <div id = "team"
-         class="ap-line"
-         data-aos="line-reveal" 
-         data-aos-offset="150" 
-         data-aos-once="true">      
     </div>
-<!-- TEAM -->
-    <div class="team">
-        <div class="team__content">
-            <div class="team__content-title">
-                <span class="about-toggle">
-                    <h1><i class="fa fa-coffee"></i> Conheça o Nosso Time</h1>
-                </span>            
-            </div>
-            <div class="padding-bottom-xl">
-                <div class="team__content-img">
-                    <?= $this->Html->Image("chief-editor.png", ["alt"=>"Imagem do editor chefe da Appaloosa Books"]); ?>
-                </div>
-                <div class="team__content-about">
-                    <h2>Matheus Peleteiro</h2>
-                    <span>Editor Chefe</span>
-                    <br/>
-                    <p>
-                        Nascido em Salvador – BA em 1995, escritor, poeta e contista, Matheus Peleteiro publicou em 2015 o seu primeiro romance, Mundo Cão, pela editora Novo Século. Em 2016, lançou a novela intitulada “Notas de um Megalomaníaco Minimalista”, (Giostri), e o livro de poemas “Tudo Que Arde Em Minha Garganta Sem Voz”, (Penalux). Em 2017, publicou “Pro Inferno com Isso”, seu primeiro livro de contos. Em 2018 publicou digitalmente “O Ditador Honesto”, que figurou entre os Best Sellers da Amazon Books, e “O Homem Acinzentado” pela Appaloosa Books.
-                    </p>
-                </div>
-            </div>
-            <div>
-                <div class="team__content-img">
-                    <?= $this->Html->Image("founder.jpg", ["alt"=>"Imagem do fundador da Appaloosa Books"]); ?>
-                </div>
-                <div class="team__content-about">
-                    <h2>Felippe Regazio</h2>
-                    <span>Programador e Fundador</span>
-                    <br/>
-                    <p>
-                        Desenvolvedor web, apaixonado por literatura, skatista das antigas, mochileiro aposentado e um incurável Lifelong Learner. Felippe tem sido desenvolvedor uno da Appaloosa no que tange sua concepção, design, e programação (webpage e algoritmos para melhor desempenho). Dentro da Appaloosa Felippe atua majoritariamente no desenvolvimento e aperfeiçoamento da plataforma digital, e também como editor, promovendo antologias e descobrindo novos autores. Embora tenha publicado alguns livros, declara-se um escritor aposentado do mundo das publicações, e atualmente escreve e finge que esqueceu. Felippe tem <?= date("Y") - 1991 ?> anos e mora em Caçapava - SP.
-                    </p>
-                </div>
-            </div>
-        </div>
+    <!-- BLACK LINE -->
+    <div id = "team"
+    class="ap-line"
+    data-aos="line-reveal"
+    data-aos-offset="150"
+    data-aos-once="true">
     </div>
 </section>
